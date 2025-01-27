@@ -1,5 +1,5 @@
 wandb:
-  api_key: "1652c23164df86e638e4ac2ebc71e82865de2c57"
+  api_key: "Add your wandb key here"
   project: "Project_PINNs_for_synchronous_machine"
 
 time : 1 # Total time to be considered
