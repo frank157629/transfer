@@ -75,7 +75,7 @@ class SynchronousMachineModels():
         Returns:
             dict: The parameters of the power system.
         """
-        system_params_path = os.path.join(self.params_dir, "system1.yaml")
+        system_params_path = os.path.join(self.params_dir, "system_bus.yaml")
         system_params = OmegaConf.load(system_params_path)
         for param in ['Vs', 'theta_vs', 'omega_B']:
             setattr(self, param, getattr(system_params, param))
