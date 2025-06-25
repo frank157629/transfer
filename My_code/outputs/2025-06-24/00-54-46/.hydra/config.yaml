@@ -1,0 +1,17 @@
+wandb:
+  api_key: c26f0418182418f6712b79b4457de4faa81b7524
+  project: Project_PINN_for_ROM_PLL_Model
+time: 1
+num_of_points: 1000
+modelling_method: true
+model:
+  model_flag: GFL_7th_order
+  model_num: 1
+  init_condition_bounds: 1
+  sampling: Lhs
+  torch: false
+  seed: 1
+dirs:
+  params_dir: ${hydra:runtime.cwd}/src/conf/params
+  init_conditions_dir: ${hydra:runtime.cwd}/src/conf/initial_conditions
+  dataset_dir: ${hydra:runtime.cwd}/data

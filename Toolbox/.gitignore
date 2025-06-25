@@ -1,0 +1,12 @@
+figs/
+__pycache__/
+*.pyc
+data/
+outputs/
+wandb/
+model/
+logs/
+.vscode/
+.mypy_cache/
+.ruff_cache/
+

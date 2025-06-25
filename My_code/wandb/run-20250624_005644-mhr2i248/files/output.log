@@ -1,0 +1,38 @@
+Is cuda available? False
+Number of different initial conditions:  2187
+['gamma', 'delta', 'theta_pll', 'i_gd_g', 'i_gq_g', 'v_od_g', 'v_oq_g'] Variables
+[[-0.15, 0.15], [-1.5708, 1.5708], [0, 6.283], [-2, 2], [-2, 2], [0.8, 1.2], [-0.2, 0.2]] Set of values for init conditions
+[3, 3, 3, 3, 3, 3, 3] Iterations per value
+Error executing job with overrides: []
+Traceback (most recent call last):
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/My_code/create_dataset.py", line 32, in <module>
+    main()
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 223, in run_and_report
+    raise ex
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+           ^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+            ^^^^^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/hydra.py", line 132, in run
+    _ = ret.return_value
+        ^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/core/utils.py", line 260, in return_value
+    raise self._return_value
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+                       ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/My_code/create_dataset.py", line 28, in main
+    solution = Model.solve_model(init_cond, modelling_full, flag_for_time)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/My_code/src/dataset/create_dataset_functions.py", line 125, in solve_model
+    solution = solve_ivp(modelling_full.odequation, self.t_span, x0, t_eval=self.t_eval)
+                                                                 ^^
+NameError: name 'x0' is not defined

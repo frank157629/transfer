@@ -1,0 +1,3 @@
+- name: "GFL_7th_order"
+  keys: ["gamma", "delta", "theta_pll", "i_gd_g", "i_gq_g", "v_od_g", "v_oq_g"]
+  full_name: "Full 7-state grid-connected converter model with GFL_2nd_order, filter inductor & capacitor dynamics"

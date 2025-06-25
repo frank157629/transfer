@@ -1,0 +1,1 @@
+{"_timestamp":1.750719024371613e+09,"Test with model ":"7th_Order_Model","_wandb":{"runtime":0},"Number of different initial conditions: ":2187,"_runtime":0.671924,"Number of samples ":1000,"Sampling method for initial points ":"Lhs","Model number ":1,"Initial conditions ":1,"_step":6,"Total time of simulation ":1}

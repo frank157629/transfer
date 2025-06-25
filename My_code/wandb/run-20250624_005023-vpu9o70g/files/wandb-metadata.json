@@ -1,0 +1,12 @@
+{
+  "os":  "macOS-15.3-arm64-arm-64bit",
+  "python":  "CPython 3.11.11",
+  "startedAt":  "2025-06-23T22:50:23.699729Z",
+  "program":  "/Users/nbhsbgnb/PycharmProjects/PythonProject/My_code/create_dataset.py",
+  "codePath":  "create_dataset.py",
+  "email":  "liuhaitian888@gmail.com",
+  "root":  "/Users/nbhsbgnb/PycharmProjects/PythonProject/My_code",
+  "host":  "niubihaishibugeniubideMacBook-Air.local",
+  "executable":  "/opt/anaconda3/envs/myenv/bin/python",
+  "codePathLocal":  "create_dataset.py"
+}

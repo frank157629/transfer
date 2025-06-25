@@ -1,0 +1,25 @@
+# ---------- nominal base values ----------
+S_b   : 1.0e6      # [VA] base apparent power
+V_g   : 1.0        # [pu] grid line-line rms voltage
+V_dc  : 1.20       # [pu] dc-link voltage (≥ √2·V_g)
+f_0   : 50         # [Hz] electrical base frequency
+w_g   : 314.159    # [rad/s] = 2π·f_0
+T_s   : 1.0e-4     # [s] simulation / control step
+
+# ---------- filter & line interface ----------
+L_g   : 0.10       # [pu·s] interface inductor
+R_g   : 0.01       # [pu]   interface resistance
+C_f   : 0.05       # [pu·s] filter capacitor (LC trap)
+
+# ---------- GFL_2nd_order controller ----------
+k_p   : 0.20       # proportional gain
+k_i   : 50.0       # integral gain
+w_n   : 314.159    # [rad/s] nominal sync speed (≈ w_g)
+
+# ---------- network voltages (treated as constants in the ODE) ----------
+v_gd_g: 1.0        # [pu] d-axis grid voltage (aligned ≈ 1 pu)
+v_gq_g: 0.0        # [pu] q-axis grid voltage
+
+# ---------- filter inductor initial currents (constants, not states) ----------
+i_Ld_g: 0.0        # [pu] d-axis current
+i_Lq_g: 0.0        # [pu] q-axis current

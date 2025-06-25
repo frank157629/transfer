@@ -1,0 +1,7 @@
+- {name: gamma     , range: [-0.15 , 0.15 ] , iterations: 3 }  # PI integrator state (pu), usually small
+- {name: delta     , range: [-1.5708 , 1.5708] , iterations: 3 }  # Phase error, ±90°
+- {name: theta_pll , range: [0 , 6.283] , iterations: 3 }  # Absolute GFL_2nd_order angle, 0–2π rad
+- {name: i_gd_g    , range: [-2 , 2 ] , iterations: 3 }  # d-axis grid-side current (pu)
+- {name: i_gq_g    , range: [-2 , 2 ] , iterations: 3 }  # q-axis grid-side current (pu)
+- {name: v_od_g    , range: [0.8 , 1.2 ] , iterations: 3 }  # d-axis capacitor voltage (pu)
+- {name: v_oq_g    , range: [-0.2 , 0.2 ] , iterations: 3 }  # q-axis capacitor voltage (pu)

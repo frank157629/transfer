@@ -1,0 +1,16 @@
+{"time":"2025-06-24T00:45:04.519941+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/My_code/wandb/run-20250624_004504-cymkcoc4/logs/debug-core.log"}
+{"time":"2025-06-24T00:45:04.862858+02:00","level":"INFO","msg":"stream: created new stream","id":"cymkcoc4"}
+{"time":"2025-06-24T00:45:04.862889+02:00","level":"INFO","msg":"stream: started","id":"cymkcoc4"}
+{"time":"2025-06-24T00:45:04.86295+02:00","level":"INFO","msg":"sender: started","stream_id":"cymkcoc4"}
+{"time":"2025-06-24T00:45:04.863089+02:00","level":"INFO","msg":"handler: started","stream_id":"cymkcoc4"}
+{"time":"2025-06-24T00:45:04.863111+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"cymkcoc4"}
+{"time":"2025-06-24T00:45:05.117899+02:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-06-24T00:45:05.439289+02:00","level":"INFO","msg":"stream: closing","id":"cymkcoc4"}
+{"time":"2025-06-24T00:45:05.439501+02:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-06-24T00:45:05.439512+02:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-06-24T00:45:35.17058+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": net/http: request canceled (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2025-06-24T00:45:37.713766+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-06-24T00:45:38.231859+02:00","level":"INFO","msg":"handler: closed","stream_id":"cymkcoc4"}
+{"time":"2025-06-24T00:45:38.231919+02:00","level":"INFO","msg":"sender: closed","stream_id":"cymkcoc4"}
+{"time":"2025-06-24T00:45:38.232951+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"cymkcoc4"}
+{"time":"2025-06-24T00:45:38.233025+02:00","level":"INFO","msg":"stream: closed","id":"cymkcoc4"}
