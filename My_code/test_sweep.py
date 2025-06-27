@@ -1,5 +1,5 @@
 import os
-from src.ode.ode import ODE
+from src.ode.gfl import GFL
 from src.nn.nn_actions import NeuralNetworkActions
 from src.functions import *
 from omegaconf import OmegaConf
@@ -19,7 +19,7 @@ def train(config=None):
         cfg.nn.num_epochs = int(cfg.nn.num_epochs / lbfgs_iter)
         cfg.nn.weighting.update_weights_freq = int(cfg.nn.weighting.update_weights_freq*4) # increase due to internal iterations, around 25 internal iterations per epoch
 
-    Model = ODE(cfg)
+    Model = GFL(cfg)
     network = NeuralNetworkActions(cfg, Model)
 
     network2.pinn_train(run)

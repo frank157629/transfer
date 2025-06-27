@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # ---------- 读取并转成 ndarray ----------
-with open("./data/7th_Order_Model/dataset_v1.pkl", "rb") as f:
+with open("./data/GFL_7th_order/dataset_v1.pkl", "rb") as f:
     sol = np.asarray(pickle.load(f))        # sol → shape: (2187, 8, 1000)
 
 print("sol shape:", sol.shape)

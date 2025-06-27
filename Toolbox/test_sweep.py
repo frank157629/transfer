@@ -8,6 +8,7 @@ from omegaconf import OmegaConf
 import wandb
 
 def train(config=None):
+
     run = wandb.init(config=config)
     config = run.config
 

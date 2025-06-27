@@ -5,7 +5,7 @@ import numpy as np
 
 
 
-class ODE:
+class GFL:
     def __init__(self, config):
         """
         Initialize the pll model with the given configuration.
@@ -53,7 +53,7 @@ class ODE:
 
 
 
-    def odequation(self, t, x):
+    def odequation_hl(self, t, x):
         """
         Calculates the derivatives of the state variables for the pll model.
 

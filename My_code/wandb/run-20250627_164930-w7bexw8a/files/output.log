@@ -1,0 +1,5 @@
+Is cuda available? False
+Number of different initial conditions:  2187
+['gamma', 'delta', 'theta_pll', 'i_gd_g', 'i_gq_g', 'v_od_g', 'v_oq_g'] Variables
+[[-0.15, 0.15], [-1.5708, 1.5708], [0, 6.283], [-2, 2], [-2, 2], [0.8, 1.2], [-0.2, 0.2]] Set of values for init conditions
+[3, 3, 3, 3, 3, 3, 3] Iterations per value

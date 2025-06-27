@@ -4,7 +4,7 @@ import os
 from src.functions import *
 import torch
 from src.dataset.create_dataset_functions import ODE_modelling
-from src.ode.ode import ODE
+from src.ode.gfl import GFL
 
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 
@@ -23,7 +23,7 @@ def main(config):
 
     Model = ODE_modelling(config)
     init_cond = Model.create_init_cond()
-    modelling_full = ODE(config)
+    modelling_full = GFL(config)
     flag_for_time = True
     solution = Model.solve_model(init_cond, modelling_full, flag_for_time)
     Model.save_dataset(solution)

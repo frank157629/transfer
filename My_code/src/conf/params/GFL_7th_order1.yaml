@@ -16,7 +16,7 @@ k_p   : 0.20       # proportional gain
 k_i   : 50.0       # integral gain
 w_n   : 314.159    # [rad/s] nominal sync speed (≈ w_g)
 
-# ---------- network voltages (treated as constants in the ODE) ----------
+# ---------- network voltages (treated as constants in the GFL) ----------
 v_gd_g: 1.0        # [pu] d-axis grid voltage (aligned ≈ 1 pu)
 v_gq_g: 0.0        # [pu] q-axis grid voltage
 

@@ -3,6 +3,7 @@ from src.functions import *
 import torch
 import wandb
 import hydra
+import numpy as np
 from src.dataset.create_dataset_functions import ODE_modelling
 #from src.ode.sm_models_d import SynchronousMachineModels
 from src.ode.GFL import GFL
@@ -16,7 +17,7 @@ os.environ["HYDRA_FULL_ERROR"]="1"
 # Use hydra to configure the dataset creation along with the setup_dataset.yaml file
 @hydra.main(config_path="src/conf", config_name="setup_dataset.yaml",version_base=None)
 def main(config):
-
+    #wandb.login(key=config.wandb.api_key)
     # Initialize wandb and log the dataset creation
     run = wandb.init(project=config.wandb.project)
     log_data_metrics_to_wandb(run, config)
@@ -34,7 +35,7 @@ def main(config):
     flag_for_time = True # we expect solution of each timestep
     solution = PLL_model.solve_pll_model(init_conditions, modelling_full,flag_for_time)  # Solve the model for the various initial conditions
     PLL_model.save_dataset(solution)  # Save the dataset
-    # plotting_solution(solution[0],flag_for_time)
+    plotting_solution(solution[0],flag_for_time)
     # plotting_solution_gridspec_original_all_7th(solution, modelling_full, show=True)
     return None
 

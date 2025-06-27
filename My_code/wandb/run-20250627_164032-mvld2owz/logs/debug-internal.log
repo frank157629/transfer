@@ -1,0 +1,15 @@
+{"time":"2025-06-27T16:40:32.9598774+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.1","symlink path":"C:\\Users\\h.liu\\PycharmProjects\\transfer-Code\\My_code\\wandb\\run-20250627_164032-mvld2owz\\logs\\debug-core.log"}
+{"time":"2025-06-27T16:40:33.4243107+02:00","level":"INFO","msg":"stream: created new stream","id":"mvld2owz"}
+{"time":"2025-06-27T16:40:33.4243107+02:00","level":"INFO","msg":"stream: started","id":"mvld2owz"}
+{"time":"2025-06-27T16:40:33.4243107+02:00","level":"INFO","msg":"sender: started","stream_id":"mvld2owz"}
+{"time":"2025-06-27T16:40:33.4243107+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"mvld2owz"}
+{"time":"2025-06-27T16:40:33.4243107+02:00","level":"INFO","msg":"handler: started","stream_id":"mvld2owz"}
+{"time":"2025-06-27T16:40:33.7343194+02:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-06-27T16:40:35.0909731+02:00","level":"INFO","msg":"stream: closing","id":"mvld2owz"}
+{"time":"2025-06-27T16:40:35.0909731+02:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-06-27T16:40:35.0909731+02:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-06-27T16:40:35.6837705+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-06-27T16:40:35.8690851+02:00","level":"INFO","msg":"handler: closed","stream_id":"mvld2owz"}
+{"time":"2025-06-27T16:40:35.8690851+02:00","level":"INFO","msg":"sender: closed","stream_id":"mvld2owz"}
+{"time":"2025-06-27T16:40:35.8690851+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"mvld2owz"}
+{"time":"2025-06-27T16:40:35.8707629+02:00","level":"INFO","msg":"stream: closed","id":"mvld2owz"}
