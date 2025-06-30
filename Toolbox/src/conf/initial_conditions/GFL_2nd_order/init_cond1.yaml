@@ -1,2 +1,2 @@
-- {name: delta, range: [-1.5708, 1.5708], iterations: 5}
-- {name: omega, range: [-10, 10], iterations: 5}
+- {name: delta, range: [-3.14159, 3.14159], iterations: 5}
+- {name: omega, range: [-60, 60], iterations: 5}

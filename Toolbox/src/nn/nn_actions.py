@@ -91,7 +91,7 @@ class NeuralNetworkActions():
         
         
         # self.SynchronousMachineModels = SynchronousMachineModels(self.cfg) # Create an instance of the class SM_modelling
-        self.PLLModel = GFL(self.cfg) # Create an instance of the class SM_modelling
+        self.GFLModel = GFL(self.cfg) # Create an instance of the class SM_modelling
         self.model = self.model.to(self.device)
         self.early_stopping = EarlyStopping(patience=cfg.nn.early_stopping_patience, verbose=True, delta=cfg.nn.early_stopping_min_delta)
         
@@ -320,7 +320,9 @@ class NeuralNetworkActions():
         time = x_train[:,0].unsqueeze(1) # get the time column SOSOSO check if x_train[1:,0] is required 
         no_time = x_train[:,1:] # get the input columns
         y, dy_dt = torch.autograd.functional.jvp( # calculate the jacobian vector product
-            func=lambda t: self.forward_nn(time=t, no_time = no_time), inputs=time ,v=torch.ones(time.shape).to(self.device), create_graph=True, retain_graph=True)
+            # func=lambda t: self.forward_nn(time=t, no_time = no_time), inputs=time ,v=torch.ones(time.shape).to(self.device), create_graph=True, retain_graph=True)
+            func = lambda t: self.forward_nn(time=t, no_time=no_time), inputs = time, v = torch.ones(time.shape).to(self.device), create_graph = True)
+
         return y, dy_dt
     
     def calculate_from_ode(self, output):
@@ -349,9 +351,9 @@ class NeuralNetworkActions():
         This function calculates the pinn loss either for collocation points or for data points
         """
         #autograd
-        #y_hat, dy_dt = self.calculate_autograd(x_train)
+        y_hat, dy_dt = self.calculate_autograd(x_train)
     
-        y_hat, dy_dt = self.calculate_autograd22(x_train) # calculate the output of the model and the derivative of the output
+        #y_hat, dy_dt = self.calculate_autograd22(x_train) # calculate the output of the model and the derivative of the output
         #ode
         if y_train is None: # collocation points
             y_processed = self.calculate_from_ode(y_hat)

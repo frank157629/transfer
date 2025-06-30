@@ -254,7 +254,7 @@ class ODE_modelling():
     #         print(f"Time taken to solve the model for {len(init_conditions)} initial conditions: {end_time - start_time} seconds.")
     #     return solution_all
 
-    def solve_pll_model(self, init_conditions, modelling_full, flag_time=False):
+    def solve_GFL_model(self, init_conditions, modelling_full, flag_time=False):
         """
         Solves the synchronous machine model for multiple initial conditions.
 

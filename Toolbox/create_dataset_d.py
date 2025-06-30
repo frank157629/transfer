@@ -28,12 +28,12 @@ def main(config):
     #  solution = SM_model.solve_sm_model(init_conditions, modelling_full, flag_for_time)  # Solve the model for the various initial conditions
     # SM_model.save_dataset(solution)  # Save the dataset
 
-    PLL_model=ODE_modelling(config)
-    init_conditions=PLL_model.create_init_conditions_set3() # Define the initial conditions of the system
+    GFL_model=ODE_modelling(config)
+    init_conditions=GFL_model.create_init_conditions_set3() # Define the initial conditions of the system
     modelling_full = GFL(config)
     flag_for_time = True # we expect solution of each timestep
-    solution = PLL_model.solve_pll_model(init_conditions, modelling_full,flag_for_time)  # Solve the model for the various initial conditions
-    PLL_model.save_dataset(solution)  # Save the dataset
+    solution = GFL_model.solve_GFL_model(init_conditions, modelling_full,flag_for_time)  # Solve the model for the various initial conditions
+    GFL_model.save_dataset(solution)  # Save the dataset
     # plotting_solution(solution[0],flag_for_time)
     # plotting_solution_gridspec_original_all_7th(solution, modelling_full, show=True)
     return None

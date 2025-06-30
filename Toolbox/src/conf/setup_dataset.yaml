@@ -28,8 +28,8 @@ num_of_points : 1000
 modelling_method : True #for pll default 'odequations'
 
 model:
-  model_flag : "GFL_7th_order"
-#  model_flag: "GFL_2nd_order"
+#  model_flag : "GFL_7th_order"
+  model_flag: "GFL_2nd_order"
   model_num : 1
   init_condition_bounds : 1
   sampling: "Lhs"
