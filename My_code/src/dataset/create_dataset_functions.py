@@ -20,7 +20,7 @@ class ODE_modelling:
         self.init_conditions_dir = config.dirs.init_conditions_dir
         self.dataset_dir = config.dirs.dataset_dir
         self.torch = config.model.torch
-        self.seed = config.model.seed
+        self.seed = None if not hasattr(config.model, 'seed') else config.model.seed
 
     def append_element_set(self, value_set, Value_range, num_ranges):
         if self.sampling=="Random":
@@ -60,7 +60,7 @@ class ODE_modelling:
         init_conditions_path = os.path.join(self.init_conditions_dir, self.model_flag,"init_cond" + str(self.init_condition_bounds) + ".yaml")
         init_conditions = OmegaConf.load(init_conditions_path)
 
-        modeling_guide_path = os.path.join(self.init_conditions_dir, "modellings_guide.yaml")
+        modeling_guide_path = os.path.join(self.init_conditions_dir, "modellings_guide_sm.yaml")
         modeling_guide = OmegaConf.load(modeling_guide_path)
 
         for model in modeling_guide:

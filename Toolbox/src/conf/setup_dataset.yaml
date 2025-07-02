@@ -23,6 +23,7 @@ wandb:
   api_key : "c26f0418182418f6712b79b4457de4faa81b7524"
   project : "Project_PINN_for_ROM_PLL_Model"
 
+Theme: GridFollowingConverterModels #Toolbox
 time : 1
 num_of_points : 1000
 modelling_method : True #for pll default 'odequations'

@@ -1,6 +1,6 @@
 import os
 
-from Toolbox.src.ode.GFL import GFL
+from Toolbox.src.ode.gfl_models_d import GFL
 from src.ode.sm_models_d import SynchronousMachineModels
 from src.nn.nn_actions import NeuralNetworkActions
 from src.functions import *

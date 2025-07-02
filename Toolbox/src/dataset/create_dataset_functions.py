@@ -128,7 +128,7 @@ class ODE_modelling():
         Returns:
             None or ValueError: If the variables are not present in the modeling guide or the iterations are not integers.
         """
-        modeling_guide_path = os.path.join(self.init_conditions_dir, "modellings_guide.yaml")
+        modeling_guide_path = os.path.join(self.init_conditions_dir, "modellings_guide_sm.yaml")
         modeling_guide = OmegaConf.load(modeling_guide_path)
         #check if proposed modeling is in the modeling guide
         for model in modeling_guide:
@@ -220,39 +220,6 @@ class ODE_modelling():
             solution = solve_ivp(modelling_full.odequations_v2, self.t_span, x0, t_eval=self.t_eval)
         return solution
 
-    # def solve_sm_model(self, init_conditions, modelling_full, flag_time=False):
-    #     """
-    #     Solves the synchronous machine model for multiple initial conditions.
-    #
-    #     Args:
-    #         machine_params (dict): Dictionary containing the parameters of the synchronous machine.
-    #         system_params (dict): Dictionary containing the parameters of the power system.
-    #         init_conditions (list): List of initial conditions for which the model needs to be solved.
-    #
-    #     Returns:
-    #         list: List of solutions for each initial condition.
-    #
-    #     """
-    #     self.t_span, self.t_eval = set_time(self.time, self.num_of_points)
-    #     solution_all=[]
-    #     if flag_time:
-    #         start_time = time.time()
-    #         start_per_iteration = start_time
-    #         time_list = []
-    #     for i in range(len(init_conditions)):
-    #         solution = self.solve(init_conditions[i], self.modelling_method, modelling_full)
-    #         solution_all.append(solution)
-    #         if flag_time:
-    #             end_per_iteration = time.time()
-    #             time_list.append(end_per_iteration - start_per_iteration)
-    #             start_per_iteration = end_per_iteration
-    #
-    #     if flag_time:
-    #         end_time = time.time()
-    #         #print mean and std of time per iteration
-    #         print("Mean time per iteration: ", np.mean(time_list), " and std: ", np.std(time_list))
-    #         print(f"Time taken to solve the model for {len(init_conditions)} initial conditions: {end_time - start_time} seconds.")
-    #     return solution_all
 
     def solve_GFL_model(self, init_conditions, modelling_full, flag_time=False):
         """

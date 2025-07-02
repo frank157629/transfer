@@ -118,7 +118,7 @@ hydra:
     override_dirname: ''
     id: ???
     num: ???
-    config_name: setup_dataset.yaml
+    config_name: setup_dataset_sm.yaml
     env_set: {}
     env_copy: []
     config:

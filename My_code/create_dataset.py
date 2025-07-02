@@ -11,9 +11,9 @@ os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 
 os.environ["HYDRA_FULL_ERROR"]="1"
 
-# Use hydra to configure the dataset creation along with the setup_dataset.yaml file
+# Use hydra to configure the dataset creation along with the setup_dataset_sm.yaml file
 @hydra.main(config_path="src/conf",
-            config_name="setup_dataset.yaml",
+            config_name="setup_dataset_sm.yaml",
             version_base=None)
 def main(config):
     run = wandb.init(project=config.wandb.project)

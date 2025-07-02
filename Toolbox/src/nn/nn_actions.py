@@ -7,7 +7,7 @@ from src.nn.nn_dataset import DataSampler
 from src.nn.nn_model import Net, Network, PinnA, FullyConnectedResNet, Kalm
 from src.functions import *
 from src.nn.early_stopping import EarlyStopping
-# from src.ode.sm_models_d import SynchronousMachineModels
+from src.ode.sm_models_d import SynchronousMachineModels
 from src.ode.GFL import GFL
 
 import wandb
@@ -17,7 +17,7 @@ import numpy as np
 from omegaconf import OmegaConf
 from torch.utils.data import DataLoader, TensorDataset
 
-from Toolbox.src.ode.GFL import GFL
+from Toolbox.src.ode.gfl_models_d import GFL
 
 
 class NeuralNetworkActions():
@@ -35,11 +35,12 @@ class NeuralNetworkActions():
     criterion (nn.Module) : loss function
     optimizer (optim) : optimizer
     scheduler (optim) : learning rate scheduler
-    SM_model (SM_modelling) : class for creating the synchronous machine model
-    machine_params (dict) : parameters of the synchronous machine
+    GFLModel (GFL_modelling) : class for creating the GridFollowingConverterModels model
+    model_params (dict) : parameters of the GridFollowingConverterModels
+    machine_params (dict) : parameters of the machine
     system_params (dict) : parameters of the power system
-    modelling_eq (CreateSolver) : class for solving the synchronous machine model
-    flag_for_modelling (bool) : flag for using the synchronous machine model
+    modelling_eq (CreateSolver) : class for solving the GridFollowingConverterModels model
+    flag_for_modelling (bool) : flag for using the GridFollowingConverterModels model
     device (torch.device) : device to run the model
     
     Methods
@@ -90,7 +91,7 @@ class NeuralNetworkActions():
         self.scheduler = self.custom_learning_rate(cfg.nn.lr_scheduler) # Define the learning rate scheduler
         
         
-        # self.SynchronousMachineModels = SynchronousMachineModels(self.cfg) # Create an instance of the class SM_modelling
+        self.SynchronousMachineModels = SynchronousMachineModels(self.cfg) # Create an instance of the class SM_modelling
         self.GFLModel = GFL(self.cfg) # Create an instance of the class SM_modelling
         self.model = self.model.to(self.device)
         self.early_stopping = EarlyStopping(patience=cfg.nn.early_stopping_patience, verbose=True, delta=cfg.nn.early_stopping_min_delta)
@@ -125,6 +126,7 @@ class NeuralNetworkActions():
             # model.speed()
         elif self.cfg.nn.type == "StaticNN": # Static architecture of the neural network
             model = Net(self.input_dim, self.cfg.nn.hidden_dim, self.output_dim)
+        #Key difference of PinnA and PinnB, please refer to function: "forward_nn"
         elif self.cfg.nn.type == "DynamicNN" or self.cfg.nn.type == "PinnB" or self.cfg.nn.type == "PinnA": # Dynamic architecture of the neural network
             model = Network(self.input_dim, self.cfg.nn.hidden_dim, self.output_dim, self.cfg.nn.hidden_layers)
         elif self.cfg.nn.type == "PinnAA": # Dynamic architecture of the neural network with the PinnA architecture for the output
@@ -319,7 +321,7 @@ class NeuralNetworkActions():
         """
         time = x_train[:,0].unsqueeze(1) # get the time column SOSOSO check if x_train[1:,0] is required 
         no_time = x_train[:,1:] # get the input columns
-        y, dy_dt = torch.autograd.functional.jvp( # calculate the jacobian vector product
+        y, dy_dt = func.jvp( # calculate the jacobian vector product
             # func=lambda t: self.forward_nn(time=t, no_time = no_time), inputs=time ,v=torch.ones(time.shape).to(self.device), create_graph=True, retain_graph=True)
             func = lambda t: self.forward_nn(time=t, no_time=no_time), inputs = time, v = torch.ones(time.shape).to(self.device), create_graph = True)
 
@@ -327,7 +329,7 @@ class NeuralNetworkActions():
     
     def calculate_from_ode(self, output):
         """
-        This function calculates the output(dy/dt) of the synchronous machine model for the given input y
+        This function calculates the output(dy/dt) of the GridFollowingConverterModels model for the given input y
         """
         if self.cfg.modelling_method:
             # y_processed = self.modelling_full.odequations(0, output.split(split_size=1, dim=1))
@@ -901,7 +903,7 @@ class NeuralNetworkActions():
     #     upper_limit = (starting_traj+total_traj)*num_per_traj #1*1000
     #     # var_name = ["theta","omega(r/s)","E_q(pu)","E_d(pu)"]
     #     # var_name = ["delta","omega(r/s)"]
-    #     modeling_guide_path = os.path.join(self.cfg.dirs.init_conditions_dir, "modellings_guide.yaml")
+    #     modeling_guide_path = os.path.join(self.cfg.dirs.init_conditions_dir, "modellings_guide_sm.yaml")
     #     modeling_guide = OmegaConf.load(modeling_guide_path)
     #     #check if proposed modeling is in the modeling guide
     #     for model in modeling_guide:
@@ -941,7 +943,7 @@ class NeuralNetworkActions():
         upper_limit = (starting_traj + total_traj) * num_per_traj  # 1*1000
         # var_name = ["theta","omega(r/s)","E_q(pu)","E_d(pu)"]
         var_name = ["delta", "omega(r/s)"]
-        modeling_guide_path = os.path.join(self.cfg.dirs.init_conditions_dir, "modellings_guide.yaml")
+        modeling_guide_path = os.path.join(self.cfg.dirs.init_conditions_dir, "modellings_guide_sm.yaml")
         modeling_guide = OmegaConf.load(modeling_guide_path)
         # check if proposed modeling is in the modeling guide
         for model in modeling_guide:

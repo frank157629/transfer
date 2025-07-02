@@ -2,6 +2,7 @@ wandb:
   api_key: "c26f0418182418f6712b79b4457de4faa81b7524"
   project: "Project_PINN_for_ROM_PLL_Model"
 
+Theme: GridFollowingConverterModels #Toolbox
 time : 1 # Total time to be considered
 num_of_points : 1000 # To be used when defining new collocation points, num per second, e.g. 1000*1s = 5K points
 modelling_method : True # Modelling approach to be followed, ddelta = omega or ddelta = omega*Omega_B

@@ -225,7 +225,7 @@ def predict(name, type, x_train_list,cfg):
 
 
 def variable_names(cfg):
-    modeling_guide_path = os.path.join(cfg.dirs.init_conditions_dir, "modellings_guide.yaml")
+    modeling_guide_path = os.path.join(cfg.dirs.init_conditions_dir, "modellings_guide_sm.yaml")
     modeling_guide = OmegaConf.load(modeling_guide_path)
     #check if proposed modeling is in the modeling guide
     for model in modeling_guide:

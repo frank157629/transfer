@@ -8,7 +8,7 @@ from matplotlib.backends.backend_pdf import PdfPages
 desktop = Path.home() / "Desktop"
 pdf_name = desktop / "results_2nd_order.pdf"
 
-##Second-order non-linear Model of a GFL converter
+##Second-order non-linear Model of a GridFollowingConverterModels converter
 #param
 params = dict(
     Vg = 1.0,   ## Grid voltage magnitude (p.u.)

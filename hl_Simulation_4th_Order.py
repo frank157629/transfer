@@ -1,5 +1,5 @@
 # ================================================================
-# 4-state large-signal GFL model – strict Eq. (8)
+# 4-state large-signal GridFollowingConverterModels model – strict Eq. (8)
 # states X = [ delta , Dw , i_gd , i_gq ]ᵀ
 # ================================================================
 import numpy as np

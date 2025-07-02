@@ -23,6 +23,7 @@ class GFL:
         self.model_num = config.model.model_num  # the number of the model to be used
         self.model_flag = config.model.model_flag  # the model to be used
         self.define_model_params_hl()  # define the parameters of the power system
+        self.define_system_params_hl()
 
 
     def define_model_params_hl(self):
