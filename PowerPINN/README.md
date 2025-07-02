@@ -1,5 +1,5 @@
 # PowerPINN
-Physics-Informed Neural Networks (PINNs) and Vanilla Neural Networks for Synchronous Machine and Grid-Following and Grid-Forming Converter Models
+Physics-Informed Neural Networks (PINNs) and Vanilla Neural Networks for Grid-Following and Grid-Forming Converter Models and Synchronous Machine Models.
 
 ## Overview
 This repository provides a framework for generating and training **Physics-Informed Neural Networks (PINNs)** for power system components(**Here: SM models and GFL models and GFM models**). It allows users to define Ordinary Differential Equations (ODEs), generate datasets, and train PINNs or Vanilla-NNs to approximate system dynamics efficiently. 
@@ -21,13 +21,13 @@ pip install -r requirements.txt
 
 ## Usage
 ### 1. Define ODEs
-ODEs are stored in `src/ode/sm_models_d.py`. You can add any new ODE model in this directory (src/ode/NameOfYourModel_models_d.py). 
+ODEs are stored in `src/ode/gfl_models_d.py`(Example for GFL models). You can add any new ODE model in this directory (src/ode/NameOfYourModel_models_d.py). 
 
 ### 2. Configure Variables
-The independent variables should be defined in `modellings_guide.yaml`, ensuring they are in the same order as in the ODEs.
+The independent variables should be defined in `modellings_guide_gfl.yaml` (Example for GFL models), ensuring they are in the same order as in the ODEs.
 
 ### 3. Set Initial Conditions
-Initial condition values and ranges should be specified in respective YAML files, located in the `src/conf/initial_conditions/` folder under the corresponding ODE name (e.g., `SM_AVR_GOV/init_cond.yaml`).
+Initial condition values and ranges should be specified in respective YAML files, located in the `src/conf/initial_conditions/` folder under the corresponding ODE name and init_cond number(e.g., `GFL_4th_order/init_cond1.yaml`).
 
 ### 4. Define Machine Parameters
 Different machine parameters can be configured in the `src/conf/params/` folder.
@@ -50,21 +50,8 @@ Train the PINN model with:
 ```bash
 python test_sweep.py
 ```
-### 7. Extension of Your Own Model
-- Follow steps 1 to 6 to define your own model
-- Global search in the PowerPINN folder, adding your own model specifications using following command to navigate:
-```bash
-grep -Rn --color --include="*.py" "#Add your specifications here..." .
-```
-- Remove the `raise NotImplementedError`
 
-### 8.To Find Changes of Haitian Based on Toolbox's Original Implementation
-- To see functions that had been modified or implemented for the GFL, please give the following command within the PowerPINN folder:
-```bash
-grep -Rn --color --include="*.py" "#Haitian" .
-```
-
-**Configuration file:** `setup_dataset_nn.yaml`
+**Configuration file:** `setup_dataset_nn_gfl.yaml`(Example for training GFL models)
 - `time`, `num_of_points`, `modelling_method`: Same as dataset setup.
 - `seed`: Ensures reproducibility.
 - `dataset`: Defines data usage (`shuffle`, `split_ratio`, `transform_input/output`).
@@ -75,14 +62,38 @@ grep -Rn --color --include="*.py" "#Haitian" .
   - `weighting`: Adjusts loss function balance.
 - `dirs`: Paths for dataset, model, and training parameters.
 
-## Configuration Files
-| File | Purpose |
-|---------------------|--------------------------------------------------|
-| `setup_dataset.yaml` | Defines parameters for dataset generation |
-| `setup_dataset_nn.yaml` | Defines parameters for neural network training |
-| `modellings_guide.yaml` | Lists different ODE models and their variables |
-| `initial_conditions/` | Folder containing initial conditions for each ODE |
-| `params/` | Folder containing different synchronous machine parameters |
+## Configuration Files(Example for training GFL models)
+| File                        | Purpose |
+|-----------------------------|--------------------------------------------------|
+| `setup_dataset_gfl.yaml`    | Defines parameters for dataset generation |
+| `setup_dataset_nn_gfl.yaml` | Defines parameters for neural network training |
+| `modellings_guide_gfl.yaml` | Lists different ODE models and their variables |
+| `initial_conditions/`       | Folder containing initial conditions for each ODE |
+| `params/`                   | Folder containing different synchronous machine parameters |
+
+### 7. Extension of Your Own Model
+- Follow steps 1 to 6 to define your own model
+- Global search in the PowerPINN folder, adding your own model specifications using following command to navigate:(For windows)
+
+```bash
+- Get-ChildItem -Recurse -Include *.py | Select-String -Pattern "#Add your specifications here..."
+```
+- For mac
+```bash
+grep -Rn --color --include="*.py" "#Add your specifications here..." .
+```
+- Remove the `raise NotImplementedError`
+
+### 8.To Find Changes of Haitian Based on Toolbox's Original Implementation
+- To see functions that had been modified or implemented for the GFL, please give the following command within the PowerPINN folder:(for windows)
+```bash
+Get-ChildItem -Recurse -Include *.py | Select-String -Pattern "#Haitian"
+```
+- for mac
+```bash
+grep -Rn --color --include="*.py" "#Haitian" .
+```
+
 
 ## Citation
 If you use this repository in your research, please cite the following paper:
