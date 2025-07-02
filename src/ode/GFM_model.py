@@ -16,8 +16,8 @@ class GFM:
 
         # Definisci V_ref e P_ref se ti servono costanti
         self.v_ref = 1.0
-        self.p_ref = 1200e3 / self.S_n
-        self.q_ref = 700e3 / self.S_n
+        self.p_ref = 1000e3 / self.S_n
+        self.q_ref = 500e3 / self.S_n
 
     def define_machine_params(self):
         machine_params_path = os.path.join(self.params_dir, "GFM.yaml")

@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 # Insert the name of the dataset you want to convert es. dataset_v2 (directory: data-->GFM)
 # Close plot first if you want to visualize printed values on terminal
 
-with open("./data/GFM/dataset_v2.pkl", "rb") as f:
+with open("./data/GFM/dataset_v1.pkl", "rb") as f:
     sol = np.asarray(pickle.load(f))
 print("sol shape:", sol.shape)  # (n_traj, 14, 1000)
 
