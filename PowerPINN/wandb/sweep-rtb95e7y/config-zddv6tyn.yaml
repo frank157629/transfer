@@ -1,0 +1,14 @@
+wandb_version: 1
+
+seed:
+  value: 1
+setup:
+  value: GFL
+weight_data:
+  value: 1
+weight_dt:
+  value: 0.001
+weight_pinn:
+  value: 0.0001
+weight_pinn_ic:
+  value: 0.001

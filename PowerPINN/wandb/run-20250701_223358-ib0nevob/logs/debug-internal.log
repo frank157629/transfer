@@ -1,0 +1,7 @@
+{"time":"2025-07-01T22:33:58.841705+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250701_223358-ib0nevob/logs/debug-core.log"}
+{"time":"2025-07-01T22:33:59.132439+02:00","level":"INFO","msg":"stream: created new stream","id":"ib0nevob"}
+{"time":"2025-07-01T22:33:59.132469+02:00","level":"INFO","msg":"stream: started","id":"ib0nevob"}
+{"time":"2025-07-01T22:33:59.132477+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"ib0nevob"}
+{"time":"2025-07-01T22:33:59.132484+02:00","level":"INFO","msg":"sender: started","stream_id":"ib0nevob"}
+{"time":"2025-07-01T22:33:59.132516+02:00","level":"INFO","msg":"handler: started","stream_id":"ib0nevob"}
+{"time":"2025-07-01T22:33:59.376963+02:00","level":"INFO","msg":"Starting system monitor"}

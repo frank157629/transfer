@@ -1,0 +1,42 @@
+Is cuda available? False
+Number of different initial conditions for collocation points:  16
+['delta', 'delta_omega', 'delta_Id', 'delta_Id_dt'] Variables
+[[-0.2, 0.2], [-0.1, 0.1], [-0.05, 0.05], [-0.1, 0.1]] Set of values for init conditions
+[2, 2, 2, 2] Iterations per value
+Shape: (16, 4)
+🟡 Solving initial condition 1/16: [0.16159439984462437, -0.09103797286681942, 0.03164906834745822, 0.03909696168993934]
+✅ Finished IC 1 successfully.
+🟡 Solving initial condition 2/16: [0.16159439984462437, -0.09103797286681942, 0.03164906834745822, -0.042617633811137506]
+✅ Finished IC 2 successfully.
+🟡 Solving initial condition 3/16: [0.16159439984462437, -0.09103797286681942, -0.031665221530111184, 0.03909696168993934]
+✅ Finished IC 3 successfully.
+🟡 Solving initial condition 4/16: [0.16159439984462437, -0.09103797286681942, -0.031665221530111184, -0.042617633811137506]
+✅ Finished IC 4 successfully.
+🟡 Solving initial condition 5/16: [0.16159439984462437, 0.09536984919563535, 0.03164906834745822, 0.03909696168993934]
+✅ Finished IC 5 successfully.
+🟡 Solving initial condition 6/16: [0.16159439984462437, 0.09536984919563535, 0.03164906834745822, -0.042617633811137506]
+✅ Finished IC 6 successfully.
+🟡 Solving initial condition 7/16: [0.16159439984462437, 0.09536984919563535, -0.031665221530111184, 0.03909696168993934]
+✅ Finished IC 7 successfully.
+🟡 Solving initial condition 8/16: [0.16159439984462437, 0.09536984919563535, -0.031665221530111184, -0.042617633811137506]
+✅ Finished IC 8 successfully.
+🟡 Solving initial condition 9/16: [-0.17781870856177617, -0.09103797286681942, 0.03164906834745822, 0.03909696168993934]
+✅ Finished IC 9 successfully.
+🟡 Solving initial condition 10/16: [-0.17781870856177617, -0.09103797286681942, 0.03164906834745822, -0.042617633811137506]
+✅ Finished IC 10 successfully.
+🟡 Solving initial condition 11/16: [-0.17781870856177617, -0.09103797286681942, -0.031665221530111184, 0.03909696168993934]
+✅ Finished IC 11 successfully.
+🟡 Solving initial condition 12/16: [-0.17781870856177617, -0.09103797286681942, -0.031665221530111184, -0.042617633811137506]
+✅ Finished IC 12 successfully.
+🟡 Solving initial condition 13/16: [-0.17781870856177617, 0.09536984919563535, 0.03164906834745822, 0.03909696168993934]
+✅ Finished IC 13 successfully.
+🟡 Solving initial condition 14/16: [-0.17781870856177617, 0.09536984919563535, 0.03164906834745822, -0.042617633811137506]
+✅ Finished IC 14 successfully.
+🟡 Solving initial condition 15/16: [-0.17781870856177617, 0.09536984919563535, -0.031665221530111184, 0.03909696168993934]
+✅ Finished IC 15 successfully.
+🟡 Solving initial condition 16/16: [-0.17781870856177617, 0.09536984919563535, -0.031665221530111184, -0.042617633811137506]
+✅ Finished IC 16 successfully.
+Mean time per iteration:  0.0003769397735595703  and std:  9.140787672567094e-05
+Time taken to solve the model for 16 initial conditions: 0.006031036376953125 seconds.
+Number of files in the directory:  2
+Saved dataset "('GFL_4th_order', 'dataset_v3')".

@@ -1,0 +1,25 @@
+{"time":"2025-07-01T20:23:21.22503+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250701_202320-k67r07ek/logs/debug-core.log"}
+{"time":"2025-07-01T20:23:21.50972+02:00","level":"INFO","msg":"stream: created new stream","id":"k67r07ek"}
+{"time":"2025-07-01T20:23:21.509906+02:00","level":"INFO","msg":"stream: started","id":"k67r07ek"}
+{"time":"2025-07-01T20:23:21.509923+02:00","level":"INFO","msg":"sender: started","stream_id":"k67r07ek"}
+{"time":"2025-07-01T20:23:21.509932+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"k67r07ek"}
+{"time":"2025-07-01T20:23:21.510176+02:00","level":"INFO","msg":"handler: started","stream_id":"k67r07ek"}
+{"time":"2025-07-01T20:23:21.747877+02:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-07-01T20:30:12.764187+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/liuhaitian888-rwth-aachen-university/Project_PINNs_for_synchronous_machine/k67r07ek/file_stream\": read tcp 134.61.134.10:50940->35.186.228.49:443: read: operation timed out"}
+{"time":"2025-07-01T20:30:14.771436+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/liuhaitian888-rwth-aachen-university/Project_PINNs_for_synchronous_machine/k67r07ek/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-07-01T20:30:19.602876+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/liuhaitian888-rwth-aachen-university/Project_PINNs_for_synchronous_machine/k67r07ek/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-07-01T20:30:21.331015+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 134.61.134.10:50863->35.186.228.49:443: read: can't assign requested address"}
+{"time":"2025-07-01T20:30:23.685503+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-07-01T20:30:27.932669+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-07-01T20:30:28.342341+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/liuhaitian888-rwth-aachen-university/Project_PINNs_for_synchronous_machine/k67r07ek/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-07-01T20:30:36.659997+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-07-01T20:31:25.807357+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/liuhaitian888-rwth-aachen-university/Project_PINNs_for_synchronous_machine/k67r07ek/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-07-01T20:50:01.623981+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 134.61.134.10:51016->35.186.228.49:443: read: can't assign requested address"}
+{"time":"2025-07-01T20:50:03.857208+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-07-01T20:50:08.598939+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-07-01T20:50:08.804197+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/liuhaitian888-rwth-aachen-university/Project_PINNs_for_synchronous_machine/k67r07ek/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-07-01T20:50:17.302812+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-07-01T21:05:36.01537+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-07-01T21:38:06.331824+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/liuhaitian888-rwth-aachen-university/Project_PINNs_for_synchronous_machine/k67r07ek/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-07-01T21:39:06.049567+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-07-01T22:13:58.824135+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 172.16.111.136:51103->35.186.228.49:443: read: connection reset by peer"}

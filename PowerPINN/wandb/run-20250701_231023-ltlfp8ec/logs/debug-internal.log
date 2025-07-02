@@ -1,0 +1,7 @@
+{"time":"2025-07-01T23:10:23.404621+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250701_231023-ltlfp8ec/logs/debug-core.log"}
+{"time":"2025-07-01T23:10:23.715023+02:00","level":"INFO","msg":"stream: created new stream","id":"ltlfp8ec"}
+{"time":"2025-07-01T23:10:23.71505+02:00","level":"INFO","msg":"stream: started","id":"ltlfp8ec"}
+{"time":"2025-07-01T23:10:23.715059+02:00","level":"INFO","msg":"sender: started","stream_id":"ltlfp8ec"}
+{"time":"2025-07-01T23:10:23.715061+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"ltlfp8ec"}
+{"time":"2025-07-01T23:10:23.715102+02:00","level":"INFO","msg":"handler: started","stream_id":"ltlfp8ec"}
+{"time":"2025-07-01T23:10:24.003955+02:00","level":"INFO","msg":"Starting system monitor"}

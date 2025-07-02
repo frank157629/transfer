@@ -1,0 +1,16 @@
+{"time":"2025-07-01T18:30:39.577505+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250701_183039-b3hncdb5/logs/debug-core.log"}
+{"time":"2025-07-01T18:30:39.845411+02:00","level":"INFO","msg":"stream: created new stream","id":"b3hncdb5"}
+{"time":"2025-07-01T18:30:39.845586+02:00","level":"INFO","msg":"stream: started","id":"b3hncdb5"}
+{"time":"2025-07-01T18:30:39.84561+02:00","level":"INFO","msg":"sender: started","stream_id":"b3hncdb5"}
+{"time":"2025-07-01T18:30:39.845624+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"b3hncdb5"}
+{"time":"2025-07-01T18:30:39.845841+02:00","level":"INFO","msg":"handler: started","stream_id":"b3hncdb5"}
+{"time":"2025-07-01T18:30:40.142684+02:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-07-01T18:30:40.395468+02:00","level":"INFO","msg":"stream: closing","id":"b3hncdb5"}
+{"time":"2025-07-01T18:30:40.395598+02:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-07-01T18:30:40.395613+02:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-07-01T18:31:10.467701+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": net/http: request canceled (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2025-07-01T18:31:13.174077+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-07-01T18:31:13.782185+02:00","level":"INFO","msg":"handler: closed","stream_id":"b3hncdb5"}
+{"time":"2025-07-01T18:31:13.782291+02:00","level":"INFO","msg":"sender: closed","stream_id":"b3hncdb5"}
+{"time":"2025-07-01T18:31:13.783356+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"b3hncdb5"}
+{"time":"2025-07-01T18:31:13.783425+02:00","level":"INFO","msg":"stream: closed","id":"b3hncdb5"}

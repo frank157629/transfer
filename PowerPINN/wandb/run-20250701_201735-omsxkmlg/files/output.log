@@ -1,0 +1,56 @@
+Is cuda available? False
+Number of different initial conditions for collocation points:  16
+['delta', 'delta_omega', 'delta_Id', 'delta_Id_dt'] Variables
+[[-0.2, 0.2], [-0.1, 0.1], [-0.05, 0.05], [-0.1, 0.1]] Set of values for init conditions
+[2, 2, 2, 2] Iterations per value
+Error executing job with overrides: []
+Traceback (most recent call last):
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/create_dataset_d.py", line 56, in <module>
+    main()
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 223, in run_and_report
+    raise ex
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+           ^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+            ^^^^^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/hydra.py", line 132, in run
+    _ = ret.return_value
+        ^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/core/utils.py", line 260, in return_value
+    raise self._return_value
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+                       ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/create_dataset_d.py", line 47, in main
+    solution = GFL_model.solve_model(init_conditions, modelling_full,flag_for_time)  # Solve the model for the various initial conditions
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/src/dataset/create_dataset_functions.py", line 255, in solve_model
+    solution = self.solve(init_conditions[i], self.modelling_method, modelling_full)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/src/dataset/create_dataset_functions.py", line 225, in solve
+    solution = solve_ivp(modelling_full.odequation_gfl, self.t_span, x0, t_eval=self.t_eval)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/scipy/integrate/_ivp/ivp.py", line 621, in solve_ivp
+    solver = method(fun, t0, y0, tf, vectorized=vectorized, **options)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/scipy/integrate/_ivp/rk.py", line 94, in __init__
+    self.f = self.fun(self.t, self.y)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/scipy/integrate/_ivp/base.py", line 154, in fun
+    return self.fun_single(t, y)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/scipy/integrate/_ivp/base.py", line 23, in fun_wrapped
+    return np.asarray(fun(t, y), dtype=dtype)
+                      ^^^^^^^^^
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/src/ode/gfl_models_d.py", line 120, in odequation_gfl
+    + (self.w_g + delta_omega) * self.L_g * delta_Id_dt)
+       ^^^^^^^^
+AttributeError: 'GridFollowingConverterModels' object has no attribute 'w_g'

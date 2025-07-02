@@ -1,0 +1,31 @@
+Error executing job with overrides: []
+Traceback (most recent call last):
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/create_dataset_d.py", line 47, in <module>
+    main()
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 223, in run_and_report
+    raise ex
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+           ^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+            ^^^^^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/hydra.py", line 132, in run
+    _ = ret.return_value
+        ^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/core/utils.py", line 260, in return_value
+    raise self._return_value
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+                       ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/create_dataset_d.py", line 23, in main
+    log_data_metrics_to_wandb(run, config)
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/src/functions.py", line 214, in log_data_metrics_to_wandb
+    raise Exception("Theme is not supported.")
+Exception: Theme is not supported.

@@ -1,0 +1,16 @@
+{
+  "os":  "macOS-15.3-arm64-arm-64bit",
+  "python":  "CPython 3.11.11",
+  "startedAt":  "2025-07-01T13:41:44.734825Z",
+  "program":  "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/test_sweep.py",
+  "codePath":  "test_sweep.py",
+  "git":  {
+    "remote":  "https://github.com/radiakos/PowerPINN/",
+    "commit":  "3a842b68f68c2a2c6eb9546abe16eb80b92d0b4a"
+  },
+  "email":  "liuhaitian888@gmail.com",
+  "root":  "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN",
+  "host":  "134-010.eduroam.rwth-aachen.de",
+  "executable":  "/opt/anaconda3/envs/myenv/bin/python",
+  "codePathLocal":  "test_sweep.py"
+}

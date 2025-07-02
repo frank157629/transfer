@@ -1,0 +1,4 @@
+#Haitian, use to switch between SM and GFL
+# src/conf/config.yaml
+theme: GFL
+

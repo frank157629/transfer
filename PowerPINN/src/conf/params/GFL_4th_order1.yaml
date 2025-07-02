@@ -1,0 +1,36 @@
+## GFL_4th_order1.yaml — inverter parameters (numeric values only)
+#Pe_kw:   7.35   # kW, rated power
+#U_f:     400.0  # V, nominal AC-side rms voltage
+#V_dc:    700.0  # V, nominal DC-link voltage
+#f_e:     50.0   # Hz, grid frequency
+#w_g:     314.159
+#L:       7.6    # mH, filter inductance
+#L_g:     2.8    # mH, grid inductance
+#K_p:     0.49   # –, PLL proportional gain
+#K_i:     30.0   # –, PLL integral gain
+#I_d_ref: 1.0    # pu, d-axis current reference
+#I_q_ref: 0.0    # pu, q-axis current reference
+#K_pc:    0.1     # current controller P-gain
+#K_ic:    0.01    # current controller I-gain
+# GFL_4th_order1.yaml - inverter parameters (全部 p.u. 单位)
+
+Pe_kw: 1.0          # pu, Rated power set to 1.0 (per unit), dimensionless after normalization
+U_f: 1.0            # pu, Rated AC voltage set to 1.0 (e.g., 400V -> 1.0 in pu system)
+V_dc: 1.0           # pu, DC bus voltage, also normalized to 1.0
+f_e: 1.0            # pu, Base frequency set to 1.0 (e.g., 50Hz -> 1.0 in pu)
+w_g: 1.0            # pu, Angular grid frequency (2πf) normalized to 1.0
+
+# Inductance, resistance, etc. (typically small values)
+mH: 0.01            # pu, Filter inductance (e.g., L_f), optional
+L_g: 0.1            # pu, Grid-side inductance (should not be too small or too large)
+L: 0.1              # pu, Equivalent inductance in the controller
+
+# Controller gains, set to moderate values
+K_p: 1.0            # pu, Proportional gain of the current controller
+K_i: 1.0            # pu, Integral gain of the current controller
+
+I_d_ref: 1.0        # pu, Reference value for d-axis current (with bias)
+I_q_ref: 0.0        # pu, Reference value for q-axis current (0 means unity power factor)
+
+K_pc: 0.1           # pu, Proportional gain of d-axis current controller (inner loop)
+K_ic: 0.01          # pu, Integral gain of d-axis current controller (inner loop)
