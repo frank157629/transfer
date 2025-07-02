@@ -38,34 +38,9 @@ class SynchronousMachineModels():
         """
         machine_params_path = os.path.join(self.params_dir, "machine" + str(self.machine_num) + ".yaml") # path to the selected machine parameters
         machine_params = OmegaConf.load(machine_params_path)
-        if not(self.model_flag=="SM_IB"):
-            for param in ['X_d_dash', 'X_q_dash', 'H', 'D', 'T_d_dash', 'X_d', 'T_q_dash', 'X_q', 'E_fd', 'P_m']:
+
+        for param in ['X_d_dash', 'X_q_dash', 'H', 'D', 'T_d_dash', 'X_d', 'T_q_dash', 'X_q', 'E_fd', 'P_m']:
                 setattr(self, param, getattr(machine_params, param))
-        else:
-            for param in ['H', 'D', 'X_d_dash', 'X_q_dash', 'P_m']:
-                setattr(self, param, getattr(machine_params, param))
-
-        if self.model_flag=="SM6":
-            self.model_name = "6th order Synchronous Machine Model"
-            for param in ['T_d_dash_dash', 'T_q_dash_dash', 'X_d_dash_dash', 'X_q_dash_dash']:
-                setattr(self, param, getattr(machine_params, param))
-
-        if self.model_flag=="SM_AVR" or self.model_flag=="SM_AVR_GOV": 
-            avr_params_path= os.path.join(self.params_dir,"avr.yaml") #path to the automatic voltage regulator parameters
-            avr_params= OmegaConf.load(avr_params_path)
-            for param in ['K_A', 'T_A', 'K_E', 'T_E', 'K_F', 'T_F', 'V_ref']:
-                setattr(self, param, getattr(avr_params, param))
-        else: 
-            avr_params=None
-
-        if self.model_flag=="SM_AVR_GOV":
-            gov_params_path= os.path.join(self.params_dir,"gov.yaml") #path to the governor parameters
-            gov_params= OmegaConf.load(gov_params_path)
-            for param in ['P_c', 'R_d', 'T_ch', 'T_sv']:
-                setattr(self, param, getattr(gov_params, param))
-        else:
-            gov_params=None
-
         return 
     
     def define_system_params(self):

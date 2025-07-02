@@ -1,5 +1,5 @@
 import os
-from src.ode.sm_models_d import SynchronousMachineModels
+from src.ode.GFM_model import GFM
 from src.nn.nn_actions import NeuralNetworkActions
 from src.functions import *
 from omegaconf import OmegaConf
@@ -23,7 +23,7 @@ def train(config=None):
 
 
     # Initialize model and network
-    modelling_full = SynchronousMachineModels(cfg)
+    modelling_full = GFM(cfg)
     network2 = NeuralNetworkActions(cfg, modelling_full)
 
     # Set skip points and start training

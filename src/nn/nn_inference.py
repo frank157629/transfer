@@ -51,7 +51,7 @@ def check_transform(name):
             return False 
         
 def check_sm_modelling(name, cfg):
-    sm_modelling_list = ["SM_AVR_GOV", "SM_AVR", "SM_IB", "SM", "SM6"]
+    sm_modelling_list = ["SM_AVR", "GFM"]  #ho modificato qui credo sia riferito al file con le opzioni macchina modellings guide
     for t1 in sm_modelling_list:
         if t1 in name:
             if t1 == cfg.model.model_flag:
@@ -387,28 +387,51 @@ def plot_results(y_pred, y_test, x_test, num_of_points, cut_off=0):
     plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:,0],y_pred.cpu().detach().numpy()[cut_off:num_of_points,0], label = "Prediction")
     plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:,0],y_test[cut_off:num_of_points].cpu().detach().numpy()[:,0], label = "True")
     plt.xlabel("Time(s)")
-    plt.ylabel("δ")
+    plt.ylabel("xi_d")
     #plt.legend()
     plt.subplot(4, 1, 2)
     plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:,0],y_pred.cpu().detach().numpy()[cut_off:num_of_points,1], label = "Prediction")
     plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:,0],y_test[cut_off:num_of_points].cpu().detach().numpy()[:,1], label = "True")
     plt.xlabel("Time(s)")
-    plt.ylabel("ω (rad/s)")
+    plt.ylabel("xi_q")
     #plt.legend()
     plt.subplot(4, 1, 3)
     plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:,0],y_pred.cpu().detach().numpy()[cut_off:num_of_points,2], label = "Prediction")
     plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:,0],y_test[cut_off:num_of_points].cpu().detach().numpy()[:,2], label = "True")
     plt.xlabel("Time(s)")
-    plt.ylabel("E_d_dash (pu)")
+    plt.ylabel("vfd")
     #plt.legend()
     plt.subplot(4, 1, 4)
     plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:,0],y_pred.cpu().detach().numpy()[cut_off:num_of_points,3], label = "Prediction")
     plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:,0],y_test[cut_off:num_of_points].cpu().detach().numpy()[:,3], label = "True")
     plt.xlabel("Time(s)")
-    plt.ylabel("E_q_dash (pu)")
+    plt.ylabel("vfq")
+    # plt.legend()
+    plt.subplot(4, 1, 5)
+    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0],y_pred.cpu().detach().numpy()[cut_off:num_of_points, 4], label="Prediction")
+    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0],y_test[cut_off:num_of_points].cpu().detach().numpy()[:, 4], label="True")
+    plt.xlabel("Time(s)")
+    plt.ylabel("ifd")
+    # plt.legend()
+    plt.subplot(4, 1, 6)
+    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0],y_pred.cpu().detach().numpy()[cut_off:num_of_points, 5], label="Prediction")
+    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0],y_test[cut_off:num_of_points].cpu().detach().numpy()[:, 5], label="True")
+    plt.xlabel("Time(s)")
+    plt.ylabel("ifq")
+    # plt.legend()
+    plt.subplot(4, 1, 7)
+    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0],y_pred.cpu().detach().numpy()[cut_off:num_of_points, 6], label="Prediction")
+    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0],y_test[cut_off:num_of_points].cpu().detach().numpy()[:, 6], label="True")
+    plt.xlabel("Time(s)")
+    plt.ylabel("itd")
+    # plt.legend()
+    plt.subplot(4, 1, 8)
+    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0],y_pred.cpu().detach().numpy()[cut_off:num_of_points, 7], label="Prediction")
+    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0],y_test[cut_off:num_of_points].cpu().detach().numpy()[:, 7], label="True")
+    plt.xlabel("Time(s)")
+    plt.ylabel("itq")
     plt.legend()
     plt.show()
-
 
 
 def save_results(model_flag, nn_type, values, values_one):

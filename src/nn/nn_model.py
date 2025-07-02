@@ -17,6 +17,8 @@ class Net(nn.Module):
         self.fc4 = nn.Linear(hidden_size, hidden_size)
         self.fc5 = nn.Linear(hidden_size, output_size)
 
+
+
     def forward(self, x):
         """
         Forward pass of the neural network.

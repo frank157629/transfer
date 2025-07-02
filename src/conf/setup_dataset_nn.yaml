@@ -11,7 +11,7 @@ model:
   model_flag : "SM_AVR_GOV" # Choose between "SM_IB" or "SM4" or "SM_AVR" or "SM_AVR_GOV" or "SM6"
   machine_num : 7 # Set of machine parameters to be used
   init_condition_bounds : 1 # Final number of set of initial conditions for the collocation points to be used
-  sampling: "Lhs" # Choose between "Lhs" or "Linear" or "Random" for sampling the initial conditions for collocation points
+  sampling: "Random" # Choose between "Lhs" or "Linear" or "Random" for sampling the initial conditions for collocation points
   torch : True # Keep it True when training the model! and also using to create the collocaiton points
   
 dataset:

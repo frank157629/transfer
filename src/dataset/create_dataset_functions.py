@@ -102,7 +102,7 @@ class ODE_modelling():
         for j in range(iterations):
             if len(value_set)<1:
                 values = (Value_range[0] + points * (Value_range[1] - Value_range[0]) if num_ranges > 1 else Value_range[0])
-                new_value_set = [values][0].tolist()
+                new_value_set = [values][0].tolist() if isinstance (values, np.ndarray) else [[values]]
             else:
                 for i in points:
                     if isinstance(i, np.ndarray):
@@ -149,7 +149,7 @@ class ODE_modelling():
                 raise ValueError(f"Variable {name} iterations must be an integer")
         return
 
-    def create_init_conditions_set3(self):
+    def create_init_conditions_set3(self) -> object:
         """
         Define the various initial conditions of the synchronous machine and return a matrix with all the possible combinations.
 
@@ -190,8 +190,8 @@ class ODE_modelling():
             wandb.log({"Number of different initial conditions: ": number_of_conditions})
 
         print(variables, "Variables")
-        print(set_of_values,"Set of values for init conditions")
-        print(iterations,"Iterations per value")
+        print(set_of_values, "Set of values for init conditions")
+        print(iterations, "Iterations per value")
         #wandb.log({"Set of values for init conditions: ": set_of_values})
         #wandb.log({"Iterations per value: ": iterations})
         init_condition_table = []   
@@ -209,15 +209,13 @@ class ODE_modelling():
         Returns:
         - solution: solution of the differential equations
         """
-
         if method:
             solution = solve_ivp(modelling_full.odequations, self.t_span, x0, t_eval=self.t_eval)
         else:
-            x0[1] = x0[1] / self.omega_B
-            solution = solve_ivp(modelling_full.odequations_v2, self.t_span, x0, t_eval=self.t_eval)
+            solution = solve_ivp(modelling_full.odequations, self.t_span, x0, t_eval=self.t_eval)
         return solution
 
-    def solve_sm_model(self, init_conditions, modelling_full, flag_time=False):
+    def solve_GFM_model(self, init_conditions, modelling_full, flag_time=False):
         """
         Solves the synchronous machine model for multiple initial conditions.
 
@@ -300,9 +298,3 @@ class ODE_modelling():
         with open(dataset_path, 'rb') as f:
             dataset = pickle.load(f)
         return dataset
-
-  
-
-
-
-    

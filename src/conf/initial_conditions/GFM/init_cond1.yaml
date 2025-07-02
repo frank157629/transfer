@@ -1,0 +1,13 @@
+- {name: xi_d, range: [0, 0.01], iterations: 1}
+- {name: xi_q, range: [0, 0.01], iterations: 1}
+- {name: vfd, range:  [0.8, 1.2], iterations: 2}
+- {name: vfq, range: [-0.3, 0.3], iterations: 2}
+- {name: ifd, range: [0.8, 1.2], iterations: 2}
+- {name: ifq, range: [-0.3, 0.3], iterations: 2}
+- {name: itd, range: [0.8, 1.2], iterations: 2}
+- {name: itq, range: [-0.3, 0.3], iterations: 2}
+- {name: sigma_d, range: [0.0, 0.01], iterations: 1}
+- {name: sigma_q, range: [0.0, 0.01], iterations: 1}
+- {name: gamma_q, range: [0, 0.01], iterations: 1}
+- {name: theta_gfm, range: [0.0, 0.01], iterations: 1}
+- {name: theta_grid, range: [0.0, 0.01], iterations: 1}

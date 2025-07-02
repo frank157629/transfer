@@ -7,7 +7,7 @@ from src.nn.nn_dataset import DataSampler
 from src.nn.nn_model import Net, Network, PinnA, FullyConnectedResNet, Kalm
 from src.functions import *
 from src.nn.early_stopping import EarlyStopping
-from src.ode.sm_models_d import SynchronousMachineModels
+from src.ode.GFM_model import GFM
 import wandb
 import torch.autograd.functional as func
 from src.nn.gradient_based_weighting import PINNWeighting
@@ -22,6 +22,7 @@ class NeuralNetworkActions():
 
     Attributes
     ----------
+    ----definition of the dataset as pre-requisite of this definition file .py-----
     cfg (dict) : configuration file
     input_dim (int) : number of input features
     hidden_dim (int) : number of hidden neural network layers
@@ -86,7 +87,7 @@ class NeuralNetworkActions():
         self.scheduler = self.custom_learning_rate(cfg.nn.lr_scheduler) # Define the learning rate scheduler
         
         
-        self.SynchronousMachineModels = SynchronousMachineModels(self.cfg) # Create an instance of the class SM_modelling
+        self.GFM = GFM(self.cfg) # Create an instance of the class GFM
         
         self.model = self.model.to(self.device)
         self.early_stopping = EarlyStopping(patience=cfg.nn.early_stopping_patience, verbose=True, delta=cfg.nn.early_stopping_min_delta)
@@ -245,9 +246,6 @@ class NeuralNetworkActions():
         return y_pred
 
 
-    
-
-        
     def forward_nn(self, time, no_time):
         """
         This function calculates the output of the neural network model, input is given as time and the other input columns
@@ -297,7 +295,9 @@ class NeuralNetworkActions():
     
     def calculate_autograd22(self, x_train):
         """
-        This function calculates the output of the neural network model and the derivative of the output using the derivative function
+        This function calculates the output of the neural network model and the derivative of the output using the derivative function. Works
+        as a loop and manual deriv. Works in any case also for complex models.
+
         """
         time = x_train[:,0].unsqueeze(1) # get the time column
 
@@ -311,7 +311,8 @@ class NeuralNetworkActions():
     
     def calculate_autograd(self, x_train):
         """
-        This function calculates the output of the neural network model and the derivative of the output 
+        This function calculates the output of the neural network model and the derivative of the output. More efficient
+        faster, calculates outputs together with the derivatives, might not work in some cases depending on the model.
         """
         time = x_train[:,0].unsqueeze(1) # get the time column SOSOSO check if x_train[1:,0] is required 
         no_time = x_train[:,1:] # get the input columns
@@ -335,9 +336,6 @@ class NeuralNetworkActions():
         y_processed = torch.cat(y_processed, 1)
 
         return y_processed
-
-
-
     
     def calculate_point_grad2(self, x_train, y_train):
         """
@@ -350,10 +348,10 @@ class NeuralNetworkActions():
         #ode
         if y_train is None: # collocation points
             y_processed = self.calculate_from_ode(y_hat)
-            return dy_dt , y_processed
+            return dy_dt, y_processed
         else:
             y_processed = self.calculate_from_ode(y_train) # data points
-            return y_hat, dy_dt , y_processed
+            return y_hat, dy_dt, y_processed
         
     def folder_name_f2(self,cfg):
         weight_data, weight_dt, weight_pinn, weight_pinn_ic = cfg.nn.weighting.weights
@@ -387,14 +385,6 @@ class NeuralNetworkActions():
             raise Exception("Folder name not found")
 
         return folder_name
-    
-    
-
-
-        
-
-
-    
     
 
     def update_loss_weights(self, old_weight_data, old_weight_dt, old_weight_pinn, old_weight_pinn_ic, loss_data, loss_dt, loss_pinn, loss_pinn_ic, epoch):
@@ -881,7 +871,7 @@ class NeuralNetworkActions():
         num_per_traj = int(self.data_loader.sample_per_traj)
         down_limit = starting_traj*num_per_traj
         upper_limit = (starting_traj+total_traj)*num_per_traj
-        var_name = ["theta","omega(r/s)","E_q(pu)","E_d(pu)"]
+        var_name = [ "xi_d", "xi_q", "vfd", "vfq", "ifd", "ifq", "itd", "itq", "sigma_d", "sigma_q", "gamma_q", "theta_gfm", "theta_grid"] #modified here
         modeling_guide_path = os.path.join(self.cfg.dirs.init_conditions_dir, "modellings_guide.yaml")
         modeling_guide = OmegaConf.load(modeling_guide_path)
         #check if proposed modeling is in the modeling guide
