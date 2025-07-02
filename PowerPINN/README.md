@@ -21,7 +21,7 @@ pip install -r requirements.txt
 
 ## Usage
 ### 1. Define ODEs
-ODEs are stored in `src/ode/gfl_models_d.py`(Example for GFL models). You can add any new ODE model in this directory (src/ode/NameOfYourModel_models_d.py). 
+ODEs are stored in `src/ode/gfl_models_d.py`(Example for GFL models). You can add any new ODE model in this directory (src/ode/gfl_models_d.py). 
 
 ### 2. Configure Variables
 The independent variables should be defined in `modellings_guide_gfl.yaml` (Example for GFL models), ensuring they are in the same order as in the ODEs.
@@ -37,11 +37,12 @@ To generate the dataset for PINN training, use:
 ```bash
 python create_dataset_d.py
 ```
-**Configuration file:** `setup_dataset.yaml`
+**Configuration file for the whole project:** `config.yaml`, in order to switch between GFL, GFM, and SM
+* Configuration file for the generation of dataset* `setup_dataset.yaml`
 - `time`: Total simulation time.
 - `num_of_points`: Number of data points per trajectory.
 - `modelling_method`: Defines how state variables evolve.
-- `model`: Specifies which ODE model to use (e.g., `SM_AVR_GOV`).
+- `model`: Specifies which ODE model to use (e.g., `GFL_4th_order`).
 - `sampling`: Type of sampling for initial conditions (`Lhs`, `Linear`, `Random`).
 - `dirs`: Paths for storing parameters, initial conditions, and dataset.
 - `PowerPINN/test_create_dataset.py`: For a quick check of your generated dataset as a plot 
