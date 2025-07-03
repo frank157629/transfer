@@ -1,0 +1,7 @@
+{"time":"2025-07-02T23:13:04.138365+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250702_231303-fbg1oapp/logs/debug-core.log"}
+{"time":"2025-07-02T23:13:04.412153+02:00","level":"INFO","msg":"stream: created new stream","id":"fbg1oapp"}
+{"time":"2025-07-02T23:13:04.41233+02:00","level":"INFO","msg":"stream: started","id":"fbg1oapp"}
+{"time":"2025-07-02T23:13:04.412517+02:00","level":"INFO","msg":"handler: started","stream_id":"fbg1oapp"}
+{"time":"2025-07-02T23:13:04.412538+02:00","level":"INFO","msg":"sender: started","stream_id":"fbg1oapp"}
+{"time":"2025-07-02T23:13:04.412687+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"fbg1oapp"}
+{"time":"2025-07-02T23:13:04.643991+02:00","level":"INFO","msg":"Starting system monitor"}

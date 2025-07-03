@@ -1,0 +1,1 @@
+{"_runtime":1.811552,"Number of different initial conditions: ":16,"Number of samples ":1000,"_wandb":{"runtime":2},"_step":7,"Test with model ":"GFL_4th_order","Sampling method for initial points ":"Lhs","Model number ":1,"Initial conditions ":1,"Dataset saved":"Saved dataset \"('GFL_4th_order', 'dataset_v1')\".","Total time of simulation ":40,"_timestamp":1.751484917825328e+09}

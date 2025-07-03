@@ -35,7 +35,7 @@ def main(config):
         SM_model.save_dataset(solution) # Save the dataset
 
     elif theme == "GFL":
-        cfg = OmegaConf.load("src/conf/setup_dataset_nn_gfl.yaml")
+        cfg = OmegaConf.load("src/conf/setup_dataset_gfl.yaml")
         cfg.theme = "GFL"
         run = wandb.init(project=cfg.wandb.project)
         log_data_metrics_to_wandb(run, cfg)
@@ -47,7 +47,7 @@ def main(config):
         solution = GFL_model.solve_model(init_conditions, modelling_full,flag_for_time)  # Solve the model for the various initial conditions
         GFL_model.save_dataset(solution)  # Save the dataset
     elif theme == "GFM":
-        cfg = OmegaConf.load("src/conf/setup_dataset_nn_gfm.yaml")
+        cfg = OmegaConf.load("src/conf/setup_dataset_gfm.yaml")
         cfg.theme = "GFM"
         #Add your specifications here...
         raise NotImplementedError

@@ -1,0 +1,41 @@
+Is cuda available? False
+Number of different initial conditions:  1
+['delta', 'delta_omega', 'delta_Id', 'delta_Id_dt'] Variables
+[[0, 0], [0, 0], [0, 0], [0, 0]] Set of values for init conditions
+[1, 1, 1, 1] Iterations per value
+Error executing job with overrides: []
+Traceback (most recent call last):
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/create_dataset_d.py", line 60, in <module>
+    main()
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 223, in run_and_report
+    raise ex
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+           ^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+            ^^^^^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/hydra.py", line 132, in run
+    _ = ret.return_value
+        ^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/core/utils.py", line 260, in return_value
+    raise self._return_value
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+                       ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/create_dataset_d.py", line 44, in main
+    init_conditions = GFL_model.create_init_conditions_set3()  # Define the initial conditions of the system
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/src/dataset/create_dataset_functions.py", line 213, in create_init_conditions_set3
+    init_condition_table = self.append_element_set(init_condition_table, set_of_values[k], iterations[k])
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/src/dataset/create_dataset_functions.py", line 109, in append_element_set
+    new_value_set = [values][0].tolist()
+                    ^^^^^^^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'tolist'

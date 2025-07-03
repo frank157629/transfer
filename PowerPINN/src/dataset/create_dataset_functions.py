@@ -7,6 +7,9 @@ import numpy as np
 from pyDOE import lhs
 from scipy.integrate import solve_ivp
 import time
+#
+import traceback, sys
+from scipy.integrate import Radau
 
 class ODE_modelling():
     def __init__(self, config):
@@ -103,7 +106,9 @@ class ODE_modelling():
         for j in range(iterations):
             if len(value_set)<1:
                 values = (Value_range[0] + points * (Value_range[1] - Value_range[0]) if num_ranges > 1 else Value_range[0])
-                new_value_set = [values][0].tolist()
+                new_value_set = [values][0].tolist() if hasattr(values, 'tolist') else [[values]]
+
+
             else:
                 for i in points:
                     if isinstance(i, np.ndarray):
@@ -214,6 +219,9 @@ class ODE_modelling():
         print(f"Shape: ({rows}, {cols})")
         return init_condition_table
 
+    step_counter = [0]  # 用 list 让内部闭包能改值
+
+
     def solve(self, x0, modelling_method, modelling_full):
         """
         Solve the differential equations for the synchronous machine model.
@@ -229,7 +237,10 @@ class ODE_modelling():
             if self.theme == "SM":
                 solution = solve_ivp(modelling_full.odequation_sm, self.t_span, x0, t_eval=self.t_eval)
             elif self.theme == "GFL":
+                #Haitian, event
                 solution = solve_ivp(modelling_full.odequation_gfl, self.t_span, x0, t_eval=self.t_eval)
+                return solution
+
             elif self.theme == "GFM":
                 #Add your specifications here...
                 raise NotImplementedError
@@ -266,13 +277,10 @@ class ODE_modelling():
         #     solution_all.append(solution)
         for i in range(len(init_conditions)):
             print(f"🟡 Solving initial condition {i + 1}/{len(init_conditions)}: {init_conditions[i]}")
-            try:
-                solution = self.solve(init_conditions[i], self.modelling_method, modelling_full)
-                solution_all.append(solution)
-                print(f"✅ Finished IC {i + 1} successfully.")
-            except Exception as e:
-                print(f"❌ Error with IC {i + 1}: {init_conditions[i]}, error: {e}")
-                continue
+            solution = self.solve(init_conditions[i], self.modelling_method, modelling_full)
+            solution_all.append(solution)
+            print(f"✅ Finished IC {i + 1} successfully.")
+
             if flag_time:
                 end_per_iteration = time.time()
                 time_list.append(end_per_iteration - start_per_iteration)
@@ -283,8 +291,11 @@ class ODE_modelling():
             #print mean and std of time per iteration
             print("Mean time per iteration: ", np.mean(time_list), " and std: ", np.std(time_list))
             print(f"Time taken to solve the model for {len(init_conditions)} initial conditions: {end_time - start_time} seconds.")
+            print("[DEBUG] t_span =", self.t_span)
         return solution_all
-    
+    #
+
+
     def save_dataset(self, solution):
         """
         Create and save dataset for the model.

@@ -1,0 +1,7 @@
+{"time":"2025-07-02T20:18:22.177208+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250702_201821-xb0en2os/logs/debug-core.log"}
+{"time":"2025-07-02T20:18:22.439904+02:00","level":"INFO","msg":"stream: created new stream","id":"xb0en2os"}
+{"time":"2025-07-02T20:18:22.439934+02:00","level":"INFO","msg":"stream: started","id":"xb0en2os"}
+{"time":"2025-07-02T20:18:22.439949+02:00","level":"INFO","msg":"sender: started","stream_id":"xb0en2os"}
+{"time":"2025-07-02T20:18:22.439962+02:00","level":"INFO","msg":"handler: started","stream_id":"xb0en2os"}
+{"time":"2025-07-02T20:18:22.439948+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"xb0en2os"}
+{"time":"2025-07-02T20:18:22.687735+02:00","level":"INFO","msg":"Starting system monitor"}

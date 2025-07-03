@@ -1,0 +1,7 @@
+Is cuda available? False
+Number of different initial conditions:  16
+['delta', 'delta_omega', 'delta_Id', 'delta_Id_dt'] Variables
+[[-0.02, 0.02], [-0.01, 0.01], [-0.01, 0.01], [-0.1, 0.1]] Set of values for init conditions
+[2, 2, 2, 2] Iterations per value
+Shape: (16, 4)
+🟡 Solving initial condition 1/16: [-0.004854006304167486, -0.006953288703227051, 0.008134523085438, 0.028625224077807432]

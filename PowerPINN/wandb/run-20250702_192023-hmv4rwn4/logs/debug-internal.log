@@ -1,0 +1,15 @@
+{"time":"2025-07-02T19:20:23.807776+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250702_192023-hmv4rwn4/logs/debug-core.log"}
+{"time":"2025-07-02T19:20:24.110923+02:00","level":"INFO","msg":"stream: created new stream","id":"hmv4rwn4"}
+{"time":"2025-07-02T19:20:24.110966+02:00","level":"INFO","msg":"stream: started","id":"hmv4rwn4"}
+{"time":"2025-07-02T19:20:24.110975+02:00","level":"INFO","msg":"handler: started","stream_id":"hmv4rwn4"}
+{"time":"2025-07-02T19:20:24.111028+02:00","level":"INFO","msg":"sender: started","stream_id":"hmv4rwn4"}
+{"time":"2025-07-02T19:20:24.111149+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"hmv4rwn4"}
+{"time":"2025-07-02T19:20:24.365989+02:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-07-02T19:20:24.658377+02:00","level":"INFO","msg":"stream: closing","id":"hmv4rwn4"}
+{"time":"2025-07-02T19:20:24.659231+02:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-07-02T19:20:24.659351+02:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-07-02T19:20:25.371134+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-07-02T19:20:25.809121+02:00","level":"INFO","msg":"handler: closed","stream_id":"hmv4rwn4"}
+{"time":"2025-07-02T19:20:25.809166+02:00","level":"INFO","msg":"sender: closed","stream_id":"hmv4rwn4"}
+{"time":"2025-07-02T19:20:25.810201+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"hmv4rwn4"}
+{"time":"2025-07-02T19:20:25.810255+02:00","level":"INFO","msg":"stream: closed","id":"hmv4rwn4"}

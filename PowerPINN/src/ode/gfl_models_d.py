@@ -3,6 +3,41 @@ import os
 import torch
 import numpy as np
 
+#Haitian, Global time variable
+_last_check_time = None
+import time
+
+def calculate_frequency(delta_omega, w_g):
+    omega = delta_omega + w_g
+    f = omega / (2 * np.pi)
+    return f
+
+#Haitan, to discover errors
+def check_state_sanity(t, x, den=None, max_step_time=10):
+    global _last_check_time
+    now = time.time()
+
+    # check runtime
+    if _last_check_time is not None:
+        duration = now - _last_check_time
+        if duration > max_step_time:
+            raise RuntimeError(f"⏰ Step at t={t:.4f} took too long: {duration:.3f} s")
+    _last_check_time = now
+
+    # 2. check denominator
+    if den is not None:
+        # if a single value, cat to list
+        den_list = den if isinstance(den, (list, tuple, np.ndarray)) else [den]
+        for d in den_list:
+            if abs(d) < 1e-6:
+                raise ZeroDivisionError(f"den≈0 at t={t:.4f}, state= {x}, den={d}")
+    # 3. check exceptions
+    if np.isnan(x).any():
+        raise RuntimeError(f"NaN detected at t={t:.4f}, state={x}")
+    if np.isinf(x).any():
+        raise RuntimeError(f"Inf detected at t={t:.4f}, state={x}")
+    if np.max(np.abs(x)) > 1e6:
+        raise RuntimeError(f"Explosion: |x| > 1e6 at t={t:.4f}, state={x}")
 
 #Haitian, the file are newly defined by Haitian to suit for the GFL needs.
 class GridFollowingConverterModels:
@@ -27,6 +62,7 @@ class GridFollowingConverterModels:
 
     def define_system_params(self):
         return
+
 
 
     def define_model_params(self):
@@ -60,6 +96,11 @@ class GridFollowingConverterModels:
 
 
         return
+    #Haitian, to prevent faults during solving the ODE
+    import numpy as np
+    import time
+
+
 
     def odequation_gfl(self, t, x):
         """
@@ -95,43 +136,51 @@ class GridFollowingConverterModels:
 
         elif self.model_flag == "GFL_4th_order":
             delta, delta_omega, delta_Id, delta_Id_dt = x
+            delta_dt = delta_omega
+
+
+            den = (1 - self.K_p * self.L_g * (self.I_d_ref + delta_Id))
+            check_state_sanity(t, x, den)
 
             if isinstance(delta, torch.Tensor):
+                delta_dt = delta_omega
                 delta_omega_dot = (
                         (self.K_p
-                                * (-self.U_f * delta_omega * torch.cos(delta)
-                                + (self.w_g + delta_omega) * self.L_g * delta_Id_dt)
+                        * (-self.U_f * delta_omega * torch.cos(delta)
+                        + (self.w_g + delta_omega) * self.L_g * delta_Id_dt)
                         + self.K_i
-                                * (-self.U_f * torch.sin(delta)
-                                - self.L_g * (delta_omega + self.w_g)
-                                * (self.I_d_ref + delta_Id))
-                                  ) / (1 - self.K_p * self.L_g * (self.I_d_ref + delta_Id)))
+                        * (-self.U_f * torch.sin(delta)
+                        - self.L_g * (delta_omega + self.w_g)
+                        * (self.I_d_ref + delta_Id))
+                        ) / (1 - self.K_p * self.L_g * (self.I_d_ref + delta_Id))
+                )
 
                 delta_Id_ddt = (
                                 - self.K_pc * delta_Id_dt
                                 - self.K_ic * delta_Id
                                 + self.U_f * delta_omega * torch.sin(delta)
-                               ) / self.L
+                                ) / self.L
 
             else:
                 delta_omega_dot = (
                         (self.K_p
-                                * (-self.U_f * delta_omega * np.cos(delta)
-                                + (self.w_g + delta_omega) * self.L_g * delta_Id_dt)
+                        * (-self.U_f * delta_omega * np.cos(delta)
+                        + (self.w_g + delta_omega) * self.L_g * delta_Id_dt)
                         + self.K_i
-                                * (-self.U_f * np.sin(delta)
-                                - self.L_g * (delta_omega + self.w_g)
-                                * (self.I_d_ref + delta_Id))
-                                  ) / (1 - self.K_p * self.L_g * (self.I_d_ref + delta_Id)))
+                        * (-self.U_f * np.sin(delta)
+                        - self.L_g * (delta_omega + self.w_g)
+                        * (self.I_d_ref + delta_Id))
+                        ) / (1 - self.K_p * self.L_g * (self.I_d_ref + delta_Id))
+                )
 
                 delta_Id_ddt = (
-                                   - self.K_pc * delta_Id_dt
-                                   - self.K_ic * delta_Id
-                                   + self.U_f * delta_omega * np.sin(delta)
+                                - self.K_pc * delta_Id_dt
+                                - self.K_ic * delta_Id
+                                + self.U_f * delta_omega * np.sin(delta)
                                ) / self.L
 
             # four-state derivative list
-            return [delta_omega,  delta_omega_dot, delta_Id_dt, delta_Id_ddt]
+            return [delta_dt,  delta_omega_dot, delta_Id_dt, delta_Id_ddt]
 
         elif self.model_flag == "GFL_7th_order":
             gamma, delta, theta_pll, i_gd_g, i_gq_g, v_od_g, v_oq_g = x

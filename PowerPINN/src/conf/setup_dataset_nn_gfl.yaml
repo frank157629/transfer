@@ -2,7 +2,7 @@ wandb:
   api_key: "Add your wandb key here"
   project: "Project_PINNs_for_synchronous_machine"
 
-time : 2 # Total time to be considered
+time : 5 # Total time to be considered
 num_of_points : 1000 # To be used when defining new collocation points, num per second, e.g. 1000*1s = 5K points
 seed : 37 # Seed for reproducibility
 modelling_method : True # For GFL: True, since in p.u.

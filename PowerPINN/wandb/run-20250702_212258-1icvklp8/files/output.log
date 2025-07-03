@@ -1,0 +1,13 @@
+Is cuda available? False
+Number of different initial conditions:  1
+['delta', 'delta_omega', 'delta_Id', 'delta_Id_dt'] Variables
+[[0, 0], [0, 0], [0, 0], [0, 0]] Set of values for init conditions
+[1, 1, 1, 1] Iterations per value
+Shape: (1, 4)
+🟡 Solving initial condition 1/1: [0, 0, 0, 0]
+✅ Finished IC 1 successfully.
+Mean time per iteration:  0.009786844253540039  and std:  0.0
+Time taken to solve the model for 1 initial conditions: 0.009787797927856445 seconds.
+[DEBUG] t_span = (0, 5)
+Number of files in the directory:  4
+Saved dataset "('GFL_4th_order', 'dataset_v5')".

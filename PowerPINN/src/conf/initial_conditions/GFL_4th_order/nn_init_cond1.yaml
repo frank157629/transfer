@@ -1,5 +1,5 @@
 # src/conf/initial_conditions/GFL_4th_order/init_cond1.yaml
-- {name: delta,       range: [-0.2,  0.2], iterations: 2}
-- {name: delta_omega, range: [-0.1,  0.1], iterations: 2}
+- {name: delta,       range: [-0.02,  0.02], iterations: 2}
+- {name: delta_omega, range: [-0.01,  0.01], iterations: 2}
 - {name: delta_Id,    range: [-0.05, 0.05], iterations: 2}
 - {name: delta_Id_dt, range: [-0.1,  0.1], iterations: 2}

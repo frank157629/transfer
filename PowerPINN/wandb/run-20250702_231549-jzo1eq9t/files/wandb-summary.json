@@ -1,0 +1,1 @@
+{"_wandb":{"runtime":6},"Initial conditions ":1,"Model number ":1,"_runtime":0.682063,"Number of samples ":1000,"Number of different initial conditions: ":20,"_timestamp":1.751490950442346e+09,"Total time of simulation ":3,"Sampling method for initial points ":"Lhs","_step":6,"Test with model ":"GFL_4th_order"}

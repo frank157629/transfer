@@ -1,0 +1,7 @@
+Is cuda available? False
+Number of different initial conditions for collocation points:  16
+['delta', 'delta_omega', 'delta_Id', 'delta_Id_dt'] Variables
+[[-0.02, 0.02], [-0.01, 0.01], [-0.05, 0.05], [-0.1, 0.1]] Set of values for init conditions
+[2, 2, 2, 2] Iterations per value
+Shape: (16, 4)
+🟡 Solving initial condition 1/16: [0.010350091345499256, 0.008427915278876942, 0.0020754708498763735, -0.06965007166383885]

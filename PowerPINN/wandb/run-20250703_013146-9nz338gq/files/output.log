@@ -1,0 +1,51 @@
+Is cuda available? False
+Number of different initial conditions:  20
+['delta', 'delta_omega', 'delta_Id', 'delta_Id_dt'] Variables
+[[-0.64, 0.64], [60, 60], [0.01, 0.01], [0.1, 0.1]] Set of values for init conditions
+[20, 1, 1, 1] Iterations per value
+Shape: (20, 4)
+🟡 Solving initial condition 1/20: [0.40166960589792244, 60, 0.01, 0.1]
+✅ Finished IC 1 successfully.
+🟡 Solving initial condition 2/20: [0.6189162043874105, 60, 0.01, 0.1]
+✅ Finished IC 2 successfully.
+🟡 Solving initial condition 3/20: [0.4937280650594763, 60, 0.01, 0.1]
+✅ Finished IC 3 successfully.
+🟡 Solving initial condition 4/20: [-0.4410901914010949, 60, 0.01, 0.1]
+✅ Finished IC 4 successfully.
+🟡 Solving initial condition 5/20: [0.5627274416783791, 60, 0.01, 0.1]
+✅ Finished IC 5 successfully.
+🟡 Solving initial condition 6/20: [0.30703508587492523, 60, 0.01, 0.1]
+✅ Finished IC 6 successfully.
+🟡 Solving initial condition 7/20: [0.07480185544387463, 60, 0.01, 0.1]
+✅ Finished IC 7 successfully.
+🟡 Solving initial condition 8/20: [-0.6159962835117629, 60, 0.01, 0.1]
+✅ Finished IC 8 successfully.
+🟡 Solving initial condition 9/20: [-0.37455254252849185, 60, 0.01, 0.1]
+✅ Finished IC 9 successfully.
+🟡 Solving initial condition 10/20: [0.06163095286106146, 60, 0.01, 0.1]
+✅ Finished IC 10 successfully.
+🟡 Solving initial condition 11/20: [-0.058851505668271686, 60, 0.01, 0.1]
+✅ Finished IC 11 successfully.
+🟡 Solving initial condition 12/20: [-0.11717129329136955, 60, 0.01, 0.1]
+✅ Finished IC 12 successfully.
+🟡 Solving initial condition 13/20: [-0.5072664996017735, 60, 0.01, 0.1]
+✅ Finished IC 13 successfully.
+🟡 Solving initial condition 14/20: [-0.2650390987844012, 60, 0.01, 0.1]
+✅ Finished IC 14 successfully.
+🟡 Solving initial condition 15/20: [0.2174919972757886, 60, 0.01, 0.1]
+✅ Finished IC 15 successfully.
+🟡 Solving initial condition 16/20: [-0.1417729125542191, 60, 0.01, 0.1]
+✅ Finished IC 16 successfully.
+🟡 Solving initial condition 17/20: [0.3752545135044888, 60, 0.01, 0.1]
+✅ Finished IC 17 successfully.
+🟡 Solving initial condition 18/20: [-0.5328751419723288, 60, 0.01, 0.1]
+✅ Finished IC 18 successfully.
+🟡 Solving initial condition 19/20: [-0.19236756494895957, 60, 0.01, 0.1]
+✅ Finished IC 19 successfully.
+🟡 Solving initial condition 20/20: [0.1839558205353805, 60, 0.01, 0.1]
+✅ Finished IC 20 successfully.
+Mean time per iteration:  0.011271345615386962  and std:  0.005640358132651358
+Time taken to solve the model for 20 initial conditions: 0.22542905807495117 seconds.
+[DEBUG] t_span = (0, 3)
+Number of files in the directory:  13
+Saved dataset "('GFL_4th_order', 'dataset_v14')".

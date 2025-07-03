@@ -1,0 +1,53 @@
+Is cuda available? False
+Number of different initial conditions:  16
+['delta', 'delta_omega', 'delta_Id', 'delta_Id_dt'] Variables
+[[-0.02, 0.02], [-0.01, 0.01], [-0.01, 0.01], [-0.1, 0.1]] Set of values for init conditions
+[2, 2, 2, 2] Iterations per value
+Shape: (16, 4)
+🟡 Solving initial condition 1/16: [-0.013533303568898928, 0.009227097748140898, 0.004651773443617694, -0.09037306591698424]
+Error executing job with overrides: []
+Traceback (most recent call last):
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/scipy/_lib/_util.py", line 1091, in __getattr__
+    return self[name]
+           ~~~~^^^^^^
+KeyError: 'step'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/create_dataset_d.py", line 60, in <module>
+    main()
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 223, in run_and_report
+    raise ex
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+           ^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+            ^^^^^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/_internal/hydra.py", line 132, in run
+    _ = ret.return_value
+        ^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/core/utils.py", line 260, in return_value
+    raise self._return_value
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+                       ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/create_dataset_d.py", line 47, in main
+    solution = GFL_model.solve_model(init_conditions, modelling_full,flag_for_time)  # Solve the model for the various initial conditions
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/src/dataset/create_dataset_functions.py", line 291, in solve_model
+    solution = self.solve(init_conditions[i], self.modelling_method, modelling_full)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/src/dataset/create_dataset_functions.py", line 249, in solve
+    solver.step()  # 前进一步
+    ^^^^^^^^^^^
+  File "/opt/anaconda3/envs/myenv/lib/python3.11/site-packages/scipy/_lib/_util.py", line 1093, in __getattr__
+    raise AttributeError(name) from e
+AttributeError: step

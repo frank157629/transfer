@@ -2,8 +2,9 @@ wandb:
   api_key: "Add your wandb key here"
   project: "Project_PINN_for_synchronous_machine"
 
-time : 2 # Total time
-num_of_points : 1 # Number of points
+time : 3 # Total time
+seed : 1 #for reproducibility
+num_of_points : 1000 # Number of points
 modelling_method : True # For GFL: True, since in p.u.
 
 
