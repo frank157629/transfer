@@ -1,9 +1,0 @@
-Is cuda available? False
-Number of different initial conditions:  625
-['delta', 'delta_omega', 'delta_Id', 'delta_Id_dt'] Variables
-[[-1.14, 1.14], [60, 60], [0.01, 0.01], [0.1, 0.1]] Set of values for init conditions
-[5, 5, 5, 5] Iterations per value
-Shape: (625, 4)
-🟡 Solving initial condition 1/625: [0.03652055680008148, 60.0, 0.01, 0.1]
-✅ Finished IC 1 successfully.
-🟡 Solving initial condition 2/625: [0.03652055680008148, 60.0, 0.01, 0.1]

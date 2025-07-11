@@ -1,7 +1,0 @@
-{"time":"2025-07-06T15:51:24.053283+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250706_155123-hzp8oqex/logs/debug-core.log"}
-{"time":"2025-07-06T15:51:24.39657+02:00","level":"INFO","msg":"stream: created new stream","id":"hzp8oqex"}
-{"time":"2025-07-06T15:51:24.396884+02:00","level":"INFO","msg":"stream: started","id":"hzp8oqex"}
-{"time":"2025-07-06T15:51:24.396914+02:00","level":"INFO","msg":"sender: started","stream_id":"hzp8oqex"}
-{"time":"2025-07-06T15:51:24.396941+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"hzp8oqex"}
-{"time":"2025-07-06T15:51:24.397024+02:00","level":"INFO","msg":"handler: started","stream_id":"hzp8oqex"}
-{"time":"2025-07-06T15:51:24.716199+02:00","level":"INFO","msg":"Starting system monitor"}

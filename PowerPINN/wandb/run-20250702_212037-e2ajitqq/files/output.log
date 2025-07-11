@@ -1,7 +1,0 @@
-Is cuda available? False
-Number of different initial conditions:  1
-['delta', 'delta_omega', 'delta_Id', 'delta_Id_dt'] Variables
-[[0, 0], [0, 0], [0, 0], [0, 0]] Set of values for init conditions
-[1, 1, 1, 1] Iterations per value
-Shape: (1, 4)
-🟡 Solving initial condition 1/1: [0, 0, 0, 0]

@@ -1,7 +1,0 @@
-{"time":"2025-07-11T11:37:03.546153+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250711_113703-4gimbpoe/logs/debug-core.log"}
-{"time":"2025-07-11T11:37:03.915962+02:00","level":"INFO","msg":"stream: created new stream","id":"4gimbpoe"}
-{"time":"2025-07-11T11:37:03.915989+02:00","level":"INFO","msg":"stream: started","id":"4gimbpoe"}
-{"time":"2025-07-11T11:37:03.915998+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"4gimbpoe"}
-{"time":"2025-07-11T11:37:03.916015+02:00","level":"INFO","msg":"sender: started","stream_id":"4gimbpoe"}
-{"time":"2025-07-11T11:37:03.916006+02:00","level":"INFO","msg":"handler: started","stream_id":"4gimbpoe"}
-{"time":"2025-07-11T11:37:04.13715+02:00","level":"INFO","msg":"Starting system monitor"}

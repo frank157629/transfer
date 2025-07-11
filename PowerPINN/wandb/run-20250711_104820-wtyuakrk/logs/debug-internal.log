@@ -1,7 +1,0 @@
-{"time":"2025-07-11T10:48:21.125406+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250711_104820-wtyuakrk/logs/debug-core.log"}
-{"time":"2025-07-11T10:48:21.459804+02:00","level":"INFO","msg":"stream: created new stream","id":"wtyuakrk"}
-{"time":"2025-07-11T10:48:21.459826+02:00","level":"INFO","msg":"stream: started","id":"wtyuakrk"}
-{"time":"2025-07-11T10:48:21.459835+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"wtyuakrk"}
-{"time":"2025-07-11T10:48:21.459848+02:00","level":"INFO","msg":"handler: started","stream_id":"wtyuakrk"}
-{"time":"2025-07-11T10:48:21.45984+02:00","level":"INFO","msg":"sender: started","stream_id":"wtyuakrk"}
-{"time":"2025-07-11T10:48:21.701702+02:00","level":"INFO","msg":"Starting system monitor"}
