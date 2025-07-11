@@ -1,0 +1,16 @@
+{"time":"2025-07-11T12:18:43.963153+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250711_121843-awn6fgkq/logs/debug-core.log"}
+{"time":"2025-07-11T12:18:44.315188+02:00","level":"INFO","msg":"stream: created new stream","id":"awn6fgkq"}
+{"time":"2025-07-11T12:18:44.315388+02:00","level":"INFO","msg":"stream: started","id":"awn6fgkq"}
+{"time":"2025-07-11T12:18:44.315407+02:00","level":"INFO","msg":"sender: started","stream_id":"awn6fgkq"}
+{"time":"2025-07-11T12:18:44.315606+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"awn6fgkq"}
+{"time":"2025-07-11T12:18:44.315652+02:00","level":"INFO","msg":"handler: started","stream_id":"awn6fgkq"}
+{"time":"2025-07-11T12:18:44.530041+02:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-07-11T12:19:24.654094+02:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-07-11T12:19:24.654199+02:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-07-11T12:19:25.661881+02:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading media/images/traj_test1-10_508_6e9ae75dc4d831e9929e.png","runtime_seconds":0.94898775,"progress":"495.6KB/495.6KB"}],"total_operations":1}}
+{"time":"2025-07-11T12:19:25.747355+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-07-11T12:19:27.016938+02:00","level":"INFO","msg":"stream: closing","id":"awn6fgkq"}
+{"time":"2025-07-11T12:19:27.016976+02:00","level":"INFO","msg":"handler: closed","stream_id":"awn6fgkq"}
+{"time":"2025-07-11T12:19:27.017005+02:00","level":"INFO","msg":"sender: closed","stream_id":"awn6fgkq"}
+{"time":"2025-07-11T12:19:27.017309+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"awn6fgkq"}
+{"time":"2025-07-11T12:19:27.017647+02:00","level":"INFO","msg":"stream: closed","id":"awn6fgkq"}
