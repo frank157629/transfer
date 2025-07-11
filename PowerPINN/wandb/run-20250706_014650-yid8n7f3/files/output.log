@@ -1,0 +1,166 @@
+GFL_2nd_order data
+Loading data from:  ./data/GFL_2nd_order/dataset_v1.pkl
+/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/src/nn/nn_dataset.py:178: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_new.cpp:264.)
+  training_sample = torch.tensor(training_sample, dtype=torch.float32) # convert the trajectory to tensor
+Number of training samples:  20000 Number of validation samples:  2500 Number of testing samples:  2500
+Number of different initial conditions for collocation points:  25
+['delta', 'omega'] Variables
+[[-3.14159, 3.14159], [-60, 60]] Set of values for init conditions
+[5, 5] Iterations per value
+Shape: (25, 2)
+Selected deep learning model:  DynamicNN
+Number of labeled training data: 870 Number of collocation points: 1316 Number of collocation points (IC): 25 Number of validation data: 625
+Weights initialized as:  [1, 0.001, 0.0001, 0.001]  are updated with scheme:  Static
+getting in training
+Validation loss decreased (inf --> 34.308723).  Saving model ...
+Epoch [50/15000], Loss: 77.6394, Loss_data: 56.3512, Loss_dt: 20436.8398, Loss_pinn: 395.1086 , Loss_pinn_ic : 811.8945 33.8755989074707 21155.166015625
+Epoch [100/15000], Loss: 77.4527, Loss_data: 56.1283, Loss_dt: 20436.7383, Loss_pinn: 807.7689 , Loss_pinn_ic : 806.8812 33.854042053222656 21155.150390625
+Epoch [150/15000], Loss: 77.1642, Loss_data: 55.8286, Loss_dt: 20435.9922, Loss_pinn: 1005.3721 , Loss_pinn_ic : 799.1297 33.925437927246094 21154.732421875
+Epoch [200/15000], Loss: 76.7440, Loss_data: 55.4044, Loss_dt: 20434.5547, Loss_pinn: 1152.3583 , Loss_pinn_ic : 789.8290 33.85464096069336 21152.70703125
+Epoch [250/15000], Loss: 75.9773, Loss_data: 54.6643, Loss_dt: 20431.1465, Loss_pinn: 1104.7366 , Loss_pinn_ic : 771.3297 33.66754913330078 21147.873046875
+Epoch [300/15000], Loss: 74.5488, Loss_data: 53.2934, Loss_dt: 20421.7773, Loss_pinn: 1059.3042 , Loss_pinn_ic : 727.6503 33.371788024902344 21130.166015625
+Epoch [350/15000], Loss: 72.4991, Loss_data: 51.3209, Loss_dt: 20398.5723, Loss_pinn: 1133.7036 , Loss_pinn_ic : 666.2555 33.23251724243164 21080.47265625
+Epoch [400/15000], Loss: 69.8689, Loss_data: 48.7988, Loss_dt: 20348.6836, Loss_pinn: 1132.8705 , Loss_pinn_ic : 608.1738 32.57033920288086 20980.60546875
+Epoch [450/15000], Loss: 66.4084, Loss_data: 45.5655, Loss_dt: 20196.8848, Loss_pinn: 1068.4255 , Loss_pinn_ic : 539.1959 31.290828704833984 20795.697265625
+Epoch [500/15000], Loss: 62.2815, Loss_data: 41.8753, Loss_dt: 19847.6816, Loss_pinn: 1120.0780 , Loss_pinn_ic : 446.5156 28.104787826538086 20152.7734375
+Epoch [550/15000], Loss: 57.6968, Loss_data: 38.2301, Loss_dt: 19028.2188, Loss_pinn: 1149.0906 , Loss_pinn_ic : 323.5077 28.512699127197266 20164.892578125
+Epoch [600/15000], Loss: 53.6817, Loss_data: 34.8702, Loss_dt: 18393.3633, Loss_pinn: 1145.4272 , Loss_pinn_ic : 303.6121 32.8923225402832 20642.193359375
+Epoch [650/15000], Loss: 51.1670, Loss_data: 32.7018, Loss_dt: 18057.6719, Loss_pinn: 1183.2972 , Loss_pinn_ic : 289.2091 32.947242736816406 21001.265625
+Epoch [700/15000], Loss: 46.5726, Loss_data: 30.6141, Loss_dt: 15667.6221, Loss_pinn: 1310.9535 , Loss_pinn_ic : 159.7811 34.067649841308594 22610.28125
+Epoch [750/15000], Loss: 43.9434, Loss_data: 29.1797, Loss_dt: 14492.0986, Loss_pinn: 1445.6041 , Loss_pinn_ic : 126.9974 30.469209671020508 20912.560546875
+Epoch [800/15000], Loss: 41.4650, Loss_data: 27.3902, Loss_dt: 13794.5439, Loss_pinn: 1434.4952 , Loss_pinn_ic : 136.7690 33.174842834472656 21270.240234375
+Epoch [850/15000], Loss: 40.1354, Loss_data: 26.6571, Loss_dt: 13164.1602, Loss_pinn: 1562.3032 , Loss_pinn_ic : 157.9098 37.78590393066406 23213.169921875
+Epoch [900/15000], Loss: 36.7216, Loss_data: 24.7825, Loss_dt: 11638.0771, Loss_pinn: 1553.4923 , Loss_pinn_ic : 145.7231 36.428043365478516 22231.38671875
+Epoch [950/15000], Loss: 34.2792, Loss_data: 23.3374, Loss_dt: 10626.2109, Loss_pinn: 1817.7959 , Loss_pinn_ic : 133.7501 32.40353012084961 19260.765625
+Epoch [1000/15000], Loss: 31.8396, Loss_data: 21.9458, Loss_dt: 9581.8164, Loss_pinn: 1917.2241 , Loss_pinn_ic : 120.3148 31.848562240600586 18763.1328125
+Epoch [1050/15000], Loss: 29.7628, Loss_data: 20.8149, Loss_dt: 8641.2842, Loss_pinn: 1880.4226 , Loss_pinn_ic : 118.5786 29.91253089904785 18022.10546875
+Epoch [1100/15000], Loss: 27.9969, Loss_data: 19.9072, Loss_dt: 7770.6162, Loss_pinn: 1964.7614 , Loss_pinn_ic : 122.5882 28.314924240112305 17449.078125
+Epoch [1150/15000], Loss: 26.6114, Loss_data: 19.2436, Loss_dt: 7037.4702, Loss_pinn: 2081.1531 , Loss_pinn_ic : 122.2638 26.84248161315918 16916.896484375
+Epoch [1200/15000], Loss: 25.8059, Loss_data: 18.8579, Loss_dt: 6623.3716, Loss_pinn: 2044.2891 , Loss_pinn_ic : 120.2338 24.945968627929688 15969.203125
+Epoch [1250/15000], Loss: 24.8406, Loss_data: 18.4785, Loss_dt: 6027.4058, Loss_pinn: 2084.7268 , Loss_pinn_ic : 126.2018 22.92478370666504 14869.1552734375
+Epoch [1300/15000], Loss: 24.3006, Loss_data: 18.4478, Loss_dt: 5518.0830, Loss_pinn: 2082.7324 , Loss_pinn_ic : 126.4618 28.229156494140625 17802.2578125
+Epoch [1350/15000], Loss: 23.4605, Loss_data: 17.9657, Loss_dt: 5163.7656, Loss_pinn: 2085.7676 , Loss_pinn_ic : 122.4423 22.43082618713379 15049.8232421875
+Epoch [1400/15000], Loss: 23.0063, Loss_data: 17.8281, Loss_dt: 4845.3052, Loss_pinn: 2122.0269 , Loss_pinn_ic : 120.7081 23.274824142456055 15700.3056640625
+Epoch [1450/15000], Loss: 22.4099, Loss_data: 17.6738, Loss_dt: 4399.1353, Loss_pinn: 2166.4800 , Loss_pinn_ic : 120.3319 23.434240341186523 15794.4306640625
+Epoch [1500/15000], Loss: 22.4011, Loss_data: 17.8358, Loss_dt: 4218.2515, Loss_pinn: 2259.3469 , Loss_pinn_ic : 121.1270 26.631799697875977 17164.8984375
+Epoch [1550/15000], Loss: 21.6238, Loss_data: 17.3485, Loss_dt: 3932.3838, Loss_pinn: 2249.2502 , Loss_pinn_ic : 117.9825 22.338850021362305 15197.8955078125
+Epoch [1600/15000], Loss: 21.8496, Loss_data: 17.2937, Loss_dt: 4215.1216, Loss_pinn: 2255.4290 , Loss_pinn_ic : 115.1947 19.438343048095703 13987.2138671875
+Epoch [1650/15000], Loss: 20.9730, Loss_data: 17.1310, Loss_dt: 3498.5413, Loss_pinn: 2282.5688 , Loss_pinn_ic : 115.1342 22.197269439697266 15283.62109375
+Epoch [1700/15000], Loss: 20.7724, Loss_data: 16.9841, Loss_dt: 3451.3762, Loss_pinn: 2241.4275 , Loss_pinn_ic : 112.7544 19.46867561340332 13909.14453125
+Epoch [1750/15000], Loss: 20.5727, Loss_data: 17.0237, Loss_dt: 3201.9229, Loss_pinn: 2353.6172 , Loss_pinn_ic : 111.7314 20.2315616607666 14203.2412109375
+Epoch [1800/15000], Loss: 20.4958, Loss_data: 17.0105, Loss_dt: 3156.2051, Loss_pinn: 2194.1846 , Loss_pinn_ic : 109.6662 21.044090270996094 14742.27734375
+Epoch [1850/15000], Loss: 20.2077, Loss_data: 16.7523, Loss_dt: 3125.2832, Loss_pinn: 2262.8799 , Loss_pinn_ic : 103.8752 16.91225242614746 12783.3759765625
+Epoch [1900/15000], Loss: 20.0030, Loss_data: 16.7040, Loss_dt: 2973.8335, Loss_pinn: 2208.9622 , Loss_pinn_ic : 104.3142 16.257471084594727 12362.6162109375
+Epoch [1950/15000], Loss: 20.0867, Loss_data: 16.8602, Loss_dt: 2900.9438, Loss_pinn: 2214.1907 , Loss_pinn_ic : 104.1239 18.417224884033203 13447.8525390625
+Epoch [2000/15000], Loss: 19.5977, Loss_data: 16.5539, Loss_dt: 2723.3110, Loss_pinn: 2197.3650 , Loss_pinn_ic : 100.7979 15.091630935668945 11847.5712890625
+Epoch [2050/15000], Loss: 19.4375, Loss_data: 16.5246, Loss_dt: 2599.9302, Loss_pinn: 2146.9351 , Loss_pinn_ic : 98.3058 15.127531051635742 11930.1806640625
+Epoch [2100/15000], Loss: 19.3412, Loss_data: 16.5162, Loss_dt: 2511.2788, Loss_pinn: 2144.5891 , Loss_pinn_ic : 99.2669 15.733139038085938 12108.33984375
+Epoch [2150/15000], Loss: 19.1859, Loss_data: 16.3036, Loss_dt: 2561.5874, Loss_pinn: 2258.2617 , Loss_pinn_ic : 94.7999 13.554746627807617 11147.9619140625
+Epoch [2200/15000], Loss: 19.0011, Loss_data: 16.2327, Loss_dt: 2460.2214, Loss_pinn: 2142.7200 , Loss_pinn_ic : 93.9621 13.5061674118042 11102.482421875
+Epoch [2250/15000], Loss: 18.8442, Loss_data: 16.1776, Loss_dt: 2367.1357, Loss_pinn: 2099.2341 , Loss_pinn_ic : 89.4837 13.49807071685791 11217.568359375
+Epoch [2300/15000], Loss: 18.4638, Loss_data: 16.0920, Loss_dt: 2068.1753, Loss_pinn: 2145.8159 , Loss_pinn_ic : 88.9939 14.401123046875 11514.158203125
+Epoch [2350/15000], Loss: 18.6151, Loss_data: 16.1718, Loss_dt: 2131.2925, Loss_pinn: 2216.0754 , Loss_pinn_ic : 90.3569 14.038788795471191 11201.4208984375
+Epoch [2400/15000], Loss: 18.1534, Loss_data: 16.0101, Loss_dt: 1831.0581, Loss_pinn: 2249.8726 , Loss_pinn_ic : 87.2035 14.801834106445312 11599.296875
+Epoch [2450/15000], Loss: 17.8178, Loss_data: 15.7852, Loss_dt: 1739.3323, Loss_pinn: 2113.9761 , Loss_pinn_ic : 81.8921 15.68632984161377 12091.3134765625
+Epoch [2500/15000], Loss: 17.8342, Loss_data: 15.8574, Loss_dt: 1681.9512, Loss_pinn: 2139.5713 , Loss_pinn_ic : 80.8512 14.425867080688477 11362.5478515625
+Epoch [2550/15000], Loss: 17.7725, Loss_data: 15.5978, Loss_dt: 1882.6240, Loss_pinn: 2156.9258 , Loss_pinn_ic : 76.3455 12.627508163452148 10546.5556640625
+Epoch [2600/15000], Loss: 17.4574, Loss_data: 15.5813, Loss_dt: 1583.2023, Loss_pinn: 2196.7429 , Loss_pinn_ic : 73.2082 16.09754753112793 12366.3115234375
+Epoch [2650/15000], Loss: 17.3918, Loss_data: 15.4622, Loss_dt: 1646.2336, Loss_pinn: 2149.8669 , Loss_pinn_ic : 68.3541 13.9826078414917 11286.8779296875
+Epoch [2700/15000], Loss: 17.1870, Loss_data: 15.3242, Loss_dt: 1556.4821, Loss_pinn: 2424.5354 , Loss_pinn_ic : 63.8920 14.07796573638916 11407.8525390625
+Epoch [2750/15000], Loss: 17.0268, Loss_data: 15.2820, Loss_dt: 1469.8970, Loss_pinn: 2120.4834 , Loss_pinn_ic : 62.7877 14.683493614196777 11706.2705078125
+Epoch [2800/15000], Loss: 16.9484, Loss_data: 15.2027, Loss_dt: 1469.9039, Loss_pinn: 2174.0767 , Loss_pinn_ic : 58.3450 16.447162628173828 12810.6767578125
+Epoch [2850/15000], Loss: 16.8588, Loss_data: 15.0818, Loss_dt: 1510.6636, Loss_pinn: 2129.7957 , Loss_pinn_ic : 53.3101 14.39462947845459 11766.0400390625
+Epoch [2900/15000], Loss: 16.8070, Loss_data: 15.1378, Loss_dt: 1401.4189, Loss_pinn: 2136.8391 , Loss_pinn_ic : 54.1225 13.642353057861328 11386.115234375
+Epoch [2950/15000], Loss: 17.0292, Loss_data: 15.1010, Loss_dt: 1646.7363, Loss_pinn: 2341.1736 , Loss_pinn_ic : 47.3089 17.11761474609375 13631.3564453125
+Epoch [3000/15000], Loss: 16.6468, Loss_data: 14.9577, Loss_dt: 1432.4199, Loss_pinn: 2067.9290 , Loss_pinn_ic : 49.9140 13.705262184143066 11470.8046875
+Epoch [3050/15000], Loss: 16.9933, Loss_data: 15.1609, Loss_dt: 1545.5256, Loss_pinn: 2351.6968 , Loss_pinn_ic : 51.6581 16.410015106201172 13079.0673828125
+Epoch [3100/15000], Loss: 16.5441, Loss_data: 14.8849, Loss_dt: 1414.5292, Loss_pinn: 1998.3429 , Loss_pinn_ic : 44.8522 16.000917434692383 12823.634765625
+Epoch [3150/15000], Loss: 16.3976, Loss_data: 14.7343, Loss_dt: 1399.4509, Loss_pinn: 2205.3384 , Loss_pinn_ic : 43.2407 13.481637954711914 11445.4931640625
+Epoch [3200/15000], Loss: 16.4582, Loss_data: 14.7291, Loss_dt: 1490.0868, Loss_pinn: 1984.2988 , Loss_pinn_ic : 40.5489 14.189022064208984 11978.33984375
+Epoch [3250/15000], Loss: 16.1946, Loss_data: 14.6609, Loss_dt: 1287.7419, Loss_pinn: 2059.3970 , Loss_pinn_ic : 40.0793 15.289979934692383 12553.42578125
+Epoch [3300/15000], Loss: 16.6808, Loss_data: 14.9301, Loss_dt: 1488.7402, Loss_pinn: 2187.2100 , Loss_pinn_ic : 43.2805 16.514375686645508 13223.2529296875
+Epoch [3350/15000], Loss: 16.2649, Loss_data: 14.6772, Loss_dt: 1346.1750, Loss_pinn: 2048.9504 , Loss_pinn_ic : 36.6089 15.757039070129395 12972.3955078125
+Epoch [3400/15000], Loss: 16.0665, Loss_data: 14.5540, Loss_dt: 1276.3082, Loss_pinn: 2000.1648 , Loss_pinn_ic : 36.1311 15.296820640563965 12650.4072265625
+Epoch [3450/15000], Loss: 15.9889, Loss_data: 14.4870, Loss_dt: 1264.8783, Loss_pinn: 2026.9419 , Loss_pinn_ic : 34.2901 14.313615798950195 12056.76171875
+Epoch [3500/15000], Loss: 15.9943, Loss_data: 14.5067, Loss_dt: 1263.9254, Loss_pinn: 1901.4913 , Loss_pinn_ic : 33.4447 15.045809745788574 12448.080078125
+Epoch [3550/15000], Loss: 16.0550, Loss_data: 14.4758, Loss_dt: 1363.4553, Loss_pinn: 1854.9362 , Loss_pinn_ic : 30.2406 14.908183097839355 12391.4853515625
+Epoch [3600/15000], Loss: 16.0060, Loss_data: 14.4513, Loss_dt: 1304.4286, Loss_pinn: 2212.5181 , Loss_pinn_ic : 29.0344 14.983362197875977 12384.7578125
+Epoch [3650/15000], Loss: 15.8304, Loss_data: 14.3657, Loss_dt: 1250.5984, Loss_pinn: 1833.2787 , Loss_pinn_ic : 30.7870 15.09591293334961 12460.7744140625
+Epoch [3700/15000], Loss: 15.9474, Loss_data: 14.3438, Loss_dt: 1338.2429, Loss_pinn: 2369.2002 , Loss_pinn_ic : 28.4080 15.198966026306152 12512.2109375
+Epoch [3750/15000], Loss: 16.2748, Loss_data: 14.5965, Loss_dt: 1429.1244, Loss_pinn: 2115.4375 , Loss_pinn_ic : 37.7005 14.644887924194336 12223.150390625
+Epoch [3800/15000], Loss: 15.7373, Loss_data: 14.2957, Loss_dt: 1238.6447, Loss_pinn: 1753.0034 , Loss_pinn_ic : 27.6515 14.960909843444824 12390.1123046875
+Epoch [3850/15000], Loss: 15.6806, Loss_data: 14.2414, Loss_dt: 1229.7299, Loss_pinn: 1815.4065 , Loss_pinn_ic : 27.9496 14.555462837219238 12037.52734375
+Epoch [3900/15000], Loss: 15.7689, Loss_data: 14.2606, Loss_dt: 1309.8516, Loss_pinn: 1715.2284 , Loss_pinn_ic : 26.9118 14.036066055297852 11765.30078125
+Epoch [3950/15000], Loss: 15.6364, Loss_data: 14.2097, Loss_dt: 1227.5431, Loss_pinn: 1716.7993 , Loss_pinn_ic : 27.4783 13.97249698638916 11693.9609375
+Epoch [4000/15000], Loss: 15.6971, Loss_data: 14.2231, Loss_dt: 1277.8638, Loss_pinn: 1709.1973 , Loss_pinn_ic : 25.1562 13.715776443481445 11532.1494140625
+Epoch [4050/15000], Loss: 15.5400, Loss_data: 14.1770, Loss_dt: 1164.7607, Loss_pinn: 1713.8864 , Loss_pinn_ic : 26.8536 15.337775230407715 12393.6787109375
+Epoch [4100/15000], Loss: 15.5049, Loss_data: 14.1696, Loss_dt: 1138.4089, Loss_pinn: 1711.5382 , Loss_pinn_ic : 25.7557 15.080259323120117 12264.28515625
+Epoch [4150/15000], Loss: 15.5141, Loss_data: 14.1030, Loss_dt: 1182.6624, Loss_pinn: 2036.4274 , Loss_pinn_ic : 24.8475 13.286690711975098 11250.375
+Epoch [4200/15000], Loss: 15.4265, Loss_data: 14.1123, Loss_dt: 1124.3057, Loss_pinn: 1657.0040 , Loss_pinn_ic : 24.2303 14.136824607849121 11742.4091796875
+Epoch [4250/15000], Loss: 15.4819, Loss_data: 14.1129, Loss_dt: 1179.1829, Loss_pinn: 1661.1798 , Loss_pinn_ic : 23.6752 13.172687530517578 11211.369140625
+Epoch [4300/15000], Loss: 15.4162, Loss_data: 14.0826, Loss_dt: 1142.5883, Loss_pinn: 1676.6494 , Loss_pinn_ic : 23.3984 13.317514419555664 11290.4052734375
+Epoch [4350/15000], Loss: 15.3353, Loss_data: 14.0599, Loss_dt: 1084.7120, Loss_pinn: 1680.4749 , Loss_pinn_ic : 22.6305 13.779706001281738 11549.2021484375
+Epoch [4400/15000], Loss: 15.3491, Loss_data: 14.0661, Loss_dt: 1066.2683, Loss_pinn: 1930.8208 , Loss_pinn_ic : 23.7095 14.371191024780273 11882.783203125
+Epoch [4450/15000], Loss: 15.3221, Loss_data: 14.0754, Loss_dt: 1054.0455, Loss_pinn: 1697.5819 , Loss_pinn_ic : 22.9754 15.05396842956543 12235.8408203125
+Epoch [4500/15000], Loss: 15.6611, Loss_data: 14.1586, Loss_dt: 1218.6305, Loss_pinn: 2562.5271 , Loss_pinn_ic : 27.5320 11.713838577270508 10265.5302734375
+Epoch [4550/15000], Loss: 15.2051, Loss_data: 14.0165, Loss_dt: 995.6083, Loss_pinn: 1710.0494 , Loss_pinn_ic : 22.0023 14.569681167602539 12084.7119140625
+Epoch [4600/15000], Loss: 15.1711, Loss_data: 14.0081, Loss_dt: 973.8074, Loss_pinn: 1681.7742 , Loss_pinn_ic : 21.0040 14.486343383789062 11993.5751953125
+Epoch [4650/15000], Loss: 15.1243, Loss_data: 13.9758, Loss_dt: 950.3478, Loss_pinn: 1777.9978 , Loss_pinn_ic : 20.4154 14.445356369018555 11978.0986328125
+Epoch [4700/15000], Loss: 15.0847, Loss_data: 13.9600, Loss_dt: 926.7548, Loss_pinn: 1781.5121 , Loss_pinn_ic : 19.8468 14.387979507446289 11972.96484375
+Epoch [4750/15000], Loss: 26.4365, Loss_data: 18.6027, Loss_dt: 7352.6519, Loss_pinn: 4491.9697 , Loss_pinn_ic : 31.9541 18.462087631225586 14054.2255859375
+Epoch [4800/15000], Loss: 15.2693, Loss_data: 14.1320, Loss_dt: 931.9991, Loss_pinn: 1808.7074 , Loss_pinn_ic : 24.4286 15.609225273132324 12650.037109375
+Epoch [4850/15000], Loss: 15.0030, Loss_data: 13.9436, Loss_dt: 848.7188, Loss_pinn: 1878.4434 , Loss_pinn_ic : 22.8821 14.510209083557129 12081.5380859375
+Epoch [4900/15000], Loss: 14.9377, Loss_data: 13.9204, Loss_dt: 809.4321, Loss_pinn: 1865.2474 , Loss_pinn_ic : 21.2831 14.538775444030762 12088.3955078125
+Epoch [4950/15000], Loss: 14.8692, Loss_data: 13.8974, Loss_dt: 764.2629, Loss_pinn: 1871.0186 , Loss_pinn_ic : 20.4606 14.63539981842041 12179.953125
+Epoch [5000/15000], Loss: 14.7887, Loss_data: 13.8689, Loss_dt: 710.4121, Loss_pinn: 1894.9850 , Loss_pinn_ic : 19.8718 14.703218460083008 12276.7646484375
+Epoch [5050/15000], Loss: 14.6982, Loss_data: 13.8470, Loss_dt: 646.4484, Loss_pinn: 1852.5431 , Loss_pinn_ic : 19.5065 14.825675010681152 12427.58203125
+Epoch [5100/15000], Loss: 14.5782, Loss_data: 13.7951, Loss_dt: 572.1927, Loss_pinn: 1918.8939 , Loss_pinn_ic : 18.9717 14.6717529296875 12440.9248046875
+Epoch [5150/15000], Loss: 14.4121, Loss_data: 13.7213, Loss_dt: 477.2608, Loss_pinn: 1953.8666 , Loss_pinn_ic : 18.1141 14.493209838867188 12458.0703125
+Epoch [5200/15000], Loss: 14.8550, Loss_data: 13.5341, Loss_dt: 457.1472, Loss_pinn: 8446.9893 , Loss_pinn_ic : 19.0641 15.911531448364258 13487.544921875
+Epoch [5250/15000], Loss: 14.0621, Loss_data: 13.5247, Loss_dt: 334.4395, Loss_pinn: 1852.9071 , Loss_pinn_ic : 17.6749 15.01137638092041 13210.1689453125
+Epoch [5300/15000], Loss: 13.7618, Loss_data: 13.2872, Loss_dt: 271.8606, Loss_pinn: 1857.6956 , Loss_pinn_ic : 16.8999 14.425578117370605 13077.755859375
+Epoch [5350/15000], Loss: 13.4807, Loss_data: 13.0707, Loss_dt: 257.3560, Loss_pinn: 1357.5376 , Loss_pinn_ic : 16.8731 14.527948379516602 13359.7607421875
+Epoch [5400/15000], Loss: 13.7562, Loss_data: 12.5831, Loss_dt: 351.4794, Loss_pinn: 8028.4224 , Loss_pinn_ic : 18.7136 16.558256149291992 14748.19140625
+Epoch [5450/15000], Loss: 12.6740, Loss_data: 12.2328, Loss_dt: 197.8547, Loss_pinn: 2266.4109 , Loss_pinn_ic : 16.7657 14.958328247070312 14007.4130859375
+Epoch [5500/15000], Loss: 12.2532, Loss_data: 11.9157, Loss_dt: 167.2508, Loss_pinn: 1539.6667 , Loss_pinn_ic : 16.2964 15.67152214050293 14334.7265625
+Epoch [5550/15000], Loss: 12.3772, Loss_data: 11.8061, Loss_dt: 156.3495, Loss_pinn: 3996.1306 , Loss_pinn_ic : 15.1649 15.962779998779297 14751.1748046875
+Epoch [5600/15000], Loss: 11.5326, Loss_data: 10.8340, Loss_dt: 258.5710, Loss_pinn: 4222.8125 , Loss_pinn_ic : 17.7406 15.4698486328125 14627.34765625
+Epoch [5650/15000], Loss: 10.7572, Loss_data: 10.4768, Loss_dt: 134.4647, Loss_pinn: 1291.6176 , Loss_pinn_ic : 16.7558 16.824663162231445 15401.107421875
+Epoch [5700/15000], Loss: 10.2636, Loss_data: 9.9944, Loss_dt: 130.2489, Loss_pinn: 1230.3031 , Loss_pinn_ic : 16.0052 16.760570526123047 15383.45703125
+Epoch [5750/15000], Loss: 9.8618, Loss_data: 9.4749, Loss_dt: 129.2903, Loss_pinn: 2417.2695 , Loss_pinn_ic : 15.8788 17.19845199584961 15647.357421875
+Epoch [5800/15000], Loss: 9.4757, Loss_data: 9.1251, Loss_dt: 214.4773, Loss_pinn: 1201.7048 , Loss_pinn_ic : 16.0497 16.712900161743164 15380.24609375
+Epoch [5850/15000], Loss: 9.0320, Loss_data: 8.7700, Loss_dt: 123.1650, Loss_pinn: 1242.2821 , Loss_pinn_ic : 14.6652 17.252206802368164 15665.1162109375
+Epoch [5900/15000], Loss: 8.5781, Loss_data: 8.3531, Loss_dt: 117.7997, Loss_pinn: 927.8015 , Loss_pinn_ic : 14.4310 17.403791427612305 15827.9580078125
+Epoch [5950/15000], Loss: 8.3681, Loss_data: 8.0516, Loss_dt: 120.2908, Loss_pinn: 1829.5785 , Loss_pinn_ic : 13.2706 16.99538803100586 15572.16015625
+Epoch [6000/15000], Loss: 8.0651, Loss_data: 7.6561, Loss_dt: 117.6577, Loss_pinn: 2782.2695 , Loss_pinn_ic : 13.1338 17.479158401489258 15774.796875
+Epoch [6050/15000], Loss: 12.7701, Loss_data: 9.1728, Loss_dt: 2840.3782, Loss_pinn: 7145.0811 , Loss_pinn_ic : 42.3861 10.142343521118164 11050.9990234375
+Epoch [6100/15000], Loss: 7.8977, Loss_data: 7.4641, Loss_dt: 234.1046, Loss_pinn: 1712.9506 , Loss_pinn_ic : 28.1691 13.19552230834961 12694.78515625
+Epoch [6150/15000], Loss: 7.4579, Loss_data: 7.1582, Loss_dt: 162.9865, Loss_pinn: 1154.5319 , Loss_pinn_ic : 21.2234 14.333208084106445 13670.765625
+Epoch [6200/15000], Loss: 7.2605, Loss_data: 6.9550, Loss_dt: 145.4372, Loss_pinn: 1422.6348 , Loss_pinn_ic : 17.7972 14.889641761779785 14120.6435546875
+Epoch [6250/15000], Loss: 7.0918, Loss_data: 6.7781, Loss_dt: 136.1133, Loss_pinn: 1619.8369 , Loss_pinn_ic : 15.6282 15.050600051879883 14290.58203125
+Epoch [6300/15000], Loss: 6.9242, Loss_data: 6.5868, Loss_dt: 130.3126, Loss_pinn: 1927.8898 , Loss_pinn_ic : 14.3150 15.084407806396484 14375.5361328125
+Epoch [6350/15000], Loss: 6.7617, Loss_data: 6.4856, Loss_dt: 126.8721, Loss_pinn: 1360.0146 , Loss_pinn_ic : 13.1923 15.023396492004395 14422.2548828125
+Epoch [6400/15000], Loss: 6.6684, Loss_data: 6.3460, Loss_dt: 123.5450, Loss_pinn: 1864.1189 , Loss_pinn_ic : 12.5289 15.050796508789062 14471.5390625
+Epoch [6450/15000], Loss: 6.8572, Loss_data: 6.2371, Loss_dt: 121.4068, Loss_pinn: 4867.5156 , Loss_pinn_ic : 11.9689 15.039850234985352 14493.1611328125
+Epoch [6500/15000], Loss: 6.4396, Loss_data: 6.1679, Loss_dt: 118.9887, Loss_pinn: 1413.6119 , Loss_pinn_ic : 11.3333 15.028084754943848 14519.2822265625
+Epoch [6550/15000], Loss: 6.5909, Loss_data: 6.0841, Loss_dt: 121.5226, Loss_pinn: 3742.8518 , Loss_pinn_ic : 10.9630 14.961417198181152 14499.4111328125
+Epoch [6600/15000], Loss: 6.3585, Loss_data: 6.0557, Loss_dt: 114.4778, Loss_pinn: 1780.9336 , Loss_pinn_ic : 10.2216 15.053179740905762 14585.7373046875
+Epoch [6650/15000], Loss: 7.2478, Loss_data: 6.1306, Loss_dt: 712.8823, Loss_pinn: 3916.4988 , Loss_pinn_ic : 12.6238 13.360699653625488 13538.314453125
+Epoch [6700/15000], Loss: 6.1161, Loss_data: 5.9064, Loss_dt: 118.5676, Loss_pinn: 818.1458 , Loss_pinn_ic : 9.3347 14.939286231994629 14673.1220703125
+Epoch [6750/15000], Loss: 6.0667, Loss_data: 5.8455, Loss_dt: 112.7157, Loss_pinn: 994.1546 , Loss_pinn_ic : 9.0111 15.125934600830078 14688.236328125
+Epoch [6800/15000], Loss: 6.0487, Loss_data: 5.8108, Loss_dt: 112.9830, Loss_pinn: 1161.2594 , Loss_pinn_ic : 8.7958 14.988582611083984 14601.23046875
+Epoch [6850/15000], Loss: 5.9958, Loss_data: 5.7926, Loss_dt: 108.5942, Loss_pinn: 862.7647 , Loss_pinn_ic : 8.3854 14.985432624816895 14593.06640625
+Epoch [6900/15000], Loss: 11.0393, Loss_data: 7.1755, Loss_dt: 3510.1516, Loss_pinn: 3346.6289 , Loss_pinn_ic : 18.9865 14.58647346496582 14260.466796875
+Epoch [6950/15000], Loss: 6.0841, Loss_data: 5.8333, Loss_dt: 159.1043, Loss_pinn: 830.9370 , Loss_pinn_ic : 8.5709 15.139729499816895 14912.7548828125
+Epoch [7000/15000], Loss: 5.9376, Loss_data: 5.7421, Loss_dt: 110.6779, Loss_pinn: 765.5727 , Loss_pinn_ic : 8.2648 14.946247100830078 14704.734375
+Epoch [7050/15000], Loss: 5.9175, Loss_data: 5.7262, Loss_dt: 106.5795, Loss_pinn: 768.3260 , Loss_pinn_ic : 7.8381 14.861286163330078 14596.7021484375
+Epoch [7100/15000], Loss: 5.9037, Loss_data: 5.7063, Loss_dt: 104.1221, Loss_pinn: 856.3088 , Loss_pinn_ic : 7.5842 14.839703559875488 14557.4677734375
+Epoch [7150/15000], Loss: 6.0130, Loss_data: 5.6875, Loss_dt: 103.2163, Loss_pinn: 2148.2668 , Loss_pinn_ic : 7.4174 14.773860931396484 14510.109375
+Epoch [7200/15000], Loss: 5.9159, Loss_data: 5.6823, Loss_dt: 102.6284, Loss_pinn: 1238.2089 , Loss_pinn_ic : 7.1964 14.709837913513184 14473.8466796875
+Early stopping
+Validation loss decreased (34.308723 --> 14.705932).  Saving model ...
+Model( and tf values) saved: model/data_dt_pinn_ic/GFL_2nd_orderDynamicNN_5_7244_870_1316_625_None_None_1_0.001_0.0001_0.001_Static.pth
+Total test trajectories 2
+Loss: 3.36759758
+MAE Loss: 0.56211686
+Total trainable parameters 17026

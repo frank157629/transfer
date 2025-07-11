@@ -1,0 +1,16 @@
+GFL_2nd_order data
+Loading data from:  ./data/GFL_2nd_order/dataset_v1.pkl
+Number of training samples:  20000 Number of validation samples:  2500 Number of testing samples:  2500
+Number of different initial conditions for collocation points:  25
+['delta', 'omega'] Variables
+[[-3.14159, 3.14159], [-60, 60]] Set of values for init conditions
+[5, 5] Iterations per value
+Shape: (25, 2)
+Selected deep learning model:  DynamicNN
+Number of labeled training data: 870 Number of collocation points: 1316 Number of collocation points (IC): 25 Number of validation data: 625
+Weights initialized as:  [1, 0.001, 0.0001, 0.001]  are updated with scheme:  Static
+getting in training
+Validation loss decreased (inf --> 32.270912).  Saving model ...
+Epoch [50/1500], Loss: 55.5467, Loss_data: 34.7918, Loss_dt: 19274.8008, Loss_pinn: 11153.2051 , Loss_pinn_ic : 364.8113 31.43032455444336 24867.15234375
+Epoch [100/1500], Loss: 39.5479, Loss_data: 22.4104, Loss_dt: 16034.1904, Loss_pinn: 8232.6309 , Loss_pinn_ic : 279.9682 29.710674285888672 24742.66796875
+Epoch [150/1500], Loss: 31.3798, Loss_data: 15.9226, Loss_dt: 14433.2080, Loss_pinn: 5979.0186 , Loss_pinn_ic : 426.1188 25.88135528564453 22805.892578125

@@ -1,0 +1,1 @@
+{"Test with model ":"GFL_4th_order","Model number ":1,"Number of samples ":1000,"_wandb":{"runtime":0},"_step":6,"_timestamp":1.751578564835479e+09,"_runtime":0.603279,"Initial conditions ":1,"Number of different initial conditions: ":100,"Sampling method for initial points ":"Lhs","Total time of simulation ":3}

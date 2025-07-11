@@ -1,0 +1,29 @@
+2025-07-11 10:21:55,392 INFO    Thread-2 (_run_job):23883 [wandb_setup.py:_flush():81] Current SDK version is 0.20.0
+2025-07-11 10:21:55,392 INFO    Thread-2 (_run_job):23883 [wandb_setup.py:_flush():81] Configure stats pid to 23883
+2025-07-11 10:21:55,392 INFO    Thread-2 (_run_job):23883 [wandb_setup.py:_flush():81] Loading settings from /Users/nbhsbgnb/.config/wandb/settings
+2025-07-11 10:21:55,392 INFO    Thread-2 (_run_job):23883 [wandb_setup.py:_flush():81] Loading settings from /Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/settings
+2025-07-11 10:21:55,392 INFO    Thread-2 (_run_job):23883 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2025-07-11 10:21:55,392 INFO    Thread-2 (_run_job):23883 [wandb_init.py:setup_run_log_directory():703] Logging user logs to /Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250711_102155-yyc45vbn/logs/debug.log
+2025-07-11 10:21:55,392 INFO    Thread-2 (_run_job):23883 [wandb_init.py:setup_run_log_directory():704] Logging internal logs to /Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250711_102155-yyc45vbn/logs/debug-internal.log
+2025-07-11 10:21:55,392 INFO    Thread-2 (_run_job):23883 [wandb_init.py:init():831] calling init triggers
+2025-07-11 10:21:55,392 INFO    Thread-2 (_run_job):23883 [wandb_init.py:init():836] wandb.init called with sweep_config: {'seed': 1, 'weight_data': 1, 'weight_dt': 0.001, 'weight_pinn': 0.0001, 'weight_pinn_ic': 0.001}
+config: {'_wandb': {}}
+2025-07-11 10:21:55,392 INFO    Thread-2 (_run_job):23883 [wandb_init.py:init():872] starting backend
+2025-07-11 10:21:55,620 INFO    Thread-2 (_run_job):23883 [wandb_init.py:init():875] sending inform_init request
+2025-07-11 10:21:55,639 INFO    Thread-2 (_run_job):23883 [wandb_init.py:init():883] backend started and connected
+2025-07-11 10:21:55,640 INFO    Thread-2 (_run_job):23883 [wandb_run.py:_config_callback():1358] config_cb None None {'seed': 1, 'weight_data': 1, 'weight_dt': 0.001, 'weight_pinn': 0.0001, 'weight_pinn_ic': 0.001}
+2025-07-11 10:21:55,641 INFO    Thread-2 (_run_job):23883 [wandb_init.py:init():956] updated telemetry
+2025-07-11 10:21:55,656 INFO    Thread-2 (_run_job):23883 [wandb_init.py:init():980] communicating run to backend with 90.0 second timeout
+2025-07-11 10:21:56,268 INFO    Thread-2 (_run_job):23883 [wandb_init.py:init():1032] starting run threads in backend
+2025-07-11 10:21:56,310 INFO    Thread-2 (_run_job):23883 [wandb_run.py:_console_start():2453] atexit reg
+2025-07-11 10:21:56,310 INFO    Thread-2 (_run_job):23883 [wandb_run.py:_redirect():2301] redirect: wrap_raw
+2025-07-11 10:21:56,310 INFO    Thread-2 (_run_job):23883 [wandb_run.py:_redirect():2370] Wrapping output streams.
+2025-07-11 10:21:56,310 INFO    Thread-2 (_run_job):23883 [wandb_run.py:_redirect():2393] Redirects installed.
+2025-07-11 10:21:56,311 INFO    Thread-2 (_run_job):23883 [wandb_init.py:init():1078] run started, returning control to user process
+2025-07-11 10:22:17,824 INFO    Thread-2 (_run_job):23883 [wandb_run.py:_finish():2219] finishing run liuhaitian888-rwth-aachen-university/PINN-ΚΑΝ/yyc45vbn
+2025-07-11 10:22:17,824 INFO    Thread-2 (_run_job):23883 [wandb_run.py:_atexit_cleanup():2418] got exitcode: 0
+2025-07-11 10:22:17,824 INFO    Thread-2 (_run_job):23883 [wandb_run.py:_restore():2400] restore
+2025-07-11 10:22:17,825 INFO    Thread-2 (_run_job):23883 [wandb_run.py:_restore():2406] restore done
+2025-07-11 10:22:19,793 INFO    Thread-2 (_run_job):23883 [wandb_run.py:_footer_history_summary_info():4000] rendering history
+2025-07-11 10:22:19,794 INFO    Thread-2 (_run_job):23883 [wandb_run.py:_footer_history_summary_info():4032] rendering summary
+2025-07-11 10:22:19,794 INFO    Thread-2 (_run_job):23883 [wandb_run.py:_footer_sync_info():3961] logging synced files

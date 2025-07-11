@@ -1,0 +1,9 @@
+GFL_2nd_order data
+Loading data from:  ./data/GFL_2nd_order/dataset_v1.pkl
+Number of training samples:  20000 Number of validation samples:  2500 Number of testing samples:  2500
+Number of different initial conditions for collocation points:  25
+['delta', 'omega'] Variables
+[[-3.14159, 3.14159], [-60, 60]] Set of values for init conditions
+[5, 5] Iterations per value
+Shape: (25, 2)
+Selected deep learning model:  DynamicNN

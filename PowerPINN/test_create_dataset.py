@@ -19,29 +19,60 @@ if cfg.theme == "GFL":
         print("sol shape:", sol.shape)
 
         #  randomly choose k trajectories for a test plotting
-        indices = random.sample(range(sol.shape[0]), 2)
+        indices = random.sample(range(sol.shape[0]), 25)
+        print("How many indices:", len(indices))
         print("Chosen indices:", indices)
-        if cfg_gfl.model.model_flag == "GFL_4th_order":
-            var_names = ["t","delta", "delta_omega", "delta_Id", "delta_Id_dt"]
+        if cfg_gfl.model.model_flag == "GFL_2nd_order":
+            var_names = ["delta", "omega", "f"]
 
-            fig, axes = plt.subplots(4, 1, figsize=(9, 18), sharex=True)
+            fig, axes = plt.subplots(2, 1, figsize=(9, 18), sharex=True)
 
             for idx in indices:
-                traj = sol[idx]  # (4, 1000)
+                traj = sol[idx]
+                t = traj[0]  # time column
+                init_states = traj[1:, 0]  # get delta, omega
+                print(f"🔹 Initial condition at t=0 for traj {idx}: {tuple(init_states.tolist())}")
+                print(f"⏱️ Traj {idx} time range: {t[0]:.2f} → {t[-1]:.2f}")
+
+                for row, var_idx in enumerate([1]):
+                    axes[row].plot(t, traj[var_idx])
+                    axes[row].set_ylabel(var_names[row])
+                    axes[row].grid(True, ls='--', alpha=.3)
+
+                delta_omega = traj[2]
+                w_g = np.pi * 100
+                f = calculate_frequency(delta_omega, w_g)
+                axes[1].plot(t, f, label=f'traj {idx}')
+                axes[1].set_ylabel("Frequency")
+                axes[1].grid(True, ls='--', alpha=.3)
+
+            axes[-1].set_xlabel('time (s)')
+            axes[1].legend(loc='upper right')
+            plt.tight_layout()
+            plt.show()
+        if cfg_gfl.model.model_flag == "GFL_4th_order":
+            var_names = ["delta", "delta_omega", "delta_Id", "delta_Id_dt","f"]
+
+            fig, axes = plt.subplots(5, 1, figsize=(9, 18), sharex=True)
+
+            for idx in indices:
+                traj = sol[idx]
                 t = traj[0]  # time column
                 init_states = traj[1:, 0]  # get delta, omega, Id, Id_dt at t=0
                 print(f"🔹 Initial condition at t=0 for traj {idx}: {tuple(init_states.tolist())}")
                 print(f"⏱️ Traj {idx} time range: {t[0]:.2f} → {t[-1]:.2f}")
 
-                for row in range(4):  # 4 states
-                    axes[row].plot(t, traj[row+1], label=f'traj {idx}')
+                for row, var_idx in enumerate([1, 4]):
+                    axes[row].plot(t, traj[var_idx], label=f'traj {idx}')
                     axes[row].set_ylabel(var_names[row])
                     axes[row].grid(True, ls='--', alpha=.3)
+
                 delta_omega = traj[1]
                 w_g = np.pi * 100
-
                 f = calculate_frequency(delta_omega, w_g)
-                plt.plot(t, f, label='frequency')
+                axes[4].plot(t, f, label=f'traj {idx}')
+                axes[4].set_ylabel("Frequency")
+                axes[4].grid(True, ls='--', alpha=.3)
 
             axes[-1].set_xlabel('time (s)')
             axes[1].legend(loc='upper right')

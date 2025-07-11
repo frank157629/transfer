@@ -1,0 +1,44 @@
+{
+  "os":  "macOS-15.3-arm64-arm-64bit",
+  "python":  "CPython 3.11.11",
+  "startedAt":  "2025-07-06T13:52:01.410061Z",
+  "program":  "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/create_dataset_d.py",
+  "codePath":  "PowerPINN/create_dataset_d.py",
+  "git":  {
+    "remote":  "git@github.com:frank157629/transfer.git",
+    "commit":  "eebdc574e08d7f976a367167267dcd5a6ed95694"
+  },
+  "email":  "liuhaitian888@gmail.com",
+  "root":  "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN",
+  "host":  "niubihaishibugeniubideMacBook-Air.local",
+  "executable":  "/opt/anaconda3/envs/myenv/bin/python",
+  "codePathLocal":  "create_dataset_d.py",
+  "cpu_count":  10,
+  "cpu_count_logical":  10,
+  "disk":  {
+    "/":  {
+      "total":  "494384795648",
+      "used":  "107943194624"
+    },
+    "/System/Volumes/Data":  {
+      "total":  "494384795648",
+      "used":  "107943194624"
+    }
+  },
+  "memory":  {
+    "total":  "17179869184"
+  },
+  "cpu":  {
+    "count":  10,
+    "countLogical":  10
+  },
+  "apple":  {
+    "name":  "Apple M4",
+    "ecpuCores":  6,
+    "pcpuCores":  4,
+    "gpuCores":  10,
+    "memoryGb":  16,
+    "swapTotalBytes":  "2147483648",
+    "ramTotalBytes":  "17179869184"
+  }
+}

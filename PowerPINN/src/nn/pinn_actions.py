@@ -8,12 +8,17 @@ from src.nn.nn_model import Net, Network, PinnA, FullyConnectedResNet, Kalm
 from src.functions import *
 from src.nn.early_stopping import EarlyStopping
 from src.ode.sm_models_d import SynchronousMachineModels
+from src.ode.gfl_models_d import GridFollowingConverterModels
 import wandb
 import torch.autograd.functional as func
 from src.nn.gradient_based_weighting import PINNWeighting
 import numpy as np
 from omegaconf import OmegaConf
 from torch.utils.data import DataLoader, TensorDataset
+from src.ode.gfl_models_d import calculate_frequency
+
+
+
 '''
     Haitian, this was the nn_actions from the toolbox originally. 
     However, we are implementing training logic here only for pinn, the vanilla NN is defined in the same folder as vanilla_actions
@@ -80,17 +85,20 @@ class PhysicsInformedNeuralNetworkActions():
         self.data_loader = DataSampler(cfg)
         self.input_dim = self.data_loader.input_dim # The input dimension is the number of input features
         self.output_dim = self.input_dim-1 # The output dimension is the input dimension minus the time column
-
+        self.model_flag = cfg.model.model_flag  # the model to be used
         self.model = self.define_nn_model() # Create an instance of the class Net
         self.weight_init(self.model, cfg.nn.weight_init) # Initialize the weights of the Net
         self.criterion = self.custom_loss(cfg.nn.loss_criterion) # Define the loss function
         self.criterion_mae = nn.L1Loss() # Define the MAE loss for testing
         self.optimizer = self.custom_optimizer(cfg.nn.optimizer, cfg.nn.lr) # Define the optimizer
         self.scheduler = self.custom_learning_rate(cfg.nn.lr_scheduler) # Define the learning rate scheduler
-        
-        
-        self.SynchronousMachineModels = SynchronousMachineModels(self.cfg) # Create an instance of the class SM_modelling
-        
+
+        # Create an instance of the class xxx_modelling
+        if self.cfg.theme == "SM":
+            self.SynchronousMachineModels = SynchronousMachineModels(self.cfg)
+        elif self.cfg.theme == "GFL":
+            self.GridFollowingConverterModels = GridFollowingConverterModels(self.cfg)
+
         self.model = self.model.to(self.device)
         self.early_stopping = EarlyStopping(patience=cfg.nn.early_stopping_patience, verbose=True, delta=cfg.nn.early_stopping_min_delta)
         
@@ -321,13 +329,17 @@ class PhysicsInformedNeuralNetworkActions():
         y, dy_dt = torch.autograd.functional.jvp( # calculate the jacobian vector product
             func=lambda t: self.forward_nn(time=t, no_time = no_time), inputs=time ,v=torch.ones(time.shape).to(self.device), create_graph=True, retain_graph=True)
         return y, dy_dt
-    
+    #Haitian, added for y_processed the "GFL" branch, line 335
     def calculate_from_ode(self, output):
         """
         This function calculates the output(dy/dt) of the synchronous machine model for the given input y
         """
         if self.cfg.modelling_method:
-            y_processed = self.modelling_full.odequation_sm(0, output.split(split_size=1, dim=1))
+            if self.cfg.theme == "SM":
+                y_processed = self.modelling_full.odequation_sm(0, output.split(split_size=1, dim=1))
+            if self.cfg.theme == "GFL":
+                y_processed = self.modelling_full.odequation_gfl(0, output.split(split_size=1, dim=1))
+
         else:
             y_processed = self.modelling_full.odequations_v2(0, output.split(split_size=1, dim=1))
         for i in range(len(y_processed)):
@@ -524,137 +536,7 @@ class PhysicsInformedNeuralNetworkActions():
     
         return ntk
     
-    def pinn_train(self, weight_data, weight_dt, weight_pinn, weight_pinn_ic, perc_of_data, perc_of_col_data, num_of_skip_data_points, num_of_skip_col_points, num_of_skip_val_points, wandb_run=None):
-        """
-        This function trains the neural network model
 
-        Args:
-            x_train (torch.Tensor): input data
-            y_train (torch.Tensor): output data
-            num_epochs (int): number of epochs
-        """
-        x_train, y_train, x_train_col, x_train_col_ic, y_train_col_ic, x_val, y_val = self.define_train_val_data2(perc_of_data, perc_of_col_data, num_of_skip_data_points, num_of_skip_col_points, num_of_skip_val_points) # define the training and validation data
-        if self.cfg.nn.type == "PinnA":
-            y_train = y_train[x_train[:,0]!=0].clone().detach().to(self.device) # remove the 0 time  from the output data
-            x_train = x_train[x_train[:,0]!=0].clone().detach().to(self.device).requires_grad_(True) # remove the 0 time  from the input data
-            x_train_col = x_train_col[x_train_col[:,0]!=0].clone().detach().to(self.device).requires_grad_(True) # remove the 0 time from the input data
-            #keep only the columns without time
-
-        x_train = self.transform_input(x_train) # transform the input data according to the respective chosen input_transform method 
-        x_train_col = self.transform_input(x_train_col) # transform the input data according to the respective chosen input_transform method
-        x_val = self.transform_input(x_val) # transform the input data according to the respective chosen input_transform method
-        x_train_col_ic = self.transform_input(x_train_col_ic) # transform the input data according to the respective chosen input_transform method
-
-        #y_train_tf = self.transform_output(y_train) # transform the output data according to the respective chosen output_transform method
-        
-        print("Number of labeled training data: ", x_train.shape[0], " number of collocation points: ", x_train_col.shape[0], " number of collocation points ic: ", x_train_col_ic.shape[0], " number of validation data: ", x_val.shape[0])
-        folder_name=self.folder_name_f2(weight_data,weight_dt,weight_pinn,weight_pinn_ic)
-        os.makedirs(os.path.join(self.cfg.dirs.model_dir, folder_name),exist_ok=True)
-        self.wandb_run = wandb_run
-        
-        self.initialize_loss_weights(weight_data, weight_dt, weight_pinn, weight_pinn_ic)
-
-        
-        print("getting in training")
-
-        for epoch in range(self.cfg.nn.num_epochs):
-            # training
-            self.model.train() # set the model to training mode
-
-            def closure():
-                self.optimizer.zero_grad() # zero the gradients
-                output, dydt0, ode0 = self.calculate_point_grad2(x_train, y_train) # calculate nn output and its gradient for the data points, and the ode solution for the target y_train
-                dydt1, ode1 = self.calculate_point_grad2(x_train_col, None) # calculate nn output gradient for the collocation points, and the ode solution for the nn output
-                output_col0 = self.forward_pass(x_train_col_ic) # calculate the nn output for the collocation points with time 0
-                loss_data = self.criterion(output, y_train) # calculate the data loss
-                loss_dt = [self.criterion(dydt0[:, i], ode0[:, i]) for i in range(dydt0.shape[1])]
-                loss_pinn = [self.criterion(dydt1[:, i], ode1[:, i]) for i in range(dydt1.shape[1])]
-                loss_pinn_ic = self.criterion(output_col0, y_train_col_ic)
-
-                # Update the weights of the loss functions
-                if self.cfg.nn.weighting.update_weight_method=="Dynamic":
-                    self.weight_data, self.weight_dt, self.weight_pinn, self.weight_pinn_ic = self.update_loss_weights(weight_data, weight_dt, weight_pinn, weight_pinn_ic, loss_data, loss_dt, loss_pinn, loss_pinn_ic, epoch)
-                elif self.cfg.nn.weighting.update_weight_method=="Sam":
-                    self.weight_data, self.weight_dt, self.weight_pinn, self.weight_pinn_ic = (self.soft_attention_weights[0], self.soft_attention_weights[1], self.soft_attention_weights[2], self.soft_attention_weights[3])
-                else: # Static or ReLoBRaLo
-                    self.weight_data, self.weight_dt, self.weight_pinn, self.weight_pinn_ic = self.update_loss_weights(self.weight_data, self.weight_dt, self.weight_pinn, self.weight_pinn_ic, loss_data, loss_dt, loss_pinn, loss_pinn_ic, epoch)
-
-                
-                loss_total = loss_data * self.weight_data + loss_dt * self.weight_dt + loss_pinn * self.weight_pinn + loss_pinn_ic * self.weight_pinn_ic
-                self.loss_total = loss_total 
-                
-                loss_total.backward() # backpropagate the total weighted loss
-                
-                return loss_total
-            
-            self.optimizer.step(closure) # update the weights of the model
-            """
-            if self.optimizer != "LBFGS":
-                self.scheduler.step()
-            """
-                #print scheduler.get_last_lr()
-
-            # Validation
-            
-            self.model.eval()
-            with torch.no_grad():
-                #output, dydt0, ode0 = self.calculate_point_grad2(x_train, y_train)
-                val_outputs, val_dydt0, val_ode0 = self.calculate_point_grad2(x_val, y_val)
-                # add the losses
-                loss_val_data = self.criterion(val_outputs, y_val)
-                loss_val_physics = [self.criterion(val_dydt0[:, i], val_ode0[:, i]) for i in range(val_dydt0.shape[1])]
-                mean_loss_val_physics = torch.mean(torch.stack(loss_val_physics))
-                
-                val_loss = loss_val_data.item() 
-                val_dt_loss = mean_loss_val_physics.item() 
-
-
-            if (epoch + 1) % 1 == 0:
-                # log some plots to wandb
-                if wandb_run is not None:
-                    self.log_plot(val_outputs, y_val, epoch, wandb_run,x_val)
-                
-                print(f'Epoch [{epoch+1}/{self.cfg.nn.num_epochs}], Loss: {self.loss_total.item():.4f}, Loss_data: {self.loss_data.item():.4f}, Loss_dt: {self.loss_dt.item():.4f}, Loss_pinn: {self.loss_pinn.item():.4f} , Loss_pinn_ic : {self.loss_pinn_ic.item():.4f}', val_loss)
-
-            # log all the losses for the epoch to wandb 
-            save_iteration = 500 if self.cfg.nn.optimizer == "LBFGS" else 10000 # 20 iterations within the optimizer ->500*20 = 10000
-            if (epoch + 1) % save_iteration == 0:
-                
-                name = f"{self.cfg.model.model_flag}{self.cfg.nn.type}_{self.cfg.time}_{epoch+1}_{self.data_loader.training_shape}_{self.data_loader.training_col_shape}_{self.data_loader.validation_shape}_{self.cfg.dataset.transform_input}_{self.cfg.dataset.transform_output}_{weight_data}_{weight_dt}_{weight_pinn}_{weight_pinn_ic}_{self.cfg.nn.weighting.update_weight_method}.pth"
-
-                self.save_model(os.path.join(folder_name, name))
-
-            if self.cfg.nn.early_stopping:
-                self.early_stopping(val_loss, self.model)
-                if self.early_stopping.early_stop:
-                    print("Early stopping")
-                    self.early_stopping.save_checkpoint(val_loss, self.model)
-                    break
-
-        if self.early_stopping.early_stop == True or (epoch + 1) % save_iteration != 0:
-            name = f"{self.cfg.model.model_flag}{self.cfg.nn.type}_{self.cfg.time}_{epoch+1}_{self.data_loader.training_shape}_{self.data_loader.training_col_shape}_{self.data_loader.validation_shape}_{self.cfg.dataset.transform_input}_{self.cfg.dataset.transform_output}_{weight_data}_{weight_dt}_{weight_pinn}_{weight_pinn_ic}_{self.cfg.nn.weighting.update_weight_method}.pth"
-            self.save_model(os.path.join(folder_name, name))
-        
-            if wandb_run is not None:
-                    log_data = {
-                        "Val_loss": val_loss,
-                        "Loss": self.loss_total.item(),
-                        "Loss_data": self.loss_data.item(),
-                        "Loss_dt": self.loss_dt,
-                        "Loss_pinn": self.loss_pinn,
-                        "Loss_pinn_ic": self.loss_pinn_ic,
-                        "Weight_data": self.weight_data,
-                        "Weight_dt": self.weight_dt,
-                        "Weight_pinn": self.weight_pinn,
-                        "Weight_pinn_ic": self.weight_pinn_ic,
-                        "epoch": epoch
-                    }
-                    wandb_run.log(log_data)
-
-        
-        self.final_name = os.path.join(folder_name, f"{self.cfg.model.model_flag}{self.cfg.nn.type}_{self.cfg.time}_{epoch+1}_{self.data_loader.training_shape}_{self.data_loader.training_col_shape}_{self.data_loader.validation_shape}_{self.cfg.dataset.transform_input}_{self.cfg.dataset.transform_output}_{weight_data}_{weight_dt}_{weight_pinn}_{weight_pinn_ic}_{self.cfg.nn.weighting.update_weight_method}")
-        total_test_loss =  self.test_model(0,500,wandb_run)
-        return 
     
     def calc_adapt_criterion_loss(self, x_train, y_train, output):
         """
@@ -686,9 +568,9 @@ class PhysicsInformedNeuralNetworkActions():
             y_train (torch.Tensor): output data
             num_epochs (int): number of epochs
         """
-        self.num_of_skip_data_points = self.config.nn.num_of_skip_data_points
-        self.num_of_skip_col_points = self.config.nn.num_of_skip_col_points
-        self.num_of_skip_val_points = self.config.nn.num_of_skip_val_points
+        num_of_skip_data_points = self.cfg.nn.num_of_skip_data_points
+        num_of_skip_col_points = self.cfg.nn.num_of_skip_col_points
+        num_of_skip_val_points = self.cfg.nn.num_of_skip_val_points
         x_train, y_train, x_train_col, x_train_col_ic, y_train_col_ic, x_val, y_val = self.data_loader.define_train_val_data2(self.cfg.dataset.perc_of_data_points, self.cfg.dataset.perc_of_col_points, num_of_skip_data_points, num_of_skip_col_points, num_of_skip_val_points) # define the training and validation data
         # Create DataLoaders for batch processing
         batch_size = self.cfg.nn.batch_size if self.cfg.nn.batch_size != "None" else max(len(x_train), len(x_train_col), len(x_train_col_ic))
@@ -806,7 +688,8 @@ class PhysicsInformedNeuralNetworkActions():
             
                 # log some plots to wandb
                 if wandb_run is not None:
-                    self.log_plot(val_outputs, y_val, epoch, wandb_run,x_val)
+                    # self.log_plot(val_outputs, y_val, epoch, wandb_run,x_val)
+                    self.log_plot(val_outputs, y_val, epoch, wandb_run, x_val,"validation", 0, 20)
                 
             if (epoch + 1 ) % 50 == 0:
                 print(f'Epoch [{epoch+1}/{self.cfg.nn.num_epochs}], Loss: {self.loss_total.item():.4f}, Loss_data: {self.loss_data.item():.4f}, Loss_dt: {self.loss_dt.item():.4f}, Loss_pinn: {self.loss_pinn.item():.4f} , Loss_pinn_ic : {self.loss_pinn_ic.item():.4f}', val_loss, val_dt_loss)
@@ -848,9 +731,40 @@ class PhysicsInformedNeuralNetworkActions():
             name = f"{self.cfg.model.model_flag}{self.cfg.nn.type}_{self.cfg.time}_{epoch+1}_{self.data_loader.training_shape}_{self.data_loader.training_col_shape}_{self.data_loader.validation_shape}_{self.cfg.dataset.transform_input}_{self.cfg.dataset.transform_output}_{self.weight_data}_{self.weight_dt}_{self.weight_pinn}_{self.weight_pinn_ic}_{self.cfg.nn.weighting.update_weight_method}.pth"
             self.save_model(os.path.join(folder_name, name))
         self.final_name = os.path.join(folder_name, f"{self.cfg.model.model_flag}{self.cfg.nn.type}_{self.cfg.time}_{epoch+1}_{self.data_loader.training_shape}_{self.data_loader.training_col_shape}_{self.data_loader.validation_shape}_{self.cfg.dataset.transform_input}_{self.cfg.dataset.transform_output}_{self.weight_data}_{self.weight_dt}_{self.weight_pinn}_{self.weight_pinn_ic}_{self.cfg.nn.weighting.update_weight_method}")
-        total_test_loss =  self.test_model(0,500,wandb_run)
-        return 
-    
+        total_test_loss =  self.test_model(0,20,wandb_run)
+        return
+    #Haitian, define model validation
+    def val_model(self, starting_traj=0, total_traj=1, run=None):
+        """
+        This function validates the neural network model at a certain epoch.
+
+        Args:
+            x_train (torch.Tensor): input data
+            y_train (torch.Tensor): output data
+            num_epochs (int): number of epochs
+        """
+        total_traj = total_traj if total_traj < self.data_loader.total_test_trajectories else self.data_loader.total_test_trajectories
+        sample_per_traj = int(self.data_loader.sample_per_traj)
+
+        x_val,y_val = self.data_loader.define_test_data(starting_traj,sample_per_traj,total_traj)
+        self.model.eval()
+        y_pred = self.forward_pass(x_test)
+        test_loss = self.criterion(y_pred, y_test)
+        print("Total test trajectories",total_traj)
+        print(f'Loss: {test_loss.item():.8f}')
+        test_loss_mae = self.criterion_mae(y_pred, y_test)
+        print(f'MAE Loss: {test_loss_mae.item():.8f}')
+        total_trainable_params = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
+        print('Total trainable parameters',total_trainable_params)
+        if run is not None:
+            run.log({"Test_loss": test_loss.item() })
+            run.log({"MAE Test loss": test_loss_mae.item() })
+            # self.log_plot(y_pred, y_test, None, run,x_test)
+            self.log_plot(y_pred, y_test, None, run, x_test,"validation", starting_traj, total_traj)
+        mae, rmse = self.loss_over_time(x_test, y_test, y_pred, run)
+        return test_loss.item()
+
+    #Haitian, change log_plot
     def test_model(self, starting_traj=0, total_traj=1, run=None):
         """
         This function tests the neural network model
@@ -873,53 +787,102 @@ class PhysicsInformedNeuralNetworkActions():
         print(f'MAE Loss: {test_loss_mae.item():.8f}')
         total_trainable_params = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
         print('Total trainable parameters',total_trainable_params)
+        print("run", run)
         if run is not None:
             run.log({"Test_loss": test_loss.item() })
             run.log({"MAE Test loss": test_loss_mae.item() })
-            self.log_plot(y_pred, y_test, None, run,x_test)
+            # self.log_plot(y_pred, y_test, None, run,x_test)
+            self.log_plot(y_pred, y_test, None, run, x_test,"test", starting_traj, total_traj)
         mae, rmse = self.loss_over_time(x_test, y_test, y_pred, run)
         return test_loss.item()
-    #Haitian, added different logic for plotting GFL and SM
-    def log_plot(self, output, target, epoch, run,x_test):
-        #log in wandb
-        starting_traj = 0
-        total_traj = 5
-        num_per_traj = int(self.data_loader.sample_per_traj)
-        down_limit = starting_traj*num_per_traj
-        upper_limit = (starting_traj+total_traj)*num_per_traj
-        var_name = ["theta","omega(r/s)","E_q(pu)","E_d(pu)"]
-        if self.theme == "SM":
+
+    # Haitian, added different logic for plotting GFL
+    def log_plot(self, output, target, epoch, run, x_test, type, starting_traj=0, total_traj=1):
+        # log in wandb
+        if self.cfg.theme == "SM":
             modeling_guide_path = os.path.join(self.cfg.dirs.init_conditions_dir, "modellings_guide_sm.yaml")
             modeling_guide = OmegaConf.load(modeling_guide_path)
-        elif self.theme == "GFL":
+        elif self.cfg.theme == "GFL":
             modeling_guide_path = os.path.join(self.cfg.dirs.init_conditions_dir, "modellings_guide_gfl.yaml")
             modeling_guide = OmegaConf.load(modeling_guide_path)
-        elif self.theme == "GFM":
-            #Add your specifications here...
-            raise NotImplementedError
-        else:
-            raise NotImplementedError
-        #check if proposed modeling is in the modeling guide
+
+        # check if proposed modeling is in the modeling guide
         for model in modeling_guide:
             model_name = model.get("name")
             if model_name == self.cfg.model.model_flag:
                 self.keys = model.get("keys")
 
-        for var in range(len(self.keys)):
-            plt.figure()
-            plt.title(f"Trajectories {starting_traj} to {starting_traj+total_traj} for variable {self.keys[var]}")
-            # plot with x axis x_test[:,0]
-            plt.plot(x_test[down_limit:upper_limit,0].detach().cpu().numpy(), output[down_limit:upper_limit,var].detach().cpu().numpy(), label="Predicted")
-            plt.plot(x_test[down_limit:upper_limit,0].detach().cpu().numpy(), target[down_limit:upper_limit,var].detach().cpu().numpy(), label="True")
-            plt.xlabel("Time(s)")
-            plt.legend()
-            image = wandb.Image(plt)
-            if epoch is None:
-                run.log({f"Test output {var}": image})
-            else:
-                run.log({f"Output {var}": image, 'epoch': epoch})
-            plt.close()
-        return
+        pts_per_traj = int(self.data_loader.sample_per_traj)
+        max_traj = len(output) // pts_per_traj
+        print("type: ",str(type) + ", total_traj:" , str(max_traj) + ", max_traj", str(total_traj))
+        total_traj = min(total_traj, max_traj)
+        # max_rows = 5  # 每页最多 5 条
+        # -------------------------------------------------- 基本信息
+        # -------------------------------------------------- 分块绘图；每块 ≤ max_rows
+        # for blk_start in range(0, len(idx_all), total_traj):
+        # blk_idx = idx_all[blk_start: blk_start + total_traj]  # 当前这张图要画的轨迹编号
+        blk_idx = list(range(starting_traj, starting_traj + total_traj))
+        fig, axes = plt.subplots(total_traj, 2,figsize=(18, 3 * total_traj),sharex='col')
+
+        # # 先全隐藏，等会儿用到的再显
+        # for r in range(max_rows):
+        #     for c in range(2):
+        #         axes[r, c].set_visible(False)
+
+        # -------------------------------------------------- 逐条轨迹画
+        for r, k in enumerate(blk_idx):
+            lo, hi = k * pts_per_traj, (k + 1) * pts_per_traj  # 这一条的切片
+            t = x_test[lo:hi, 0].detach().cpu().numpy()
+            delta_true = target[lo:hi, 0].detach().cpu().numpy()
+            omega_true = target[lo:hi, 1].detach().cpu().numpy()
+            delta_pred = output[lo:hi, 0].detach().cpu().numpy()
+            omega_pred = output[lo:hi, 1].detach().cpu().numpy()
+
+            f_true = calculate_frequency(omega_true, np.pi * 100)
+            f_pred = calculate_frequency(omega_pred, np.pi * 100)
+
+            # --- δ ---
+            if self.keys[0] == "delta":
+                axd = axes[r, 0]
+                axd.set_visible(True)
+                axd.plot(t, delta_true, color='tab:blue', lw=1.2,
+                         label='True' if r == 0 else None)
+                axd.plot(t, delta_pred, color='tab:orange', lw=1.2, ls='--',
+                         label='Pred' if r == 0 else None)
+                axd.grid(ls='--', alpha=.3)
+
+            # --- f ---
+            if self.keys[1] == "omega":
+                axf = axes[r, 1]
+                axf.set_visible(True)
+                axf.plot(t, f_true, color='tab:blue', lw=1.2,label='True' if r == 0 else None)
+                axf.plot(t, f_pred, color='tab:orange', lw=1.2, ls='--',label='Pred' if r == 0 else None)
+                axf.grid(ls='--', alpha=.3)
+
+            # 行标签
+            axd.text(-0.05, 0.5, f'traj {k+1}',transform=axd.transAxes,va='center', ha='right',fontsize=9, weight='bold')
+
+        # 统一标题 / x 轴
+        axes[0, 0].set_title('δ')
+        axes[0, 1].set_title('f = ω/2*pi')
+        axes[-1, 0].set_xlabel('Time (s)')
+        axes[-1, 1].set_xlabel('Time (s)')
+
+        # 只放一次图例
+        handles, labels = axes[0, 0].get_legend_handles_labels()
+        if handles:
+            fig.legend(handles, labels, loc='upper right')
+
+        plt.tight_layout()
+
+        # --------------------------- wandb 记录
+        gname = f"{type}{blk_idx[0]+1}-{blk_idx[-1]+1}"  # 例：0-4, 5-9 …
+        run.log({f"traj_{gname}": wandb.Image(fig)},commit=False)  # 不提前 commit，最后一次性 flush
+
+        plt.close(fig)
+        run.log({}, commit=True)  # flush 一次即可
+
+
     
     def loss_over_time(self, x_test, y_test, y_pred, run = None):
 
@@ -941,7 +904,15 @@ class PhysicsInformedNeuralNetworkActions():
         mae = np.array(mae)
         rmse = np.array(rmse)
         mae2 = torch.abs(y_test - y_pred)  # Calculate absolute errors for each prediction
-        var_name = ["theta","omega(r/s)","E_q(pu)","E_d(pu)"]
+        if self.cfg.theme == "SM":
+            var_name = ["theta","omega(r/s)","E_q(pu)","E_d(pu)"]
+        elif self.cfg.theme == "GFL":
+            if self.model_flag == "GFL_2nd_order":
+                var_name = ["delta", "omega"]
+            elif self.model_flag == "GFL_4th_order":
+                var_name = ["delta", "delta_omega", "delta_Id", "delta_Id_dt"]
+        else:
+            raise NotImplementedError
         if run is not None:
             for i in range(y_pred_.shape[1]):
                 """

@@ -1,0 +1,61 @@
+Is cuda available? False
+Number of different initial conditions:  25
+['delta', 'omega'] Variables
+[[-3.14159, 3.14159], [-60, 60]] Set of values for init conditions
+[5, 5] Iterations per value
+Shape: (25, 2)
+🟡 Solving initial condition 1/25: [-0.9611545373333081, 25.844060919013472]
+✅ Finished IC 1 successfully.
+🟡 Solving initial condition 2/25: [-0.9611545373333081, -16.26445873125288]
+✅ Finished IC 2 successfully.
+🟡 Solving initial condition 3/25: [-0.9611545373333081, 58.42274042346605]
+✅ Finished IC 3 successfully.
+🟡 Solving initial condition 4/25: [-0.9611545373333081, -58.4391744757937]
+✅ Finished IC 4 successfully.
+🟡 Solving initial condition 5/25: [-0.9611545373333081, -11.020720639806846]
+✅ Finished IC 5 successfully.
+🟡 Solving initial condition 6/25: [1.012953740416246, 25.844060919013472]
+✅ Finished IC 6 successfully.
+🟡 Solving initial condition 7/25: [1.012953740416246, -16.26445873125288]
+✅ Finished IC 7 successfully.
+🟡 Solving initial condition 8/25: [1.012953740416246, 58.42274042346605]
+✅ Finished IC 8 successfully.
+🟡 Solving initial condition 9/25: [1.012953740416246, -58.4391744757937]
+✅ Finished IC 9 successfully.
+🟡 Solving initial condition 10/25: [1.012953740416246, -11.020720639806846]
+✅ Finished IC 10 successfully.
+🟡 Solving initial condition 11/25: [-1.914792089375159, 25.844060919013472]
+✅ Finished IC 11 successfully.
+🟡 Solving initial condition 12/25: [-1.914792089375159, -16.26445873125288]
+✅ Finished IC 12 successfully.
+🟡 Solving initial condition 13/25: [-1.914792089375159, 58.42274042346605]
+✅ Finished IC 13 successfully.
+🟡 Solving initial condition 14/25: [-1.914792089375159, -58.4391744757937]
+✅ Finished IC 14 successfully.
+🟡 Solving initial condition 15/25: [-1.914792089375159, -11.020720639806846]
+✅ Finished IC 15 successfully.
+🟡 Solving initial condition 16/25: [2.047418673407833, 25.844060919013472]
+✅ Finished IC 16 successfully.
+🟡 Solving initial condition 17/25: [2.047418673407833, -16.26445873125288]
+✅ Finished IC 17 successfully.
+🟡 Solving initial condition 18/25: [2.047418673407833, 58.42274042346605]
+✅ Finished IC 18 successfully.
+🟡 Solving initial condition 19/25: [2.047418673407833, -58.4391744757937]
+✅ Finished IC 19 successfully.
+🟡 Solving initial condition 20/25: [2.047418673407833, -11.020720639806846]
+✅ Finished IC 20 successfully.
+🟡 Solving initial condition 21/25: [-0.023423809564599996, 25.844060919013472]
+✅ Finished IC 21 successfully.
+🟡 Solving initial condition 22/25: [-0.023423809564599996, -16.26445873125288]
+✅ Finished IC 22 successfully.
+🟡 Solving initial condition 23/25: [-0.023423809564599996, 58.42274042346605]
+✅ Finished IC 23 successfully.
+🟡 Solving initial condition 24/25: [-0.023423809564599996, -58.4391744757937]
+✅ Finished IC 24 successfully.
+🟡 Solving initial condition 25/25: [-0.023423809564599996, -11.020720639806846]
+✅ Finished IC 25 successfully.
+Mean time per iteration:  0.0028612041473388672  and std:  0.00018675992237478754
+Time taken to solve the model for 25 initial conditions: 0.07153105735778809 seconds.
+[DEBUG] t_span = (0, 3)
+Number of files in the directory:  0
+Saved dataset "('GFL_2nd_order', 'dataset_v1')".

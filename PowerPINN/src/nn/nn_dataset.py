@@ -189,7 +189,7 @@ class DataSampler:
         self.time = min(time_limit, x_train_list[:,0].max().item())
         return x_train_list, y_train_list
 
-    
+    #Haitian, add total_validation_trajectories
     def train_val_test_split(self, x_data, y_data, split_ratio, val_flag=True):
         """
         Split the data into training, validation, and testing sets.
@@ -215,6 +215,7 @@ class DataSampler:
             y_train, y_val, y_test = y_data[:split], y_data[split:split+val_split], y_data[split+val_split:]
             print("Number of training samples: ", len(x_train), "Number of validation samples: ", len(x_val), "Number of testing samples: ", len(x_test))
             self.total_test_trajectories = int(self.total_trajectories * (10-split_ratio*10)/(2*10)) # number of test trajectories is given by the val_split and is equal to val trajectories
+            self.total_validation_trajectories = self.total_test_trajectories
             return x_train, x_val, x_test, y_train, y_val, y_test
         else:
             x_train, x_test = x_data[:split], x_data[split:]

@@ -1,0 +1,30 @@
+GFL_2nd_order data
+Loading data from:  ./data/GFL_2nd_order/dataset_v1.pkl
+/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/src/nn/nn_dataset.py:178: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_new.cpp:264.)
+  training_sample = torch.tensor(training_sample, dtype=torch.float32) # convert the trajectory to tensor
+Number of training samples:  2000000 Number of validation samples:  250000 Number of testing samples:  250000
+Number of different initial conditions for collocation points:  25
+['delta', 'omega'] Variables
+[[-3.14159, 3.14159], [-60, 60]] Set of values for init conditions
+[5, 5] Iterations per value
+Shape: (25, 2)
+Selected deep learning model:  DynamicNN
+Number of labeled training data: 86957 Number of collocation points: 1316 Number of collocation points (IC): 25 Number of validation data: 62500
+Weights initialized as:  [1, 0.001, 0.0001, 0.001]  are updated with scheme:  Static
+getting in training
+Validation loss decreased (inf --> 105.109184).  Saving model ...
+Epoch [50/15000], Loss: 184.2764, Loss_data: 117.2070, Loss_dt: 66471.4688, Loss_pinn: 489.5668 , Loss_pinn_ic : 548.9850 103.34508514404297 62287.1171875
+Epoch [100/15000], Loss: 183.8754, Loss_data: 116.8107, Loss_dt: 66471.2891, Loss_pinn: 454.0035 , Loss_pinn_ic : 548.0579 103.01509094238281 62286.9375
+Epoch [150/15000], Loss: 183.4087, Loss_data: 116.3568, Loss_dt: 66469.8594, Loss_pinn: 400.1017 , Loss_pinn_ic : 542.0493 102.69827270507812 62285.25390625
+Epoch [200/15000], Loss: 182.7163, Loss_data: 115.6638, Loss_dt: 66464.0000, Loss_pinn: 517.8326 , Loss_pinn_ic : 536.6383 102.19905090332031 62278.40234375
+Epoch [250/15000], Loss: 181.2578, Loss_data: 114.2300, Loss_dt: 66442.1641, Loss_pinn: 585.6144 , Loss_pinn_ic : 527.0876 101.01812744140625 62253.59375
+Epoch [300/15000], Loss: 177.3891, Loss_data: 110.4958, Loss_dt: 66335.5312, Loss_pinn: 747.8152 , Loss_pinn_ic : 482.9813 97.82758331298828 62131.140625
+Epoch [350/15000], Loss: 170.6982, Loss_data: 104.3048, Loss_dt: 65930.3438, Loss_pinn: 633.4515 , Loss_pinn_ic : 399.7353 93.13456726074219 61697.625
+Epoch [400/15000], Loss: 161.2574, Loss_data: 96.0972, Loss_dt: 64828.0391, Loss_pinn: 686.4964 , Loss_pinn_ic : 263.5290 85.95865631103516 60400.03515625
+Epoch [450/15000], Loss: 147.7578, Loss_data: 85.3820, Loss_dt: 62095.6758, Loss_pinn: 916.4606 , Loss_pinn_ic : 188.5307 77.66571807861328 57297.6875
+Epoch [500/15000], Loss: 133.0938, Loss_data: 75.1702, Loss_dt: 57673.1328, Loss_pinn: 1582.8214 , Loss_pinn_ic : 92.1138 67.78446197509766 52339.34765625
+Epoch [550/15000], Loss: 123.3080, Loss_data: 68.5810, Loss_dt: 54463.8242, Loss_pinn: 1915.6389 , Loss_pinn_ic : 71.6068 61.2829475402832 48699.58984375
+Epoch [600/15000], Loss: 117.0295, Loss_data: 64.1944, Loss_dt: 52599.3438, Loss_pinn: 1600.4303 , Loss_pinn_ic : 75.7625 56.96753692626953 46479.2734375
+Epoch [650/15000], Loss: 111.4531, Loss_data: 60.8838, Loss_dt: 50360.6875, Loss_pinn: 1267.5840 , Loss_pinn_ic : 81.7997 52.49122619628906 44463.515625
+Epoch [700/15000], Loss: 105.8739, Loss_data: 57.4488, Loss_dt: 48215.9805, Loss_pinn: 1156.3351 , Loss_pinn_ic : 93.5695 48.75757598876953 42057.40625
+Epoch [750/15000], Loss: 100.9662, Loss_data: 54.4830, Loss_dt: 46242.9375, Loss_pinn: 1333.8252 , Loss_pinn_ic : 106.8806 45.55878448486328 39742.5625

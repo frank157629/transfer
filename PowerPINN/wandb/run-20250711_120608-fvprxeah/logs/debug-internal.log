@@ -1,0 +1,18 @@
+{"time":"2025-07-11T12:06:08.750572+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250711_120608-fvprxeah/logs/debug-core.log"}
+{"time":"2025-07-11T12:06:09.163423+02:00","level":"INFO","msg":"stream: created new stream","id":"fvprxeah"}
+{"time":"2025-07-11T12:06:09.163689+02:00","level":"INFO","msg":"stream: started","id":"fvprxeah"}
+{"time":"2025-07-11T12:06:09.163717+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"fvprxeah"}
+{"time":"2025-07-11T12:06:09.163726+02:00","level":"INFO","msg":"sender: started","stream_id":"fvprxeah"}
+{"time":"2025-07-11T12:06:09.163899+02:00","level":"INFO","msg":"handler: started","stream_id":"fvprxeah"}
+{"time":"2025-07-11T12:06:09.359809+02:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-07-11T12:06:31.472137+02:00","level":"WARN","msg":"handler: ignoring partial history record","step":49,"current":254}
+{"time":"2025-07-11T12:06:50.719806+02:00","level":"WARN","msg":"handler: ignoring partial history record","step":99,"current":505}
+{"time":"2025-07-11T12:06:51.387124+02:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-07-11T12:06:51.387157+02:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-07-11T12:06:52.394775+02:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading media/images/traj_test1-10_508_6de3118d2fb13e88fed2.png","runtime_seconds":0.941581792,"progress":"480.6KB/480.6KB"}],"total_operations":1}}
+{"time":"2025-07-11T12:06:52.530712+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-07-11T12:06:54.149077+02:00","level":"INFO","msg":"stream: closing","id":"fvprxeah"}
+{"time":"2025-07-11T12:06:54.149117+02:00","level":"INFO","msg":"handler: closed","stream_id":"fvprxeah"}
+{"time":"2025-07-11T12:06:54.149142+02:00","level":"INFO","msg":"sender: closed","stream_id":"fvprxeah"}
+{"time":"2025-07-11T12:06:54.149443+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"fvprxeah"}
+{"time":"2025-07-11T12:06:54.149639+02:00","level":"INFO","msg":"stream: closed","id":"fvprxeah"}

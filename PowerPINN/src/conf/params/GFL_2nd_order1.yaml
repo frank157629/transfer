@@ -1,0 +1,19 @@
+# Toolbox/src/conf/params/GFL_2nd_order/1.yaml
+S_b : 1.2e8
+V_g : 690
+V_dc : 1380
+f_0 : 50
+w_g : 314.15926
+T_s  : 1e-5
+X_Lg : 16.3
+R_Lg : 1
+L_Lg : 0.05188
+X_R_ratio : 16.3
+i_d_c : 1.0
+i_q_c : -0.1
+K_p : 0.025
+K_i : 1.5
+
+
+
+

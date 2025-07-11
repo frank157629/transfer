@@ -1,0 +1,7 @@
+{"time":"2025-07-10T22:34:02.123378+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250710_223401-ovbcdtd7/logs/debug-core.log"}
+{"time":"2025-07-10T22:34:02.469736+02:00","level":"INFO","msg":"stream: created new stream","id":"ovbcdtd7"}
+{"time":"2025-07-10T22:34:02.46976+02:00","level":"INFO","msg":"stream: started","id":"ovbcdtd7"}
+{"time":"2025-07-10T22:34:02.469766+02:00","level":"INFO","msg":"sender: started","stream_id":"ovbcdtd7"}
+{"time":"2025-07-10T22:34:02.469778+02:00","level":"INFO","msg":"handler: started","stream_id":"ovbcdtd7"}
+{"time":"2025-07-10T22:34:02.469769+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"ovbcdtd7"}
+{"time":"2025-07-10T22:34:02.664372+02:00","level":"INFO","msg":"Starting system monitor"}

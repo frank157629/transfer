@@ -1,3 +1,8 @@
 - name: "GFL_4th_order"
   keys: ["delta", "delta_omega", "delta_Id", "delta_Id_dt"]
   full_name: "Grid-following converter reduced-order model with four states"
+
+
+- name: "GFL_2nd_order"
+  keys: ["delta", "omega"]
+  full_name: "Reduced-order model for GFL_2nd_order control with two states"

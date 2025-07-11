@@ -1,0 +1,25 @@
+GFL_2nd_order data
+Loading data from:  ./data/GFL_2nd_order/dataset_v1.pkl
+Number of training samples:  3200 Number of validation samples:  400 Number of testing samples:  400
+Number of different initial conditions for collocation points:  25
+['delta', 'omega'] Variables
+[[-3.14159, 3.14159], [-60, 60]] Set of values for init conditions
+[5, 5] Iterations per value
+Shape: (25, 2)
+Selected deep learning model:  DynamicNN
+Number of labeled training data: 140 Number of collocation points: 1316 Number of collocation points (IC): 25 Number of validation data: 100
+Weights initialized as:  [1, 0.001, 0.0001, 0.001]  are updated with scheme:  Static
+getting in training
+Validation loss decreased (inf --> 0.004533).  Saving model ...
+Epoch [50/1500], Loss: 15.1321, Loss_data: 5.7085, Loss_dt: 7987.3438, Loss_pinn: 8841.7188 , Loss_pinn_ic : 552.1104 0.5743350982666016 5.463150501251221
+Epoch [100/1500], Loss: 9.2158, Loss_data: 3.8893, Loss_dt: 4399.9785, Loss_pinn: 3797.6299 , Loss_pinn_ic : 546.7027 1.8816043138504028 34.9368896484375
+Epoch [150/1500], Loss: 4.1624, Loss_data: 1.5398, Loss_dt: 1733.5621, Loss_pinn: 3965.6724 , Loss_pinn_ic : 492.4618 0.11330971121788025 2.8335766792297363
+Epoch [200/1500], Loss: 2.6770, Loss_data: 0.9806, Loss_dt: 1097.5691, Loss_pinn: 1612.5105 , Loss_pinn_ic : 437.5334 0.2612833082675934 11.417949676513672
+Epoch [250/1500], Loss: 2.1350, Loss_data: 0.9577, Loss_dt: 567.8042, Loss_pinn: 1706.5544 , Loss_pinn_ic : 438.9013 0.40435534715652466 19.958717346191406
+Early stopping
+Validation loss decreased (0.004533 --> 0.404355).  Saving model ...
+Model( and tf values) saved: model/data_dt_pinn_ic/GFL_2nd_orderDynamicNN_5_251_140_1316_100_None_None_1_0.001_0.0001_0.001_Static.pth
+Total test trajectories 0
+Loss: nan
+MAE Loss: nan
+Total trainable parameters 17026

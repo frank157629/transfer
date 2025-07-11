@@ -2,14 +2,14 @@ wandb:
   api_key: "Add your wandb key here"
   project: "Project_PINN_for_synchronous_machine"
 
-time : 3 # Total time
+time : 1 # Total time
 seed : 1 #for reproducibility
 num_of_points : 1000 # Number of points
 modelling_method : True # For GFL: True, since in p.u.
 
 
 model:
-  model_flag : "GFL_4th_order"
+  model_flag : "GFL_2nd_order"
   model_num : 1
   init_condition_bounds : 1
   sampling: "Lhs" # Choose between "Lhs" or "Linear" or "Random"

@@ -1,0 +1,7 @@
+{"time":"2025-07-11T10:48:34.119531+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250711_104833-om61pmit/logs/debug-core.log"}
+{"time":"2025-07-11T10:48:34.449039+02:00","level":"INFO","msg":"stream: created new stream","id":"om61pmit"}
+{"time":"2025-07-11T10:48:34.449067+02:00","level":"INFO","msg":"stream: started","id":"om61pmit"}
+{"time":"2025-07-11T10:48:34.449071+02:00","level":"INFO","msg":"handler: started","stream_id":"om61pmit"}
+{"time":"2025-07-11T10:48:34.449106+02:00","level":"INFO","msg":"sender: started","stream_id":"om61pmit"}
+{"time":"2025-07-11T10:48:34.449119+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"om61pmit"}
+{"time":"2025-07-11T10:48:34.715355+02:00","level":"INFO","msg":"Starting system monitor"}

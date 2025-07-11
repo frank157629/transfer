@@ -1,0 +1,16 @@
+{"time":"2025-07-06T01:19:50.526927+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250706_011950-osde7mww/logs/debug-core.log"}
+{"time":"2025-07-06T01:19:50.867119+02:00","level":"INFO","msg":"stream: created new stream","id":"osde7mww"}
+{"time":"2025-07-06T01:19:50.86715+02:00","level":"INFO","msg":"stream: started","id":"osde7mww"}
+{"time":"2025-07-06T01:19:50.867155+02:00","level":"INFO","msg":"handler: started","stream_id":"osde7mww"}
+{"time":"2025-07-06T01:19:50.867167+02:00","level":"INFO","msg":"sender: started","stream_id":"osde7mww"}
+{"time":"2025-07-06T01:19:50.867181+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"osde7mww"}
+{"time":"2025-07-06T01:19:51.042774+02:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-07-06T01:19:51.085505+02:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-07-06T01:19:51.085521+02:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-07-06T01:19:51.959755+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-07-06T01:19:52.092062+02:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading console lines 0-8","runtime_seconds":0.132036875}],"total_operations":1}}
+{"time":"2025-07-06T01:19:52.244535+02:00","level":"INFO","msg":"stream: closing","id":"osde7mww"}
+{"time":"2025-07-06T01:19:52.244567+02:00","level":"INFO","msg":"handler: closed","stream_id":"osde7mww"}
+{"time":"2025-07-06T01:19:52.244588+02:00","level":"INFO","msg":"sender: closed","stream_id":"osde7mww"}
+{"time":"2025-07-06T01:19:52.244593+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"osde7mww"}
+{"time":"2025-07-06T01:19:52.244814+02:00","level":"INFO","msg":"stream: closed","id":"osde7mww"}

@@ -1,0 +1,21 @@
+Is cuda available? False
+Number of different initial conditions:  5
+['delta', 'omega'] Variables
+[[-3.14159, 3.14159], [-60]] Set of values for init conditions
+[5, 1] Iterations per value
+Shape: (5, 2)
+🟡 Solving initial condition 1/5: [1.645805869046601, -60]
+✅ Finished IC 1 successfully.
+🟡 Solving initial condition 2/5: [-0.945140034461446, -60]
+✅ Finished IC 2 successfully.
+🟡 Solving initial condition 3/5: [2.7807563862301015, -60]
+✅ Finished IC 3 successfully.
+🟡 Solving initial condition 4/5: [0.13956123425957268, -60]
+✅ Finished IC 4 successfully.
+🟡 Solving initial condition 5/5: [-2.9984533799283803, -60]
+✅ Finished IC 5 successfully.
+Mean time per iteration:  0.002886199951171875  and std:  0.00013037486567045765
+Time taken to solve the model for 5 initial conditions: 0.014430999755859375 seconds.
+[DEBUG] t_span = (0, 3)
+Number of files in the directory:  2
+Saved dataset "('GFL_2nd_order', 'dataset_v3')".

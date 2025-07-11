@@ -27,7 +27,7 @@ def train(config=None):
 
     cfg.seed = config.seed
     cfg.nn.weighting.weights = [config.weight_data, config.weight_dt, config.weight_pinn, config.weight_pinn_ic]
-
+    cfg.theme = setup.theme
 
     if cfg.nn.optimizer == "LBFGS":
         lbfgs_iter = 10
@@ -40,10 +40,10 @@ def train(config=None):
     if cfg.theme == "SM":
         modelling_full = SynchronousMachineModels(cfg)
         network = NeuralNetworkActions(cfg, modelling_full)
-    if cfg.theme == "GFL":
+    elif cfg.theme == "GFL":
         modelling_full = GridFollowingConverterModels(cfg)
         network = PhysicsInformedNeuralNetworkActions(cfg, modelling_full)
-    if cfg.theme == "GFM":
+    elif cfg.theme == "GFM":
         ##Add your specifications here...
         raise NotImplementedError
 
@@ -62,7 +62,7 @@ if __name__ == "__main__":
             "goal": "minimize"
         },
         "parameters": {
-            "seed": {"values": [1, 3, 7]},
+            "seed": {"values": [1]},
             "weight_data": {"values": [1]},
             "weight_dt": {"values": [1e-3]},
             "weight_pinn": {"values": [1e-4]},
