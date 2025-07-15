@@ -1,4 +1,7 @@
 #Haitian, use to switch between SM and GFL
 # src/conf/config.yaml
-theme: GFL
+theme: GFL #keep SM, for comparison
+#Vanilla or pinn
+train: vanilla
+
 

@@ -1,0 +1,19 @@
+{"time":"2025-07-11T19:31:14.161331+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250711_193113-a99hopdg/logs/debug-core.log"}
+{"time":"2025-07-11T19:31:14.574127+02:00","level":"INFO","msg":"stream: created new stream","id":"a99hopdg"}
+{"time":"2025-07-11T19:31:14.57416+02:00","level":"INFO","msg":"stream: started","id":"a99hopdg"}
+{"time":"2025-07-11T19:31:14.574184+02:00","level":"INFO","msg":"handler: started","stream_id":"a99hopdg"}
+{"time":"2025-07-11T19:31:14.574197+02:00","level":"INFO","msg":"sender: started","stream_id":"a99hopdg"}
+{"time":"2025-07-11T19:31:14.574408+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"a99hopdg"}
+{"time":"2025-07-11T19:31:14.821534+02:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-07-11T20:13:22.910145+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/liuhaitian888-rwth-aachen-university/PINN-%CE%9A%CE%91%CE%9D/a99hopdg/file_stream\": dial tcp 35.186.228.49:443: connect: operation timed out"}
+{"time":"2025-07-11T20:13:33.115003+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/liuhaitian888-rwth-aachen-university/PINN-%CE%9A%CE%91%CE%9D/a99hopdg/file_stream\": dial tcp 35.186.228.49:443: connect: operation timed out"}
+{"time":"2025-07-11T20:13:34.346595+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 192.168.0.25:64094->35.186.228.49:443: read: operation timed out"}
+{"time":"2025-07-11T21:18:13.87708+02:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-07-11T21:18:13.877121+02:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-07-11T21:18:14.89008+02:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading media/images/traj_test1-10_75307_cded03d9b9dec165ecef.png","runtime_seconds":0.950166875,"progress":"814.7KB/814.7KB"}],"total_operations":1}}
+{"time":"2025-07-11T21:18:15.002218+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-07-11T21:18:16.345359+02:00","level":"INFO","msg":"stream: closing","id":"a99hopdg"}
+{"time":"2025-07-11T21:18:16.345409+02:00","level":"INFO","msg":"handler: closed","stream_id":"a99hopdg"}
+{"time":"2025-07-11T21:18:16.345429+02:00","level":"INFO","msg":"sender: closed","stream_id":"a99hopdg"}
+{"time":"2025-07-11T21:18:16.345785+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"a99hopdg"}
+{"time":"2025-07-11T21:18:16.345871+02:00","level":"INFO","msg":"stream: closed","id":"a99hopdg"}

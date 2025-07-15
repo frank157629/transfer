@@ -81,7 +81,7 @@ class Kalm(nn.Module):
         return self.ka(x)
     def update_grid(self,x):
         self.ka.update_grid_from_samples(x)
-        
+
 class PinnA(nn.Module): # DISCARD IT, OUTPUT IS WRONG
     """
     A class to represent a Pinn model with adjusted output.

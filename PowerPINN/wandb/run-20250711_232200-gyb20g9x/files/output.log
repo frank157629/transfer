@@ -1,0 +1,22 @@
+GFL_2nd_order data
+Loading data from:  ./data/GFL_2nd_order/dataset_v1.pkl
+/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/src/nn/nn_dataset.py:178: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_new.cpp:264.)
+  training_sample = torch.tensor(training_sample, dtype=torch.float32) # convert the trajectory to tensor
+Number of training samples:  80000 Number of validation samples:  10000 Number of testing samples:  10000
+Number of different initial conditions for collocation points:  100
+['delta', 'omega'] Variables
+[[-3.14159, 3.14159], [-60, 60]] Set of values for init conditions
+[10, 10] Iterations per value
+Shape: (100, 2)
+Selected deep learning model:  PinnB
+Number of labeled training data: 80000 Number of collocation points: 100000 Number of collocation points (IC): 100 Number of validation data: 10000
+Weights initialized as:  [1, 0.001, 0.0001, 0.001]  are updated with scheme:  Static
+getting in training
+type:  validation, total_traj: 10, max_traj 20
+Epoch [50/15000], Loss: 538.4708, Loss_data: 444.2187, Loss_dt: 67125.3047, Loss_pinn: 270724.3438 , Loss_pinn_ic : 54.3140 393.9056396484375 85136.359375
+type:  validation, total_traj: 10, max_traj 20
+Epoch [100/15000], Loss: 472.1393, Loss_data: 379.4472, Loss_dt: 67125.9062, Loss_pinn: 254699.5781 , Loss_pinn_ic : 96.1950 333.5494384765625 85136.375
+type:  validation, total_traj: 10, max_traj 20
+Epoch [150/15000], Loss: 419.4707, Loss_data: 329.0049, Loss_dt: 67125.9297, Loss_pinn: 232070.1094 , Loss_pinn_ic : 132.8642 289.99700927734375 85136.0234375
+type:  validation, total_traj: 10, max_traj 20
+Epoch [200/15000], Loss: 377.4474, Loss_data: 288.2906, Loss_dt: 67126.3516, Loss_pinn: 218634.0938 , Loss_pinn_ic : 167.0378 253.44744873046875 85137.2578125

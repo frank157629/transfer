@@ -1,0 +1,16 @@
+{"time":"2025-07-11T18:58:58.448367+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250711_185858-k0osljjp/logs/debug-core.log"}
+{"time":"2025-07-11T18:58:58.863278+02:00","level":"INFO","msg":"stream: created new stream","id":"k0osljjp"}
+{"time":"2025-07-11T18:58:58.863491+02:00","level":"INFO","msg":"stream: started","id":"k0osljjp"}
+{"time":"2025-07-11T18:58:58.863518+02:00","level":"INFO","msg":"sender: started","stream_id":"k0osljjp"}
+{"time":"2025-07-11T18:58:58.863678+02:00","level":"INFO","msg":"handler: started","stream_id":"k0osljjp"}
+{"time":"2025-07-11T18:58:58.863712+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"k0osljjp"}
+{"time":"2025-07-11T18:58:59.086765+02:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-07-11T19:22:01.248711+02:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-07-11T19:22:01.248742+02:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-07-11T19:22:02.256881+02:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading media/images/traj_test1-10_17345_65dd95eb61d86335e855.png","runtime_seconds":0.95053025,"progress":"822.9KB/822.9KB"},{"desc":"uploading output.log","runtime_seconds":0.748204833,"progress":"15.2KB/15.2KB"},{"desc":"uploading config.yaml","runtime_seconds":0.506864667,"progress":"623B/623B"}],"total_operations":3}}
+{"time":"2025-07-11T19:22:02.559271+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-07-11T19:22:03.273782+02:00","level":"INFO","msg":"stream: closing","id":"k0osljjp"}
+{"time":"2025-07-11T19:22:03.273842+02:00","level":"INFO","msg":"handler: closed","stream_id":"k0osljjp"}
+{"time":"2025-07-11T19:22:03.273886+02:00","level":"INFO","msg":"sender: closed","stream_id":"k0osljjp"}
+{"time":"2025-07-11T19:22:03.274271+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"k0osljjp"}
+{"time":"2025-07-11T19:22:03.274397+02:00","level":"INFO","msg":"stream: closed","id":"k0osljjp"}

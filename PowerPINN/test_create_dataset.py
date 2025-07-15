@@ -19,7 +19,7 @@ if cfg.theme == "GFL":
         print("sol shape:", sol.shape)
 
         #  randomly choose k trajectories for a test plotting
-        indices = random.sample(range(sol.shape[0]), 25)
+        indices = random.sample(range(sol.shape[0]), 900)
         print("How many indices:", len(indices))
         print("Chosen indices:", indices)
         if cfg_gfl.model.model_flag == "GFL_2nd_order":
@@ -35,7 +35,8 @@ if cfg.theme == "GFL":
                 print(f"⏱️ Traj {idx} time range: {t[0]:.2f} → {t[-1]:.2f}")
 
                 for row, var_idx in enumerate([1]):
-                    axes[row].plot(t, traj[var_idx])
+                    axes[row].plot(t, np.sin(traj[var_idx]))
+                    # axes[row].plot(t, traj[var_idx])
                     axes[row].set_ylabel(var_names[row])
                     axes[row].grid(True, ls='--', alpha=.3)
 
@@ -47,9 +48,10 @@ if cfg.theme == "GFL":
                 axes[1].grid(True, ls='--', alpha=.3)
 
             axes[-1].set_xlabel('time (s)')
-            axes[1].legend(loc='upper right')
+            # axes[1].legend(loc='upper right', fontsize='small', ncol=2)
             plt.tight_layout()
             plt.show()
+
         if cfg_gfl.model.model_flag == "GFL_4th_order":
             var_names = ["delta", "delta_omega", "delta_Id", "delta_Id_dt","f"]
 

@@ -3,6 +3,7 @@ import os
 from ode.gfl_models_d import GridFollowingConverterModels
 from src.ode.sm_models_d import SynchronousMachineModels
 from src.nn.pinn_actions import PhysicsInformedNeuralNetworkActions
+from src.nn.vanilla_actions import VanillaNeuralNetworkActions
 from src.functions import *
 from omegaconf import OmegaConf
 import wandb
@@ -18,7 +19,7 @@ def train(config=None):
     if setup.theme == "SM":
         cfg = OmegaConf.load("src/conf/setup_dataset_nn_sm.yaml")
     elif setup.theme == "GFL":
-        cfg = OmegaConf.load("src/conf/setup_dataset_nn_gfl.yaml")
+        cfg = OmegaConf.load("src/conf/setup_dataset_train_gfl.yaml")
     elif setup.theme == "GFM":
         #Add your specifications here...
         raise NotImplementedError
@@ -26,14 +27,14 @@ def train(config=None):
         raise NotImplementedError
 
     cfg.seed = config.seed
-    cfg.nn.weighting.weights = [config.weight_data, config.weight_dt, config.weight_pinn, config.weight_pinn_ic]
+    cfg.network.weighting.weights = [config.weight_data, config.weight_dt, config.weight_pinn, config.weight_pinn_ic]
     cfg.theme = setup.theme
 
-    if cfg.nn.optimizer == "LBFGS":
+    if cfg.network.optimizer == "LBFGS":
         lbfgs_iter = 10
-        cfg.nn.early_stopping_patience = int(cfg.nn.early_stopping_patience / lbfgs_iter)
-        cfg.nn.num_epochs = int(cfg.nn.num_epochs / lbfgs_iter)
-        cfg.nn.weighting.update_weights_freq = int(cfg.nn.weighting.update_weights_freq*4) # increase due to internal iterations, around 25 internal iterations per epoch
+        cfg.network.early_stopping_patience = int(cfg.network.early_stopping_patience / lbfgs_iter)
+        cfg.network.num_epochs = int(cfg.network.num_epochs / lbfgs_iter)
+        cfg.network.weighting.update_weights_freq = int(cfg.network.weighting.update_weights_freq*4) # increase due to internal iterations, around 25 internal iterations per epoch
 
 
     # Initialize model and network
@@ -42,7 +43,11 @@ def train(config=None):
         network = NeuralNetworkActions(cfg, modelling_full)
     elif cfg.theme == "GFL":
         modelling_full = GridFollowingConverterModels(cfg)
-        network = PhysicsInformedNeuralNetworkActions(cfg, modelling_full)
+        if setup.train == "pinn":
+            pinn = PhysicsInformedNeuralNetworkActions(cfg, modelling_full)
+        elif setup.train == "vanilla":
+            vanilla = VanillaNeuralNetworkActions(cfg, modelling_full)
+
     elif cfg.theme == "GFM":
         ##Add your specifications here...
         raise NotImplementedError
@@ -50,7 +55,13 @@ def train(config=None):
 
     # Set skip points and start training
     #Haitian, changed pinn_train2, removed passing the skip_points as parameters of function but inside the function.
-    network.pinn_train2(run)
+    if setup.train == "pinn":
+        pinn.pinn_train2(run)
+    elif setup.train == "vanilla":
+        vanilla.vanilla_train2(run)
+
+
+
     run.finish()
 
 if __name__ == "__main__":
@@ -60,13 +71,20 @@ if __name__ == "__main__":
         "metric": {
             "name": "Test_loss",
             "goal": "minimize"
-        },
-        "parameters": {
+        }
+        # ,"parameters": {
+        #     "seed": {"values": [1]},
+        #     "weight_data": {"values": [1]},
+        #     "weight_dt": {"values": [1e-3]},
+        #     "weight_pinn": {"values": [1e-4]},
+        #     "weight_pinn_ic": {"values": [1e-3]}
+        # }
+        , "parameters": {
             "seed": {"values": [1]},
             "weight_data": {"values": [1]},
-            "weight_dt": {"values": [1e-3]},
-            "weight_pinn": {"values": [1e-4]},
-            "weight_pinn_ic": {"values": [1e-3]}
+            "weight_dt": {"values": [0]},
+            "weight_pinn": {"values": [0]},
+            "weight_pinn_ic": {"values": [0]}
         }
     }
 

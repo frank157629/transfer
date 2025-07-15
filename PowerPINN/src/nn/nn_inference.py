@@ -66,20 +66,20 @@ def define_nn_model(cfg, input_dim, output_dim):
     """
     This function defines the neural network model
     """
-    print("Selected deep learning model: ",cfg.nn.type)
-    if cfg.nn.type == "KAN": # Static architecture of the neural network
-        model = Kalm(input_dim, cfg.nn.hidden_dim, output_dim, cfg.nn.hidden_layers)
+    print("Selected deep learning model: ",cfg.network.type)
+    if cfg.network.type == "KAN": # Static architecture of the neural network
+        model = Kalm(input_dim, cfg.network.hidden_dim, output_dim, cfg.network.hidden_layers)
         # model.speed()
-    elif cfg.nn.type == "StaticNN": # Static architecture of the neural network
-        model = Net(input_dim, cfg.nn.hidden_dim, output_dim)
-    elif cfg.nn.type == "DynamicNN" or cfg.nn.type == "PinnB" or cfg.nn.type == "PinnA": # Dynamic architecture of the neural network
-        model = Network(input_dim, cfg.nn.hidden_dim, output_dim, cfg.nn.hidden_layers)
-    elif cfg.nn.type == "PinnAA": # Dynamic architecture of the neural network with the PinnA architecture for the output
-        model = PinnA(input_dim, cfg.nn.hidden_dim, output_dim, cfg.nn.hidden_layers)
-    elif cfg.nn.type == "ResNet":
+    elif cfg.network.type == "StaticNN": # Static architecture of the neural network
+        model = Net(input_dim, cfg.network.hidden_dim, output_dim)
+    elif cfg.network.type == "DynamicNN" or cfg.network.type == "PinnB" or cfg.network.type == "PinnA": # Dynamic architecture of the neural network
+        model = Network(input_dim, cfg.network.hidden_dim, output_dim, cfg.network.hidden_layers)
+    elif cfg.network.type == "PinnAA": # Dynamic architecture of the neural network with the PinnA architecture for the output
+        model = PinnA(input_dim, cfg.network.hidden_dim, output_dim, cfg.network.hidden_layers)
+    elif cfg.network.type == "ResNet":
         num_blocks=2
         num_layers_per_block=2
-        model = FullyConnectedResNet(input_dim, cfg.nn.hidden_dim, output_dim, num_blocks, num_layers_per_block)
+        model = FullyConnectedResNet(input_dim, cfg.network.hidden_dim, output_dim, num_blocks, num_layers_per_block)
     else:
         raise ValueError("Invalid nn type specified in the configuration.")
     return model
@@ -94,7 +94,7 @@ def forward_pass(model, data_network, input):
     no_time = input[:,1:]
     model.eval()
     y_pred = model.forward(input)
-    if data_network.cfg.nn.type == "PinnA":
+    if data_network.cfg.network.type == "PinnA":
         if data_network.cfg.dataset.transform_input == "None":
             return no_time + y_pred*time
         minus = data_network.data_loader.minus_input.clone().detach().to(data_network.device)
@@ -104,9 +104,9 @@ def forward_pass(model, data_network, input):
             plus = nn.Parameter(torch.tensor(1.0), requires_grad=False)
             return ((no_time + plus) * divide[1:] / div + minus[1:]) + y_pred*((time + plus) * divide[0] / div + minus[0])
         return (no_time* divide[1:] + minus[1:]) + y_pred*(time* divide[0] + minus[0])
-    if data_network.cfg.nn.type == "PinnB":
+    if data_network.cfg.network.type == "PinnB":
         return no_time + y_pred
-    if data_network.cfg.nn.type == "DynamicNN" or data_network.cfg.nn.type == "PinnAA" or data_network.cfg.nn.type == "KAN":
+    if data_network.cfg.network.type == "DynamicNN" or data_network.cfg.network.type == "PinnAA" or data_network.cfg.network.type == "KAN":
         return y_pred
     else:
         raise Exception('Enter valid NN type! (zeroth_order or first_order')
@@ -208,7 +208,7 @@ def forward_pass_a(model,x_train):
 
 
 def predict(name, type, x_train_list,cfg):
-    cfg.nn.type = type
+    cfg.network.type = type
     input_dim = x_train_list.shape[1]
     output_dim = x_train_list.shape[1]-1
     model = define_nn_model(cfg, input_dim, output_dim)

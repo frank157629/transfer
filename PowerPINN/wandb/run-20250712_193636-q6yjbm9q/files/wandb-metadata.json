@@ -1,0 +1,44 @@
+{
+  "os":  "macOS-15.3-arm64-arm-64bit",
+  "python":  "CPython 3.11.11",
+  "startedAt":  "2025-07-12T17:36:36.265409Z",
+  "program":  "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/test_sweep.py",
+  "codePath":  "PowerPINN/test_sweep.py",
+  "git":  {
+    "remote":  "git@github.com:frank157629/transfer.git",
+    "commit":  "f4afd62b2937d894be690c1d0d373cd1aef3de06"
+  },
+  "email":  "liuhaitian888@gmail.com",
+  "root":  "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN",
+  "host":  "Mac",
+  "executable":  "/opt/anaconda3/envs/myenv/bin/python",
+  "codePathLocal":  "test_sweep.py",
+  "cpu_count":  10,
+  "cpu_count_logical":  10,
+  "disk":  {
+    "/":  {
+      "total":  "494384795648",
+      "used":  "112722333696"
+    },
+    "/System/Volumes/Data":  {
+      "total":  "494384795648",
+      "used":  "112722333696"
+    }
+  },
+  "memory":  {
+    "total":  "17179869184"
+  },
+  "cpu":  {
+    "count":  10,
+    "countLogical":  10
+  },
+  "apple":  {
+    "name":  "Apple M4",
+    "ecpuCores":  6,
+    "pcpuCores":  4,
+    "gpuCores":  10,
+    "memoryGb":  16,
+    "swapTotalBytes":  "4294967296",
+    "ramTotalBytes":  "17179869184"
+  }
+}

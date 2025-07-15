@@ -4,7 +4,7 @@ import torch.optim as optim
 import os
 import matplotlib.pyplot as plt
 from src.nn.nn_dataset import DataSampler
-from src.nn.nn_model import Net, Network, PinnA, FullyConnectedResNet, Kalm
+from src.nn.nn_model import Net, Network,PinnA, FullyConnectedResNet, Kalm
 from src.functions import *
 from src.nn.early_stopping import EarlyStopping
 from src.ode.sm_models_d import SynchronousMachineModels
@@ -26,7 +26,7 @@ from src.ode.gfl_models_d import calculate_frequency
 
 class PhysicsInformedNeuralNetworkActions():
     """
-    A class used to define the actions of the neural network model
+    A class used to define the actions of the PINN
 
     Attributes
     ----------
@@ -86,12 +86,12 @@ class PhysicsInformedNeuralNetworkActions():
         self.input_dim = self.data_loader.input_dim # The input dimension is the number of input features
         self.output_dim = self.input_dim-1 # The output dimension is the input dimension minus the time column
         self.model_flag = cfg.model.model_flag  # the model to be used
-        self.model = self.define_nn_model() # Create an instance of the class Net
-        self.weight_init(self.model, cfg.nn.weight_init) # Initialize the weights of the Net
-        self.criterion = self.custom_loss(cfg.nn.loss_criterion) # Define the loss function
+        self.model = self.define_pinn_model()  # Create an instance of the class Net
+        self.weight_init(self.model, cfg.network.weight_init) # Initialize the weights of the Net
+        self.criterion = self.custom_loss(cfg.network.loss_criterion) # Define the loss function
         self.criterion_mae = nn.L1Loss() # Define the MAE loss for testing
-        self.optimizer = self.custom_optimizer(cfg.nn.optimizer, cfg.nn.lr) # Define the optimizer
-        self.scheduler = self.custom_learning_rate(cfg.nn.lr_scheduler) # Define the learning rate scheduler
+        self.optimizer = self.custom_optimizer(cfg.network.optimizer, cfg.network.lr) # Define the optimizer
+        self.scheduler = self.custom_learning_rate(cfg.network.lr_scheduler) # Define the learning rate scheduler
 
         # Create an instance of the class xxx_modelling
         if self.cfg.theme == "SM":
@@ -100,46 +100,46 @@ class PhysicsInformedNeuralNetworkActions():
             self.GridFollowingConverterModels = GridFollowingConverterModels(self.cfg)
 
         self.model = self.model.to(self.device)
-        self.early_stopping = EarlyStopping(patience=cfg.nn.early_stopping_patience, verbose=True, delta=cfg.nn.early_stopping_min_delta)
+        self.early_stopping = EarlyStopping(patience=cfg.network.early_stopping_patience, verbose=True, delta=cfg.network.early_stopping_min_delta)
         
 
 
     def setup_nn(self):
-        self.model = self.define_nn_model() # Create an instance of the class Net
-        self.weight_init(self.model, self.cfg.nn.weight_init) # Initialize the weights of the Net
-        self.criterion = self.custom_loss(self.cfg.nn.loss_criterion) # Define the loss function
-        if self.cfg.nn.optimizer == "Hybrid":  # Define the optimizer
-            self.optimizer = self.custom_optimizer("Adam", self.cfg.nn.lr)
-            self.optimizer2 = self.custom_optimizer("LBFGS", self.cfg.nn.lr)
+        self.model = self.define_pinn_model()  # Create an instance of the class Net
+        self.weight_init(self.model, self.cfg.network.weight_init) # Initialize the weights of the Net
+        self.criterion = self.custom_loss(self.cfg.network.loss_criterion) # Define the loss function
+        if self.cfg.network.optimizer == "Hybrid":  # Define the optimizer
+            self.optimizer = self.custom_optimizer("Adam", self.cfg.network.lr)
+            self.optimizer2 = self.custom_optimizer("LBFGS", self.cfg.network.lr)
         else:
-            self.optimizer = self.custom_optimizer(self.cfg.nn.optimizer, self.cfg.nn.lr)
-        self.scheduler = self.custom_learning_rate(self.cfg.nn.lr_scheduler) # Define the learning rate scheduler
+            self.optimizer = self.custom_optimizer(self.cfg.network.optimizer, self.cfg.network.lr)
+        self.scheduler = self.custom_learning_rate(self.cfg.network.lr_scheduler) # Define the learning rate scheduler
         self.model = self.model.to(self.device)
-        self.early_stopping = EarlyStopping(patience=self.cfg.nn.early_stopping_patience, verbose=True, delta=self.cfg.nn.early_stopping_min_delta)
-        if self.cfg.nn.update_weight_method=="ReLoBRaLo":
+        self.early_stopping = EarlyStopping(patience=self.cfg.network.early_stopping_patience, verbose=True, delta=self.cfg.network.early_stopping_min_delta)
+        if self.cfg.network.update_weight_method=="ReLoBRaLo":
             self.relobralo_loss = ReLoBRaLoLoss()
         return
 
-
-    def define_nn_model(self):
+    #Haitian, define pinn
+    def define_pinn_model(self):
         """
         This function defines the neural network model
         """
-        print("Selected deep learning model: ",self.cfg.nn.type)
-        if self.cfg.nn.type == "KAN": # Static architecture of the neural network
-            print(self.input_dim, self.cfg.nn.hidden_dim, self.output_dim)
-            model = Kalm(self.input_dim, self.cfg.nn.hidden_dim, self.output_dim, self.cfg.nn.hidden_layers)
+        print("Selected deep learning model: ",self.cfg.network.type)
+        if self.cfg.network.type == "KAN": # Static architecture of the neural network
+            print(self.input_dim, self.cfg.network.hidden_dim, self.output_dim)
+            model = Kalm(self.input_dim, self.cfg.network.hidden_dim, self.output_dim, self.cfg.network.hidden_layers)
             # model.speed()
-        elif self.cfg.nn.type == "StaticNN": # Static architecture of the neural network
-            model = Net(self.input_dim, self.cfg.nn.hidden_dim, self.output_dim)
-        elif self.cfg.nn.type == "DynamicNN" or self.cfg.nn.type == "PinnB" or self.cfg.nn.type == "PinnA": # Dynamic architecture of the neural network
-            model = Network(self.input_dim, self.cfg.nn.hidden_dim, self.output_dim, self.cfg.nn.hidden_layers)
-        elif self.cfg.nn.type == "PinnAA": # Dynamic architecture of the neural network with the PinnA architecture for the output
-            model = PinnA(self.input_dim, self.cfg.nn.hidden_dim, self.output_dim, self.cfg.nn.hidden_layers)
-        elif self.cfg.nn.type == "ResNet":
+        elif self.cfg.network.type == "StaticNN": # Static architecture of the neural network
+            model = Net(self.input_dim, self.cfg.network.hidden_dim, self.output_dim)
+        elif self.cfg.network.type == "DynamicNN" or self.cfg.network.type == "PinnB" or self.cfg.network.type == "PinnA": # Dynamic architecture of the neural network
+            model = Network(self.input_dim, self.cfg.network.hidden_dim, self.output_dim, self.cfg.network.hidden_layers)
+        elif self.cfg.network.type == "PinnAA": # Dynamic architecture of the neural network with the PinnA architecture for the output
+            model = PinnA(self.input_dim, self.cfg.network.hidden_dim, self.output_dim, self.cfg.network.hidden_layers)
+        elif self.cfg.network.type == "ResNet":
             num_blocks=2
             num_layers_per_block=2
-            model = FullyConnectedResNet(self.input_dim, self.cfg.nn.hidden_dim, self.output_dim, num_blocks, num_layers_per_block)
+            model = FullyConnectedResNet(self.input_dim, self.cfg.network.hidden_dim, self.output_dim, num_blocks, num_layers_per_block)
         else:
             raise Exception("NN type not found")
         return model
@@ -266,11 +266,11 @@ class PhysicsInformedNeuralNetworkActions():
         x_train = torch.cat((time, no_time), 1)
         y_pred = self.model.forward(x_train)
         y_pred = self.data_loader.detransform_output(y_pred)
-        if self.cfg.nn.type == "PinnA":
+        if self.cfg.network.type == "PinnA":
             return no_time + y_pred*time
-        if self.cfg.nn.type == "PinnB":
+        if self.cfg.network.type == "PinnB":
             return no_time + y_pred
-        if self.cfg.nn.type in ["DynamicNN", "PinnAA", "ResNet", "KAN"]:
+        if self.cfg.network.type in ["DynamicNN", "PinnAA", "ResNet", "KAN"]:
             return y_pred
         else:
             raise Exception('Enter valid NN type! (zeroth_order or first_order')
@@ -285,11 +285,11 @@ class PhysicsInformedNeuralNetworkActions():
         no_time = x_train[:,1:]
         y_pred = self.model.forward(x_train)
         y_pred = self.data_loader.detransform_output(y_pred)
-        if self.cfg.nn.type == "PinnA":
+        if self.cfg.network.type == "PinnA":
             return no_time + y_pred*time
-        if self.cfg.nn.type == "PinnB":
+        if self.cfg.network.type == "PinnB":
             return no_time + y_pred
-        if self.cfg.nn.type in ["DynamicNN", "PinnAA", "ResNet","KAN"]:
+        if self.cfg.network.type in ["DynamicNN", "PinnAA", "ResNet","KAN"]:
             return y_pred
         else:
             raise Exception('Enter valid NN type! (zeroth_order or first_order')
@@ -371,7 +371,7 @@ class PhysicsInformedNeuralNetworkActions():
             return y_hat, dy_dt , y_processed
         
     def folder_name_f2(self,cfg):
-        weight_data, weight_dt, weight_pinn, weight_pinn_ic = cfg.nn.weighting.weights
+        weight_data, weight_dt, weight_pinn, weight_pinn_ic = cfg.network.weighting.weights
 
         self.weight_data = weight_data
         self.weight_dt = weight_dt
@@ -403,27 +403,21 @@ class PhysicsInformedNeuralNetworkActions():
 
         return folder_name
     
-    
 
-
-        
-
-
-    
     
 
     def update_loss_weights(self, old_weight_data, old_weight_dt, old_weight_pinn, old_weight_pinn_ic, loss_data, loss_dt, loss_pinn, loss_pinn_ic, epoch):
-        if self.cfg.nn.weighting.update_weight_method=="Static":
+        if self.cfg.network.weighting.update_weight_method=="Static":
             return old_weight_data, old_weight_dt, old_weight_pinn, old_weight_pinn_ic
         
-        elif self.cfg.nn.weighting.update_weight_method=="ReLoBRaLo": #SOS needs fix if this methos is adapted everywhere
+        elif self.cfg.network.weighting.update_weight_method=="ReLoBRaLo": #SOS needs fix if this methos is adapted everywhere
             result = self.relobralo_loss(loss_data, loss_dt, loss_pinn, loss_pinn_ic, old_weight_data, old_weight_dt, old_weight_pinn, old_weight_pinn_ic)
             new_weight_data, new_weight_dt, new_weight_pinn, new_weight_pinn_ic = result
             return new_weight_data, new_weight_dt, new_weight_pinn, new_weight_pinn_ic
         
-        elif self.cfg.nn.weighting.update_weight_method=="Dynamic":
+        elif self.cfg.network.weighting.update_weight_method=="Dynamic":
             alpha_max = torch.tensor(0.2)
-            epochs_to_tenfold = self.update_weights_freq if self.cfg.nn.optimizer == "LBFGS" else self.update_weights_freq*20
+            epochs_to_tenfold = self.update_weights_freq if self.cfg.network.optimizer == "LBFGS" else self.update_weights_freq*20
             epoch_factor = torch.tensor(10.0 ** (epoch / epochs_to_tenfold))
             new_weight_data = torch.min(alpha_max, self.weight_data * epoch_factor)
             new_weight_dt = torch.min(alpha_max, self.weight_dt * epoch_factor)
@@ -431,7 +425,7 @@ class PhysicsInformedNeuralNetworkActions():
             new_weight_pinn_ic = torch.min(alpha_max, self.weight_pinn * epoch_factor)
             return new_weight_data, new_weight_dt, new_weight_pinn, new_weight_pinn_ic
         
-        elif self.cfg.nn.weighting.update_weight_method=="Sam":
+        elif self.cfg.network.weighting.update_weight_method=="Sam":
             soft_attention_weights = old_weight_data, old_weight_dt, old_weight_pinn, old_weight_pinn_ic
             if epoch % self.update_weights_freq == 0:
                 with torch.no_grad():
@@ -448,24 +442,24 @@ class PhysicsInformedNeuralNetworkActions():
             else:
                 return old_weight_data, old_weight_dt, old_weight_pinn, old_weight_pinn_ic
         
-        elif self.cfg.nn.update_weight_method=="NTK":
+        elif self.cfg.network.update_weight_method=="NTK":
             raise Exception("Not Implemented")
         ########### Add more methods KAN here ###########
         else:
             raise Exception("Weight update method not found")
 
     def initialize_loss_weights(self, weight_data, weight_dt, weight_pinn, weight_pinn_ic):
-        if self.cfg.nn.weighting.update_weight_method=="Sam":
+        if self.cfg.network.weighting.update_weight_method=="Sam":
             self.soft_attention_weights = torch.nn.Parameter(torch.tensor([weight_data,weight_dt,weight_pinn,weight_pinn_ic], dtype=torch.float32, requires_grad=True))
             self.weight_mask = torch.tensor([weight_data, weight_dt, weight_pinn, weight_pinn_ic], dtype=torch.float32)
             self.weight_mask = torch.where(self.weight_mask == 0, torch.tensor(0.0), torch.tensor(1.0))
-            self.update_weights_freq = self.cfg.nn.weighting.update_weights_freq
+            self.update_weights_freq = self.cfg.network.weighting.update_weights_freq
 
-        if self.cfg.nn.weighting.update_weight_method=="ReLoBRaLo":
+        if self.cfg.network.weighting.update_weight_method=="ReLoBRaLo":
             self.relobralo_loss = ReLoBRaLoLoss()
 
-        if self.cfg.nn.weighting.update_weight_method=="Dynamic":
-            self.update_weights_freq = self.cfg.nn.weighting.update_weights_freq
+        if self.cfg.network.weighting.update_weight_method=="Dynamic":
+            self.update_weights_freq = self.cfg.network.weighting.update_weights_freq
 
         self.weight_data = weight_data
         self.weight_dt = weight_dt
@@ -473,76 +467,12 @@ class PhysicsInformedNeuralNetworkActions():
         self.weight_pinn_ic = weight_pinn_ic
         return
 
-    def compute_ntk_jacrev(self, x):
-        """
-        Compute the Neural Tangent Kernel (NTK) using torch.func.jacrev.
-    
-        Args:
-            model: The neural network model (PINN).
-            x: Input data of shape (n_samples, input_dim).
-    
-        Returns:
-            ntk: The NTK matrix of shape (n_samples, n_samples).
-        """
-        #
-    
-        # Get model parameters as a dictionary {name: param}
-        params = {name: param for name, param in self.model.named_parameters()}
-        y, dy = self.calculate_autograd22(x)
-        y_processed = self.modelling_full.odequation_sm(0, y.split(split_size=1, dim=1))
-
-        """
-        def model_fn(params, x):
-            x.requires_grad = True
-            # Call the entire model and handle residuals here
-            pred = func.functional_call(model, params, (x,))
-            if res == 1:
-                delta = pred[:, 0:1]
-                delta_t = torch.autograd.grad(delta, x, torch.ones_like(delta), retain_graph=True, create_graph=True)[0]
-                omega = pred[:, 1:2]
-                return delta_t - omega
-            elif res == 2:
-                delta = pred[:, 0:1]
-                omega = pred[:, 1:2]
-                V = pred[:, 2:3]
-                omega_t = torch.autograd.grad(omega, x, torch.ones_like(omega), retain_graph=True, create_graph=True)[0]
-                Pe = system.E * V * torch.sin(delta)
-                Pm_t = 1.0 + 0.5 * torch.sin(10 * x)
-                return omega_t - (Pm_t - Pe - system.D * omega) / system.M
-            elif res == 3:
-                delta = pred[:, 0:1]
-                V = pred[:, 2:3]
-                V_t = torch.autograd.grad(V, x, torch.ones_like(V), retain_graph=True, create_graph=True)[0]
-                return V_t - (system.V_ref - V + system.k * torch.sin(delta)) / system.tau
-            else:
-                return pred
-        """
-        r = dy-y_processed
-        # extend r with y
-        #r = torch.cat((r, y), dim=1)
-
-        # Compute the Jacobian of the output with respect to the parameters for the entire batch
-        jac_fn = func.jacrev(r, argnums=0)  # Derivative w.r.t. model parameters
-    
-        # Evaluate the Jacobian
-        x.requires_grad = True
-        jacobians = jac_fn(params, x)
-    
-        # Flatten each Jacobian and concatenate them along the second dimension
-        jac_flattened = torch.cat([jac.view(jac.shape[0], -1) for jac in jacobians.values()], dim=1)
-    
-        # Compute NTK as J(x) @ J(x)^T
-        ntk = jac_flattened @ jac_flattened.T
-    
-        return ntk
-    
-
     
     def calc_adapt_criterion_loss(self, x_train, y_train, output):
         """
         This function calculates the loss with the adaptive criterion
         """
-        if self.cfg.nn.time_factored_loss == True:
+        if self.cfg.network.time_factored_loss == True:
             time = x_train[:,0].unsqueeze(1) # get the time column
             end_time = self.cfg.time 
             end_time = torch.tensor([end_time]).to(self.device)
@@ -568,12 +498,12 @@ class PhysicsInformedNeuralNetworkActions():
             y_train (torch.Tensor): output data
             num_epochs (int): number of epochs
         """
-        num_of_skip_data_points = self.cfg.nn.num_of_skip_data_points
-        num_of_skip_col_points = self.cfg.nn.num_of_skip_col_points
-        num_of_skip_val_points = self.cfg.nn.num_of_skip_val_points
+        num_of_skip_data_points = self.cfg.network.num_of_skip_data_points
+        num_of_skip_col_points = self.cfg.network.num_of_skip_col_points
+        num_of_skip_val_points = self.cfg.network.num_of_skip_val_points
         x_train, y_train, x_train_col, x_train_col_ic, y_train_col_ic, x_val, y_val = self.data_loader.define_train_val_data2(self.cfg.dataset.perc_of_data_points, self.cfg.dataset.perc_of_col_points, num_of_skip_data_points, num_of_skip_col_points, num_of_skip_val_points) # define the training and validation data
         # Create DataLoaders for batch processing
-        batch_size = self.cfg.nn.batch_size if self.cfg.nn.batch_size != "None" else max(len(x_train), len(x_train_col), len(x_train_col_ic))
+        batch_size = self.cfg.network.batch_size if self.cfg.network.batch_size != "None" else max(len(x_train), len(x_train_col), len(x_train_col_ic))
         train_loader = DataLoader(TensorDataset(x_train, y_train), batch_size=batch_size)
         collocation_loader = DataLoader(x_train_col, batch_size=batch_size)
         col_ic_loader = DataLoader(TensorDataset(x_train_col_ic, y_train_col_ic), batch_size=batch_size)
@@ -594,11 +524,11 @@ class PhysicsInformedNeuralNetworkActions():
         #last_update_iteration = 0
 
         print("getting in training")
-        for epoch in range(self.cfg.nn.num_epochs):
+        for epoch in range(self.cfg.network.num_epochs):
     
             
             self.model.train() # set the model to training mode
-            if self.cfg.nn.batch_size != "None":
+            if self.cfg.network.batch_size != "None":
             # Training loop with batches
                 for (x_batch, y_batch), x_col_batch, (x_ic_batch, y_ic_batch) in zip(train_loader, collocation_loader, col_ic_loader):
                     
@@ -679,11 +609,11 @@ class PhysicsInformedNeuralNetworkActions():
             val_dt_loss = mean_loss_val_physics.item() 
             
 
-            #if total_iteration_count - last_update_iteration > self.cfg.nn.weighting.update_weights_freq:
+            #if total_iteration_count - last_update_iteration > self.cfg.network.weighting.update_weights_freq:
                 # update the weights of the loss functions
             #    last_update_iteration = total_iteration_count
-            if (epoch + 1) % self.cfg.nn.weighting.update_weights_freq == 0:
-                if self.cfg.nn.weighting.update_weight_method=="Sam":
+            if (epoch + 1) % self.cfg.network.weighting.update_weights_freq == 0:
+                if self.cfg.network.weighting.update_weight_method=="Sam":
                     self.weighting_scheme.update_weights(self.losses, epoch)
             
                 # log some plots to wandb
@@ -692,13 +622,13 @@ class PhysicsInformedNeuralNetworkActions():
                     self.log_plot(val_outputs, y_val, epoch, wandb_run, x_val,"validation", 0, 20)
                 
             if (epoch + 1 ) % 50 == 0:
-                print(f'Epoch [{epoch+1}/{self.cfg.nn.num_epochs}], Loss: {self.loss_total.item():.4f}, Loss_data: {self.loss_data.item():.4f}, Loss_dt: {self.loss_dt.item():.4f}, Loss_pinn: {self.loss_pinn.item():.4f} , Loss_pinn_ic : {self.loss_pinn_ic.item():.4f}', val_loss, val_dt_loss)
+                print(f'Epoch [{epoch+1}/{self.cfg.network.num_epochs}], Loss: {self.loss_total.item():.4f}, Loss_data: {self.loss_data.item():.4f}, Loss_dt: {self.loss_dt.item():.4f}, Loss_pinn: {self.loss_pinn.item():.4f} , Loss_pinn_ic : {self.loss_pinn_ic.item():.4f}', val_loss, val_dt_loss)
 
             # log all the losses for the epoch to wandb 
-            save_iteration = 500 if self.cfg.nn.optimizer == "LBFGS" else 10000 # 20 iterations within the optimizer ->500*20 = 10000
+            save_iteration = 500 if self.cfg.network.optimizer == "LBFGS" else 10000 # 20 iterations within the optimizer ->500*20 = 10000
             if (epoch + 1) % save_iteration == 0:
                 
-                name = f"{self.cfg.model.model_flag}{self.cfg.nn.type}_{self.cfg.time}_{epoch+1}_{self.data_loader.training_shape}_{self.data_loader.training_col_shape}_{self.data_loader.validation_shape}_{self.cfg.dataset.transform_input}_{self.cfg.dataset.transform_output}_{self.weight_data}_{self.weight_dt}_{self.weight_pinn}_{self.weight_pinn_ic}_{self.cfg.nn.weighting.update_weight_method}.pth"
+                name = f"{self.cfg.model.model_flag}{self.cfg.network.type}_{self.cfg.time}_{epoch+1}_{self.data_loader.training_shape}_{self.data_loader.training_col_shape}_{self.data_loader.validation_shape}_{self.cfg.dataset.transform_input}_{self.cfg.dataset.transform_output}_{self.weight_data}_{self.weight_dt}_{self.weight_pinn}_{self.weight_pinn_ic}_{self.cfg.network.weighting.update_weight_method}.pth"
 
                 self.save_model(os.path.join(folder_name, name))
             
@@ -720,7 +650,7 @@ class PhysicsInformedNeuralNetworkActions():
                     wandb_run.log(log_data)
 
 
-            if self.cfg.nn.early_stopping:
+            if self.cfg.network.early_stopping:
                 self.early_stopping(val_loss, self.model)
                 if self.early_stopping.early_stop:
                     print("Early stopping")
@@ -728,41 +658,11 @@ class PhysicsInformedNeuralNetworkActions():
                     break
 
         if self.early_stopping.early_stop == True or (epoch + 1) % save_iteration != 0:
-            name = f"{self.cfg.model.model_flag}{self.cfg.nn.type}_{self.cfg.time}_{epoch+1}_{self.data_loader.training_shape}_{self.data_loader.training_col_shape}_{self.data_loader.validation_shape}_{self.cfg.dataset.transform_input}_{self.cfg.dataset.transform_output}_{self.weight_data}_{self.weight_dt}_{self.weight_pinn}_{self.weight_pinn_ic}_{self.cfg.nn.weighting.update_weight_method}.pth"
+            name = f"{self.cfg.model.model_flag}{self.cfg.network.type}_{self.cfg.time}_{epoch+1}_{self.data_loader.training_shape}_{self.data_loader.training_col_shape}_{self.data_loader.validation_shape}_{self.cfg.dataset.transform_input}_{self.cfg.dataset.transform_output}_{self.weight_data}_{self.weight_dt}_{self.weight_pinn}_{self.weight_pinn_ic}_{self.cfg.network.weighting.update_weight_method}.pth"
             self.save_model(os.path.join(folder_name, name))
-        self.final_name = os.path.join(folder_name, f"{self.cfg.model.model_flag}{self.cfg.nn.type}_{self.cfg.time}_{epoch+1}_{self.data_loader.training_shape}_{self.data_loader.training_col_shape}_{self.data_loader.validation_shape}_{self.cfg.dataset.transform_input}_{self.cfg.dataset.transform_output}_{self.weight_data}_{self.weight_dt}_{self.weight_pinn}_{self.weight_pinn_ic}_{self.cfg.nn.weighting.update_weight_method}")
+        self.final_name = os.path.join(folder_name, f"{self.cfg.model.model_flag}{self.cfg.network.type}_{self.cfg.time}_{epoch+1}_{self.data_loader.training_shape}_{self.data_loader.training_col_shape}_{self.data_loader.validation_shape}_{self.cfg.dataset.transform_input}_{self.cfg.dataset.transform_output}_{self.weight_data}_{self.weight_dt}_{self.weight_pinn}_{self.weight_pinn_ic}_{self.cfg.network.weighting.update_weight_method}")
         total_test_loss =  self.test_model(0,20,wandb_run)
         return
-    #Haitian, define model validation
-    def val_model(self, starting_traj=0, total_traj=1, run=None):
-        """
-        This function validates the neural network model at a certain epoch.
-
-        Args:
-            x_train (torch.Tensor): input data
-            y_train (torch.Tensor): output data
-            num_epochs (int): number of epochs
-        """
-        total_traj = total_traj if total_traj < self.data_loader.total_test_trajectories else self.data_loader.total_test_trajectories
-        sample_per_traj = int(self.data_loader.sample_per_traj)
-
-        x_val,y_val = self.data_loader.define_test_data(starting_traj,sample_per_traj,total_traj)
-        self.model.eval()
-        y_pred = self.forward_pass(x_test)
-        test_loss = self.criterion(y_pred, y_test)
-        print("Total test trajectories",total_traj)
-        print(f'Loss: {test_loss.item():.8f}')
-        test_loss_mae = self.criterion_mae(y_pred, y_test)
-        print(f'MAE Loss: {test_loss_mae.item():.8f}')
-        total_trainable_params = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
-        print('Total trainable parameters',total_trainable_params)
-        if run is not None:
-            run.log({"Test_loss": test_loss.item() })
-            run.log({"MAE Test loss": test_loss_mae.item() })
-            # self.log_plot(y_pred, y_test, None, run,x_test)
-            self.log_plot(y_pred, y_test, None, run, x_test,"validation", starting_traj, total_traj)
-        mae, rmse = self.loss_over_time(x_test, y_test, y_pred, run)
-        return test_loss.item()
 
     #Haitian, change log_plot
     def test_model(self, starting_traj=0, total_traj=1, run=None):
@@ -816,28 +716,18 @@ class PhysicsInformedNeuralNetworkActions():
         max_traj = len(output) // pts_per_traj
         print("type: ",str(type) + ", total_traj:" , str(max_traj) + ", max_traj", str(total_traj))
         total_traj = min(total_traj, max_traj)
-        # max_rows = 5  # 每页最多 5 条
-        # -------------------------------------------------- 基本信息
-        # -------------------------------------------------- 分块绘图；每块 ≤ max_rows
-        # for blk_start in range(0, len(idx_all), total_traj):
-        # blk_idx = idx_all[blk_start: blk_start + total_traj]  # 当前这张图要画的轨迹编号
+
         blk_idx = list(range(starting_traj, starting_traj + total_traj))
-        fig, axes = plt.subplots(total_traj, 2,figsize=(18, 3 * total_traj),sharex='col')
+        fig, axes = plt.subplots(total_traj, 3,figsize=(27, 3 * total_traj),sharex='col')
 
-        # # 先全隐藏，等会儿用到的再显
-        # for r in range(max_rows):
-        #     for c in range(2):
-        #         axes[r, c].set_visible(False)
-
-        # -------------------------------------------------- 逐条轨迹画
         for r, k in enumerate(blk_idx):
-            lo, hi = k * pts_per_traj, (k + 1) * pts_per_traj  # 这一条的切片
+            lo, hi = k * pts_per_traj, (k + 1) * pts_per_traj       #Slice current trajectory
             t = x_test[lo:hi, 0].detach().cpu().numpy()
             delta_true = target[lo:hi, 0].detach().cpu().numpy()
             omega_true = target[lo:hi, 1].detach().cpu().numpy()
             delta_pred = output[lo:hi, 0].detach().cpu().numpy()
             omega_pred = output[lo:hi, 1].detach().cpu().numpy()
-
+            #Calculate frequency
             f_true = calculate_frequency(omega_true, np.pi * 100)
             f_pred = calculate_frequency(omega_pred, np.pi * 100)
 
@@ -845,42 +735,51 @@ class PhysicsInformedNeuralNetworkActions():
             if self.keys[0] == "delta":
                 axd = axes[r, 0]
                 axd.set_visible(True)
-                axd.plot(t, delta_true, color='tab:blue', lw=1.2,
-                         label='True' if r == 0 else None)
-                axd.plot(t, delta_pred, color='tab:orange', lw=1.2, ls='--',
-                         label='Pred' if r == 0 else None)
+                axd.plot(t, delta_true, color='tab:blue', lw=1.2,label='True' if r == 0 else None)
+                axd.plot(t, delta_pred, color='tab:orange', lw=1.2, ls='--',label='Pred' if r == 0 else None)
                 axd.grid(ls='--', alpha=.3)
 
-            # --- f ---
             if self.keys[1] == "omega":
-                axf = axes[r, 1]
+            # --- ω ---
+                axw = axes[r, 1]
+                axw.set_visible(True)
+                axw.plot(t, omega_true, color='tab:blue', lw=1.2,
+                         label='True' if r == 0 else None)
+                axw.plot(t, omega_pred, color='tab:orange', lw=1.2, ls='--',
+                         label='Pred' if r == 0 else None)
+                axw.grid(ls='--', alpha=.3)
+
+            # --- f ---
+                axf = axes[r, 2]
                 axf.set_visible(True)
                 axf.plot(t, f_true, color='tab:blue', lw=1.2,label='True' if r == 0 else None)
                 axf.plot(t, f_pred, color='tab:orange', lw=1.2, ls='--',label='Pred' if r == 0 else None)
                 axf.grid(ls='--', alpha=.3)
 
-            # 行标签
+            # Row labelling
             axd.text(-0.05, 0.5, f'traj {k+1}',transform=axd.transAxes,va='center', ha='right',fontsize=9, weight='bold')
 
-        # 统一标题 / x 轴
+        # label x-axes
         axes[0, 0].set_title('δ')
-        axes[0, 1].set_title('f = ω/2*pi')
+        axes[0, 1].set_title('ω')
+        axes[0, 2].set_title('f = ω/2*pi')
         axes[-1, 0].set_xlabel('Time (s)')
         axes[-1, 1].set_xlabel('Time (s)')
+        axes[-1, 2].set_xlabel('Time (s)')
 
-        # 只放一次图例
+        #??
         handles, labels = axes[0, 0].get_legend_handles_labels()
         if handles:
             fig.legend(handles, labels, loc='upper right')
 
         plt.tight_layout()
 
-        # --------------------------- wandb 记录
-        gname = f"{type}{blk_idx[0]+1}-{blk_idx[-1]+1}"  # 例：0-4, 5-9 …
-        run.log({f"traj_{gname}": wandb.Image(fig)},commit=False)  # 不提前 commit，最后一次性 flush
+        # --------------------------- wandb docu.
+        gname = f"{type}{blk_idx[0]+1}-{blk_idx[-1]+1}"  # Example ：1-5, 6-10 …
+        run.log({f"traj_{gname}": wandb.Image(fig)},commit=False)
 
         plt.close(fig)
-        run.log({}, commit=True)  # flush 一次即可
+        run.log({}, commit=True)  #  ??
 
 
     

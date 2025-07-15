@@ -139,7 +139,7 @@ class DataSampler:
         x_val = self.x_val[:: num_of_skip_val_points].clone().detach().to(self.device).requires_grad_(True) # validation data without skipping points
         y_val = self.y_val[:: num_of_skip_val_points].clone().detach().to(self.device)
         self.training_shape, self.training_col_shape, self.training_col_shape0, self.validation_shape = (x_train.shape[0], x_train_col.shape[0], x_train_col0.shape[0], x_val.shape[0])
-        if self.cfg.nn.type == "PinnA":
+        if self.cfg.network.type == "PinnA":
             y_train = y_train[x_train[:,0]!=0].clone().detach().to(self.device) # remove the 0 time  from the output data
             x_train = x_train[x_train[:,0]!=0].clone().detach().to(self.device).requires_grad_(True) # remove the 0 time  from the input data
             x_train_col = x_train_col[x_train_col[:,0]!=0].clone().detach().to(self.device).requires_grad_(True) # remove the 0 time from the input data

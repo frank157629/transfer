@@ -4,12 +4,12 @@ import torch.nn as nn
 class PINNWeighting:
     def __init__(self, model, cfg, device, loss_dimension, wandb_run, beta=0.99):
         self.model = model
-        self.weights = cfg.nn.weighting.weights # Weights will be initialized based on number of residuals dynamically
-        self.scheme = cfg.nn.weighting.update_weight_method
-        self.update_weights_freq = cfg.nn.weighting.update_weights_freq
+        self.weights = cfg.network.weighting.weights # Weights will be initialized based on number of residuals dynamically
+        self.scheme = cfg.network.weighting.update_weight_method
+        self.update_weights_freq = cfg.network.weighting.update_weights_freq
         self.beta = beta
         self.wandb_run = wandb_run
-        self.loss_dimension = (1 if (cfg.nn.weighting.flag_mean_weights or cfg.nn.time_factored_loss) else loss_dimension)
+        self.loss_dimension = (1 if (cfg.network.weighting.flag_mean_weights or cfg.network.time_factored_loss) else loss_dimension)
         self.device = device
         self.initialize_weights()
         self.epoch_flag = -1
