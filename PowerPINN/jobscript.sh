@@ -23,4 +23,13 @@ nvidia-smi || echo "CPU-only run"
 
 # 4. 进入项目目录并启动脚本
 cd ~/transfer/PowerPINN
+
+echo "Python  :" $(which python)
+python - <<'PY'
+import torch, os, sys
+print("Torch   :", torch.__version__)
+print("CUDA OK :", torch.cuda.is_available())
+if torch.cuda.is_available():
+    print("GPU     :", torch.cuda.get_device_name())
+PY
 python test_sweep.py
