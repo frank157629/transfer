@@ -16,6 +16,7 @@ module load CUDA/12.6.3
 export CONDA_ROOT=$HOME/miniforge3
 source $CONDA_ROOT/etc/profile.d/conda.sh
 conda activate pinn_env
+export PYTHONPATH=$PYTHONPATH:$HOME/transfer/PowerPINN
 
 # 3. 打印节点 & GPU 信息
 echo "Running on $(hostname)"

@@ -1,0 +1,28 @@
+GFL_2nd_order data
+Loading data from:  ./data/GFL_2nd_order/dataset_v1.pkl
+/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/src/nn/nn_dataset.py:178: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_new.cpp:264.)
+  training_sample = torch.tensor(training_sample, dtype=torch.float32) # convert the trajectory to tensor
+Number of training samples:  423200 Number of validation samples:  52900 Number of testing samples:  52900
+Number of different initial conditions for collocation points:  529
+['delta', 'omega'] Variables
+[[-3.14159, 3.14159], [-60, 60]] Set of values for init conditions
+[23, 23] Iterations per value
+Shape: (529, 2)
+Selected deep learning model:  DynamicNN
+Number of labeled training data: 423200 Number of collocation points: 529000 Number of collocation points (IC): 529 Number of validation data: 52900
+Weights initialized as:  [1, 0, 0, 0]  are updated with scheme:  Static
+getting in training
+type:  validation, total_traj: 52, max_traj 20
+Epoch [50/25000], Loss: 109.1821, Loss_data: 109.1821, Loss_dt: 65858.8281, Loss_pinn: 263052.2188 , Loss_pinn_ic : 549.0947 113.20599365234375 66975.4375
+type:  validation, total_traj: 52, max_traj 20
+Epoch [100/25000], Loss: 104.4319, Loss_data: 104.4319, Loss_dt: 65842.0156, Loss_pinn: 127881.1953 , Loss_pinn_ic : 540.8912 107.80426025390625 66963.375
+type:  validation, total_traj: 52, max_traj 20
+Epoch [150/25000], Loss: 100.5216, Loss_data: 100.5216, Loss_dt: 65723.3828, Loss_pinn: 140440.8906 , Loss_pinn_ic : 500.4895 103.6576919555664 66868.046875
+type:  validation, total_traj: 52, max_traj 20
+Epoch [200/25000], Loss: 92.1515, Loss_data: 92.1515, Loss_dt: 64887.4023, Loss_pinn: 136911.3281 , Loss_pinn_ic : 396.5479 95.61031341552734 66131.0
+type:  validation, total_traj: 52, max_traj 20
+Epoch [250/25000], Loss: 77.4742, Loss_data: 77.4742, Loss_dt: 60217.1797, Loss_pinn: 129166.7188 , Loss_pinn_ic : 266.4649 81.89469146728516 61708.52734375
+type:  validation, total_traj: 52, max_traj 20
+Epoch [300/25000], Loss: 64.2492, Loss_data: 64.2492, Loss_dt: 54531.2891, Loss_pinn: 131642.6094 , Loss_pinn_ic : 190.6310 69.23258209228516 56232.83984375
+type:  validation, total_traj: 52, max_traj 20
+Epoch [350/25000], Loss: 54.8039, Loss_data: 54.8039, Loss_dt: 50513.9609, Loss_pinn: 142220.7188 , Loss_pinn_ic : 161.2141 59.85609817504883 52282.73046875
