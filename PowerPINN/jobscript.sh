@@ -10,7 +10,7 @@
 ##########################
 
 # 1. 加载 CUDA 模块（与 PyTorch 版本匹配）
-module load cuda/11.8
+module load cuda/12.8.0
 
 # 2. 激活 Conda 环境
 export CONDA_ROOT=$HOME/miniforge3
@@ -23,13 +23,4 @@ nvidia-smi || echo "CPU-only run"
 
 # 4. 进入项目目录并启动脚本
 cd ~/transfer/PowerPINN
-
-echo "Python  :" $(which python)
-python - <<'PY'
-import torch, os, sys
-print("Torch   :", torch.__version__)
-print("CUDA OK :", torch.cuda.is_available())
-if torch.cuda.is_available():
-    print("GPU     :", torch.cuda.get_device_name())
-PY
 python test_sweep.py
