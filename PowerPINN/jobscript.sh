@@ -1,24 +1,28 @@
-#!/bin/sh
-#BSUB -q gpuv100
-#BSUB -gpu "num=1:mode=exclusive_process"
-#BSUB -J sweep_pinn
-#BSUB -n 8
-#BSUB -W 12:00
-#BSUB -R "span[hosts=1]"
-#BSUB -R "rusage[mem=12GB]"
-#BSUB -o logs/%J.out
-#BSUB -e logs/%J.err
+#!/usr/local_rwth/bin/zsh
+#SBATCH --partition=gpuv100
+#SBATCH --gres=gpu:1
+#SBATCH --ntasks=8
+#SBATCH --time=12:00:00
+#SBATCH --mem=16G
+#SBATCH --job-name=powerpinn
+#SBATCH --output=logs/%j.out
+#SBATCH --error=logs/%j.err
 
+# ①（可选）加载与 PyTorch 对应的 CUDA 模块
+# 若你保留 torch 2.1.0+cu118 ⇒
+module load cuda/11.8
+# 若换回 2.5.1+cu12.4 ⇒
+# module load cuda/12.4
+# 若用 CPU 版 ⇒ 注释掉 module 行
 
-echo "Running script..."
-echo "Running script..."
+# ② 激活 conda 环境
+export CONDA_ROOT=$HOME/miniforge3
+source $CONDA_ROOT/etc/profile.d/conda.sh
+conda activate pinn_env
 
-nvidia-smi
-module swap python3/3.10.2
-module swap cuda/12.1
+# ③ 打印节点 / GPU 信息（调试用）
+echo "Running on $(hostname)"
+nvidia-smi || echo "CPU-only run"
 
-source ../Thesis/venv/bin/activate
-
-#python create_dataset_d.py
+# ④ 进入项目目录并启动脚本
 python test_sweep.py
-
