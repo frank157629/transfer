@@ -1,7 +1,0 @@
-{"time":"2025-07-12T18:20:44.730041+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250712_182044-urmrdp3j/logs/debug-core.log"}
-{"time":"2025-07-12T18:20:45.068291+02:00","level":"INFO","msg":"stream: created new stream","id":"urmrdp3j"}
-{"time":"2025-07-12T18:20:45.068321+02:00","level":"INFO","msg":"stream: started","id":"urmrdp3j"}
-{"time":"2025-07-12T18:20:45.068334+02:00","level":"INFO","msg":"handler: started","stream_id":"urmrdp3j"}
-{"time":"2025-07-12T18:20:45.068328+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"urmrdp3j"}
-{"time":"2025-07-12T18:20:45.06836+02:00","level":"INFO","msg":"sender: started","stream_id":"urmrdp3j"}
-{"time":"2025-07-12T18:20:45.266158+02:00","level":"INFO","msg":"Starting system monitor"}

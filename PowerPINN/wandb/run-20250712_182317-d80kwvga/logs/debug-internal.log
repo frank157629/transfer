@@ -1,7 +1,0 @@
-{"time":"2025-07-12T18:23:18.189128+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250712_182317-d80kwvga/logs/debug-core.log"}
-{"time":"2025-07-12T18:23:18.52423+02:00","level":"INFO","msg":"stream: created new stream","id":"d80kwvga"}
-{"time":"2025-07-12T18:23:18.52426+02:00","level":"INFO","msg":"stream: started","id":"d80kwvga"}
-{"time":"2025-07-12T18:23:18.524262+02:00","level":"INFO","msg":"handler: started","stream_id":"d80kwvga"}
-{"time":"2025-07-12T18:23:18.524269+02:00","level":"INFO","msg":"sender: started","stream_id":"d80kwvga"}
-{"time":"2025-07-12T18:23:18.524283+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"d80kwvga"}
-{"time":"2025-07-12T18:23:18.771859+02:00","level":"INFO","msg":"Starting system monitor"}
