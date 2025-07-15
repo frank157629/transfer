@@ -10,7 +10,7 @@
 ##########################
 
 # 1. 加载 CUDA 模块（与 PyTorch 版本匹配）
-module load cuda/12.8.0
+module load CUDA/12.6.3
 
 # 2. 激活 Conda 环境
 export CONDA_ROOT=$HOME/miniforge3
@@ -20,6 +20,14 @@ conda activate pinn_env
 # 3. 打印节点 & GPU 信息
 echo "Running on $(hostname)"
 nvidia-smi || echo "CPU-only run"
+
+python - <<'PY'
+import torch, platform, os
+print("Torch :", torch.__version__)
+print("CUDA? :", torch.cuda.is_available())
+if torch.cuda.is_available():
+    print("GPU   :", torch.cuda.get_device_name())
+PY
 
 # 4. 进入项目目录并启动脚本
 cd ~/transfer/PowerPINN
