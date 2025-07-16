@@ -56,8 +56,10 @@ def train(config=None):
     # Set skip points and start training
     #Haitian, changed pinn_train2, removed passing the skip_points as parameters of function but inside the function.
     if setup.train == "pinn":
+        print("PINN")
         pinn.pinn_train2(run)
     elif setup.train == "vanilla":
+        print("VANILLA")
         vanilla.vanilla_train2(run)
 
 
@@ -72,20 +74,20 @@ if __name__ == "__main__":
             "name": "Test_loss",
             "goal": "minimize"
         }
-        # ,"parameters": {
-        #     "seed": {"values": [1]},
-        #     "weight_data": {"values": [1]},
-        #     "weight_dt": {"values": [1e-3]},
-        #     "weight_pinn": {"values": [1e-4]},
-        #     "weight_pinn_ic": {"values": [1e-3]}
-        # }
-        , "parameters": {
+        ,"parameters": {
             "seed": {"values": [1]},
             "weight_data": {"values": [1]},
-            "weight_dt": {"values": [0]},
-            "weight_pinn": {"values": [0]},
-            "weight_pinn_ic": {"values": [0]}
+            "weight_dt": {"values": [1e-3]},
+            "weight_pinn": {"values": [1e-3]},
+            "weight_pinn_ic": {"values": [1e-3]}
         }
+        # , "parameters": {
+        #     "seed": {"values": [1]},
+        #     "weight_data": {"values": [1]},
+        #     "weight_dt": {"values": [0]},
+        #     "weight_pinn": {"values": [0]},
+        #     "weight_pinn_ic": {"values": [0]}
+        # }
     }
 
     # Initialize and run sweep

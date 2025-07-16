@@ -1,0 +1,33 @@
+GFL_2nd_order data
+Loading data from:  ./data/GFL_2nd_order/dataset_v1.pkl
+/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/src/nn/nn_dataset.py:178: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_new.cpp:264.)
+  training_sample = torch.tensor(training_sample, dtype=torch.float32) # convert the trajectory to tensor
+Number of training samples:  80000 Number of validation samples:  10000 Number of testing samples:  10000
+Number of different initial conditions for collocation points:  529
+['delta', 'omega'] Variables
+[[-3.14159, 3.14159], [-60, 60]] Set of values for init conditions
+[23, 23] Iterations per value
+Shape: (529, 2)
+Selected deep learning model:  DynamicNN
+Number of labeled training data: 80000 Number of collocation points: 529000 Number of collocation points (IC): 529 Number of validation data: 10000
+Weights initialized as:  [1, 0.001, 0.001, 0.001]  are updated with scheme:  Static
+getting in training
+Validation loss decreased (inf --> 60.567181).  Saving model ...
+type:  validation, total_traj: 10, max_traj 500
+Epoch [50/25000], Loss: 197.9064, Loss_data: 126.8351, Loss_dt: 69658.9062, Loss_pinn: 821.3954 , Loss_pinn_ic : 590.9708 60.1013069152832 46510.859375
+type:  validation, total_traj: 10, max_traj 500
+Epoch [100/25000], Loss: 196.2770, Loss_data: 125.9743, Loss_dt: 69658.8672, Loss_pinn: 78.6367 , Loss_pinn_ic : 565.2140 60.38206100463867 46510.75390625
+type:  validation, total_traj: 10, max_traj 500
+Epoch [150/25000], Loss: 195.9380, Loss_data: 125.6794, Loss_dt: 69658.8906, Loss_pinn: 45.0797 , Loss_pinn_ic : 554.7125 60.58498001098633 46510.76171875
+type:  validation, total_traj: 10, max_traj 500
+Epoch [200/25000], Loss: 195.6664, Loss_data: 125.4189, Loss_dt: 69658.8828, Loss_pinn: 37.0365 , Loss_pinn_ic : 551.5596 60.5828742980957 46510.8046875
+type:  validation, total_traj: 10, max_traj 500
+Epoch [250/25000], Loss: 195.4099, Loss_data: 125.1686, Loss_dt: 69658.8672, Loss_pinn: 34.1240 , Loss_pinn_ic : 548.2455 60.620567321777344 46510.80078125
+type:  validation, total_traj: 10, max_traj 500
+Epoch [300/25000], Loss: 195.1558, Loss_data: 124.9190, Loss_dt: 69658.7969, Loss_pinn: 32.2408 , Loss_pinn_ic : 545.7537 60.64899826049805 46510.65234375
+type:  validation, total_traj: 10, max_traj 500
+Epoch [350/25000], Loss: 194.8526, Loss_data: 124.6188, Loss_dt: 69658.5859, Loss_pinn: 30.6740 , Loss_pinn_ic : 544.5809 60.63463592529297 46510.19921875
+type:  validation, total_traj: 10, max_traj 500
+Epoch [400/25000], Loss: 194.4529, Loss_data: 124.2211, Loss_dt: 69658.0234, Loss_pinn: 29.6189 , Loss_pinn_ic : 544.1443 60.60563659667969 46508.94921875
+type:  validation, total_traj: 10, max_traj 500
+Epoch [450/25000], Loss: 193.9383, Loss_data: 123.7081, Loss_dt: 69656.7188, Loss_pinn: 29.4810 , Loss_pinn_ic : 543.9971 60.593624114990234 46506.37109375

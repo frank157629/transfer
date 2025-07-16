@@ -619,7 +619,7 @@ class PhysicsInformedNeuralNetworkActions():
                 # log some plots to wandb
                 if wandb_run is not None:
                     # self.log_plot(val_outputs, y_val, epoch, wandb_run,x_val)
-                    self.log_plot(val_outputs, y_val, epoch, wandb_run, x_val,"validation", 0, 20)
+                    self.log_plot(val_outputs, y_val, epoch, wandb_run, x_val,"validation", 0, 500)
                 
             if (epoch + 1 ) % 50 == 0:
                 print(f'Epoch [{epoch+1}/{self.cfg.network.num_epochs}], Loss: {self.loss_total.item():.4f}, Loss_data: {self.loss_data.item():.4f}, Loss_dt: {self.loss_dt.item():.4f}, Loss_pinn: {self.loss_pinn.item():.4f} , Loss_pinn_ic : {self.loss_pinn_ic.item():.4f}', val_loss, val_dt_loss)
@@ -661,7 +661,7 @@ class PhysicsInformedNeuralNetworkActions():
             name = f"{self.cfg.model.model_flag}{self.cfg.network.type}_{self.cfg.time}_{epoch+1}_{self.data_loader.training_shape}_{self.data_loader.training_col_shape}_{self.data_loader.validation_shape}_{self.cfg.dataset.transform_input}_{self.cfg.dataset.transform_output}_{self.weight_data}_{self.weight_dt}_{self.weight_pinn}_{self.weight_pinn_ic}_{self.cfg.network.weighting.update_weight_method}.pth"
             self.save_model(os.path.join(folder_name, name))
         self.final_name = os.path.join(folder_name, f"{self.cfg.model.model_flag}{self.cfg.network.type}_{self.cfg.time}_{epoch+1}_{self.data_loader.training_shape}_{self.data_loader.training_col_shape}_{self.data_loader.validation_shape}_{self.cfg.dataset.transform_input}_{self.cfg.dataset.transform_output}_{self.weight_data}_{self.weight_dt}_{self.weight_pinn}_{self.weight_pinn_ic}_{self.cfg.network.weighting.update_weight_method}")
-        total_test_loss =  self.test_model(0,20,wandb_run)
+        total_test_loss =  self.test_model(0,500,wandb_run)
         return
 
     #Haitian, change log_plot
