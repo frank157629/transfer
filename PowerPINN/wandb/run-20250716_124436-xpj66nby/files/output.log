@@ -1,0 +1,1069 @@
+Is cuda available? False
+Number of different initial conditions:  529
+['delta', 'omega'] Variables
+[[-3.14159, 3.14159], [-60, 60]] Set of values for init conditions
+[23, 23] Iterations per value
+Shape: (529, 2)
+🟡 Solving initial condition 1/529: [-0.14875803475233962, 0.9958410088469023]
+✅ Finished IC 1 successfully.
+🟡 Solving initial condition 2/529: [-0.14875803475233962, 7.310769592690534]
+✅ Finished IC 2 successfully.
+🟡 Solving initial condition 3/529: [-0.14875803475233962, -51.83333458537078]
+✅ Finished IC 3 successfully.
+🟡 Solving initial condition 4/529: [-0.14875803475233962, 18.702720748097235]
+✅ Finished IC 4 successfully.
+🟡 Solving initial condition 5/529: [-0.14875803475233962, 47.50449902825163]
+✅ Finished IC 5 successfully.
+🟡 Solving initial condition 6/529: [-0.14875803475233962, -34.587868788924055]
+✅ Finished IC 6 successfully.
+🟡 Solving initial condition 7/529: [-0.14875803475233962, 55.57346088259875]
+✅ Finished IC 7 successfully.
+🟡 Solving initial condition 8/529: [-0.14875803475233962, -23.978672321813733]
+✅ Finished IC 8 successfully.
+🟡 Solving initial condition 9/529: [-0.14875803475233962, 30.322712065353784]
+✅ Finished IC 9 successfully.
+🟡 Solving initial condition 10/529: [-0.14875803475233962, -4.799008994011018]
+✅ Finished IC 10 successfully.
+🟡 Solving initial condition 11/529: [-0.14875803475233962, -19.010303790574184]
+✅ Finished IC 11 successfully.
+🟡 Solving initial condition 12/529: [-0.14875803475233962, 11.738457872962044]
+✅ Finished IC 12 successfully.
+🟡 Solving initial condition 13/529: [-0.14875803475233962, 38.176161836437316]
+✅ Finished IC 13 successfully.
+🟡 Solving initial condition 14/529: [-0.14875803475233962, -31.14157047652497]
+✅ Finished IC 14 successfully.
+🟡 Solving initial condition 15/529: [-0.14875803475233962, 43.052233275603896]
+✅ Finished IC 15 successfully.
+🟡 Solving initial condition 16/529: [-0.14875803475233962, -58.051239435271015]
+✅ Finished IC 16 successfully.
+🟡 Solving initial condition 17/529: [-0.14875803475233962, 49.68056588950806]
+✅ Finished IC 17 successfully.
+🟡 Solving initial condition 18/529: [-0.14875803475233962, -12.365963885335148]
+✅ Finished IC 18 successfully.
+🟡 Solving initial condition 19/529: [-0.14875803475233962, -42.85818349093722]
+✅ Finished IC 19 successfully.
+🟡 Solving initial condition 20/529: [-0.14875803475233962, 14.677096464226764]
+✅ Finished IC 20 successfully.
+🟡 Solving initial condition 21/529: [-0.14875803475233962, 23.94385371419827]
+✅ Finished IC 21 successfully.
+🟡 Solving initial condition 22/529: [-0.14875803475233962, -44.812027102257076]
+✅ Finished IC 22 successfully.
+🟡 Solving initial condition 23/529: [-0.14875803475233962, -16.015784943586283]
+✅ Finished IC 23 successfully.
+🟡 Solving initial condition 24/529: [3.0113327707009008, 0.9958410088469023]
+✅ Finished IC 24 successfully.
+🟡 Solving initial condition 25/529: [3.0113327707009008, 7.310769592690534]
+✅ Finished IC 25 successfully.
+🟡 Solving initial condition 26/529: [3.0113327707009008, -51.83333458537078]
+✅ Finished IC 26 successfully.
+🟡 Solving initial condition 27/529: [3.0113327707009008, 18.702720748097235]
+✅ Finished IC 27 successfully.
+🟡 Solving initial condition 28/529: [3.0113327707009008, 47.50449902825163]
+✅ Finished IC 28 successfully.
+🟡 Solving initial condition 29/529: [3.0113327707009008, -34.587868788924055]
+✅ Finished IC 29 successfully.
+🟡 Solving initial condition 30/529: [3.0113327707009008, 55.57346088259875]
+✅ Finished IC 30 successfully.
+🟡 Solving initial condition 31/529: [3.0113327707009008, -23.978672321813733]
+✅ Finished IC 31 successfully.
+🟡 Solving initial condition 32/529: [3.0113327707009008, 30.322712065353784]
+✅ Finished IC 32 successfully.
+🟡 Solving initial condition 33/529: [3.0113327707009008, -4.799008994011018]
+✅ Finished IC 33 successfully.
+🟡 Solving initial condition 34/529: [3.0113327707009008, -19.010303790574184]
+✅ Finished IC 34 successfully.
+🟡 Solving initial condition 35/529: [3.0113327707009008, 11.738457872962044]
+✅ Finished IC 35 successfully.
+🟡 Solving initial condition 36/529: [3.0113327707009008, 38.176161836437316]
+✅ Finished IC 36 successfully.
+🟡 Solving initial condition 37/529: [3.0113327707009008, -31.14157047652497]
+✅ Finished IC 37 successfully.
+🟡 Solving initial condition 38/529: [3.0113327707009008, 43.052233275603896]
+✅ Finished IC 38 successfully.
+🟡 Solving initial condition 39/529: [3.0113327707009008, -58.051239435271015]
+✅ Finished IC 39 successfully.
+🟡 Solving initial condition 40/529: [3.0113327707009008, 49.68056588950806]
+✅ Finished IC 40 successfully.
+🟡 Solving initial condition 41/529: [3.0113327707009008, -12.365963885335148]
+✅ Finished IC 41 successfully.
+🟡 Solving initial condition 42/529: [3.0113327707009008, -42.85818349093722]
+✅ Finished IC 42 successfully.
+🟡 Solving initial condition 43/529: [3.0113327707009008, 14.677096464226764]
+✅ Finished IC 43 successfully.
+🟡 Solving initial condition 44/529: [3.0113327707009008, 23.94385371419827]
+✅ Finished IC 44 successfully.
+🟡 Solving initial condition 45/529: [3.0113327707009008, -44.812027102257076]
+✅ Finished IC 45 successfully.
+🟡 Solving initial condition 46/529: [3.0113327707009008, -16.015784943586283]
+✅ Finished IC 46 successfully.
+🟡 Solving initial condition 47/529: [2.5294416891606906, 0.9958410088469023]
+✅ Finished IC 47 successfully.
+🟡 Solving initial condition 48/529: [2.5294416891606906, 7.310769592690534]
+✅ Finished IC 48 successfully.
+🟡 Solving initial condition 49/529: [2.5294416891606906, -51.83333458537078]
+✅ Finished IC 49 successfully.
+🟡 Solving initial condition 50/529: [2.5294416891606906, 18.702720748097235]
+✅ Finished IC 50 successfully.
+🟡 Solving initial condition 51/529: [2.5294416891606906, 47.50449902825163]
+✅ Finished IC 51 successfully.
+🟡 Solving initial condition 52/529: [2.5294416891606906, -34.587868788924055]
+✅ Finished IC 52 successfully.
+🟡 Solving initial condition 53/529: [2.5294416891606906, 55.57346088259875]
+✅ Finished IC 53 successfully.
+🟡 Solving initial condition 54/529: [2.5294416891606906, -23.978672321813733]
+✅ Finished IC 54 successfully.
+🟡 Solving initial condition 55/529: [2.5294416891606906, 30.322712065353784]
+✅ Finished IC 55 successfully.
+🟡 Solving initial condition 56/529: [2.5294416891606906, -4.799008994011018]
+✅ Finished IC 56 successfully.
+🟡 Solving initial condition 57/529: [2.5294416891606906, -19.010303790574184]
+✅ Finished IC 57 successfully.
+🟡 Solving initial condition 58/529: [2.5294416891606906, 11.738457872962044]
+✅ Finished IC 58 successfully.
+🟡 Solving initial condition 59/529: [2.5294416891606906, 38.176161836437316]
+✅ Finished IC 59 successfully.
+🟡 Solving initial condition 60/529: [2.5294416891606906, -31.14157047652497]
+✅ Finished IC 60 successfully.
+🟡 Solving initial condition 61/529: [2.5294416891606906, 43.052233275603896]
+✅ Finished IC 61 successfully.
+🟡 Solving initial condition 62/529: [2.5294416891606906, -58.051239435271015]
+✅ Finished IC 62 successfully.
+🟡 Solving initial condition 63/529: [2.5294416891606906, 49.68056588950806]
+✅ Finished IC 63 successfully.
+🟡 Solving initial condition 64/529: [2.5294416891606906, -12.365963885335148]
+✅ Finished IC 64 successfully.
+🟡 Solving initial condition 65/529: [2.5294416891606906, -42.85818349093722]
+✅ Finished IC 65 successfully.
+🟡 Solving initial condition 66/529: [2.5294416891606906, 14.677096464226764]
+✅ Finished IC 66 successfully.
+🟡 Solving initial condition 67/529: [2.5294416891606906, 23.94385371419827]
+✅ Finished IC 67 successfully.
+🟡 Solving initial condition 68/529: [2.5294416891606906, -44.812027102257076]
+✅ Finished IC 68 successfully.
+🟡 Solving initial condition 69/529: [2.5294416891606906, -16.015784943586283]
+✅ Finished IC 69 successfully.
+🟡 Solving initial condition 70/529: [-3.066006179284665, 0.9958410088469023]
+✅ Finished IC 70 successfully.
+🟡 Solving initial condition 71/529: [-3.066006179284665, 7.310769592690534]
+✅ Finished IC 71 successfully.
+🟡 Solving initial condition 72/529: [-3.066006179284665, -51.83333458537078]
+✅ Finished IC 72 successfully.
+🟡 Solving initial condition 73/529: [-3.066006179284665, 18.702720748097235]
+✅ Finished IC 73 successfully.
+🟡 Solving initial condition 74/529: [-3.066006179284665, 47.50449902825163]
+✅ Finished IC 74 successfully.
+🟡 Solving initial condition 75/529: [-3.066006179284665, -34.587868788924055]
+✅ Finished IC 75 successfully.
+🟡 Solving initial condition 76/529: [-3.066006179284665, 55.57346088259875]
+✅ Finished IC 76 successfully.
+🟡 Solving initial condition 77/529: [-3.066006179284665, -23.978672321813733]
+✅ Finished IC 77 successfully.
+🟡 Solving initial condition 78/529: [-3.066006179284665, 30.322712065353784]
+✅ Finished IC 78 successfully.
+🟡 Solving initial condition 79/529: [-3.066006179284665, -4.799008994011018]
+✅ Finished IC 79 successfully.
+🟡 Solving initial condition 80/529: [-3.066006179284665, -19.010303790574184]
+✅ Finished IC 80 successfully.
+🟡 Solving initial condition 81/529: [-3.066006179284665, 11.738457872962044]
+✅ Finished IC 81 successfully.
+🟡 Solving initial condition 82/529: [-3.066006179284665, 38.176161836437316]
+✅ Finished IC 82 successfully.
+🟡 Solving initial condition 83/529: [-3.066006179284665, -31.14157047652497]
+✅ Finished IC 83 successfully.
+🟡 Solving initial condition 84/529: [-3.066006179284665, 43.052233275603896]
+✅ Finished IC 84 successfully.
+🟡 Solving initial condition 85/529: [-3.066006179284665, -58.051239435271015]
+✅ Finished IC 85 successfully.
+🟡 Solving initial condition 86/529: [-3.066006179284665, 49.68056588950806]
+✅ Finished IC 86 successfully.
+🟡 Solving initial condition 87/529: [-3.066006179284665, -12.365963885335148]
+✅ Finished IC 87 successfully.
+🟡 Solving initial condition 88/529: [-3.066006179284665, -42.85818349093722]
+✅ Finished IC 88 successfully.
+🟡 Solving initial condition 89/529: [-3.066006179284665, 14.677096464226764]
+✅ Finished IC 89 successfully.
+🟡 Solving initial condition 90/529: [-3.066006179284665, 23.94385371419827]
+✅ Finished IC 90 successfully.
+🟡 Solving initial condition 91/529: [-3.066006179284665, -44.812027102257076]
+✅ Finished IC 91 successfully.
+🟡 Solving initial condition 92/529: [-3.066006179284665, -16.015784943586283]
+✅ Finished IC 92 successfully.
+🟡 Solving initial condition 93/529: [-2.4304758106117577, 0.9958410088469023]
+✅ Finished IC 93 successfully.
+🟡 Solving initial condition 94/529: [-2.4304758106117577, 7.310769592690534]
+✅ Finished IC 94 successfully.
+🟡 Solving initial condition 95/529: [-2.4304758106117577, -51.83333458537078]
+✅ Finished IC 95 successfully.
+🟡 Solving initial condition 96/529: [-2.4304758106117577, 18.702720748097235]
+✅ Finished IC 96 successfully.
+🟡 Solving initial condition 97/529: [-2.4304758106117577, 47.50449902825163]
+✅ Finished IC 97 successfully.
+🟡 Solving initial condition 98/529: [-2.4304758106117577, -34.587868788924055]
+✅ Finished IC 98 successfully.
+🟡 Solving initial condition 99/529: [-2.4304758106117577, 55.57346088259875]
+✅ Finished IC 99 successfully.
+🟡 Solving initial condition 100/529: [-2.4304758106117577, -23.978672321813733]
+✅ Finished IC 100 successfully.
+🟡 Solving initial condition 101/529: [-2.4304758106117577, 30.322712065353784]
+✅ Finished IC 101 successfully.
+🟡 Solving initial condition 102/529: [-2.4304758106117577, -4.799008994011018]
+✅ Finished IC 102 successfully.
+🟡 Solving initial condition 103/529: [-2.4304758106117577, -19.010303790574184]
+✅ Finished IC 103 successfully.
+🟡 Solving initial condition 104/529: [-2.4304758106117577, 11.738457872962044]
+✅ Finished IC 104 successfully.
+🟡 Solving initial condition 105/529: [-2.4304758106117577, 38.176161836437316]
+✅ Finished IC 105 successfully.
+🟡 Solving initial condition 106/529: [-2.4304758106117577, -31.14157047652497]
+✅ Finished IC 106 successfully.
+🟡 Solving initial condition 107/529: [-2.4304758106117577, 43.052233275603896]
+✅ Finished IC 107 successfully.
+🟡 Solving initial condition 108/529: [-2.4304758106117577, -58.051239435271015]
+✅ Finished IC 108 successfully.
+🟡 Solving initial condition 109/529: [-2.4304758106117577, 49.68056588950806]
+✅ Finished IC 109 successfully.
+🟡 Solving initial condition 110/529: [-2.4304758106117577, -12.365963885335148]
+✅ Finished IC 110 successfully.
+🟡 Solving initial condition 111/529: [-2.4304758106117577, -42.85818349093722]
+✅ Finished IC 111 successfully.
+🟡 Solving initial condition 112/529: [-2.4304758106117577, 14.677096464226764]
+✅ Finished IC 112 successfully.
+🟡 Solving initial condition 113/529: [-2.4304758106117577, 23.94385371419827]
+✅ Finished IC 113 successfully.
+🟡 Solving initial condition 114/529: [-2.4304758106117577, -44.812027102257076]
+✅ Finished IC 114 successfully.
+🟡 Solving initial condition 115/529: [-2.4304758106117577, -16.015784943586283]
+✅ Finished IC 115 successfully.
+🟡 Solving initial condition 116/529: [1.940752503680689, 0.9958410088469023]
+✅ Finished IC 116 successfully.
+🟡 Solving initial condition 117/529: [1.940752503680689, 7.310769592690534]
+✅ Finished IC 117 successfully.
+🟡 Solving initial condition 118/529: [1.940752503680689, -51.83333458537078]
+✅ Finished IC 118 successfully.
+🟡 Solving initial condition 119/529: [1.940752503680689, 18.702720748097235]
+✅ Finished IC 119 successfully.
+🟡 Solving initial condition 120/529: [1.940752503680689, 47.50449902825163]
+✅ Finished IC 120 successfully.
+🟡 Solving initial condition 121/529: [1.940752503680689, -34.587868788924055]
+✅ Finished IC 121 successfully.
+🟡 Solving initial condition 122/529: [1.940752503680689, 55.57346088259875]
+✅ Finished IC 122 successfully.
+🟡 Solving initial condition 123/529: [1.940752503680689, -23.978672321813733]
+✅ Finished IC 123 successfully.
+🟡 Solving initial condition 124/529: [1.940752503680689, 30.322712065353784]
+✅ Finished IC 124 successfully.
+🟡 Solving initial condition 125/529: [1.940752503680689, -4.799008994011018]
+✅ Finished IC 125 successfully.
+🟡 Solving initial condition 126/529: [1.940752503680689, -19.010303790574184]
+✅ Finished IC 126 successfully.
+🟡 Solving initial condition 127/529: [1.940752503680689, 11.738457872962044]
+✅ Finished IC 127 successfully.
+🟡 Solving initial condition 128/529: [1.940752503680689, 38.176161836437316]
+✅ Finished IC 128 successfully.
+🟡 Solving initial condition 129/529: [1.940752503680689, -31.14157047652497]
+✅ Finished IC 129 successfully.
+🟡 Solving initial condition 130/529: [1.940752503680689, 43.052233275603896]
+✅ Finished IC 130 successfully.
+🟡 Solving initial condition 131/529: [1.940752503680689, -58.051239435271015]
+✅ Finished IC 131 successfully.
+🟡 Solving initial condition 132/529: [1.940752503680689, 49.68056588950806]
+✅ Finished IC 132 successfully.
+🟡 Solving initial condition 133/529: [1.940752503680689, -12.365963885335148]
+✅ Finished IC 133 successfully.
+🟡 Solving initial condition 134/529: [1.940752503680689, -42.85818349093722]
+✅ Finished IC 134 successfully.
+🟡 Solving initial condition 135/529: [1.940752503680689, 14.677096464226764]
+✅ Finished IC 135 successfully.
+🟡 Solving initial condition 136/529: [1.940752503680689, 23.94385371419827]
+✅ Finished IC 136 successfully.
+🟡 Solving initial condition 137/529: [1.940752503680689, -44.812027102257076]
+✅ Finished IC 137 successfully.
+🟡 Solving initial condition 138/529: [1.940752503680689, -16.015784943586283]
+✅ Finished IC 138 successfully.
+🟡 Solving initial condition 139/529: [2.072038691121607, 0.9958410088469023]
+✅ Finished IC 139 successfully.
+🟡 Solving initial condition 140/529: [2.072038691121607, 7.310769592690534]
+✅ Finished IC 140 successfully.
+🟡 Solving initial condition 141/529: [2.072038691121607, -51.83333458537078]
+✅ Finished IC 141 successfully.
+🟡 Solving initial condition 142/529: [2.072038691121607, 18.702720748097235]
+✅ Finished IC 142 successfully.
+🟡 Solving initial condition 143/529: [2.072038691121607, 47.50449902825163]
+✅ Finished IC 143 successfully.
+🟡 Solving initial condition 144/529: [2.072038691121607, -34.587868788924055]
+✅ Finished IC 144 successfully.
+🟡 Solving initial condition 145/529: [2.072038691121607, 55.57346088259875]
+✅ Finished IC 145 successfully.
+🟡 Solving initial condition 146/529: [2.072038691121607, -23.978672321813733]
+✅ Finished IC 146 successfully.
+🟡 Solving initial condition 147/529: [2.072038691121607, 30.322712065353784]
+✅ Finished IC 147 successfully.
+🟡 Solving initial condition 148/529: [2.072038691121607, -4.799008994011018]
+✅ Finished IC 148 successfully.
+🟡 Solving initial condition 149/529: [2.072038691121607, -19.010303790574184]
+✅ Finished IC 149 successfully.
+🟡 Solving initial condition 150/529: [2.072038691121607, 11.738457872962044]
+✅ Finished IC 150 successfully.
+🟡 Solving initial condition 151/529: [2.072038691121607, 38.176161836437316]
+✅ Finished IC 151 successfully.
+🟡 Solving initial condition 152/529: [2.072038691121607, -31.14157047652497]
+✅ Finished IC 152 successfully.
+🟡 Solving initial condition 153/529: [2.072038691121607, 43.052233275603896]
+✅ Finished IC 153 successfully.
+🟡 Solving initial condition 154/529: [2.072038691121607, -58.051239435271015]
+✅ Finished IC 154 successfully.
+🟡 Solving initial condition 155/529: [2.072038691121607, 49.68056588950806]
+✅ Finished IC 155 successfully.
+🟡 Solving initial condition 156/529: [2.072038691121607, -12.365963885335148]
+✅ Finished IC 156 successfully.
+🟡 Solving initial condition 157/529: [2.072038691121607, -42.85818349093722]
+✅ Finished IC 157 successfully.
+🟡 Solving initial condition 158/529: [2.072038691121607, 14.677096464226764]
+✅ Finished IC 158 successfully.
+🟡 Solving initial condition 159/529: [2.072038691121607, 23.94385371419827]
+✅ Finished IC 159 successfully.
+🟡 Solving initial condition 160/529: [2.072038691121607, -44.812027102257076]
+✅ Finished IC 160 successfully.
+🟡 Solving initial condition 161/529: [2.072038691121607, -16.015784943586283]
+✅ Finished IC 161 successfully.
+🟡 Solving initial condition 162/529: [-0.6331639493144423, 0.9958410088469023]
+✅ Finished IC 162 successfully.
+🟡 Solving initial condition 163/529: [-0.6331639493144423, 7.310769592690534]
+✅ Finished IC 163 successfully.
+🟡 Solving initial condition 164/529: [-0.6331639493144423, -51.83333458537078]
+✅ Finished IC 164 successfully.
+🟡 Solving initial condition 165/529: [-0.6331639493144423, 18.702720748097235]
+✅ Finished IC 165 successfully.
+🟡 Solving initial condition 166/529: [-0.6331639493144423, 47.50449902825163]
+✅ Finished IC 166 successfully.
+🟡 Solving initial condition 167/529: [-0.6331639493144423, -34.587868788924055]
+✅ Finished IC 167 successfully.
+🟡 Solving initial condition 168/529: [-0.6331639493144423, 55.57346088259875]
+✅ Finished IC 168 successfully.
+🟡 Solving initial condition 169/529: [-0.6331639493144423, -23.978672321813733]
+✅ Finished IC 169 successfully.
+🟡 Solving initial condition 170/529: [-0.6331639493144423, 30.322712065353784]
+✅ Finished IC 170 successfully.
+🟡 Solving initial condition 171/529: [-0.6331639493144423, -4.799008994011018]
+✅ Finished IC 171 successfully.
+🟡 Solving initial condition 172/529: [-0.6331639493144423, -19.010303790574184]
+✅ Finished IC 172 successfully.
+🟡 Solving initial condition 173/529: [-0.6331639493144423, 11.738457872962044]
+✅ Finished IC 173 successfully.
+🟡 Solving initial condition 174/529: [-0.6331639493144423, 38.176161836437316]
+✅ Finished IC 174 successfully.
+🟡 Solving initial condition 175/529: [-0.6331639493144423, -31.14157047652497]
+✅ Finished IC 175 successfully.
+🟡 Solving initial condition 176/529: [-0.6331639493144423, 43.052233275603896]
+✅ Finished IC 176 successfully.
+🟡 Solving initial condition 177/529: [-0.6331639493144423, -58.051239435271015]
+✅ Finished IC 177 successfully.
+🟡 Solving initial condition 178/529: [-0.6331639493144423, 49.68056588950806]
+✅ Finished IC 178 successfully.
+🟡 Solving initial condition 179/529: [-0.6331639493144423, -12.365963885335148]
+✅ Finished IC 179 successfully.
+🟡 Solving initial condition 180/529: [-0.6331639493144423, -42.85818349093722]
+✅ Finished IC 180 successfully.
+🟡 Solving initial condition 181/529: [-0.6331639493144423, 14.677096464226764]
+✅ Finished IC 181 successfully.
+🟡 Solving initial condition 182/529: [-0.6331639493144423, 23.94385371419827]
+✅ Finished IC 182 successfully.
+🟡 Solving initial condition 183/529: [-0.6331639493144423, -44.812027102257076]
+✅ Finished IC 183 successfully.
+🟡 Solving initial condition 184/529: [-0.6331639493144423, -16.015784943586283]
+✅ Finished IC 184 successfully.
+🟡 Solving initial condition 185/529: [1.7087965557419613, 0.9958410088469023]
+✅ Finished IC 185 successfully.
+🟡 Solving initial condition 186/529: [1.7087965557419613, 7.310769592690534]
+✅ Finished IC 186 successfully.
+🟡 Solving initial condition 187/529: [1.7087965557419613, -51.83333458537078]
+✅ Finished IC 187 successfully.
+🟡 Solving initial condition 188/529: [1.7087965557419613, 18.702720748097235]
+✅ Finished IC 188 successfully.
+🟡 Solving initial condition 189/529: [1.7087965557419613, 47.50449902825163]
+✅ Finished IC 189 successfully.
+🟡 Solving initial condition 190/529: [1.7087965557419613, -34.587868788924055]
+✅ Finished IC 190 successfully.
+🟡 Solving initial condition 191/529: [1.7087965557419613, 55.57346088259875]
+✅ Finished IC 191 successfully.
+🟡 Solving initial condition 192/529: [1.7087965557419613, -23.978672321813733]
+✅ Finished IC 192 successfully.
+🟡 Solving initial condition 193/529: [1.7087965557419613, 30.322712065353784]
+✅ Finished IC 193 successfully.
+🟡 Solving initial condition 194/529: [1.7087965557419613, -4.799008994011018]
+✅ Finished IC 194 successfully.
+🟡 Solving initial condition 195/529: [1.7087965557419613, -19.010303790574184]
+✅ Finished IC 195 successfully.
+🟡 Solving initial condition 196/529: [1.7087965557419613, 11.738457872962044]
+✅ Finished IC 196 successfully.
+🟡 Solving initial condition 197/529: [1.7087965557419613, 38.176161836437316]
+✅ Finished IC 197 successfully.
+🟡 Solving initial condition 198/529: [1.7087965557419613, -31.14157047652497]
+✅ Finished IC 198 successfully.
+🟡 Solving initial condition 199/529: [1.7087965557419613, 43.052233275603896]
+✅ Finished IC 199 successfully.
+🟡 Solving initial condition 200/529: [1.7087965557419613, -58.051239435271015]
+✅ Finished IC 200 successfully.
+🟡 Solving initial condition 201/529: [1.7087965557419613, 49.68056588950806]
+✅ Finished IC 201 successfully.
+🟡 Solving initial condition 202/529: [1.7087965557419613, -12.365963885335148]
+✅ Finished IC 202 successfully.
+🟡 Solving initial condition 203/529: [1.7087965557419613, -42.85818349093722]
+✅ Finished IC 203 successfully.
+🟡 Solving initial condition 204/529: [1.7087965557419613, 14.677096464226764]
+✅ Finished IC 204 successfully.
+🟡 Solving initial condition 205/529: [1.7087965557419613, 23.94385371419827]
+✅ Finished IC 205 successfully.
+🟡 Solving initial condition 206/529: [1.7087965557419613, -44.812027102257076]
+✅ Finished IC 206 successfully.
+🟡 Solving initial condition 207/529: [1.7087965557419613, -16.015784943586283]
+✅ Finished IC 207 successfully.
+🟡 Solving initial condition 208/529: [0.885611305692712, 0.9958410088469023]
+✅ Finished IC 208 successfully.
+🟡 Solving initial condition 209/529: [0.885611305692712, 7.310769592690534]
+✅ Finished IC 209 successfully.
+🟡 Solving initial condition 210/529: [0.885611305692712, -51.83333458537078]
+✅ Finished IC 210 successfully.
+🟡 Solving initial condition 211/529: [0.885611305692712, 18.702720748097235]
+✅ Finished IC 211 successfully.
+🟡 Solving initial condition 212/529: [0.885611305692712, 47.50449902825163]
+✅ Finished IC 212 successfully.
+🟡 Solving initial condition 213/529: [0.885611305692712, -34.587868788924055]
+✅ Finished IC 213 successfully.
+🟡 Solving initial condition 214/529: [0.885611305692712, 55.57346088259875]
+✅ Finished IC 214 successfully.
+🟡 Solving initial condition 215/529: [0.885611305692712, -23.978672321813733]
+✅ Finished IC 215 successfully.
+🟡 Solving initial condition 216/529: [0.885611305692712, 30.322712065353784]
+✅ Finished IC 216 successfully.
+🟡 Solving initial condition 217/529: [0.885611305692712, -4.799008994011018]
+✅ Finished IC 217 successfully.
+🟡 Solving initial condition 218/529: [0.885611305692712, -19.010303790574184]
+✅ Finished IC 218 successfully.
+🟡 Solving initial condition 219/529: [0.885611305692712, 11.738457872962044]
+✅ Finished IC 219 successfully.
+🟡 Solving initial condition 220/529: [0.885611305692712, 38.176161836437316]
+✅ Finished IC 220 successfully.
+🟡 Solving initial condition 221/529: [0.885611305692712, -31.14157047652497]
+✅ Finished IC 221 successfully.
+🟡 Solving initial condition 222/529: [0.885611305692712, 43.052233275603896]
+✅ Finished IC 222 successfully.
+🟡 Solving initial condition 223/529: [0.885611305692712, -58.051239435271015]
+✅ Finished IC 223 successfully.
+🟡 Solving initial condition 224/529: [0.885611305692712, 49.68056588950806]
+✅ Finished IC 224 successfully.
+🟡 Solving initial condition 225/529: [0.885611305692712, -12.365963885335148]
+✅ Finished IC 225 successfully.
+🟡 Solving initial condition 226/529: [0.885611305692712, -42.85818349093722]
+✅ Finished IC 226 successfully.
+🟡 Solving initial condition 227/529: [0.885611305692712, 14.677096464226764]
+✅ Finished IC 227 successfully.
+🟡 Solving initial condition 228/529: [0.885611305692712, 23.94385371419827]
+✅ Finished IC 228 successfully.
+🟡 Solving initial condition 229/529: [0.885611305692712, -44.812027102257076]
+✅ Finished IC 229 successfully.
+🟡 Solving initial condition 230/529: [0.885611305692712, -16.015784943586283]
+✅ Finished IC 230 successfully.
+🟡 Solving initial condition 231/529: [-1.5741564081612127, 0.9958410088469023]
+✅ Finished IC 231 successfully.
+🟡 Solving initial condition 232/529: [-1.5741564081612127, 7.310769592690534]
+✅ Finished IC 232 successfully.
+🟡 Solving initial condition 233/529: [-1.5741564081612127, -51.83333458537078]
+✅ Finished IC 233 successfully.
+🟡 Solving initial condition 234/529: [-1.5741564081612127, 18.702720748097235]
+✅ Finished IC 234 successfully.
+🟡 Solving initial condition 235/529: [-1.5741564081612127, 47.50449902825163]
+✅ Finished IC 235 successfully.
+🟡 Solving initial condition 236/529: [-1.5741564081612127, -34.587868788924055]
+✅ Finished IC 236 successfully.
+🟡 Solving initial condition 237/529: [-1.5741564081612127, 55.57346088259875]
+✅ Finished IC 237 successfully.
+🟡 Solving initial condition 238/529: [-1.5741564081612127, -23.978672321813733]
+✅ Finished IC 238 successfully.
+🟡 Solving initial condition 239/529: [-1.5741564081612127, 30.322712065353784]
+✅ Finished IC 239 successfully.
+🟡 Solving initial condition 240/529: [-1.5741564081612127, -4.799008994011018]
+✅ Finished IC 240 successfully.
+🟡 Solving initial condition 241/529: [-1.5741564081612127, -19.010303790574184]
+✅ Finished IC 241 successfully.
+🟡 Solving initial condition 242/529: [-1.5741564081612127, 11.738457872962044]
+✅ Finished IC 242 successfully.
+🟡 Solving initial condition 243/529: [-1.5741564081612127, 38.176161836437316]
+✅ Finished IC 243 successfully.
+🟡 Solving initial condition 244/529: [-1.5741564081612127, -31.14157047652497]
+✅ Finished IC 244 successfully.
+🟡 Solving initial condition 245/529: [-1.5741564081612127, 43.052233275603896]
+✅ Finished IC 245 successfully.
+🟡 Solving initial condition 246/529: [-1.5741564081612127, -58.051239435271015]
+✅ Finished IC 246 successfully.
+🟡 Solving initial condition 247/529: [-1.5741564081612127, 49.68056588950806]
+✅ Finished IC 247 successfully.
+🟡 Solving initial condition 248/529: [-1.5741564081612127, -12.365963885335148]
+✅ Finished IC 248 successfully.
+🟡 Solving initial condition 249/529: [-1.5741564081612127, -42.85818349093722]
+✅ Finished IC 249 successfully.
+🟡 Solving initial condition 250/529: [-1.5741564081612127, 14.677096464226764]
+✅ Finished IC 250 successfully.
+🟡 Solving initial condition 251/529: [-1.5741564081612127, 23.94385371419827]
+✅ Finished IC 251 successfully.
+🟡 Solving initial condition 252/529: [-1.5741564081612127, -44.812027102257076]
+✅ Finished IC 252 successfully.
+🟡 Solving initial condition 253/529: [-1.5741564081612127, -16.015784943586283]
+✅ Finished IC 253 successfully.
+🟡 Solving initial condition 254/529: [-0.9304989840373095, 0.9958410088469023]
+✅ Finished IC 254 successfully.
+🟡 Solving initial condition 255/529: [-0.9304989840373095, 7.310769592690534]
+✅ Finished IC 255 successfully.
+🟡 Solving initial condition 256/529: [-0.9304989840373095, -51.83333458537078]
+✅ Finished IC 256 successfully.
+🟡 Solving initial condition 257/529: [-0.9304989840373095, 18.702720748097235]
+✅ Finished IC 257 successfully.
+🟡 Solving initial condition 258/529: [-0.9304989840373095, 47.50449902825163]
+✅ Finished IC 258 successfully.
+🟡 Solving initial condition 259/529: [-0.9304989840373095, -34.587868788924055]
+✅ Finished IC 259 successfully.
+🟡 Solving initial condition 260/529: [-0.9304989840373095, 55.57346088259875]
+✅ Finished IC 260 successfully.
+🟡 Solving initial condition 261/529: [-0.9304989840373095, -23.978672321813733]
+✅ Finished IC 261 successfully.
+🟡 Solving initial condition 262/529: [-0.9304989840373095, 30.322712065353784]
+✅ Finished IC 262 successfully.
+🟡 Solving initial condition 263/529: [-0.9304989840373095, -4.799008994011018]
+✅ Finished IC 263 successfully.
+🟡 Solving initial condition 264/529: [-0.9304989840373095, -19.010303790574184]
+✅ Finished IC 264 successfully.
+🟡 Solving initial condition 265/529: [-0.9304989840373095, 11.738457872962044]
+✅ Finished IC 265 successfully.
+🟡 Solving initial condition 266/529: [-0.9304989840373095, 38.176161836437316]
+✅ Finished IC 266 successfully.
+🟡 Solving initial condition 267/529: [-0.9304989840373095, -31.14157047652497]
+✅ Finished IC 267 successfully.
+🟡 Solving initial condition 268/529: [-0.9304989840373095, 43.052233275603896]
+✅ Finished IC 268 successfully.
+🟡 Solving initial condition 269/529: [-0.9304989840373095, -58.051239435271015]
+✅ Finished IC 269 successfully.
+🟡 Solving initial condition 270/529: [-0.9304989840373095, 49.68056588950806]
+✅ Finished IC 270 successfully.
+🟡 Solving initial condition 271/529: [-0.9304989840373095, -12.365963885335148]
+✅ Finished IC 271 successfully.
+🟡 Solving initial condition 272/529: [-0.9304989840373095, -42.85818349093722]
+✅ Finished IC 272 successfully.
+🟡 Solving initial condition 273/529: [-0.9304989840373095, 14.677096464226764]
+✅ Finished IC 273 successfully.
+🟡 Solving initial condition 274/529: [-0.9304989840373095, 23.94385371419827]
+✅ Finished IC 274 successfully.
+🟡 Solving initial condition 275/529: [-0.9304989840373095, -44.812027102257076]
+✅ Finished IC 275 successfully.
+🟡 Solving initial condition 276/529: [-0.9304989840373095, -16.015784943586283]
+✅ Finished IC 276 successfully.
+🟡 Solving initial condition 277/529: [-1.97911882065654, 0.9958410088469023]
+✅ Finished IC 277 successfully.
+🟡 Solving initial condition 278/529: [-1.97911882065654, 7.310769592690534]
+✅ Finished IC 278 successfully.
+🟡 Solving initial condition 279/529: [-1.97911882065654, -51.83333458537078]
+✅ Finished IC 279 successfully.
+🟡 Solving initial condition 280/529: [-1.97911882065654, 18.702720748097235]
+✅ Finished IC 280 successfully.
+🟡 Solving initial condition 281/529: [-1.97911882065654, 47.50449902825163]
+✅ Finished IC 281 successfully.
+🟡 Solving initial condition 282/529: [-1.97911882065654, -34.587868788924055]
+✅ Finished IC 282 successfully.
+🟡 Solving initial condition 283/529: [-1.97911882065654, 55.57346088259875]
+✅ Finished IC 283 successfully.
+🟡 Solving initial condition 284/529: [-1.97911882065654, -23.978672321813733]
+✅ Finished IC 284 successfully.
+🟡 Solving initial condition 285/529: [-1.97911882065654, 30.322712065353784]
+✅ Finished IC 285 successfully.
+🟡 Solving initial condition 286/529: [-1.97911882065654, -4.799008994011018]
+✅ Finished IC 286 successfully.
+🟡 Solving initial condition 287/529: [-1.97911882065654, -19.010303790574184]
+✅ Finished IC 287 successfully.
+🟡 Solving initial condition 288/529: [-1.97911882065654, 11.738457872962044]
+✅ Finished IC 288 successfully.
+🟡 Solving initial condition 289/529: [-1.97911882065654, 38.176161836437316]
+✅ Finished IC 289 successfully.
+🟡 Solving initial condition 290/529: [-1.97911882065654, -31.14157047652497]
+✅ Finished IC 290 successfully.
+🟡 Solving initial condition 291/529: [-1.97911882065654, 43.052233275603896]
+✅ Finished IC 291 successfully.
+🟡 Solving initial condition 292/529: [-1.97911882065654, -58.051239435271015]
+✅ Finished IC 292 successfully.
+🟡 Solving initial condition 293/529: [-1.97911882065654, 49.68056588950806]
+✅ Finished IC 293 successfully.
+🟡 Solving initial condition 294/529: [-1.97911882065654, -12.365963885335148]
+✅ Finished IC 294 successfully.
+🟡 Solving initial condition 295/529: [-1.97911882065654, -42.85818349093722]
+✅ Finished IC 295 successfully.
+🟡 Solving initial condition 296/529: [-1.97911882065654, 14.677096464226764]
+✅ Finished IC 296 successfully.
+🟡 Solving initial condition 297/529: [-1.97911882065654, 23.94385371419827]
+✅ Finished IC 297 successfully.
+🟡 Solving initial condition 298/529: [-1.97911882065654, -44.812027102257076]
+✅ Finished IC 298 successfully.
+🟡 Solving initial condition 299/529: [-1.97911882065654, -16.015784943586283]
+✅ Finished IC 299 successfully.
+🟡 Solving initial condition 300/529: [0.040995446726434626, 0.9958410088469023]
+✅ Finished IC 300 successfully.
+🟡 Solving initial condition 301/529: [0.040995446726434626, 7.310769592690534]
+✅ Finished IC 301 successfully.
+🟡 Solving initial condition 302/529: [0.040995446726434626, -51.83333458537078]
+✅ Finished IC 302 successfully.
+🟡 Solving initial condition 303/529: [0.040995446726434626, 18.702720748097235]
+✅ Finished IC 303 successfully.
+🟡 Solving initial condition 304/529: [0.040995446726434626, 47.50449902825163]
+✅ Finished IC 304 successfully.
+🟡 Solving initial condition 305/529: [0.040995446726434626, -34.587868788924055]
+✅ Finished IC 305 successfully.
+🟡 Solving initial condition 306/529: [0.040995446726434626, 55.57346088259875]
+✅ Finished IC 306 successfully.
+🟡 Solving initial condition 307/529: [0.040995446726434626, -23.978672321813733]
+✅ Finished IC 307 successfully.
+🟡 Solving initial condition 308/529: [0.040995446726434626, 30.322712065353784]
+✅ Finished IC 308 successfully.
+🟡 Solving initial condition 309/529: [0.040995446726434626, -4.799008994011018]
+✅ Finished IC 309 successfully.
+🟡 Solving initial condition 310/529: [0.040995446726434626, -19.010303790574184]
+✅ Finished IC 310 successfully.
+🟡 Solving initial condition 311/529: [0.040995446726434626, 11.738457872962044]
+✅ Finished IC 311 successfully.
+🟡 Solving initial condition 312/529: [0.040995446726434626, 38.176161836437316]
+✅ Finished IC 312 successfully.
+🟡 Solving initial condition 313/529: [0.040995446726434626, -31.14157047652497]
+✅ Finished IC 313 successfully.
+🟡 Solving initial condition 314/529: [0.040995446726434626, 43.052233275603896]
+✅ Finished IC 314 successfully.
+🟡 Solving initial condition 315/529: [0.040995446726434626, -58.051239435271015]
+✅ Finished IC 315 successfully.
+🟡 Solving initial condition 316/529: [0.040995446726434626, 49.68056588950806]
+✅ Finished IC 316 successfully.
+🟡 Solving initial condition 317/529: [0.040995446726434626, -12.365963885335148]
+✅ Finished IC 317 successfully.
+🟡 Solving initial condition 318/529: [0.040995446726434626, -42.85818349093722]
+✅ Finished IC 318 successfully.
+🟡 Solving initial condition 319/529: [0.040995446726434626, 14.677096464226764]
+✅ Finished IC 319 successfully.
+🟡 Solving initial condition 320/529: [0.040995446726434626, 23.94385371419827]
+✅ Finished IC 320 successfully.
+🟡 Solving initial condition 321/529: [0.040995446726434626, -44.812027102257076]
+✅ Finished IC 321 successfully.
+🟡 Solving initial condition 322/529: [0.040995446726434626, -16.015784943586283]
+✅ Finished IC 322 successfully.
+🟡 Solving initial condition 323/529: [0.3797821649296993, 0.9958410088469023]
+✅ Finished IC 323 successfully.
+🟡 Solving initial condition 324/529: [0.3797821649296993, 7.310769592690534]
+✅ Finished IC 324 successfully.
+🟡 Solving initial condition 325/529: [0.3797821649296993, -51.83333458537078]
+✅ Finished IC 325 successfully.
+🟡 Solving initial condition 326/529: [0.3797821649296993, 18.702720748097235]
+✅ Finished IC 326 successfully.
+🟡 Solving initial condition 327/529: [0.3797821649296993, 47.50449902825163]
+✅ Finished IC 327 successfully.
+🟡 Solving initial condition 328/529: [0.3797821649296993, -34.587868788924055]
+✅ Finished IC 328 successfully.
+🟡 Solving initial condition 329/529: [0.3797821649296993, 55.57346088259875]
+✅ Finished IC 329 successfully.
+🟡 Solving initial condition 330/529: [0.3797821649296993, -23.978672321813733]
+✅ Finished IC 330 successfully.
+🟡 Solving initial condition 331/529: [0.3797821649296993, 30.322712065353784]
+✅ Finished IC 331 successfully.
+🟡 Solving initial condition 332/529: [0.3797821649296993, -4.799008994011018]
+✅ Finished IC 332 successfully.
+🟡 Solving initial condition 333/529: [0.3797821649296993, -19.010303790574184]
+✅ Finished IC 333 successfully.
+🟡 Solving initial condition 334/529: [0.3797821649296993, 11.738457872962044]
+✅ Finished IC 334 successfully.
+🟡 Solving initial condition 335/529: [0.3797821649296993, 38.176161836437316]
+✅ Finished IC 335 successfully.
+🟡 Solving initial condition 336/529: [0.3797821649296993, -31.14157047652497]
+✅ Finished IC 336 successfully.
+🟡 Solving initial condition 337/529: [0.3797821649296993, 43.052233275603896]
+✅ Finished IC 337 successfully.
+🟡 Solving initial condition 338/529: [0.3797821649296993, -58.051239435271015]
+✅ Finished IC 338 successfully.
+🟡 Solving initial condition 339/529: [0.3797821649296993, 49.68056588950806]
+✅ Finished IC 339 successfully.
+🟡 Solving initial condition 340/529: [0.3797821649296993, -12.365963885335148]
+✅ Finished IC 340 successfully.
+🟡 Solving initial condition 341/529: [0.3797821649296993, -42.85818349093722]
+✅ Finished IC 341 successfully.
+🟡 Solving initial condition 342/529: [0.3797821649296993, 14.677096464226764]
+✅ Finished IC 342 successfully.
+🟡 Solving initial condition 343/529: [0.3797821649296993, 23.94385371419827]
+✅ Finished IC 343 successfully.
+🟡 Solving initial condition 344/529: [0.3797821649296993, -44.812027102257076]
+✅ Finished IC 344 successfully.
+🟡 Solving initial condition 345/529: [0.3797821649296993, -16.015784943586283]
+✅ Finished IC 345 successfully.
+🟡 Solving initial condition 346/529: [-0.9596260172582838, 0.9958410088469023]
+✅ Finished IC 346 successfully.
+🟡 Solving initial condition 347/529: [-0.9596260172582838, 7.310769592690534]
+✅ Finished IC 347 successfully.
+🟡 Solving initial condition 348/529: [-0.9596260172582838, -51.83333458537078]
+✅ Finished IC 348 successfully.
+🟡 Solving initial condition 349/529: [-0.9596260172582838, 18.702720748097235]
+✅ Finished IC 349 successfully.
+🟡 Solving initial condition 350/529: [-0.9596260172582838, 47.50449902825163]
+✅ Finished IC 350 successfully.
+🟡 Solving initial condition 351/529: [-0.9596260172582838, -34.587868788924055]
+✅ Finished IC 351 successfully.
+🟡 Solving initial condition 352/529: [-0.9596260172582838, 55.57346088259875]
+✅ Finished IC 352 successfully.
+🟡 Solving initial condition 353/529: [-0.9596260172582838, -23.978672321813733]
+✅ Finished IC 353 successfully.
+🟡 Solving initial condition 354/529: [-0.9596260172582838, 30.322712065353784]
+✅ Finished IC 354 successfully.
+🟡 Solving initial condition 355/529: [-0.9596260172582838, -4.799008994011018]
+✅ Finished IC 355 successfully.
+🟡 Solving initial condition 356/529: [-0.9596260172582838, -19.010303790574184]
+✅ Finished IC 356 successfully.
+🟡 Solving initial condition 357/529: [-0.9596260172582838, 11.738457872962044]
+✅ Finished IC 357 successfully.
+🟡 Solving initial condition 358/529: [-0.9596260172582838, 38.176161836437316]
+✅ Finished IC 358 successfully.
+🟡 Solving initial condition 359/529: [-0.9596260172582838, -31.14157047652497]
+✅ Finished IC 359 successfully.
+🟡 Solving initial condition 360/529: [-0.9596260172582838, 43.052233275603896]
+✅ Finished IC 360 successfully.
+🟡 Solving initial condition 361/529: [-0.9596260172582838, -58.051239435271015]
+✅ Finished IC 361 successfully.
+🟡 Solving initial condition 362/529: [-0.9596260172582838, 49.68056588950806]
+✅ Finished IC 362 successfully.
+🟡 Solving initial condition 363/529: [-0.9596260172582838, -12.365963885335148]
+✅ Finished IC 363 successfully.
+🟡 Solving initial condition 364/529: [-0.9596260172582838, -42.85818349093722]
+✅ Finished IC 364 successfully.
+🟡 Solving initial condition 365/529: [-0.9596260172582838, 14.677096464226764]
+✅ Finished IC 365 successfully.
+🟡 Solving initial condition 366/529: [-0.9596260172582838, 23.94385371419827]
+✅ Finished IC 366 successfully.
+🟡 Solving initial condition 367/529: [-0.9596260172582838, -44.812027102257076]
+✅ Finished IC 367 successfully.
+🟡 Solving initial condition 368/529: [-0.9596260172582838, -16.015784943586283]
+✅ Finished IC 368 successfully.
+🟡 Solving initial condition 369/529: [-1.273370925986769, 0.9958410088469023]
+✅ Finished IC 369 successfully.
+🟡 Solving initial condition 370/529: [-1.273370925986769, 7.310769592690534]
+✅ Finished IC 370 successfully.
+🟡 Solving initial condition 371/529: [-1.273370925986769, -51.83333458537078]
+✅ Finished IC 371 successfully.
+🟡 Solving initial condition 372/529: [-1.273370925986769, 18.702720748097235]
+✅ Finished IC 372 successfully.
+🟡 Solving initial condition 373/529: [-1.273370925986769, 47.50449902825163]
+✅ Finished IC 373 successfully.
+🟡 Solving initial condition 374/529: [-1.273370925986769, -34.587868788924055]
+✅ Finished IC 374 successfully.
+🟡 Solving initial condition 375/529: [-1.273370925986769, 55.57346088259875]
+✅ Finished IC 375 successfully.
+🟡 Solving initial condition 376/529: [-1.273370925986769, -23.978672321813733]
+✅ Finished IC 376 successfully.
+🟡 Solving initial condition 377/529: [-1.273370925986769, 30.322712065353784]
+✅ Finished IC 377 successfully.
+🟡 Solving initial condition 378/529: [-1.273370925986769, -4.799008994011018]
+✅ Finished IC 378 successfully.
+🟡 Solving initial condition 379/529: [-1.273370925986769, -19.010303790574184]
+✅ Finished IC 379 successfully.
+🟡 Solving initial condition 380/529: [-1.273370925986769, 11.738457872962044]
+✅ Finished IC 380 successfully.
+🟡 Solving initial condition 381/529: [-1.273370925986769, 38.176161836437316]
+✅ Finished IC 381 successfully.
+🟡 Solving initial condition 382/529: [-1.273370925986769, -31.14157047652497]
+✅ Finished IC 382 successfully.
+🟡 Solving initial condition 383/529: [-1.273370925986769, 43.052233275603896]
+✅ Finished IC 383 successfully.
+🟡 Solving initial condition 384/529: [-1.273370925986769, -58.051239435271015]
+✅ Finished IC 384 successfully.
+🟡 Solving initial condition 385/529: [-1.273370925986769, 49.68056588950806]
+✅ Finished IC 385 successfully.
+🟡 Solving initial condition 386/529: [-1.273370925986769, -12.365963885335148]
+✅ Finished IC 386 successfully.
+🟡 Solving initial condition 387/529: [-1.273370925986769, -42.85818349093722]
+✅ Finished IC 387 successfully.
+🟡 Solving initial condition 388/529: [-1.273370925986769, 14.677096464226764]
+✅ Finished IC 388 successfully.
+🟡 Solving initial condition 389/529: [-1.273370925986769, 23.94385371419827]
+✅ Finished IC 389 successfully.
+🟡 Solving initial condition 390/529: [-1.273370925986769, -44.812027102257076]
+✅ Finished IC 390 successfully.
+🟡 Solving initial condition 391/529: [-1.273370925986769, -16.015784943586283]
+✅ Finished IC 391 successfully.
+🟡 Solving initial condition 392/529: [1.2382774388772653, 0.9958410088469023]
+✅ Finished IC 392 successfully.
+🟡 Solving initial condition 393/529: [1.2382774388772653, 7.310769592690534]
+✅ Finished IC 393 successfully.
+🟡 Solving initial condition 394/529: [1.2382774388772653, -51.83333458537078]
+✅ Finished IC 394 successfully.
+🟡 Solving initial condition 395/529: [1.2382774388772653, 18.702720748097235]
+✅ Finished IC 395 successfully.
+🟡 Solving initial condition 396/529: [1.2382774388772653, 47.50449902825163]
+✅ Finished IC 396 successfully.
+🟡 Solving initial condition 397/529: [1.2382774388772653, -34.587868788924055]
+✅ Finished IC 397 successfully.
+🟡 Solving initial condition 398/529: [1.2382774388772653, 55.57346088259875]
+✅ Finished IC 398 successfully.
+🟡 Solving initial condition 399/529: [1.2382774388772653, -23.978672321813733]
+✅ Finished IC 399 successfully.
+🟡 Solving initial condition 400/529: [1.2382774388772653, 30.322712065353784]
+✅ Finished IC 400 successfully.
+🟡 Solving initial condition 401/529: [1.2382774388772653, -4.799008994011018]
+✅ Finished IC 401 successfully.
+🟡 Solving initial condition 402/529: [1.2382774388772653, -19.010303790574184]
+✅ Finished IC 402 successfully.
+🟡 Solving initial condition 403/529: [1.2382774388772653, 11.738457872962044]
+✅ Finished IC 403 successfully.
+🟡 Solving initial condition 404/529: [1.2382774388772653, 38.176161836437316]
+✅ Finished IC 404 successfully.
+🟡 Solving initial condition 405/529: [1.2382774388772653, -31.14157047652497]
+✅ Finished IC 405 successfully.
+🟡 Solving initial condition 406/529: [1.2382774388772653, 43.052233275603896]
+✅ Finished IC 406 successfully.
+🟡 Solving initial condition 407/529: [1.2382774388772653, -58.051239435271015]
+✅ Finished IC 407 successfully.
+🟡 Solving initial condition 408/529: [1.2382774388772653, 49.68056588950806]
+✅ Finished IC 408 successfully.
+🟡 Solving initial condition 409/529: [1.2382774388772653, -12.365963885335148]
+✅ Finished IC 409 successfully.
+🟡 Solving initial condition 410/529: [1.2382774388772653, -42.85818349093722]
+✅ Finished IC 410 successfully.
+🟡 Solving initial condition 411/529: [1.2382774388772653, 14.677096464226764]
+✅ Finished IC 411 successfully.
+🟡 Solving initial condition 412/529: [1.2382774388772653, 23.94385371419827]
+✅ Finished IC 412 successfully.
+🟡 Solving initial condition 413/529: [1.2382774388772653, -44.812027102257076]
+✅ Finished IC 413 successfully.
+🟡 Solving initial condition 414/529: [1.2382774388772653, -16.015784943586283]
+✅ Finished IC 414 successfully.
+🟡 Solving initial condition 415/529: [0.4774990616291386, 0.9958410088469023]
+✅ Finished IC 415 successfully.
+🟡 Solving initial condition 416/529: [0.4774990616291386, 7.310769592690534]
+✅ Finished IC 416 successfully.
+🟡 Solving initial condition 417/529: [0.4774990616291386, -51.83333458537078]
+✅ Finished IC 417 successfully.
+🟡 Solving initial condition 418/529: [0.4774990616291386, 18.702720748097235]
+✅ Finished IC 418 successfully.
+🟡 Solving initial condition 419/529: [0.4774990616291386, 47.50449902825163]
+✅ Finished IC 419 successfully.
+🟡 Solving initial condition 420/529: [0.4774990616291386, -34.587868788924055]
+✅ Finished IC 420 successfully.
+🟡 Solving initial condition 421/529: [0.4774990616291386, 55.57346088259875]
+✅ Finished IC 421 successfully.
+🟡 Solving initial condition 422/529: [0.4774990616291386, -23.978672321813733]
+✅ Finished IC 422 successfully.
+🟡 Solving initial condition 423/529: [0.4774990616291386, 30.322712065353784]
+✅ Finished IC 423 successfully.
+🟡 Solving initial condition 424/529: [0.4774990616291386, -4.799008994011018]
+✅ Finished IC 424 successfully.
+🟡 Solving initial condition 425/529: [0.4774990616291386, -19.010303790574184]
+✅ Finished IC 425 successfully.
+🟡 Solving initial condition 426/529: [0.4774990616291386, 11.738457872962044]
+✅ Finished IC 426 successfully.
+🟡 Solving initial condition 427/529: [0.4774990616291386, 38.176161836437316]
+✅ Finished IC 427 successfully.
+🟡 Solving initial condition 428/529: [0.4774990616291386, -31.14157047652497]
+✅ Finished IC 428 successfully.
+🟡 Solving initial condition 429/529: [0.4774990616291386, 43.052233275603896]
+✅ Finished IC 429 successfully.
+🟡 Solving initial condition 430/529: [0.4774990616291386, -58.051239435271015]
+✅ Finished IC 430 successfully.
+🟡 Solving initial condition 431/529: [0.4774990616291386, 49.68056588950806]
+✅ Finished IC 431 successfully.
+🟡 Solving initial condition 432/529: [0.4774990616291386, -12.365963885335148]
+✅ Finished IC 432 successfully.
+🟡 Solving initial condition 433/529: [0.4774990616291386, -42.85818349093722]
+✅ Finished IC 433 successfully.
+🟡 Solving initial condition 434/529: [0.4774990616291386, 14.677096464226764]
+✅ Finished IC 434 successfully.
+🟡 Solving initial condition 435/529: [0.4774990616291386, 23.94385371419827]
+✅ Finished IC 435 successfully.
+🟡 Solving initial condition 436/529: [0.4774990616291386, -44.812027102257076]
+✅ Finished IC 436 successfully.
+🟡 Solving initial condition 437/529: [0.4774990616291386, -16.015784943586283]
+✅ Finished IC 437 successfully.
+🟡 Solving initial condition 438/529: [-2.8295792042602077, 0.9958410088469023]
+✅ Finished IC 438 successfully.
+🟡 Solving initial condition 439/529: [-2.8295792042602077, 7.310769592690534]
+✅ Finished IC 439 successfully.
+🟡 Solving initial condition 440/529: [-2.8295792042602077, -51.83333458537078]
+✅ Finished IC 440 successfully.
+🟡 Solving initial condition 441/529: [-2.8295792042602077, 18.702720748097235]
+✅ Finished IC 441 successfully.
+🟡 Solving initial condition 442/529: [-2.8295792042602077, 47.50449902825163]
+✅ Finished IC 442 successfully.
+🟡 Solving initial condition 443/529: [-2.8295792042602077, -34.587868788924055]
+✅ Finished IC 443 successfully.
+🟡 Solving initial condition 444/529: [-2.8295792042602077, 55.57346088259875]
+✅ Finished IC 444 successfully.
+🟡 Solving initial condition 445/529: [-2.8295792042602077, -23.978672321813733]
+✅ Finished IC 445 successfully.
+🟡 Solving initial condition 446/529: [-2.8295792042602077, 30.322712065353784]
+✅ Finished IC 446 successfully.
+🟡 Solving initial condition 447/529: [-2.8295792042602077, -4.799008994011018]
+✅ Finished IC 447 successfully.
+🟡 Solving initial condition 448/529: [-2.8295792042602077, -19.010303790574184]
+✅ Finished IC 448 successfully.
+🟡 Solving initial condition 449/529: [-2.8295792042602077, 11.738457872962044]
+✅ Finished IC 449 successfully.
+🟡 Solving initial condition 450/529: [-2.8295792042602077, 38.176161836437316]
+✅ Finished IC 450 successfully.
+🟡 Solving initial condition 451/529: [-2.8295792042602077, -31.14157047652497]
+✅ Finished IC 451 successfully.
+🟡 Solving initial condition 452/529: [-2.8295792042602077, 43.052233275603896]
+✅ Finished IC 452 successfully.
+🟡 Solving initial condition 453/529: [-2.8295792042602077, -58.051239435271015]
+✅ Finished IC 453 successfully.
+🟡 Solving initial condition 454/529: [-2.8295792042602077, 49.68056588950806]
+✅ Finished IC 454 successfully.
+🟡 Solving initial condition 455/529: [-2.8295792042602077, -12.365963885335148]
+✅ Finished IC 455 successfully.
+🟡 Solving initial condition 456/529: [-2.8295792042602077, -42.85818349093722]
+✅ Finished IC 456 successfully.
+🟡 Solving initial condition 457/529: [-2.8295792042602077, 14.677096464226764]
+✅ Finished IC 457 successfully.
+🟡 Solving initial condition 458/529: [-2.8295792042602077, 23.94385371419827]
+✅ Finished IC 458 successfully.
+🟡 Solving initial condition 459/529: [-2.8295792042602077, -44.812027102257076]
+✅ Finished IC 459 successfully.
+🟡 Solving initial condition 460/529: [-2.8295792042602077, -16.015784943586283]
+✅ Finished IC 460 successfully.
+🟡 Solving initial condition 461/529: [2.6620043428092313, 0.9958410088469023]
+✅ Finished IC 461 successfully.
+🟡 Solving initial condition 462/529: [2.6620043428092313, 7.310769592690534]
+✅ Finished IC 462 successfully.
+🟡 Solving initial condition 463/529: [2.6620043428092313, -51.83333458537078]
+✅ Finished IC 463 successfully.
+🟡 Solving initial condition 464/529: [2.6620043428092313, 18.702720748097235]
+✅ Finished IC 464 successfully.
+🟡 Solving initial condition 465/529: [2.6620043428092313, 47.50449902825163]
+✅ Finished IC 465 successfully.
+🟡 Solving initial condition 466/529: [2.6620043428092313, -34.587868788924055]
+✅ Finished IC 466 successfully.
+🟡 Solving initial condition 467/529: [2.6620043428092313, 55.57346088259875]
+✅ Finished IC 467 successfully.
+🟡 Solving initial condition 468/529: [2.6620043428092313, -23.978672321813733]
+✅ Finished IC 468 successfully.
+🟡 Solving initial condition 469/529: [2.6620043428092313, 30.322712065353784]
+✅ Finished IC 469 successfully.
+🟡 Solving initial condition 470/529: [2.6620043428092313, -4.799008994011018]
+✅ Finished IC 470 successfully.
+🟡 Solving initial condition 471/529: [2.6620043428092313, -19.010303790574184]
+✅ Finished IC 471 successfully.
+🟡 Solving initial condition 472/529: [2.6620043428092313, 11.738457872962044]
+✅ Finished IC 472 successfully.
+🟡 Solving initial condition 473/529: [2.6620043428092313, 38.176161836437316]
+✅ Finished IC 473 successfully.
+🟡 Solving initial condition 474/529: [2.6620043428092313, -31.14157047652497]
+✅ Finished IC 474 successfully.
+🟡 Solving initial condition 475/529: [2.6620043428092313, 43.052233275603896]
+✅ Finished IC 475 successfully.
+🟡 Solving initial condition 476/529: [2.6620043428092313, -58.051239435271015]
+✅ Finished IC 476 successfully.
+🟡 Solving initial condition 477/529: [2.6620043428092313, 49.68056588950806]
+✅ Finished IC 477 successfully.
+🟡 Solving initial condition 478/529: [2.6620043428092313, -12.365963885335148]
+✅ Finished IC 478 successfully.
+🟡 Solving initial condition 479/529: [2.6620043428092313, -42.85818349093722]
+✅ Finished IC 479 successfully.
+🟡 Solving initial condition 480/529: [2.6620043428092313, 14.677096464226764]
+✅ Finished IC 480 successfully.
+🟡 Solving initial condition 481/529: [2.6620043428092313, 23.94385371419827]
+✅ Finished IC 481 successfully.
+🟡 Solving initial condition 482/529: [2.6620043428092313, -44.812027102257076]
+✅ Finished IC 482 successfully.
+🟡 Solving initial condition 483/529: [2.6620043428092313, -16.015784943586283]
+✅ Finished IC 483 successfully.
+🟡 Solving initial condition 484/529: [0.9983907252965762, 0.9958410088469023]
+✅ Finished IC 484 successfully.
+🟡 Solving initial condition 485/529: [0.9983907252965762, 7.310769592690534]
+✅ Finished IC 485 successfully.
+🟡 Solving initial condition 486/529: [0.9983907252965762, -51.83333458537078]
+✅ Finished IC 486 successfully.
+🟡 Solving initial condition 487/529: [0.9983907252965762, 18.702720748097235]
+✅ Finished IC 487 successfully.
+🟡 Solving initial condition 488/529: [0.9983907252965762, 47.50449902825163]
+✅ Finished IC 488 successfully.
+🟡 Solving initial condition 489/529: [0.9983907252965762, -34.587868788924055]
+✅ Finished IC 489 successfully.
+🟡 Solving initial condition 490/529: [0.9983907252965762, 55.57346088259875]
+✅ Finished IC 490 successfully.
+🟡 Solving initial condition 491/529: [0.9983907252965762, -23.978672321813733]
+✅ Finished IC 491 successfully.
+🟡 Solving initial condition 492/529: [0.9983907252965762, 30.322712065353784]
+✅ Finished IC 492 successfully.
+🟡 Solving initial condition 493/529: [0.9983907252965762, -4.799008994011018]
+✅ Finished IC 493 successfully.
+🟡 Solving initial condition 494/529: [0.9983907252965762, -19.010303790574184]
+✅ Finished IC 494 successfully.
+🟡 Solving initial condition 495/529: [0.9983907252965762, 11.738457872962044]
+✅ Finished IC 495 successfully.
+🟡 Solving initial condition 496/529: [0.9983907252965762, 38.176161836437316]
+✅ Finished IC 496 successfully.
+🟡 Solving initial condition 497/529: [0.9983907252965762, -31.14157047652497]
+✅ Finished IC 497 successfully.
+🟡 Solving initial condition 498/529: [0.9983907252965762, 43.052233275603896]
+✅ Finished IC 498 successfully.
+🟡 Solving initial condition 499/529: [0.9983907252965762, -58.051239435271015]
+✅ Finished IC 499 successfully.
+🟡 Solving initial condition 500/529: [0.9983907252965762, 49.68056588950806]
+✅ Finished IC 500 successfully.
+🟡 Solving initial condition 501/529: [0.9983907252965762, -12.365963885335148]
+✅ Finished IC 501 successfully.
+🟡 Solving initial condition 502/529: [0.9983907252965762, -42.85818349093722]
+✅ Finished IC 502 successfully.
+🟡 Solving initial condition 503/529: [0.9983907252965762, 14.677096464226764]
+✅ Finished IC 503 successfully.
+🟡 Solving initial condition 504/529: [0.9983907252965762, 23.94385371419827]
+✅ Finished IC 504 successfully.
+🟡 Solving initial condition 505/529: [0.9983907252965762, -44.812027102257076]
+✅ Finished IC 505 successfully.
+🟡 Solving initial condition 506/529: [0.9983907252965762, -16.015784943586283]
+✅ Finished IC 506 successfully.
+🟡 Solving initial condition 507/529: [-2.1863002846705744, 0.9958410088469023]
+✅ Finished IC 507 successfully.
+🟡 Solving initial condition 508/529: [-2.1863002846705744, 7.310769592690534]
+✅ Finished IC 508 successfully.
+🟡 Solving initial condition 509/529: [-2.1863002846705744, -51.83333458537078]
+✅ Finished IC 509 successfully.
+🟡 Solving initial condition 510/529: [-2.1863002846705744, 18.702720748097235]
+✅ Finished IC 510 successfully.
+🟡 Solving initial condition 511/529: [-2.1863002846705744, 47.50449902825163]
+✅ Finished IC 511 successfully.
+🟡 Solving initial condition 512/529: [-2.1863002846705744, -34.587868788924055]
+✅ Finished IC 512 successfully.
+🟡 Solving initial condition 513/529: [-2.1863002846705744, 55.57346088259875]
+✅ Finished IC 513 successfully.
+🟡 Solving initial condition 514/529: [-2.1863002846705744, -23.978672321813733]
+✅ Finished IC 514 successfully.
+🟡 Solving initial condition 515/529: [-2.1863002846705744, 30.322712065353784]
+✅ Finished IC 515 successfully.
+🟡 Solving initial condition 516/529: [-2.1863002846705744, -4.799008994011018]
+✅ Finished IC 516 successfully.
+🟡 Solving initial condition 517/529: [-2.1863002846705744, -19.010303790574184]
+✅ Finished IC 517 successfully.
+🟡 Solving initial condition 518/529: [-2.1863002846705744, 11.738457872962044]
+✅ Finished IC 518 successfully.
+🟡 Solving initial condition 519/529: [-2.1863002846705744, 38.176161836437316]
+✅ Finished IC 519 successfully.
+🟡 Solving initial condition 520/529: [-2.1863002846705744, -31.14157047652497]
+✅ Finished IC 520 successfully.
+🟡 Solving initial condition 521/529: [-2.1863002846705744, 43.052233275603896]
+✅ Finished IC 521 successfully.
+🟡 Solving initial condition 522/529: [-2.1863002846705744, -58.051239435271015]
+✅ Finished IC 522 successfully.
+🟡 Solving initial condition 523/529: [-2.1863002846705744, 49.68056588950806]
+✅ Finished IC 523 successfully.
+🟡 Solving initial condition 524/529: [-2.1863002846705744, -12.365963885335148]
+✅ Finished IC 524 successfully.
+🟡 Solving initial condition 525/529: [-2.1863002846705744, -42.85818349093722]
+✅ Finished IC 525 successfully.
+🟡 Solving initial condition 526/529: [-2.1863002846705744, 14.677096464226764]
+✅ Finished IC 526 successfully.
+🟡 Solving initial condition 527/529: [-2.1863002846705744, 23.94385371419827]
+✅ Finished IC 527 successfully.
+🟡 Solving initial condition 528/529: [-2.1863002846705744, -44.812027102257076]
+✅ Finished IC 528 successfully.
+🟡 Solving initial condition 529/529: [-2.1863002846705744, -16.015784943586283]
+✅ Finished IC 529 successfully.
+Mean time per iteration:  0.0014046761849877513  and std:  0.00011878916963732408
+Time taken to solve the model for 529 initial conditions: 0.7430746555328369 seconds.
+[DEBUG] t_span = (0, 1)
+Number of files in the directory:  0
+Saved dataset "('GFL_2nd_order', 'dataset_v1')".
