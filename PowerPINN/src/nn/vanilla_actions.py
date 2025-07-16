@@ -76,8 +76,7 @@ class VanillaNeuralNetworkActions():
 
     """
 
-    def __init__(self, cfg,
-                 modelling_full):  # The modelling equations are used, must be predefined, more choices to be added such as dynamic modelling
+    def __init__(self, cfg,modelling_full):  # The modelling equations are used, must be predefined, more choices to be added such as dynamic modelling
         self.cfg = cfg
         set_random_seeds(cfg.seed)  # set all seeds
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -192,8 +191,7 @@ class VanillaNeuralNetworkActions():
             raise Exception("Optimizer not found")
         return optimizer
 
-    def custom_learning_rate(self,
-                             lr_name):  # Choose between "StepLR", "MultiStepLR", "ExponentialLR", "ReduceLROnPlateau
+    def custom_learning_rate(self, lr_name):  # Choose between "StepLR", "MultiStepLR", "ExponentialLR", "ReduceLROnPlateau
         """
         This function defines the learning rate scheduler
 
@@ -625,6 +623,14 @@ class VanillaNeuralNetworkActions():
         sample_per_traj = int(self.data_loader.sample_per_traj)
 
         x_test, y_test = self.data_loader.define_test_data(starting_traj, sample_per_traj, total_traj)
+
+        # 在 vanilla/test_model 里加：
+        print("sample_per_traj from loader:", self.data_loader.sample_per_traj)
+        print("x_test shape:", x_test.shape)
+        print("x_test time range:", x_test[:, 0].min().item(), "→", x_test[:, 0].max().item())
+        # 临时：重新算 pts_per_traj
+        pts_per_traj = int(len(x_test) / total_traj)
+
         self.model.eval()
         y_pred = self.forward_pass(x_test)
         test_loss = self.criterion(y_pred, y_test)

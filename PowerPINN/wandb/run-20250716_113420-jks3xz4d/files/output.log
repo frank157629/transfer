@@ -1,0 +1,29 @@
+Is cuda available? False
+Number of different initial conditions:  9
+['delta', 'omega'] Variables
+[[-3.14159, 3.14159], [-60, 60]] Set of values for init conditions
+[3, 3] Iterations per value
+Shape: (9, 2)
+🟡 Solving initial condition 1/9: [0.8201084402938852, 9.304854841552384]
+✅ Finished IC 1 successfully.
+🟡 Solving initial condition 2/9: [0.8201084402938852, 57.178150708786546]
+✅ Finished IC 2 successfully.
+🟡 Solving initial condition 3/9: [0.8201084402938852, -33.25193715496111]
+✅ Finished IC 3 successfully.
+🟡 Solving initial condition 4/9: [1.643807996749591, 9.304854841552384]
+✅ Finished IC 4 successfully.
+🟡 Solving initial condition 5/9: [1.643807996749591, 57.178150708786546]
+✅ Finished IC 5 successfully.
+🟡 Solving initial condition 6/9: [1.643807996749591, -33.25193715496111]
+✅ Finished IC 6 successfully.
+🟡 Solving initial condition 7/9: [-3.1049584931636, 9.304854841552384]
+✅ Finished IC 7 successfully.
+🟡 Solving initial condition 8/9: [-3.1049584931636, 57.178150708786546]
+✅ Finished IC 8 successfully.
+🟡 Solving initial condition 9/9: [-3.1049584931636, -33.25193715496111]
+✅ Finished IC 9 successfully.
+Mean time per iteration:  0.0015136665768093532  and std:  0.00011427715170301504
+Time taken to solve the model for 9 initial conditions: 0.01362299919128418 seconds.
+[DEBUG] t_span = (0, 1)
+Number of files in the directory:  0
+Saved dataset "('GFL_2nd_order', 'dataset_v1')".

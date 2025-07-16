@@ -1,0 +1,17 @@
+GFL_2nd_order data
+Loading data from:  ./data/GFL_2nd_order/dataset_v1.pkl
+/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/src/nn/nn_dataset.py:178: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at /Users/runner/work/pytorch/pytorch/pytorch/torch/csrc/utils/tensor_new.cpp:264.)
+  training_sample = torch.tensor(training_sample, dtype=torch.float32) # convert the trajectory to tensor
+Number of training samples:  80000 Number of validation samples:  10000 Number of testing samples:  10000
+Number of different initial conditions for collocation points:  100
+['delta', 'omega'] Variables
+[[-3.14159, 3.14159], [-60, 60]] Set of values for init conditions
+[10, 10] Iterations per value
+Shape: (100, 2)
+Selected deep learning model:  DynamicNN
+Number of labeled training data: 80000 Number of collocation points: 100000 Number of collocation points (IC): 100 Number of validation data: 10000
+Weights initialized as:  [1, 0, 0, 0]  are updated with scheme:  Static
+getting in training
+Validation loss decreased (inf --> 60.455639).  Saving model ...
+type:  validation, total_traj: 10, max_traj 20
+Epoch [50/25000], Loss: 118.9142, Loss_data: 118.9142, Loss_dt: 69657.6797, Loss_pinn: 253418.8438 , Loss_pinn_ic : 591.0231 61.141517639160156 46510.0546875

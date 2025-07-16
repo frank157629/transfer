@@ -1,0 +1,211 @@
+Is cuda available? False
+Number of different initial conditions:  100
+['delta', 'omega'] Variables
+[[-3.14159, 3.14159], [-60, 60]] Set of values for init conditions
+[10, 10] Iterations per value
+Shape: (100, 2)
+🟡 Solving initial condition 1/100: [-1.0908904997258202, 56.40469092896463]
+✅ Finished IC 1 successfully.
+🟡 Solving initial condition 2/100: [-1.0908904997258202, -37.38628287716126]
+✅ Finished IC 2 successfully.
+🟡 Solving initial condition 3/100: [-1.0908904997258202, 31.828882644473467]
+✅ Finished IC 3 successfully.
+🟡 Solving initial condition 4/100: [-1.0908904997258202, -9.27355372352379]
+✅ Finished IC 4 successfully.
+🟡 Solving initial condition 5/100: [-1.0908904997258202, -52.10704585895803]
+✅ Finished IC 5 successfully.
+🟡 Solving initial condition 6/100: [-1.0908904997258202, 19.338423204687388]
+✅ Finished IC 6 successfully.
+🟡 Solving initial condition 7/100: [-1.0908904997258202, -14.16289644364246]
+✅ Finished IC 7 successfully.
+🟡 Solving initial condition 8/100: [-1.0908904997258202, -28.933069877988306]
+✅ Finished IC 8 successfully.
+🟡 Solving initial condition 9/100: [-1.0908904997258202, 1.8929111161348402]
+✅ Finished IC 9 successfully.
+🟡 Solving initial condition 10/100: [-1.0908904997258202, 43.23868294672468]
+✅ Finished IC 10 successfully.
+🟡 Solving initial condition 11/100: [2.2110623182139326, 56.40469092896463]
+✅ Finished IC 11 successfully.
+🟡 Solving initial condition 12/100: [2.2110623182139326, -37.38628287716126]
+✅ Finished IC 12 successfully.
+🟡 Solving initial condition 13/100: [2.2110623182139326, 31.828882644473467]
+✅ Finished IC 13 successfully.
+🟡 Solving initial condition 14/100: [2.2110623182139326, -9.27355372352379]
+✅ Finished IC 14 successfully.
+🟡 Solving initial condition 15/100: [2.2110623182139326, -52.10704585895803]
+✅ Finished IC 15 successfully.
+🟡 Solving initial condition 16/100: [2.2110623182139326, 19.338423204687388]
+✅ Finished IC 16 successfully.
+🟡 Solving initial condition 17/100: [2.2110623182139326, -14.16289644364246]
+✅ Finished IC 17 successfully.
+🟡 Solving initial condition 18/100: [2.2110623182139326, -28.933069877988306]
+✅ Finished IC 18 successfully.
+🟡 Solving initial condition 19/100: [2.2110623182139326, 1.8929111161348402]
+✅ Finished IC 19 successfully.
+🟡 Solving initial condition 20/100: [2.2110623182139326, 43.23868294672468]
+✅ Finished IC 20 successfully.
+🟡 Solving initial condition 21/100: [-1.6923902954705974, 56.40469092896463]
+✅ Finished IC 21 successfully.
+🟡 Solving initial condition 22/100: [-1.6923902954705974, -37.38628287716126]
+✅ Finished IC 22 successfully.
+🟡 Solving initial condition 23/100: [-1.6923902954705974, 31.828882644473467]
+✅ Finished IC 23 successfully.
+🟡 Solving initial condition 24/100: [-1.6923902954705974, -9.27355372352379]
+✅ Finished IC 24 successfully.
+🟡 Solving initial condition 25/100: [-1.6923902954705974, -52.10704585895803]
+✅ Finished IC 25 successfully.
+🟡 Solving initial condition 26/100: [-1.6923902954705974, 19.338423204687388]
+✅ Finished IC 26 successfully.
+🟡 Solving initial condition 27/100: [-1.6923902954705974, -14.16289644364246]
+✅ Finished IC 27 successfully.
+🟡 Solving initial condition 28/100: [-1.6923902954705974, -28.933069877988306]
+✅ Finished IC 28 successfully.
+🟡 Solving initial condition 29/100: [-1.6923902954705974, 1.8929111161348402]
+✅ Finished IC 29 successfully.
+🟡 Solving initial condition 30/100: [-1.6923902954705974, 43.23868294672468]
+✅ Finished IC 30 successfully.
+🟡 Solving initial condition 31/100: [-2.5850121638465455, 56.40469092896463]
+✅ Finished IC 31 successfully.
+🟡 Solving initial condition 32/100: [-2.5850121638465455, -37.38628287716126]
+✅ Finished IC 32 successfully.
+🟡 Solving initial condition 33/100: [-2.5850121638465455, 31.828882644473467]
+✅ Finished IC 33 successfully.
+🟡 Solving initial condition 34/100: [-2.5850121638465455, -9.27355372352379]
+✅ Finished IC 34 successfully.
+🟡 Solving initial condition 35/100: [-2.5850121638465455, -52.10704585895803]
+✅ Finished IC 35 successfully.
+🟡 Solving initial condition 36/100: [-2.5850121638465455, 19.338423204687388]
+✅ Finished IC 36 successfully.
+🟡 Solving initial condition 37/100: [-2.5850121638465455, -14.16289644364246]
+✅ Finished IC 37 successfully.
+🟡 Solving initial condition 38/100: [-2.5850121638465455, -28.933069877988306]
+✅ Finished IC 38 successfully.
+🟡 Solving initial condition 39/100: [-2.5850121638465455, 1.8929111161348402]
+✅ Finished IC 39 successfully.
+🟡 Solving initial condition 40/100: [-2.5850121638465455, 43.23868294672468]
+✅ Finished IC 40 successfully.
+🟡 Solving initial condition 41/100: [1.768252368676987, 56.40469092896463]
+✅ Finished IC 41 successfully.
+🟡 Solving initial condition 42/100: [1.768252368676987, -37.38628287716126]
+✅ Finished IC 42 successfully.
+🟡 Solving initial condition 43/100: [1.768252368676987, 31.828882644473467]
+✅ Finished IC 43 successfully.
+🟡 Solving initial condition 44/100: [1.768252368676987, -9.27355372352379]
+✅ Finished IC 44 successfully.
+🟡 Solving initial condition 45/100: [1.768252368676987, -52.10704585895803]
+✅ Finished IC 45 successfully.
+🟡 Solving initial condition 46/100: [1.768252368676987, 19.338423204687388]
+✅ Finished IC 46 successfully.
+🟡 Solving initial condition 47/100: [1.768252368676987, -14.16289644364246]
+✅ Finished IC 47 successfully.
+🟡 Solving initial condition 48/100: [1.768252368676987, -28.933069877988306]
+✅ Finished IC 48 successfully.
+🟡 Solving initial condition 49/100: [1.768252368676987, 1.8929111161348402]
+✅ Finished IC 49 successfully.
+🟡 Solving initial condition 50/100: [1.768252368676987, 43.23868294672468]
+✅ Finished IC 50 successfully.
+🟡 Solving initial condition 51/100: [0.37270401661487584, 56.40469092896463]
+✅ Finished IC 51 successfully.
+🟡 Solving initial condition 52/100: [0.37270401661487584, -37.38628287716126]
+✅ Finished IC 52 successfully.
+🟡 Solving initial condition 53/100: [0.37270401661487584, 31.828882644473467]
+✅ Finished IC 53 successfully.
+🟡 Solving initial condition 54/100: [0.37270401661487584, -9.27355372352379]
+✅ Finished IC 54 successfully.
+🟡 Solving initial condition 55/100: [0.37270401661487584, -52.10704585895803]
+✅ Finished IC 55 successfully.
+🟡 Solving initial condition 56/100: [0.37270401661487584, 19.338423204687388]
+✅ Finished IC 56 successfully.
+🟡 Solving initial condition 57/100: [0.37270401661487584, -14.16289644364246]
+✅ Finished IC 57 successfully.
+🟡 Solving initial condition 58/100: [0.37270401661487584, -28.933069877988306]
+✅ Finished IC 58 successfully.
+🟡 Solving initial condition 59/100: [0.37270401661487584, 1.8929111161348402]
+✅ Finished IC 59 successfully.
+🟡 Solving initial condition 60/100: [0.37270401661487584, 43.23868294672468]
+✅ Finished IC 60 successfully.
+🟡 Solving initial condition 61/100: [-2.307805679095152, 56.40469092896463]
+✅ Finished IC 61 successfully.
+🟡 Solving initial condition 62/100: [-2.307805679095152, -37.38628287716126]
+✅ Finished IC 62 successfully.
+🟡 Solving initial condition 63/100: [-2.307805679095152, 31.828882644473467]
+✅ Finished IC 63 successfully.
+🟡 Solving initial condition 64/100: [-2.307805679095152, -9.27355372352379]
+✅ Finished IC 64 successfully.
+🟡 Solving initial condition 65/100: [-2.307805679095152, -52.10704585895803]
+✅ Finished IC 65 successfully.
+🟡 Solving initial condition 66/100: [-2.307805679095152, 19.338423204687388]
+✅ Finished IC 66 successfully.
+🟡 Solving initial condition 67/100: [-2.307805679095152, -14.16289644364246]
+✅ Finished IC 67 successfully.
+🟡 Solving initial condition 68/100: [-2.307805679095152, -28.933069877988306]
+✅ Finished IC 68 successfully.
+🟡 Solving initial condition 69/100: [-2.307805679095152, 1.8929111161348402]
+✅ Finished IC 69 successfully.
+🟡 Solving initial condition 70/100: [-2.307805679095152, 43.23868294672468]
+✅ Finished IC 70 successfully.
+🟡 Solving initial condition 71/100: [-0.08987842420147496, 56.40469092896463]
+✅ Finished IC 71 successfully.
+🟡 Solving initial condition 72/100: [-0.08987842420147496, -37.38628287716126]
+✅ Finished IC 72 successfully.
+🟡 Solving initial condition 73/100: [-0.08987842420147496, 31.828882644473467]
+✅ Finished IC 73 successfully.
+🟡 Solving initial condition 74/100: [-0.08987842420147496, -9.27355372352379]
+✅ Finished IC 74 successfully.
+🟡 Solving initial condition 75/100: [-0.08987842420147496, -52.10704585895803]
+✅ Finished IC 75 successfully.
+🟡 Solving initial condition 76/100: [-0.08987842420147496, 19.338423204687388]
+✅ Finished IC 76 successfully.
+🟡 Solving initial condition 77/100: [-0.08987842420147496, -14.16289644364246]
+✅ Finished IC 77 successfully.
+🟡 Solving initial condition 78/100: [-0.08987842420147496, -28.933069877988306]
+✅ Finished IC 78 successfully.
+🟡 Solving initial condition 79/100: [-0.08987842420147496, 1.8929111161348402]
+✅ Finished IC 79 successfully.
+🟡 Solving initial condition 80/100: [-0.08987842420147496, 43.23868294672468]
+✅ Finished IC 80 successfully.
+🟡 Solving initial condition 81/100: [0.6701830159456321, 56.40469092896463]
+✅ Finished IC 81 successfully.
+🟡 Solving initial condition 82/100: [0.6701830159456321, -37.38628287716126]
+✅ Finished IC 82 successfully.
+🟡 Solving initial condition 83/100: [0.6701830159456321, 31.828882644473467]
+✅ Finished IC 83 successfully.
+🟡 Solving initial condition 84/100: [0.6701830159456321, -9.27355372352379]
+✅ Finished IC 84 successfully.
+🟡 Solving initial condition 85/100: [0.6701830159456321, -52.10704585895803]
+✅ Finished IC 85 successfully.
+🟡 Solving initial condition 86/100: [0.6701830159456321, 19.338423204687388]
+✅ Finished IC 86 successfully.
+🟡 Solving initial condition 87/100: [0.6701830159456321, -14.16289644364246]
+✅ Finished IC 87 successfully.
+🟡 Solving initial condition 88/100: [0.6701830159456321, -28.933069877988306]
+✅ Finished IC 88 successfully.
+🟡 Solving initial condition 89/100: [0.6701830159456321, 1.8929111161348402]
+✅ Finished IC 89 successfully.
+🟡 Solving initial condition 90/100: [0.6701830159456321, 43.23868294672468]
+✅ Finished IC 90 successfully.
+🟡 Solving initial condition 91/100: [2.887043666815508, 56.40469092896463]
+✅ Finished IC 91 successfully.
+🟡 Solving initial condition 92/100: [2.887043666815508, -37.38628287716126]
+✅ Finished IC 92 successfully.
+🟡 Solving initial condition 93/100: [2.887043666815508, 31.828882644473467]
+✅ Finished IC 93 successfully.
+🟡 Solving initial condition 94/100: [2.887043666815508, -9.27355372352379]
+✅ Finished IC 94 successfully.
+🟡 Solving initial condition 95/100: [2.887043666815508, -52.10704585895803]
+✅ Finished IC 95 successfully.
+🟡 Solving initial condition 96/100: [2.887043666815508, 19.338423204687388]
+✅ Finished IC 96 successfully.
+🟡 Solving initial condition 97/100: [2.887043666815508, -14.16289644364246]
+✅ Finished IC 97 successfully.
+🟡 Solving initial condition 98/100: [2.887043666815508, -28.933069877988306]
+✅ Finished IC 98 successfully.
+🟡 Solving initial condition 99/100: [2.887043666815508, 1.8929111161348402]
+✅ Finished IC 99 successfully.
+🟡 Solving initial condition 100/100: [2.887043666815508, 43.23868294672468]
+✅ Finished IC 100 successfully.
+Mean time per iteration:  0.0014301800727844238  and std:  8.621036407805544e-05
+Time taken to solve the model for 100 initial conditions: 0.14301800727844238 seconds.
+[DEBUG] t_span = (0, 1)
+Number of files in the directory:  0
+Saved dataset "('GFL_2nd_order', 'dataset_v1')".
