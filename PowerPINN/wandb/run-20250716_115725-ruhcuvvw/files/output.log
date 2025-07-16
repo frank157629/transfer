@@ -100,3 +100,5 @@ type:  validation, total_traj: 10, max_traj 20
 Epoch [2100/25000], Loss: 3.3137, Loss_data: 3.3137, Loss_dt: 10639.8379, Loss_pinn: 111121.8125 , Loss_pinn_ic : 28.3656 2.0704991817474365 5072.77490234375
 type:  validation, total_traj: 10, max_traj 20
 Epoch [2150/25000], Loss: 2.5518, Loss_data: 2.5518, Loss_dt: 9699.7832, Loss_pinn: 111176.1953 , Loss_pinn_ic : 26.5126 1.753316044807434 4677.265625
+type:  validation, total_traj: 10, max_traj 20
+Epoch [2200/25000], Loss: 2.4821, Loss_data: 2.4821, Loss_dt: 9567.2012, Loss_pinn: 111161.4375 , Loss_pinn_ic : 26.1354 1.7294529676437378 4600.08544921875
