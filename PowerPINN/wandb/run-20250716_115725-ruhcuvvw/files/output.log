@@ -34,3 +34,27 @@ type:  validation, total_traj: 10, max_traj 20
 Epoch [450/25000], Loss: 37.2455, Loss_data: 37.2455, Loss_dt: 44483.9727, Loss_pinn: 153567.8438 , Loss_pinn_ic : 148.9388 11.479508399963379 19065.76171875
 type:  validation, total_traj: 10, max_traj 20
 Epoch [500/25000], Loss: 32.2234, Loss_data: 32.2234, Loss_dt: 40946.3750, Loss_pinn: 170004.8438 , Loss_pinn_ic : 141.1304 8.961384773254395 16005.6787109375
+type:  validation, total_traj: 10, max_traj 20
+Epoch [550/25000], Loss: 28.3291, Loss_data: 28.3291, Loss_dt: 38260.5156, Loss_pinn: 175281.0156 , Loss_pinn_ic : 127.2645 7.530137538909912 14531.1767578125
+type:  validation, total_traj: 10, max_traj 20
+Epoch [600/25000], Loss: 24.9097, Loss_data: 24.9097, Loss_dt: 35720.9102, Loss_pinn: 173293.3125 , Loss_pinn_ic : 113.2988 7.203895092010498 13991.0400390625
+type:  validation, total_traj: 10, max_traj 20
+Epoch [650/25000], Loss: 21.9573, Loss_data: 21.9573, Loss_dt: 33430.1289, Loss_pinn: 173353.3125 , Loss_pinn_ic : 94.2818 5.932069778442383 12676.7783203125
+type:  validation, total_traj: 10, max_traj 20
+Epoch [700/25000], Loss: 19.6815, Loss_data: 19.6815, Loss_dt: 31436.1484, Loss_pinn: 163953.9062 , Loss_pinn_ic : 74.7545 5.21559476852417 11487.20703125
+type:  validation, total_traj: 10, max_traj 20
+Epoch [750/25000], Loss: 17.6754, Loss_data: 17.6754, Loss_dt: 29670.5391, Loss_pinn: 142628.8125 , Loss_pinn_ic : 64.8014 4.648471832275391 10290.482421875
+type:  validation, total_traj: 10, max_traj 20
+Epoch [800/25000], Loss: 15.8204, Loss_data: 15.8204, Loss_dt: 28001.4512, Loss_pinn: 141301.4531 , Loss_pinn_ic : 58.2445 4.133029937744141 9289.412109375
+type:  validation, total_traj: 10, max_traj 20
+Epoch [850/25000], Loss: 13.7703, Loss_data: 13.7703, Loss_dt: 26149.4180, Loss_pinn: 141402.6406 , Loss_pinn_ic : 53.4532 3.5794081687927246 8417.5478515625
+type:  validation, total_traj: 10, max_traj 20
+Epoch [900/25000], Loss: 12.0645, Loss_data: 12.0645, Loss_dt: 24432.2656, Loss_pinn: 138371.5781 , Loss_pinn_ic : 47.1176 3.2942280769348145 7871.6845703125
+type:  validation, total_traj: 10, max_traj 20
+Epoch [950/25000], Loss: 10.4030, Loss_data: 10.4030, Loss_dt: 22790.3145, Loss_pinn: 136991.3438 , Loss_pinn_ic : 45.0231 3.139857053756714 7834.4794921875
+type:  validation, total_traj: 10, max_traj 20
+Epoch [1000/25000], Loss: 9.8455, Loss_data: 9.8455, Loss_dt: 21882.3340, Loss_pinn: 136680.0781 , Loss_pinn_ic : 45.5156 3.3462820053100586 8015.97509765625
+type:  validation, total_traj: 10, max_traj 20
+Epoch [1050/25000], Loss: 7.9040, Loss_data: 7.9040, Loss_dt: 20049.1504, Loss_pinn: 138954.0469 , Loss_pinn_ic : 39.5324 2.698153018951416 7064.4697265625
+type:  validation, total_traj: 10, max_traj 20
+Epoch [1100/25000], Loss: 7.4510, Loss_data: 7.4510, Loss_dt: 19164.3086, Loss_pinn: 139186.4062 , Loss_pinn_ic : 38.7601 2.5811102390289307 6796.41552734375

@@ -17,6 +17,7 @@ export CONDA_ROOT=$HOME/miniforge3
 source $CONDA_ROOT/etc/profile.d/conda.sh
 conda activate pinn_env
 export PYTHONPATH=$PYTHONPATH:$HOME/transfer/PowerPINN/src
+export WANDB_API_KEY="c26f0418182418f6712b79b4457de4faa81b7524"
 
 # 3. 打印节点 & GPU 信息
 echo "Running on $(hostname)"
