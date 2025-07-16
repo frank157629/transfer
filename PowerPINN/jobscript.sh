@@ -33,4 +33,4 @@ PY
 
 # 4. 进入项目目录并启动脚本
 cd ~/transfer/PowerPINN
-python test_sweep.py
+python -u test_sweep.py
