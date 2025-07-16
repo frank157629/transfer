@@ -100,8 +100,10 @@ class VanillaNeuralNetworkActions():
             self.GridFollowingConverterModels = GridFollowingConverterModels(self.cfg)
 
         self.model = self.model.to(self.device)
-        self.early_stopping = EarlyStopping(patience=cfg.network.early_stopping_patience, verbose=True,
-                                            delta=cfg.network.early_stopping_min_delta)
+        self.early_stopping = EarlyStopping(patience=cfg.network.early_stopping_patience, verbose=True,delta=cfg.network.early_stopping_min_delta)
+
+        self.sample_per_traj = int(self.data_loader.sample_per_traj)
+        print("[INIT] sample_per_traj =", self.sample_per_traj)
 
     def setup_nn(self):
         self.model = self.define_pinn_model()  # Create an instance of the class Net
@@ -607,6 +609,8 @@ class VanillaNeuralNetworkActions():
             self.save_model(os.path.join(folder_name, name))
         self.final_name = os.path.join(folder_name,f"{self.cfg.model.model_flag}{self.cfg.network.type}_{self.cfg.time}_{epoch + 1}_{self.data_loader.training_shape}_{self.data_loader.training_col_shape}_{self.data_loader.validation_shape}_{self.cfg.dataset.transform_input}_{self.cfg.dataset.transform_output}_{self.weight_data}_{self.weight_dt}_{self.weight_pinn}_{self.weight_pinn_ic}_{self.cfg.network.weighting.update_weight_method}")
         total_test_loss = self.test_model(0, 20, wandb_run)
+
+
         return
 
     # Haitian, change log_plot

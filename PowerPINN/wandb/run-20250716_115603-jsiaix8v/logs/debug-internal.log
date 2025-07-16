@@ -1,0 +1,7 @@
+{"time":"2025-07-16T11:56:03.587714+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.0","symlink path":"/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/wandb/run-20250716_115603-jsiaix8v/logs/debug-core.log"}
+{"time":"2025-07-16T11:56:04.013783+02:00","level":"INFO","msg":"stream: created new stream","id":"jsiaix8v"}
+{"time":"2025-07-16T11:56:04.013806+02:00","level":"INFO","msg":"stream: started","id":"jsiaix8v"}
+{"time":"2025-07-16T11:56:04.01381+02:00","level":"INFO","msg":"handler: started","stream_id":"jsiaix8v"}
+{"time":"2025-07-16T11:56:04.013816+02:00","level":"INFO","msg":"sender: started","stream_id":"jsiaix8v"}
+{"time":"2025-07-16T11:56:04.013827+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"jsiaix8v"}
+{"time":"2025-07-16T11:56:04.263311+02:00","level":"INFO","msg":"Starting system monitor"}
