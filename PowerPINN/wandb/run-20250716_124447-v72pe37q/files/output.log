@@ -13,3 +13,4 @@ PINN
 Number of labeled training data: 423200 Number of collocation points: 529000 Number of collocation points (IC): 529 Number of validation data: 52900
 Weights initialized as:  [1, 0.001, 0.001, 0.001]  are updated with scheme:  Static
 getting in training
+Validation loss decreased (inf --> 121.535484).  Saving model ...
