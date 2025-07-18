@@ -17,9 +17,12 @@ def train(config=None):
     # Load base configuration from YAML
 
     if setup.theme == "SM":
-        cfg = OmegaConf.load("src/conf/setup_dataset_nn_sm.yaml")
+        cfg = OmegaConf.load("src/conf/setup_dataset_nn_sm.yaml.yaml")
     elif setup.theme == "GFL":
-        cfg = OmegaConf.load("src/conf/setup_dataset_train_gfl.yaml")
+        if setup.train == "pinn":
+            cfg = OmegaConf.load("src/conf/setup_dataset_pinn_gfl.yaml")
+        elif setup.train == "vanilla":
+            cfg = OmegaConf.load("src/conf/setup_dataset_vanilla_gfl.yaml")
     elif setup.theme == "GFM":
         #Add your specifications here...
         raise NotImplementedError
@@ -74,20 +77,20 @@ if __name__ == "__main__":
             "name": "Test_loss",
             "goal": "minimize"
         }
-        ,"parameters": {
-            "seed": {"values": [1]},
-            "weight_data": {"values": [1]},
-            "weight_dt": {"values": [1e-3]},
-            "weight_pinn": {"values": [1e-3]},
-            "weight_pinn_ic": {"values": [1e-3]}
-        }
-        # , "parameters": {
+        # ,"parameters": {
         #     "seed": {"values": [1]},
         #     "weight_data": {"values": [1]},
-        #     "weight_dt": {"values": [0]},
-        #     "weight_pinn": {"values": [0]},
-        #     "weight_pinn_ic": {"values": [0]}
+        #     "weight_dt": {"values": [1e-3]},
+        #     "weight_pinn": {"values": [1e-3]},
+        #     "weight_pinn_ic": {"values": [1e-3]}
         # }
+        , "parameters": {
+            "seed": {"values": [1]},
+            "weight_data": {"values": [1]},
+            "weight_dt": {"values": [0]},
+            "weight_pinn": {"values": [0]},
+            "weight_pinn_ic": {"values": [0]}
+        }
     }
 
     # Initialize and run sweep

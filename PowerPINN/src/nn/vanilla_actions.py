@@ -116,8 +116,7 @@ class VanillaNeuralNetworkActions():
             self.optimizer = self.custom_optimizer(self.cfg.network.optimizer, self.cfg.network.lr)
         self.scheduler = self.custom_learning_rate(self.cfg.network.lr_scheduler)  # Define the learning rate scheduler
         self.model = self.model.to(self.device)
-        self.early_stopping = EarlyStopping(patience=self.cfg.network.early_stopping_patience, verbose=True,
-                                            delta=self.cfg.network.early_stopping_min_delta)
+        self.early_stopping = EarlyStopping(patience=self.cfg.network.early_stopping_patience, verbose=True, delta=self.cfg.network.early_stopping_min_delta)
         if self.cfg.network.update_weight_method == "ReLoBRaLo":
             self.relobralo_loss = ReLoBRaLoLoss()
         return
@@ -476,23 +475,34 @@ class VanillaNeuralNetworkActions():
                     def closure():
                         # nonlocal iteration_count
                         # iteration_count += 1
-                        output, dydt0, ode0 = self.calculate_point_grad2(x_batch,
-                                                                         y_batch)  # calculate nn output and its gradient for the data points, and the ode solution for the target y_train
-                        dydt1, ode1 = self.calculate_point_grad2(x_col_batch,
-                                                                 None)  # calculate nn output gradient for the collocation points, and the ode solution for the nn output
-                        output_col0 = self.forward_pass(
-                            x_col_ic_batch)  # calculate the nn output for the collocation points with time 0
-                        loss_data = self.criterion(output, y_batch)  # calculate the data loss
+                        output, dydt0, ode0 = self.calculate_point_grad2(x_batch,y_batch)  # calculate nn output and its gradient for the data points, and the ode solution for the target y_train
+                        dydt1, ode1 = self.calculate_point_grad2(x_col_batch,None)  # calculate nn output gradient for the collocation points, and the ode solution for the nn output
+                        output_col0 = self.forward_pass(x_col_ic_batch)  # calculate the nn output for the collocation points with time 0
 
-                        loss_dt = [self.criterion(dydt0[:, i], ode0[:, i]) for i in range(dydt0.shape[1])]
+                        # loss_data = self.criterion(output, y_batch)  # calculate the data loss
+                        # loss_dt = [self.criterion(dydt0[:, i], ode0[:, i]) for i in range(dydt0.shape[1])]
+                        # mean_loss_dt = torch.mean(torch.stack(loss_dt))
+                        # mean_loss_pinn, loss_pinn = self.calc_adapt_criterion_loss(x_col_batch, dydt1, ode1)
+                        # loss_pinn = [self.criterion(dydt1[:, i], ode1[:, i]) for i in range(dydt1.shape[1])]
+                        # mean_loss_pinn = torch.mean(torch.stack(loss_pinn))
+                        # loss_pinn_ic = self.criterion(output_col0, y_col_ic_batch)
+                        # loss_total, self.losses = self.weighting_scheme.compute_weighted_loss(loss_data, loss_dt, loss_pinn, loss_pinn_ic,epoch)  # total_iteration_count + iteration_count
+
+
+
+                        # 当前权重→读出来更直观
+                        w_data, w_dt, w_pinn, w_pinn_ic = self.weight_data, self.weight_dt, self.weight_pinn, self.weight_pinn_ic
+                        crit = self.criterion  # 省得敲长名
+                        # ───────────────────── 3. 分别计算（带判断） ─────────────
+                        loss_data = crit(output, y_batch) if w_data != 0 else torch.tensor(0., device=self.device)
+                        loss_dt = [crit(dydt0[:, i], ode0[:, i]) for i in range(dydt0.shape[1])] if w_dt != 0 else [torch.tensor(0., device=self.device)]
+                        loss_pinn = [crit(dydt1[:, i], ode1[:, i]) for i in range(dydt1.shape[1])] if w_pinn != 0 else [torch.tensor(0., device=self.device)]
+                        loss_pinn_ic = crit(output_col0, y_col_ic_batch) if w_pinn_ic != 0 else torch.tensor(0.,device=self.device)
+                        # ───────────────────── 4. 总 loss & 反传 ────────────────
                         mean_loss_dt = torch.mean(torch.stack(loss_dt))
-                        mean_loss_pinn, loss_pinn = self.calc_adapt_criterion_loss(x_col_batch, dydt1, ode1)
-                        loss_pinn = [self.criterion(dydt1[:, i], ode1[:, i]) for i in range(dydt1.shape[1])]
                         mean_loss_pinn = torch.mean(torch.stack(loss_pinn))
-                        loss_pinn_ic = self.criterion(output_col0, y_col_ic_batch)
-                        loss_total, self.losses = self.weighting_scheme.compute_weighted_loss(loss_data, loss_dt,
-                                                                                              loss_pinn, loss_pinn_ic,
-                                                                                              epoch)  # total_iteration_count + iteration_count
+                        loss_total, self.losses = self.weighting_scheme.compute_weighted_loss(loss_data, loss_dt,loss_pinn, loss_pinn_ic,epoch)
+
                         self.loss_total = loss_total
                         self.loss_data = loss_data
                         self.loss_dt = mean_loss_dt
@@ -510,19 +520,34 @@ class VanillaNeuralNetworkActions():
                     self.optimizer.step(closure)  # update the weights of the model
             else:
                 def closure():
-                    output, dydt0, ode0 = self.calculate_point_grad2(x_train,
-                                                                     y_train)  # calculate nn output and its gradient for the data points, and the ode solution for the target y_train
+                    output, dydt0, ode0 = self.calculate_point_grad2(x_train,y_train)  # calculate nn output and its gradient for the data points, and the ode solution for the target y_train
                     dydt1, ode1 = self.calculate_point_grad2(x_train_col, None)
                     output_col0 = self.forward_pass(x_train_col_ic)
-                    loss_data = self.criterion(output, y_train)
-                    loss_dt = [self.criterion(dydt0[:, i], ode0[:, i]) for i in range(dydt0.shape[1])]
+
+                    # loss_data = self.criterion(output, y_train)
+                    # loss_dt = [self.criterion(dydt0[:, i], ode0[:, i]) for i in range(dydt0.shape[1])]
+                    # mean_loss_dt = torch.mean(torch.stack(loss_dt))
+                    # mean_loss_pinn, loss_pinn = self.calc_adapt_criterion_loss(x_train_col, dydt1, ode1)
+                    # loss_pinn = [self.criterion(dydt1[:, i], ode1[:, i]) for i in range(dydt1.shape[1])]
+                    # mean_loss_pinn = torch.mean(torch.stack(loss_pinn))
+                    # loss_pinn_ic = self.criterion(output_col0, y_train_col_ic)
+                    # loss_total, self.losses = self.weighting_scheme.compute_weighted_loss(loss_data, loss_dt, loss_pinn,loss_pinn_ic, epoch)
+
+
+
+                    # 当前权重→读出来更直观
+                    w_data, w_dt, w_pinn, w_pinn_ic = self.weight_data, self.weight_dt, self.weight_pinn, self.weight_pinn_ic
+                    crit = self.criterion  # 省得敲长名
+                    # ───────────────────── 3. 分别计算（带判断） ─────────────
+                    loss_data = crit(output, y_train) if w_data != 0 else torch.tensor(0., device=self.device)
+                    loss_dt = [crit(dydt0[:, i], ode0[:, i]) for i in range(dydt0.shape[1])] if w_dt != 0 else [torch.tensor(0., device=self.device)]
+                    loss_pinn = [crit(dydt1[:, i], ode1[:, i]) for i in range(dydt1.shape[1])] if w_pinn != 0 else [torch.tensor(0., device=self.device)]
+                    loss_pinn_ic = crit(output_col0, y_train_col_ic) if w_pinn_ic != 0 else torch.tensor(0., device=self.device)
+                    # ───────────────────── 4. 总 loss & 反传 ────────────────
                     mean_loss_dt = torch.mean(torch.stack(loss_dt))
-                    mean_loss_pinn, loss_pinn = self.calc_adapt_criterion_loss(x_train_col, dydt1, ode1)
-                    loss_pinn = [self.criterion(dydt1[:, i], ode1[:, i]) for i in range(dydt1.shape[1])]
                     mean_loss_pinn = torch.mean(torch.stack(loss_pinn))
-                    loss_pinn_ic = self.criterion(output_col0, y_train_col_ic)
-                    loss_total, self.losses = self.weighting_scheme.compute_weighted_loss(loss_data, loss_dt, loss_pinn,
-                                                                                          loss_pinn_ic, epoch)
+                    loss_total, self.losses = self.weighting_scheme.compute_weighted_loss(loss_data, loss_dt, loss_pinn,loss_pinn_ic, epoch)
+
                     self.loss_total = loss_total
                     self.loss_data = loss_data
                     self.loss_dt = mean_loss_dt
@@ -570,7 +595,8 @@ class VanillaNeuralNetworkActions():
             if (epoch + 1) % 50 == 0:
                 print(
                     f'Epoch [{epoch + 1}/{self.cfg.network.num_epochs}], Loss: {self.loss_total.item():.4f}, Loss_data: {self.loss_data.item():.4f}, Loss_dt: {self.loss_dt.item():.4f}, Loss_pinn: {self.loss_pinn.item():.4f} , Loss_pinn_ic : {self.loss_pinn_ic.item():.4f}',
-                    val_loss, val_dt_loss)
+                    f"val_data={val_loss:.4f} "
+                    f"val_dt={val_dt_loss:.4f}")
 
             # log all the losses for the epoch to wandb
             save_iteration = 500 if self.cfg.network.optimizer == "LBFGS" else 10000  # 20 iterations within the optimizer ->500*20 = 10000

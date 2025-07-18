@@ -172,8 +172,8 @@ class ODE_modelling():
         Returns:
             list: A matrix with all the possible combinations of initial conditions.
         """
-        if self.torch:# if using torch then use the nn_init_cond.yaml file to create collocation points init conditions
-            init_conditions_path = os.path.join(self.init_conditions_dir, self.model_flag,"nn_init_cond"+str(self.init_condition_bounds)+".yaml")
+        if self.torch:# if using torch then use the pinn_init_cond.yaml file to create collocation points init conditions
+            init_conditions_path = os.path.join(self.init_conditions_dir, self.model_flag,"pinn_init_cond"+str(self.init_condition_bounds)+".yaml")
         else: # 
             init_conditions_path = os.path.join(self.init_conditions_dir, self.model_flag,"init_cond"+str(self.init_condition_bounds)+".yaml")
         init_conditions = OmegaConf.load(init_conditions_path)

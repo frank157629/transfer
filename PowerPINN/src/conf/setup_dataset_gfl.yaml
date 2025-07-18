@@ -13,7 +13,7 @@ model:
   model_num : 1
   init_condition_bounds : 1
   sampling: "Lhs" # Choose between "Lhs" or "Linear" or "Random"
-  torch : False
+  torch : True
 
 dirs:
   params_dir :  ${hydra:runtime.cwd}/src/conf/params

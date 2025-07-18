@@ -22,7 +22,7 @@ def main(config):
     theme = config.theme
     if theme == "SM":
         # Initialize wandb and log the dataset creation
-        cfg = OmegaConf.load("src/conf/setup_dataset_nn_sm.yaml")
+        cfg = OmegaConf.load("src/conf/setup_dataset_nn_sm.yaml.yaml")
         cfg.theme = "SM"
         run = wandb.init(project=cfg.wandb.project)
         log_data_metrics_to_wandb(run, cfg)

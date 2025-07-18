@@ -13,7 +13,7 @@ model:
   init_condition_bounds : 1 # Final number of set of initial conditions for the collocation points to be used
   sampling: "Lhs" # Choose between "Lhs" or "Linear" or "Random" for sampling the initial conditions for collocation points
   torch : True # Keep it True when training the model! and also using to create the collocaiton points
-  
+
 dataset:
   number : 1 # Number of dataset to be used
   shuffle: True # Shuffle the trajectories of the dataset # If True, the dataset will be shuffled
@@ -29,7 +29,7 @@ nn:
   num_of_skip_data_points : 23
   num_of_skip_col_points : 19
   num_of_skip_val_points : 4
-  type : "DynamicNN" # Choose between "StaticNN" or "DynamicNN" or "PinnA" or "PinnB" or "PinnAA" this is the adj target one 
+  type : "DynamicNN" # Choose between "StaticNN" or "DynamicNN" or "PinnA" or "PinnB" or "PinnAA" this is the adj target one
   hidden_layers: 4
   hidden_dim: 64 # 20 if Kan
   loss_criterion : "MSELoss" # Choose between "MSELoss" or "L1Loss" or "SmoothL1Loss"
@@ -40,7 +40,7 @@ nn:
   lr_scheduler : "No_scheduler" # Choose between "StepLR", "MultiStepLR", "ExponentialLR", "ReduceLROnPlateau", "No_scheduler"
   num_epochs: 15000
   batch_size: "None" # Choose between "None" or any integer value
-  early_stopping: True 
+  early_stopping: True
   early_stopping_patience: 2500
   early_stopping_min_delta: 1e-6
   weighting:
