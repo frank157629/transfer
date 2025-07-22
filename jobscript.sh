@@ -1,24 +1,18 @@
-#!/bin/sh
-#BSUB -q gpuv100
-#BSUB -gpu "num=1:mode=exclusive_process"
-#BSUB -J sweep_pinn
-#BSUB -n 8
-#BSUB -W 12:00
-#BSUB -R "span[hosts=1]"
-#BSUB -R "rusage[mem=12GB]"
-#BSUB -o logs/%J.out
-#BSUB -e logs/%J.err
+#!/usr/local_rwth/bin/zsh
+### SBATCH Section
+#request one gpu per node
+#SBATCH --gres=gpu:1
+#SBATCH --mem=128G
+#SBATCH --job-name=MA_fois
+#SBATCH --output=ma_fois/%J.out
+#SBATCH --time=0-24:00:00
+#SBATCH --account=rwth1854
 
-
-echo "Running script..."
-echo "Running script..."
-
-nvidia-smi
-module swap python3/3.10.2
-module swap cuda/12.1
-
-source ../Thesis/venv/bin/activate
-
-#python create_dataset_d.py
-python test_sweep.py
-
+### Program Section
+module load cuda/11.6
+export CONDA_ROOT=$HOME/miniconda3
+. $CONDA_ROOT/etc/profile.d/conda.sh
+export PATH="$CONDA_ROOT/bin:$PATH"
+conda activate env_fois
+cd ma_fois
+python3 test_sweep.py

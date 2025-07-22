@@ -23,6 +23,7 @@ def train(config=None):
 
 
     # Initialize model and network
+
     modelling_full = GFM(cfg)
     network2 = NeuralNetworkActions(cfg, modelling_full)
 
@@ -31,7 +32,7 @@ def train(config=None):
     num_of_skip_col_points = 19
     num_of_skip_val_points = 4
 
-    network2.pinn_train2(num_of_skip_data_points, num_of_skip_col_points, num_of_skip_val_points, run)
+    network2.pinn_train2(num_of_skip_data_points, num_of_skip_col_points, num_of_skip_val_points, run) #USING pinn train 2!!
     run.finish()
 
 if __name__ == "__main__":
@@ -45,9 +46,9 @@ if __name__ == "__main__":
         "parameters": {
             "seed": {"values": [1, 3, 7]},
             "weight_data": {"values": [1]},
-            "weight_dt": {"values": [1e-3]},
-            "weight_pinn": {"values": [1e-4]},
-            "weight_pinn_ic": {"values": [1e-3]}
+            "weight_dt": {"values": [0.001]},
+            "weight_pinn": {"values": [0.0001]},
+            "weight_pinn_ic": {"values": [0.001]}
         }
     }
 

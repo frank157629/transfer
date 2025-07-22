@@ -4,6 +4,7 @@ from src.functions import set_time
 import torch
 import os
 from omegaconf import OmegaConf
+import random
 
 
 class GFM:
@@ -14,10 +15,30 @@ class GFM:
         self.define_machine_params()  # define parameters of GFM
         self.define_system_params()  # define parameters of grid
 
-        # Definisci V_ref e P_ref se ti servono costanti
+        # Aggiungo la definizione del device qui:
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+        # Definizione dei ratio
+        ratios = [
+            (0.90, 0.10),
+            (0.45, 0.55),
+            (0.55, 0.45),
+            (0.65, 0.35),
+            (0.75, 0.25),
+            (0.05, 0.95),
+            (0.75, 0.25),
+            (0.15, 0.85),
+            (0.3, 0.7),
+            (0.99, 0.01)
+        ]
+
+        # Scelta casuale del ratio
+        p_ratio, q_ratio = random.choice(ratios)
+
+        # Impostazione delle potenze di riferimento
+        self.p_ref = p_ratio * (1000e3 / self.S_n)
+        self.q_ref = q_ratio * (1000e3 / self.S_n)
         self.v_ref = 1.0
-        self.p_ref = 1000e3 / self.S_n
-        self.q_ref = 500e3 / self.S_n
 
     def define_machine_params(self):
         machine_params_path = os.path.join(self.params_dir, "GFM.yaml")
@@ -74,9 +95,9 @@ class GFM:
 
             # Equazioni ausiliarie
             vmd = self.kp_c * (
-                        i_ref_d - ifd + self.kFFi * itd) + self.ki_c * sigma_d - omega_gfm * self.lf * ifq + vfd * self.kFFv
+                    i_ref_d - ifd + self.kFFi * itd) + self.ki_c * sigma_d - omega_gfm * self.lf * ifq + vfd * self.kFFv
             vmq = self.kp_c * (
-                        i_ref_q - ifq + self.kFFi * itq) + self.ki_c * sigma_q + omega_gfm * self.lf * ifd + vfq * self.kFFv
+                    i_ref_q - ifq + self.kFFi * itq) + self.ki_c * sigma_q + omega_gfm * self.lf * ifd + vfq * self.kFFv
             dxi_d_dt = v_ref_d - vfd
             dxi_q_dt = v_ref_q - vfq
             dvfd_dt = self.w_n * ((ifd - itd) / self.cf + omega_gfm * vfq)
@@ -88,10 +109,41 @@ class GFM:
             dsigmad_dt = i_ref_d - ifd + self.kFFi * itd
             dsigmaq_dt = i_ref_q - ifq + self.kFFi * itq
             dgammaq_dt = self.wq * (self.s_qv * (self.q_ref - q_inst) - gamma_q)
-            dthetagfm_dt = omega_gfm * self.w_n
-            dthetagrid_dt = self.w_n
 
-            return [
-                dxi_d_dt, dxi_q_dt, dvfd_dt, dvfq_dt, difd_dt, difq_dt, ditd_dt, ditq_dt,
-                dsigmad_dt, dsigmaq_dt, dgammaq_dt, dthetagfm_dt, dthetagrid_dt
-            ]
+            # Check se siamo in modalità batch (torch.Tensor) o singolo sample (numpy)
+            is_torch = isinstance(xi_d, torch.Tensor)
+
+            if is_torch:
+                # ---- CASO TORCH (per training PINN con PyTorch) ----
+                batch_size = xi_d.shape[0]
+
+                if isinstance(self.w_n, torch.Tensor):
+                    dthetagfm_dt = omega_gfm * self.w_n
+                    dthetagrid_dt = self.w_n
+                else:
+                    dthetagfm_dt = torch.tensor(omega_gfm*self.w_n).to(self.device)
+                    dthetagrid_dt = torch.tensor(self.w_n).to(self.device)
+
+                # Espandi se necessario
+                if dthetagfm_dt.dim() == 0:
+                    dthetagfm_dt = dthetagfm_dt.expand(batch_size, 1)
+                if dthetagrid_dt.dim() == 0:
+                    dthetagrid_dt = dthetagrid_dt.expand(batch_size, 1)
+
+                return [
+                    dxi_d_dt, dxi_q_dt, dvfd_dt, dvfq_dt, difd_dt, difq_dt, ditd_dt, ditq_dt,
+                    dsigmad_dt, dsigmaq_dt, dgammaq_dt, dthetagfm_dt, dthetagrid_dt
+                ]
+
+            else:
+                # ---- CASO NUMPY (per integrazione con solve_ivp) ----
+                dthetagfm_dt = omega_gfm * self.w_n
+                dthetagrid_dt = self.w_n
+
+                # Restituisci una lista di scalari o array NumPy 0D coerenti
+                return np.array([
+                    dxi_d_dt, dxi_q_dt, dvfd_dt, dvfq_dt, difd_dt, difq_dt, ditd_dt, ditq_dt,
+                    dsigmad_dt, dsigmaq_dt, dgammaq_dt, dthetagfm_dt, dthetagrid_dt
+                ], dtype=np.float64)
+
+

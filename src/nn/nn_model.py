@@ -3,7 +3,10 @@ import torch
 import torch.nn.functional as F
 from kan import KAN
 
-class Net(nn.Module):
+
+#------------------------------------------------------------------------------------------------------------------
+
+class Net(nn.Module): #classe 1 - Primo modello rete neurale NET semplice con hidden layer statico
     """
     A class to represent a neural network model.
     """
@@ -34,11 +37,13 @@ class Net(nn.Module):
         x = self.fc5(x)
         return x
 
-class Network(nn.Module):
+#------------------------------------------------------------------------------------------------------------------
+
+class Network(nn.Module): #classe 2 - secondo modello NET con hidden layer dinamico
     """
     A class to represent a dynamic neural network model with dynamic number of layers based on the respective argument.
     """
-    def __init__(self, input_size, hidden_size, output_size, num_layers):
+    def __init__(self, input_size, hidden_size, output_size, num_layers): #ha come ingresso anche num_layers
         super(Network, self).__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size
@@ -63,8 +68,10 @@ class Network(nn.Module):
             x = F.tanh(self.hidden[i](x))
         x = self.output(x)
         return x
+
+#------------------------------------------------------------------------------------------------------------------
     
-class Kalm(nn.Module):
+class Kalm(nn.Module):   #classe 3 - rete KAN
     """
     A class to represent a dynamic neural network model with dynamic number of layers based on the respective argument.
     """
@@ -81,44 +88,11 @@ class Kalm(nn.Module):
 
     def forward(self, x):
         return self.ka(x)
+
     def update_grid(self,x):
         self.ka.update_grid_from_samples(x)
-        
-class PinnA(nn.Module): # DISCARD IT, OUTPUT IS WRONG
-    """
-    A class to represent a Pinn model with adjusted output.
-    """
-    def __init__(self, input_size, hidden_size, output_size, num_layers):
-        super(PinnA, self).__init__()
-        self.input_size = input_size
-        self.hidden_size = hidden_size
-        self.output_size = output_size
-        self.num_layers = num_layers
-        self.hidden = []
-        self.hidden.append(nn.Linear(self.input_size, self.hidden_size))
-        for i in range(self.num_layers):
-            self.hidden.append(nn.Linear(self.hidden_size, self.hidden_size))
-        self.hidden = nn.ModuleList(self.hidden)
-        self.output = nn.Linear(self.hidden_size, self.output_size)
-        #self.shortcut = nn.Linear(self.input_size, self.output_size)
 
-    def forward(self, x):
-        """
-        Forward pass of the PinnA model.
-        Args:
-            x (torch.Tensor): Input tensor.
-        Returns:
-            torch.Tensor: Output tensor.
-        """
-        y = torch.tanh(self.hidden[0](x))
-        for i in range(self.num_layers-1):
-            y = torch.tanh(self.hidden[i+1](y))
-        y = self.output(y)
-        time = x[:,0].view(-1,1)
-        #time = torch.where(time < 0.5, time, 0.5*torch.ones_like(time))
-        y = x[:,1:] + y*time
-        return y
-    
+#------------------------------------------------------------------------------------------------------------------
 
 class ResidualBlock(nn.Module):
     """
@@ -128,7 +102,7 @@ class ResidualBlock(nn.Module):
         super(ResidualBlock, self).__init__()
         self.fc1 = nn.Linear(in_features, out_features)
         self.activation = activation
-        self.fc2 = nn.Linear(out_features, out_features)
+        self.fc2 = nn.Linear(out_features, out_features) #NOTE: in and out must have same dimension so 1x1 or you get error
 
     def forward(self, x):
         identity = x

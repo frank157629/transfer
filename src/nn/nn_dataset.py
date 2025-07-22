@@ -69,7 +69,7 @@ class DataSampler:
         self.cfg = cfg
         self.idx = 0
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        self.model_flag = cfg.model.model_flag #  'SM_IB' or 'SM' or 'SM_AVR' or 'SM_GOV'
+        self.model_flag = cfg.model.model_flag #  'GFM'
         self.shuffle = cfg.dataset.shuffle # Define whether to shuffle the data before splitting
         self.split_ratio = cfg.dataset.split_ratio # Define the ratio of the training set to the validation and test sets
         self.new_coll_points_flag = cfg.dataset.new_coll_points_flag # Define whether to use new collocation points
@@ -105,7 +105,7 @@ class DataSampler:
         Returns:
             sol (list): The loaded data.
         """
-        model_flag  = self.model_flag #  'SM_IB' or 'SM' or 'SM_AVR' or 'SM_GOV'
+        model_flag  = self.model_flag
         number_of_dataset = self.cfg.dataset.number # Define the number of the dataset to load
         name = model_flag + '/dataset_v' + str(number_of_dataset) + '.pkl'
         print(model_flag,self.cfg.dirs.dataset_dir)
@@ -153,6 +153,8 @@ class DataSampler:
         
         
         return x_train, y_train, x_train_col, x_train_col0, y_train_col0 , x_val, y_val
+
+#------------------------------------------------------------------------------------------------------------------------------------------------
     
     def define_test_data(self,starting_traj,sample_per_traj,total_traj):
         x_test = self.x_test[starting_traj*sample_per_traj:(starting_traj+total_traj)*sample_per_traj].clone().detach().to(self.device).requires_grad_(True)
@@ -175,7 +177,7 @@ class DataSampler:
         x_train_list = torch.tensor(())
         y_train_list = torch.tensor(())
         for training_sample in data:
-            training_sample = torch.tensor(training_sample, dtype=torch.float32) # convert the trajectory to tensor
+            training_sample = torch.tensor(np.array(training_sample), dtype=torch.float32) # convert the trajectory to tensor
             y_train = training_sample[1:].T.clone().detach().requires_grad_(True) # target data
             if time_limit != 0:
                 training_sample_l = training_sample.T

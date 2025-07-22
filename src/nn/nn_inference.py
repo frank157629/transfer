@@ -3,7 +3,7 @@ import torch.nn as nn
 
 from omegaconf import OmegaConf
 import wandb
-from src.nn.nn_model import Net, Network, PinnA, Kalm, FullyConnectedResNet
+from src.nn.nn_model import Net, Network, Kalm, FullyConnectedResNet
 import os
 import numpy as np
 import pandas as pd
@@ -376,61 +376,36 @@ def save_as_dat_in_time(data, x_test, keys, file):
     output_df.to_csv(file_name, sep=' ', index=False)
     return
 
+
 def plot_results(y_pred, y_test, x_test, num_of_points, cut_off=0):
-    #create a plot that contains 4 subplots , 2 in each row
-    plt.figure(figsize=(15, 15))
-    #plt.suptitle("Comparison of the Prediction and the True Values for a Single Trajectory", fontsize=16)
-    #put title for all the plots
-    cut_off=0
-    plt.subplot(4, 1, 1)
-    #use time x_test[:,0] for the x-axis and the prediction and actual for y axi
-    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:,0],y_pred.cpu().detach().numpy()[cut_off:num_of_points,0], label = "Prediction")
-    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:,0],y_test[cut_off:num_of_points].cpu().detach().numpy()[:,0], label = "True")
-    plt.xlabel("Time(s)")
-    plt.ylabel("xi_d")
-    #plt.legend()
-    plt.subplot(4, 1, 2)
-    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:,0],y_pred.cpu().detach().numpy()[cut_off:num_of_points,1], label = "Prediction")
-    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:,0],y_test[cut_off:num_of_points].cpu().detach().numpy()[:,1], label = "True")
-    plt.xlabel("Time(s)")
-    plt.ylabel("xi_q")
-    #plt.legend()
-    plt.subplot(4, 1, 3)
-    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:,0],y_pred.cpu().detach().numpy()[cut_off:num_of_points,2], label = "Prediction")
-    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:,0],y_test[cut_off:num_of_points].cpu().detach().numpy()[:,2], label = "True")
-    plt.xlabel("Time(s)")
-    plt.ylabel("vfd")
-    #plt.legend()
-    plt.subplot(4, 1, 4)
-    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:,0],y_pred.cpu().detach().numpy()[cut_off:num_of_points,3], label = "Prediction")
-    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:,0],y_test[cut_off:num_of_points].cpu().detach().numpy()[:,3], label = "True")
-    plt.xlabel("Time(s)")
-    plt.ylabel("vfq")
-    # plt.legend()
-    plt.subplot(4, 1, 5)
-    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0],y_pred.cpu().detach().numpy()[cut_off:num_of_points, 4], label="Prediction")
-    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0],y_test[cut_off:num_of_points].cpu().detach().numpy()[:, 4], label="True")
-    plt.xlabel("Time(s)")
-    plt.ylabel("ifd")
-    # plt.legend()
-    plt.subplot(4, 1, 6)
-    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0],y_pred.cpu().detach().numpy()[cut_off:num_of_points, 5], label="Prediction")
-    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0],y_test[cut_off:num_of_points].cpu().detach().numpy()[:, 5], label="True")
-    plt.xlabel("Time(s)")
-    plt.ylabel("ifq")
-    # plt.legend()
-    plt.subplot(4, 1, 7)
-    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0],y_pred.cpu().detach().numpy()[cut_off:num_of_points, 6], label="Prediction")
-    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0],y_test[cut_off:num_of_points].cpu().detach().numpy()[:, 6], label="True")
-    plt.xlabel("Time(s)")
-    plt.ylabel("itd")
-    # plt.legend()
-    plt.subplot(4, 1, 8)
-    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0],y_pred.cpu().detach().numpy()[cut_off:num_of_points, 7], label="Prediction")
-    plt.plot(x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0],y_test[cut_off:num_of_points].cpu().detach().numpy()[:, 7], label="True")
-    plt.xlabel("Time(s)")
-    plt.ylabel("itq")
-    plt.legend()
+    """
+    Plot the predicted and true trajectories for the 13 GFM state variables.
+    """
+    var_labels = [
+        "xi_d", "xi_q", "vfd", "vfq", "ifd", "ifq",
+        "itd", "itq", "sigma_d", "sigma_q", "gamma_q", "theta_gfm", "theta_grid"]
+
+    num_vars_to_plot = 13
+    plt.figure(figsize=(15, 3 * num_vars_to_plot))
+
+    time = x_test[cut_off:num_of_points].cpu().detach().numpy()[:, 0]
+
+    for i in range(num_vars_to_plot):
+        plt.subplot(num_vars_to_plot, 1, i + 1)
+
+        y_p = y_pred.cpu().detach().numpy()[cut_off:num_of_points, i]
+        y_t = y_test.cpu().detach().numpy()[cut_off:num_of_points, i]
+
+        plt.plot(time, y_p, label="Prediction")
+        plt.plot(time, y_t, label="True")
+
+        plt.xlabel("Time (s)")
+        plt.ylabel(var_labels[i])
+
+        if i == 0:
+            plt.legend()
+
+    plt.tight_layout()
     plt.show()
 
 
