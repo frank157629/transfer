@@ -1,0 +1,136 @@
+import numpy as np
+import pickle
+from collections import defaultdict
+import matplotlib.pyplot as plt
+
+# ======== Configuration parameters ========
+data_path = "./data/GFL_2nd_order/dataset_v17.pkl"
+
+# --- Threshold settings ---
+omega_std_thresh     = 1e-2        # Oscillation tolerance for ω (std)
+omega_mean_thresh    = 1.26        # Final value tolerance for ω (≈ 2π * 0.2)
+
+delta_std_thresh     = 0.05        # Oscillation tolerance for δ (in rad)
+delta_final_thresh   = 0.14        # Convergence tolerance for δ to 0 or 2π·n (≈ 8°)
+
+tail_window = 100                  # Number of tail time steps to check convergence
+pi = np.pi
+# =========================================
+
+def load_dataset(path):
+    with open(path, "rb") as f:
+        data = pickle.load(f)
+    return np.array(data)  # shape = (N, 3, T)
+
+def analyze_convergence(data, omega_std_thr, omega_mean_thr,
+                        delta_std_thr, delta_final_thr, tail_window):
+    """
+    Check convergence:
+    - ω: low oscillation (std) and mean close to 0
+    - δ: low oscillation (std) and final value close to n·2π
+    """
+    N = data.shape[0]
+    groups = defaultdict(list)
+
+    for i in range(N):
+        delta_series = data[i, 1, :]
+        omega_series = data[i, 2, :]
+
+        delta_tail = delta_series[-tail_window:]
+        omega_tail = omega_series[-tail_window:]
+
+        # ω convergence criteria
+        omega_std = np.std(omega_tail)
+        omega_mean = np.abs(np.mean(omega_tail))
+
+        # δ convergence criteria
+        delta_std = np.std(delta_tail)
+        final_delta = delta_series[-1]
+        delta_mod = np.abs((final_delta + pi) % (2 * pi) - pi)  # Normalize to [-π, π]
+        delta_residual = np.abs(delta_mod)  # Distance to n·2π
+
+        if (omega_std  < omega_std_thr and
+            omega_mean < omega_mean_thr and
+            delta_std  < delta_std_thr and
+            delta_residual < delta_final_thr):
+
+            delta0 = delta_series[0]
+            omega0 = omega_series[0]
+            final_omega = omega_series[-1]
+            k = int(np.floor(final_delta / (2 * pi)))  # Index of convergence zone
+            groups[k].append((i, delta0, omega0, final_delta, final_omega))
+
+    return groups
+
+def print_report(groups):
+    total = sum(len(v) for v in groups.values())
+    print(f"📊 Total converged trajectories: {total}\n")
+    print("📦 Grouped by δ ∈ [2kπ, 2(k+1)π):")
+    for k in sorted(groups.keys()):
+        group = groups[k]
+        print(f"  Interval [{2*k}π, {2*(k+1)}π): {len(group)} trajectories")
+        for entry in group:
+            i, delta0, omega0, deltaf, omegaf = entry
+            print(f"    ID {i:5d} | δ₀ = {delta0:+.3f}, ω₀ = {omega0:+.3f} → δf = {deltaf:+.3f}, ωf = {omegaf:+.3f}")
+        print()
+
+def plot_scatter(groups, data):
+    group_A = []  # Converged to [0, 2π)
+    group_B = []  # Converged to other 2kπ intervals
+    group_C = []  # Non-converged
+
+    for k, trajs in groups.items():
+        for entry in trajs:
+            _, delta0, omega0, deltaf, _ = entry
+            if 0 <= deltaf < 2 * pi:
+                group_A.append((delta0, omega0))
+            else:
+                group_B.append((delta0, omega0))
+
+    all_ids = set(range(data.shape[0]))
+    converged_ids = set(i for group in groups.values() for i, *_ in group)
+    non_converged_ids = all_ids - converged_ids
+    for i in non_converged_ids:
+        delta0 = data[i, 1, 0]
+        omega0 = data[i, 2, 0]
+        group_C.append((delta0, omega0))
+
+    A = np.array(group_A)
+    B = np.array(group_B)
+    C = np.array(group_C)
+
+    plt.figure(figsize=(8, 6))
+    if len(A) > 0:
+        plt.scatter(A[:, 0], A[:, 1], color='green', label=f"[0, 2π): {len(A)}", s=1)
+    if len(B) > 0:
+        plt.scatter(B[:, 0], B[:, 1], color='blue', label=f"Other 2kπ: {len(B)}", s=1)
+    if len(C) > 0:
+        plt.scatter(C[:, 0], C[:, 1], color='red', label=f"Non-converged: {len(C)}", s=1)
+
+    plt.xlabel("Initial δ₀")
+    plt.ylabel("Initial ω₀")
+    plt.title("Trajectory Convergence Classification")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig("convergence_map.pdf")
+    plt.show()
+    return A, B, C
+
+if __name__ == "__main__":
+    print("📥 Loading dataset...")
+    data = load_dataset(data_path)
+
+    print("🧮 Analyzing convergence based on tail behavior...")
+    grouped = analyze_convergence(data,
+                                  omega_std_thresh,
+                                  omega_mean_thresh,
+                                  delta_std_thresh,
+                                  delta_final_thresh,
+                                  tail_window)
+
+    print("📋 Generating report...")
+    print_report(grouped)
+
+    print("🎯 Plotting classification map...")
+    A, B, C = plot_scatter(grouped, data)
