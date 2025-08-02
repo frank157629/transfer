@@ -15,9 +15,17 @@ os.environ["HYDRA_FULL_ERROR"]="1"
 
 '''
 1. This file is for solving the ICs that are newly generated. 
-2. The generated ICs come from lhs_init_conditions.pkl, which are generated with LHS sampling inside a rectangular region of 'delta x omega'.
-3. The solution are trajectories, which would be saved under the regular naming convention.(e.g. dataset_v10.pkl)
-4. The next step would be loading dataset_v10.pkl into convergence.pkl to filter the non-converging trajectories and use a part of the converging points as dataset.
+2. The generated ICs come from lhs_init_conditions.pkl, 
+    which are generated with LHS sampling inside a rectangular 
+    region of 'delta x omega'.
+3. The solution are trajectories, which would be saved under 
+    the regular naming convention.(e.g. dataset_v10.pkl)
+4. The next step would be loading dataset_v10.pkl into convergence.pkl 
+    to filter the non-converging trajectories and use a part of 
+    the converging points as dataset.
+5. If you are using datasets directly from the whole region for training, 
+    change the number under section dataset inside "setup_dataset_pinn_gfl.yaml" 
+    or "setup_dataset_vanilla_gfl.yaml as 10. "
 '''
 
 # Use hydra to configure the dataset creation along with the setup_dataset_sm.yaml file
@@ -47,7 +55,7 @@ def main(config):
         log_data_metrics_to_wandb(run, cfg)
         print("Is cuda available?", torch.cuda.is_available())
         GFL_model = ODE_modelling(cfg)
-        with open("./lhs_init_conditions.pkl", "rb") as f:
+        with open("lhs_init_conditions.pkl", "rb") as f:
             lhs_dataset = pickle.load(f)
         init_conditions = np.array(lhs_dataset)[:,:2]  # 只取 [δ₀, ω₀]
         modelling_full = GridFollowingConverterModels(cfg) # Define the GridFollowingConverterModels model to be used
