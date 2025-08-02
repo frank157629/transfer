@@ -321,7 +321,7 @@ class VanillaNeuralNetworkActions():
         no_time = x_train[:, 1:]  # get the input columns
         y, dy_dt = torch.autograd.functional.jvp(  # calculate the jacobian vector product
             func=lambda t: self.forward_nn(time=t, no_time=no_time), inputs=time,
-            v=torch.ones(time.shape).to(self.device), create_graph=True, retain_graph=True)
+            v=torch.ones(time.shape).to(self.device), create_graph=True)
         return y, dy_dt
 
     # Haitian, added for y_processed the "GFL" branch, line 335
@@ -351,10 +351,9 @@ class VanillaNeuralNetworkActions():
         This function calculates the pinn loss either for collocation points or for data points
         """
         # autograd
-        # y_hat, dy_dt = self.calculate_autograd(x_train)
+        y_hat, dy_dt = self.calculate_autograd(x_train)
 
-        y_hat, dy_dt = self.calculate_autograd22(
-            x_train)  # calculate the output of the model and the derivative of the output
+        # y_hat, dy_dt = self.calculate_autograd22( x_train)  # calculate the output of the model and the derivative of the output
         # ode
         if y_train is None:  # collocation points
             y_processed = self.calculate_from_ode(y_hat)
@@ -595,8 +594,7 @@ class VanillaNeuralNetworkActions():
             if (epoch + 1) % 50 == 0:
                 print(
                     f'Epoch [{epoch + 1}/{self.cfg.network.num_epochs}], Loss: {self.loss_total.item():.4f}, Loss_data: {self.loss_data.item():.4f}, Loss_dt: {self.loss_dt.item():.4f}, Loss_pinn: {self.loss_pinn.item():.4f} , Loss_pinn_ic : {self.loss_pinn_ic.item():.4f}',
-                    f"val_data={val_loss:.4f} "
-                    f"val_dt={val_dt_loss:.4f}")
+                    f"val_data={val_loss:.4f} ")
 
             # log all the losses for the epoch to wandb
             save_iteration = 500 if self.cfg.network.optimizer == "LBFGS" else 10000  # 20 iterations within the optimizer ->500*20 = 10000

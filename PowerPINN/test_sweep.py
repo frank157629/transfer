@@ -87,9 +87,9 @@ if __name__ == "__main__":
         , "parameters": {
             "seed": {"values": [1]},
             "weight_data": {"values": [1]},
-            "weight_dt": {"values": [0]},
-            "weight_pinn": {"values": [0]},
-            "weight_pinn_ic": {"values": [0]}
+            "weight_dt": {"values": [1e-4]},
+            "weight_pinn": {"values": [1e-4]},
+            "weight_pinn_ic": {"values": [1e-4]}
         }
     }
 

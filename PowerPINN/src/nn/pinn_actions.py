@@ -327,7 +327,7 @@ class PhysicsInformedNeuralNetworkActions():
         time = x_train[:,0].unsqueeze(1) # get the time column SOSOSO check if x_train[1:,0] is required 
         no_time = x_train[:,1:] # get the input columns
         y, dy_dt = torch.autograd.functional.jvp( # calculate the jacobian vector product
-            func=lambda t: self.forward_nn(time=t, no_time = no_time), inputs=time ,v=torch.ones(time.shape).to(self.device), create_graph=True, retain_graph=True)
+            func=lambda t: self.forward_nn(time=t, no_time = no_time), inputs=time ,v=torch.ones(time.shape).to(self.device), create_graph=True)
         return y, dy_dt
     #Haitian, added for y_processed the "GFL" branch, line 335
     def calculate_from_ode(self, output):
@@ -359,9 +359,9 @@ class PhysicsInformedNeuralNetworkActions():
         This function calculates the pinn loss either for collocation points or for data points
         """
         #autograd
-        #y_hat, dy_dt = self.calculate_autograd(x_train)
+        y_hat, dy_dt = self.calculate_autograd(x_train)
     
-        y_hat, dy_dt = self.calculate_autograd22(x_train) # calculate the output of the model and the derivative of the output
+        # y_hat, dy_dt = self.calculate_autograd22(x_train) # calculate the output of the model and the derivative of the output
         #ode
         if y_train is None: # collocation points
             y_processed = self.calculate_from_ode(y_hat)
