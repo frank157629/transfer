@@ -504,9 +504,9 @@ class PhysicsInformedNeuralNetworkActions():
         x_train, y_train, x_train_col, x_train_col_ic, y_train_col_ic, x_val, y_val = self.data_loader.define_train_val_data2(self.cfg.dataset.perc_of_data_points, self.cfg.dataset.perc_of_col_points, num_of_skip_data_points, num_of_skip_col_points, num_of_skip_val_points) # define the training and validation data
         # Create DataLoaders for batch processing
         batch_size = self.cfg.network.batch_size if self.cfg.network.batch_size != "None" else max(len(x_train), len(x_train_col), len(x_train_col_ic))
-        train_loader = DataLoader(TensorDataset(x_train, y_train), batch_size=batch_size)
-        collocation_loader = DataLoader(x_train_col, batch_size=batch_size)
-        col_ic_loader = DataLoader(TensorDataset(x_train_col_ic, y_train_col_ic), batch_size=batch_size)
+        train_loader = DataLoader(TensorDataset(x_train, y_train), batch_size=batch_size, shuffle=True)
+        collocation_loader = DataLoader(x_train_col, batch_size=batch_size, shuffle=True)
+        col_ic_loader = DataLoader(TensorDataset(x_train_col_ic, y_train_col_ic), batch_size=batch_size, shuffle=True)
 
         print("Number of labeled training data:", x_train.shape[0], 
             "Number of collocation points:", x_train_col.shape[0], 

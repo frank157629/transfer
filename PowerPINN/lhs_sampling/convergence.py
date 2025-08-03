@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
     names that can be recognized. (e.g. "dataset_v10")
 '''
 # ======== Configuration parameters ========
-data_path = "../data/GFL_2nd_order/dataset_v18.pkl"
+data_path = "../data/GFL_2nd_order/dataset_v19.pkl"
 
 # --- Threshold settings ---
 omega_std_thresh     = 1e-2        # Oscillation tolerance for ω (std, <1 % of 2π * 0.2)
@@ -30,6 +30,8 @@ delta_final_thresh   = 0.14        # Convergence tolerance for δ to 0 or 2π·n
 
 tail_window = 100                  # Number of tail time steps to check convergence
 pi = np.pi
+
+num_points_to_save = 10000
 # =========================================
 
 def load_dataset(path):
@@ -156,8 +158,13 @@ if __name__ == "__main__":
     all_converged_ids = [entry[0] for entry in all_converged_entries]
     all_converged_trajectories = data[all_converged_ids]
 
-    save_path = "../data/GFL_2nd_order/converged_all_zones.pkl"
-    with open(save_path, "wb") as f:
-        pickle.dump(all_converged_trajectories, f)
+    # 💾 只保存前 k 条收敛轨迹并覆盖文件
+    print(f"💾 Saving first {num_points_to_save} converged trajectories (overwriting)...")
+    k_converged_ids = all_converged_ids[:num_points_to_save]
+    k_converged_trajectories = data[k_converged_ids]
 
-    print(f"✅ Done. Saved {len(all_converged_ids)} converged trajectories to → {save_path}")
+    save_path = f"../lhs_sampling/dataset_v19_converged_k{num_points_to_save}.pkl"
+    with open(save_path, "wb") as f:
+        pickle.dump(k_converged_trajectories, f)
+
+    print(f"✅ Done. Saved {len(k_converged_ids)} converged trajectories to → {save_path}")
