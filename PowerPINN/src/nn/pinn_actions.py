@@ -319,16 +319,29 @@ class PhysicsInformedNeuralNetworkActions():
             u.append(self.derivative(y[:,i], time))
         u_all = torch.cat(u, 1)
         return y, u_all
-    
+    #Haitian, new
     def calculate_autograd(self, x_train):
-        """
-        This function calculates the output of the neural network model and the derivative of the output 
-        """
-        time = x_train[:,0].unsqueeze(1) # get the time column SOSOSO check if x_train[1:,0] is required 
-        no_time = x_train[:,1:] # get the input columns
-        y, dy_dt = torch.autograd.functional.jvp( # calculate the jacobian vector product
-            func=lambda t: self.forward_nn(time=t, no_time = no_time), inputs=time ,v=torch.ones(time.shape).to(self.device), create_graph=True)
+        time = x_train[:, 0].unsqueeze(1).clone().detach().to(self.device)
+        time.requires_grad_(True)  # ★关键
+        no_time = x_train[:, 1:].to(self.device)
+
+        # 方式A：autograd.grad（建议先用这个，最稳）
+        y = self.forward_nn(time=time, no_time=no_time)
+        dy_dt = torch.autograd.grad(
+            y, time, grad_outputs=torch.ones_like(y), create_graph=True, retain_graph=True
+        )[0]
         return y, dy_dt
+
+
+    # def calculate_autograd(self, x_train):
+    #     """
+    #     This function calculates the output of the neural network model and the derivative of the output
+    #     """
+    #     time = x_train[:,0].unsqueeze(1) # get the time column SOSOSO check if x_train[1:,0] is required
+    #     no_time = x_train[:,1:] # get the input columns
+    #     y, dy_dt = torch.autograd.functional.jvp( # calculate the jacobian vector product
+    #         func=lambda t: self.forward_nn(time=t, no_time = no_time), inputs=time ,v=torch.ones(time.shape).to(self.device), create_graph=True)
+    #     return y, dy_dt
     #Haitian, added for y_processed the "GFL" branch, line 335
     def calculate_from_ode(self, output):
         """
@@ -548,8 +561,8 @@ class PhysicsInformedNeuralNetworkActions():
                         loss_dt = [self.criterion(dydt0[:, i], ode0[:, i]) for i in range(dydt0.shape[1])]
                         mean_loss_dt = torch.mean(torch.stack(loss_dt))
                         mean_loss_pinn, loss_pinn = self.calc_adapt_criterion_loss(x_col_batch, dydt1, ode1)
-                        loss_pinn = [self.criterion(dydt1[:, i], ode1[:, i]) for i in range(dydt1.shape[1])]
-                        mean_loss_pinn = torch.mean(torch.stack(loss_pinn))
+                        # loss_pinn = [self.criterion(dydt1[:, i], ode1[:, i]) for i in range(dydt1.shape[1])]
+                        # mean_loss_pinn = torch.mean(torch.stack(loss_pinn))
                         loss_pinn_ic = self.criterion(output_col0, y_col_ic_batch)
                         loss_total, self.losses = self.weighting_scheme.compute_weighted_loss(loss_data, loss_dt, loss_pinn, loss_pinn_ic, epoch) #total_iteration_count + iteration_count
                         self.loss_total = loss_total
@@ -695,7 +708,105 @@ class PhysicsInformedNeuralNetworkActions():
             self.log_plot(y_pred, y_test, None, run, x_test,"test", starting_traj, total_traj)
         mae, rmse = self.loss_over_time(x_test, y_test, y_pred, run)
         return test_loss.item()
-
+    # #Haitian, temporary
+    # def log_plot(self, output, target, epoch, run, x_test, type,
+    #              starting_traj=0, total_traj=1):
+    #     # log in wandb
+    #     if self.cfg.theme == "SM":
+    #         modeling_guide_path = os.path.join(self.cfg.dirs.init_conditions_dir, "modellings_guide_sm.yaml")
+    #         modeling_guide = OmegaConf.load(modeling_guide_path)
+    #     elif self.cfg.theme == "GFL":
+    #         modeling_guide_path = os.path.join(self.cfg.dirs.init_conditions_dir, "modellings_guide_gfl.yaml")
+    #         modeling_guide = OmegaConf.load(modeling_guide_path)
+    #
+    #     # check if proposed modeling is in the modeling guide
+    #     for model in modeling_guide:
+    #         model_name = model.get("name")
+    #         if model_name == self.cfg.model.model_flag:
+    #             self.keys = model.get("keys")
+    #
+    #     pts_per_traj = int(self.data_loader.sample_per_traj)
+    #     max_traj = len(output) // pts_per_traj
+    #     print("type: ",str(type) + ", total_traj:" , str(max_traj) + ", max_traj", str(total_traj))
+    #     total_traj = min(total_traj, max_traj)
+    #
+    #     blk_idx = list(range(starting_traj, starting_traj + total_traj))
+    #     fig, axes = plt.subplots(total_traj, 3,figsize=(27, 3 * total_traj),sharex='col')
+    #     # …………………………………… 前面保持不变 ……………………………………
+    #
+    #     for r, k in enumerate(blk_idx):
+    #         lo, hi = k * pts_per_traj, (k + 1) * pts_per_traj
+    #
+    #         # -------- ① 反变换时间轴 --------
+    #         x_block_scaled = x_test[lo:hi]  # ← FIX: 传整块
+    #         x_block_phys = self.data_loader.detransform_input(x_block_scaled).detach()
+    #         t = x_block_phys[:, 0].cpu().numpy()  # ← FIX: 反变换后再取时间列
+    #
+    #         # -------- ② 反变换 δ / ω --------
+    #         y_true = self.data_loader.detransform_output(target[lo:hi]).detach().cpu().numpy()
+    #         y_pred = self.data_loader.detransform_output(output[lo:hi]).detach().cpu().numpy()
+    #         delta_true, omega_true = y_true[:, 0], y_true[:, 1]
+    #         delta_pred, omega_pred = y_pred[:, 0], y_pred[:, 1]
+    #
+    #         f_true = calculate_frequency(omega_true, np.pi * 100)
+    #         f_pred = calculate_frequency(omega_pred, np.pi * 100)
+    #
+    #         # -------- ④ 画图部分保持原逻辑 --------
+    #         # --- δ ---
+    #         if self.keys[0] == "delta":
+    #             axd = axes[r, 0]
+    #             axd.set_visible(True)
+    #             axd.plot(t, delta_true, color='tab:blue', lw=1.2,
+    #                      label='True' if r == 0 else None)
+    #             axd.plot(t, delta_pred, color='tab:orange', lw=1.2, ls='--',
+    #                      label='Pred' if r == 0 else None)
+    #             axd.grid(ls='--', alpha=.3)
+    #
+    #         # --- ω ---
+    #         if self.keys[1] == "omega":
+    #             axw = axes[r, 1]
+    #             axw.set_visible(True)
+    #             axw.plot(t, omega_true, color='tab:blue', lw=1.2,
+    #                      label='True' if r == 0 else None)
+    #             axw.plot(t, omega_pred, color='tab:orange', lw=1.2, ls='--',
+    #                      label='Pred' if r == 0 else None)
+    #             axw.grid(ls='--', alpha=.3)
+    #
+    #             # --- f ---
+    #             axf = axes[r, 2]
+    #             axf.set_visible(True)
+    #             axf.plot(t, f_true, color='tab:blue', lw=1.2,
+    #                      label='True' if r == 0 else None)
+    #             axf.plot(t, f_pred, color='tab:orange', lw=1.2, ls='--',
+    #                      label='Pred' if r == 0 else None)
+    #             axf.grid(ls='--', alpha=.3)
+    #
+    #         # 行标签
+    #         axd.text(-0.05, 0.5, f'traj {k + 1}',
+    #                  transform=axd.transAxes, va='center', ha='right',
+    #                  fontsize=9, weight='bold')
+    #         # label x-axes
+    #     axes[0, 0].set_title('δ')
+    #     axes[0, 1].set_title('ω')
+    #     axes[0, 2].set_title('f = ω/2*pi')
+    #     axes[-1, 0].set_xlabel('Time (s)')
+    #     axes[-1, 1].set_xlabel('Time (s)')
+    #     axes[-1, 2].set_xlabel('Time (s)')
+    #
+    #     #??
+    #     handles, labels = axes[0, 0].get_legend_handles_labels()
+    #     if handles:
+    #         fig.legend(handles, labels, loc='upper right')
+    #
+    #     plt.tight_layout()
+    #
+    #     # --------------------------- wandb docu.
+    #     gname = f"{type}{blk_idx[0]+1}-{blk_idx[-1]+1}"  # Example ：1-5, 6-10 …
+    #     run.log({f"traj_{gname}": wandb.Image(fig)},commit=False)
+    #
+    #     plt.close(fig)
+    #     run.log({}, commit=True)  #  ??
+        # …………………………………… 后面保持不变 ……………………………………
     # Haitian, added different logic for plotting GFL
     def log_plot(self, output, target, epoch, run, x_test, type, starting_traj=0, total_traj=1):
         # log in wandb
@@ -842,7 +953,7 @@ class PhysicsInformedNeuralNetworkActions():
 
                 #log only mean values
                 run.log({f"Mean MAE for variable {self.keys[i]}": mean_mae})
-                run.log({f"Mean RMSE for variable {self.keys[i]}": mean_rmse})
+                run.log({f"Mean MSE for variable {self.keys[i]}": mean_rmse})
                 run.log({f"Max MAE for variable {self.keys[i]}": max_mae.item()})
             time = unique_values.detach().cpu().numpy()
             for i in range(y_pred_.shape[1]):
@@ -851,14 +962,14 @@ class PhysicsInformedNeuralNetworkActions():
                     # log MAE and RMSE for each variable at time  
                 
                     run.log({f"MAE for variable {self.keys[i]}": mae[j,i], "Time": time[j]})
-                    run.log({f"RMSE for variable {self.keys[i]}": rmse[j,i], "Time": time[j]})
+                    run.log({f"MSE for variable {self.keys[i]}": rmse[j,i], "Time": time[j]})
 
         max_mae = torch.max(mae2)  # Find the maximum absolute error
         run.log({"Test Max AE": max_mae.item()})
         #save the mae and rmse
         full_path = os.path.join(self.cfg.dirs.model_dir, self.final_name)
         np.save(full_path+"_mae.npy", mae)
-        np.save(full_path+"_rmse.npy", rmse)
+        np.save(full_path+"_mse.npy", rmse)
 
         return mae, rmse
 
