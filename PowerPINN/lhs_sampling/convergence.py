@@ -19,65 +19,124 @@ import matplotlib.pyplot as plt
     names that can be recognized. (e.g. "dataset_v10")
 '''
 # ======== Configuration parameters ========
-data_path = "../data/GFL_2nd_order/dataset_v19.pkl"
+dataset = "dataset_v" + str(8)
+data_path = f"../data/GFL_2nd_order/{dataset}.pkl"
 
 # --- Threshold settings ---
-omega_std_thresh     = 1e-2        # Oscillation tolerance for ω (std, <1 % of 2π * 0.2)
-omega_mean_thresh    = 1.26        # Final value tolerance for ω (≈ 2π * 0.2 Hz, European standard)
+# --- Threshold settings ---
+omega_std_thresh   = 0.01     # RMS 波动阈值   (Hz)
+omega_ptp_thresh   = 0.05       # 峰-峰摆幅阈值 (Hz)
+omega_abs_thresh   = 1.26       # 尾窗内 |ω| 最大允许值 (Hz)
 
-delta_std_thresh     = 0.05        # Oscillation tolerance for δ (in rad, <1 % of 2π)
-delta_final_thresh   = 0.14        # Convergence tolerance for δ to 0 or 2π·n (≈ 8°, IEEE Std 1547-2018)
-
-tail_window = 100                  # Number of tail time steps to check convergence
+delta_std_thresh   = 0.05       # δ RMS 波动 (rad)
+delta_final_thresh = 0.14       # δ 收敛到 2kπ±0.14 (rad)
+tail_window        = 1       # 建议覆盖≥4-6个周期
+# omega_std_thresh     = 0.01        # Oscillation tolerance for ω (std, <1 % of 2π * 0.2)
+# omega_mean_thresh    = 1.26       # Final value tolerance for ω (≈ 2π * 0.2 Hz, European standard)
+#
+# delta_std_thresh     = 0.05       # Oscillation tolerance for δ (in rad, <1 % of 2π)
+# delta_final_thresh   = 0.14        # Convergence tolerance for δ to 0 or 2π·n (≈ 8°, IEEE Std 1547-2018)
+#
+# tail_window = 40                  # Number of tail time steps to check convergence
 pi = np.pi
+
+# --- Sampling ratio for A / B / C ---
+sampling_ratio = {
+    "region_0": 1,        # [0, 2π)
+    "region_2kpi": 0,     # other 2kπ
+    "non_converged": 0   # red
+}
 
 num_points_to_save = 10000
 # =========================================
+
 
 def load_dataset(path):
     with open(path, "rb") as f:
         data = pickle.load(f)
     return np.array(data)  # shape = (N, 3, T)
-
-def analyze_convergence(data, omega_std_thr, omega_mean_thr,
-                        delta_std_thr, delta_final_thr, tail_window):
+#New version with abs
+def analyze_convergence(data,
+                        ω_std_thr,  ω_ptp_thr,  ω_abs_thr,
+                        δ_std_thr,  δ_final_thr,
+                        tail_window):
     """
-    Check convergence:
-    - ω: low oscillation (std) and mean close to 0
-    - δ: low oscillation (std) and final value close to n·2π
+    1. ω 在尾窗内 —— 绝对值、RMS、峰-峰值 都小于阈值
+    2. δ 在尾窗内 —— RMS 足够小 & 收敛到 2kπ
     """
     N = data.shape[0]
     groups = defaultdict(list)
+    pi = np.pi
 
     for i in range(N):
-        delta_series = data[i, 1, :]
-        omega_series = data[i, 2, :]
+        δ_series = data[i, 1, :]
+        ω_series = data[i, 2, :]
 
-        delta_tail = delta_series[-tail_window:]
-        omega_tail = omega_series[-tail_window:]
+        δ_tail = δ_series[-tail_window:]
+        ω_tail = ω_series[-tail_window:]
 
-        # ω convergence criteria
-        omega_std = np.std(omega_tail)
-        omega_mean = np.abs(np.mean(omega_tail))
+        # ---------- ω 判据 ----------
+        ω_abs_ok  = np.max(np.abs(ω_tail)) < ω_abs_thr
+        ω_std_ok  = np.std(ω_tail)         < ω_std_thr
+        ω_ptp_ok  = np.ptp(ω_tail)         < ω_ptp_thr
 
-        # δ convergence criteria
-        delta_std = np.std(delta_tail)
-        final_delta = delta_series[-1]
-        delta_mod = np.abs((final_delta + pi) % (2 * pi) - pi)  # Normalize to [-π, π]
-        delta_residual = np.abs(delta_mod)  # Distance to n·2π
+        # ---------- δ 判据 ----------
+        δ_std_ok  = np.std(δ_tail)         < δ_std_thr
+        δ_final   = δ_series[-1]
+        δ_mod     = np.abs((δ_final + pi) % (2*pi) - pi)   # 距离最近的 2kπ
+        δ_conv_ok = δ_mod < δ_final_thr
 
-        if (omega_std  < omega_std_thr and
-            omega_mean < omega_mean_thr and
-            delta_std  < delta_std_thr and
-            delta_residual < delta_final_thr):
-
-            delta0 = delta_series[0]
-            omega0 = omega_series[0]
-            final_omega = omega_series[-1]
-            k = int(np.floor(final_delta / (2 * pi)))  # Index of convergence zone
-            groups[k].append((i, delta0, omega0, final_delta, final_omega))
-
+        if ω_abs_ok and ω_std_ok and ω_ptp_ok and δ_std_ok and δ_conv_ok:
+        # if ω_abs_ok and ω_ptp_ok and δ_std_ok and δ_conv_ok:
+            k = int(np.floor(δ_final / (2*pi)))            # 收敛区间索引
+            groups[k].append((
+                i,                      # 轨迹 ID
+                δ_series[0],            # δ0
+                ω_series[0],            # ω0
+                δ_final,                # δ_final
+                ω_series[-1])           # ω_final
+            )
     return groups
+#old version
+# def analyze_convergence(data, omega_std_thr, omega_mean_thr,
+#                         delta_std_thr, delta_final_thr, tail_window):
+#     """
+#     Check convergence:
+#     - ω: low oscillation (std) and mean close to 0
+#     - δ: low oscillation (std) and final value close to n·2π
+#     """
+#     N = data.shape[0]
+#     groups = defaultdict(list)
+#
+#     for i in range(N):
+#         delta_series = data[i, 1, :]
+#         omega_series = data[i, 2, :]
+#
+#         delta_tail = delta_series[-tail_window:]
+#         omega_tail = omega_series[-tail_window:]
+#
+#         # ω convergence criteria
+#         omega_std = np.std(omega_tail)
+#         omega_mean = np.abs(np.mean(omega_tail))
+#
+#         # δ convergence criteria
+#         delta_std = np.std(delta_tail)
+#         final_delta = delta_series[-1]
+#         delta_mod = np.abs((final_delta + pi) % (2 * pi) - pi)  # Normalize to [-π, π]
+#         delta_residual = np.abs(delta_mod)  # Distance to n·2π
+#
+#         if (omega_std  < omega_std_thr and
+#             omega_mean < omega_mean_thr and
+#             delta_std  < delta_std_thr and
+#             delta_residual < delta_final_thr):
+#
+#             delta0 = delta_series[0]
+#             omega0 = omega_series[0]
+#             final_omega = omega_series[-1]
+#             k = int(np.floor(final_delta / (2 * pi)))  # Index of convergence zone
+#             groups[k].append((i, delta0, omega0, final_delta, final_omega))
+#
+#     return groups
 
 def print_report(groups):
     total = sum(len(v) for v in groups.values())
@@ -139,9 +198,16 @@ if __name__ == "__main__":
     data = load_dataset(data_path)
 
     print("🧮 Analyzing convergence based on tail behavior...")
+    # grouped = analyze_convergence(data,
+    #                               omega_std_thresh,
+    #                               omega_mean_thresh,
+    #                               delta_std_thresh,
+    #                               delta_final_thresh,
+    #                               tail_window)
     grouped = analyze_convergence(data,
                                   omega_std_thresh,
-                                  omega_mean_thresh,
+                                  omega_ptp_thresh,
+                                  omega_abs_thresh,
                                   delta_std_thresh,
                                   delta_final_thresh,
                                   tail_window)
@@ -152,19 +218,67 @@ if __name__ == "__main__":
     print("🎯 Plotting classification map...")
     A, B, C = plot_scatter(grouped, data)
 
-    print("💾 Saving all converged trajectories (any 2kπ zone)...")
-    # Get all converged trajectory indices
-    all_converged_entries = [entry for group in grouped.values() for entry in group]
-    all_converged_ids = [entry[0] for entry in all_converged_entries]
-    all_converged_trajectories = data[all_converged_ids]
+    print("🎯 Sampling from three regions by ratio...")
 
-    # 💾 只保存前 k 条收敛轨迹并覆盖文件
-    print(f"💾 Saving first {num_points_to_save} converged trajectories (overwriting)...")
-    k_converged_ids = all_converged_ids[:num_points_to_save]
-    k_converged_trajectories = data[k_converged_ids]
+    # region_0: green (label 1)
+    # region_2kpi: blue (label 2)
+    # non_converged: red (label 0)
 
-    save_path = f"../lhs_sampling/dataset_v19_converged_k{num_points_to_save}.pkl"
+    # === Step 1: 分出三类 ID ===
+    region_0_ids = [entry[0] for group in grouped.values() for entry in group if 0 <= entry[3] < 2 * pi]
+    region_2kpi_ids = [entry[0] for group in grouped.values() for entry in group if not (0 <= entry[3] < 2 * pi)]
+    all_ids = set(range(data.shape[0]))
+    converged_ids = set(region_0_ids + region_2kpi_ids)
+    non_converged_ids = list(all_ids - converged_ids)
+
+    # === Step 2: 按比例确定采样数量 ===
+    n_total = num_points_to_save
+    n_r0 = min(len(region_0_ids), int(n_total * sampling_ratio["region_0"]))
+    n_r2 = min(len(region_2kpi_ids), int(n_total * sampling_ratio["region_2kpi"]))
+    n_nc = min(len(non_converged_ids), n_total - n_r0 - n_r2)
+    if n_r0 < int(n_total * sampling_ratio["region_0"]):
+        print(f"⚠️  Warning: region_0 only has {len(region_0_ids)} samples, using all of them.")
+    if n_r2 < int(n_total * sampling_ratio["region_2kpi"]):
+        print(f"⚠️  Warning: region_2kpi only has {len(region_2kpi_ids)} samples, using all of them.")
+    if n_nc < int(n_total * sampling_ratio["non_converged"]):
+        print(f"⚠️  Warning: non-converged only has {len(non_converged_ids)} samples, using all of them.")
+
+    # === Step 3: 随机抽样 ===
+    np.random.seed(42)
+    r0_sample = np.random.choice(region_0_ids, n_r0, replace=False)
+    r2_sample = np.random.choice(region_2kpi_ids, n_r2, replace=False)
+    nc_sample = np.random.choice(non_converged_ids, n_nc, replace=False)
+
+    # === Step 4: 合并样本 ===
+    final_indices = np.concatenate([r0_sample, r2_sample, nc_sample]).astype(int)
+    np.random.shuffle(final_indices)
+    # === Step 5: 保存数据 ===
+    final_dataset = data[final_indices]
+    save_path = f"../lhs_sampling/{dataset}_mixed_k{n_total}.pkl"
     with open(save_path, "wb") as f:
-        pickle.dump(k_converged_trajectories, f)
+        pickle.dump(final_dataset, f)
 
-    print(f"✅ Done. Saved {len(k_converged_ids)} converged trajectories to → {save_path}")
+    print(f"✅ Saved {len(final_indices)} mixed-sample trajectories to → {save_path}")
+
+    import matplotlib.pyplot as plt
+
+    print("📊 Generating IC scatter plot for saved trajectories...")
+
+    # === Step 6: 画出 final_indices 轨迹的初始点 ===
+    delta0_all = data[final_indices, 1, 0]
+    omega0_all = data[final_indices, 2, 0]
+
+    plt.figure(figsize=(8, 6))
+    plt.scatter(delta0_all, omega0_all, c='black', s=1, alpha=0.6)
+    plt.xlabel("Initial δ₀")
+    plt.ylabel("Initial ω₀")
+    plt.title("Initial Conditions of Saved Trajectories")
+    plt.grid(True)
+    plt.tight_layout()
+
+    # Save PDF
+    pdf_path = f"../lhs_sampling/ic_map_{dataset}_mixed_k{n_total}.pdf"
+    plt.savefig(pdf_path)
+    plt.close()
+
+    print(f"✅ IC map saved to → {pdf_path}")
