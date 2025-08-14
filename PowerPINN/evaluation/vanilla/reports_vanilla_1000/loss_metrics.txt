@@ -1,0 +1,4 @@
+=== Vanilla 1000: TEST LOSS METRICS ===
+MAE             = 6.165149e+00
+MSE            = 1.775268e+02
+Max AE          = 8.214317e+01

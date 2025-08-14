@@ -1,0 +1,4 @@
+=== PINN: TEST LOSS METRICS ===
+MAE             = 4.183870e-01
+MSE            = 9.265271e-01
+Max AE          = 9.986871e+00
