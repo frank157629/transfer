@@ -13,7 +13,7 @@ model:
   init_condition_bounds : 1 # Final number of set of initial conditions for the collocation points to be used
   sampling: "Lhs" # Choose between "Lhs" or "Linear" or "Random" for sampling the initial conditions for collocation points
   torch : True # Keep it True when training the model! and also using to create the collocaiton points
-
+  activation: "tanh"
 dataset:
   number : 1 # Number of dataset to be used
   shuffle: True # Shuffle the trajectories of the dataset # If True, the dataset will be shuffled
@@ -21,7 +21,7 @@ dataset:
   validation_flag : True # Use validation set
   transform_input : "None" # Choose between "Std" or "MinMax" or "None" for input transformation
   transform_output : "None" # Choose between "Std" or "MinMax" or "None" for output transformation
-  new_coll_points_flag : True # Use new collocation points or use from the dataset
+  new_coll_points_flag : False # Use new collocation points or use from the dataset
   perc_of_data_points : 1 # Percentage of ground truth data points to be used for PINN training
   perc_of_col_points : 0 # Percentage of available collocation points to be used for PINN training
 
@@ -31,14 +31,14 @@ network:
   num_of_skip_val_points : 1
   type : "DynamicNN" # Choose between "StaticNN" or "DynamicNN" or "PinnA" or "PinnB" or "PinnAA" this is the adj target one
   hidden_layers: 4
-  hidden_dim: 64 # 20 if Kan
+  hidden_dim: 128 # 20 if Kan
   loss_criterion : "MSELoss" # Choose between "MSELoss" or "L1Loss" or "SmoothL1Loss"
   time_factored_loss : False # Use time factored loss or not
-  optimizer : "Adam" # Choose between "Adam" or "SGD" or "RMSprop" or "LBFGS"
+  optimizer : "SGD" # Choose between "Adam" or "SGD" or "RMSprop" or "LBFGS"
   weight_init: "xavier_normal" # Choose between "xavier_normal" or "xavier_uniform" or "kaiming_normal" or "kaiming_uniform" or "normal"
   lr: 0.001
-  lr_scheduler : "ExponentialLR" # Choose between "StepLR", "MultiStepLR", "ExponentialLR", "ReduceLROnPlateau", "No_scheduler"
-  num_epochs: 25000
+  lr_scheduler : "No_scheduler" # Choose between "StepLR", "MultiStepLR", "ExponentialLR", "ReduceLROnPlateau", "No_scheduler"
+  num_epochs: 50
   batch_size: "None" # Choose between "None" or any integer value
   early_stopping: True
   early_stopping_patience: 2500
