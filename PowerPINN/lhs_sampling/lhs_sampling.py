@@ -12,7 +12,7 @@ from scipy.stats import qmc
 4. Next step would be done in "create_dataset_d1.py", Which solves uses the ICs to generate the trajectories.
 '''
 # ======== Configurable parameters ========
-n_samples = 500                      # Number of sample points
+n_samples = 100000                      # Number of sample points
 delta_range = (-np.pi, np.pi)       # Range for δ (x-axis)
 omega_range = (-60, 60)             # Range for ω (y-axis)
 base_height = 400
