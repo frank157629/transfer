@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 # 一处配置（路径留白，自己粘贴）
 # ==============================
 CONFIG = {
-    "model_path": "evaluation/GFL_2nd_orderDynamicNN_1_750_800000_1600000_100000_None_None_1_0.01_0.0001_0.1_Static_20250813-050030.pth",          # <- 填你的 .pth
+    "model_path": "evaluation/pinn_model_1000/GFL_2nd_orderDynamicNN_1_750_800000_1600000_100000_None_None_1_0.01_0.0001_0.1_Static_20250813-050030.pth",          # <- 填你的 .pth
     "dataset_path": "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/lhs_sampling/dataset_v8_mixed_k1000.pkl",        # <- 填 (N,3,T) 的测试集 [t,delta,omega]
     # "dataset_path": "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/data/GFL_2nd_order/dataset_v11.pkl",
     "out_dir": "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/evaluation/pinn/reports_pinn",   # <- PDF 输出目录
@@ -333,24 +333,36 @@ def main():
     maxae_avg_t = 0.5 * (t_MaxAE[:, 0] + t_MaxAE[:, 1])
 
     # 替代原来 save_two_lines
-    save_single_line(
-        t, mae_avg_t,
-        title="MAE over time (avg)",
-        ylabel="MAE",
-        out_pdf=os.path.join(CONFIG["out_dir"], "mae_over_time_avg.pdf")
-    )
-    save_single_line(
-        t, mse_avg_t,
-        title="MSE over time (avg)",
-        ylabel="MSE",
-        out_pdf=os.path.join(CONFIG["out_dir"], "mse_over_time_avg.pdf")
-    )
-    save_single_line(
-        t, maxae_avg_t,
-        title="Max MAE over time (avg)",
-        ylabel="Max MAE",
-        out_pdf=os.path.join(CONFIG["out_dir"], "max_mae_over_time_avg.pdf")
-    )
+    # save_single_line(
+    #     t, mae_avg_t,
+    #     title="MAE over time (avg)",
+    #     ylabel="MAE",
+    #     out_pdf=os.path.join(CONFIG["out_dir"], "mae_over_time_avg.pdf")
+    # )
+    # save_single_line(
+    #     t, mse_avg_t,
+    #     title="MSE over time (avg)",
+    #     ylabel="MSE",
+    #     out_pdf=os.path.join(CONFIG["out_dir"], "mse_over_time_avg.pdf")
+    # )
+    # save_single_line(
+    #     t, maxae_avg_t,
+    #     title="Max MAE over time (avg)",
+    #     ylabel="Max MAE",
+    #     out_pdf=os.path.join(CONFIG["out_dir"], "max_mae_over_time_avg.pdf")
+    # )
+
+    # MAE 分开画
+    save_single_line(t, t_MAE[:,0], "MAE over time (delta)", "MAE", os.path.join(CONFIG["out_dir"], "mae_over_time_delta.pdf"))
+    save_single_line(t, t_MAE[:,1], "MAE over time (omega)", "MAE", os.path.join(CONFIG["out_dir"], "mae_over_time_omega.pdf"))
+
+    # MSE 分开画
+    save_single_line(t, t_MSE[:,0], "MSE over time (delta)", "MSE", os.path.join(CONFIG["out_dir"], "mse_over_time_delta.pdf"))
+    save_single_line(t, t_MSE[:,1], "MSE over time (omega)", "MSE", os.path.join(CONFIG["out_dir"], "mse_over_time_omega.pdf"))
+
+    # MaxAE 分开画
+    save_single_line(t, t_MaxAE[:,0], "Max AE over time (delta)", "Max AE", os.path.join(CONFIG["out_dir"], "max_ae_over_time_delta.pdf"))
+    save_single_line(t, t_MaxAE[:,1], "Max AE over time (omega)", "Max AE", os.path.join(CONFIG["out_dir"], "max_ae_over_time_omega.pdf"))
 
     # 6) Boxplot（每条轨迹的 mean MAE）
     err = y_pred.reshape(N, T, 2) - y_np.reshape(N, T, 2)
@@ -458,26 +470,55 @@ def main():
     y_true = y_np.reshape(N, T, 2)
     y_pred = y_pred.reshape(N, T, 2)
     abs_err = np.abs(y_true - y_pred)  # (N,T,2)
-    mae_per_point = 0.5 * (abs_err[:,:,0] + abs_err[:,:,1])  # (N,T)，delta+omega 的 avg MAE
-
+    # mae_per_point = 0.5 * (abs_err[:,:,0] + abs_err[:,:,1])  # (N,T)，delta+omega 的 avg MAE
+    mae_per_point_delta = abs_err[:,:,0]  # (N,T)
+    mae_per_point_omega = abs_err[:,:,1]  # (N,T)
+    mae_per_point_avg = 0.5 * (mae_per_point_delta + mae_per_point_omega)  # 可选保留
     # 每个时间段做一个 boxplot
     bin_edges = np.linspace(t_all[0], t_all[-1], num_bins + 1)
     bin_indices = np.digitize(t_all, bin_edges) - 1  # (T,) ∈ [0, num_bins-1]
 
-    # 每段一个 box（10个），每个 box 里是 N 条轨迹在该时间段内的误差
-    boxes = [[] for _ in range(num_bins)]
+    # # 每段一个 box（10个），每个 box 里是 N 条轨迹在该时间段内的误差
+    # boxes = [[] for _ in range(num_bins)]
+    # for i in range(num_bins):
+    #     # 选中这个 bin 里的时间点索引
+    #     idx = np.where(bin_indices == i)[0]
+    #     if len(idx) == 0:
+    #         continue
+    #     # 从所有轨迹中提取这些时刻的误差，平均成一个值
+    #     box_data = mae_per_point[:, idx].mean(axis=1)  # (N,)
+    #     boxes[i] = box_data
+    #
+    # # 画图
+    # plt.figure(figsize=(12, 4))
+    # plt.boxplot(boxes, positions=[(i + 0.5) * interval for i in range(num_bins)],
+    #             widths=0.04,
+    #             patch_artist=True,
+    #             boxprops=dict(facecolor='lightgray', color='black'),
+    #             medianprops=dict(color='red', linestyle='-', linewidth=2),
+    #             whiskerprops=dict(color='black'),
+    #             capprops=dict(color='black'),
+    #             showfliers=False)
+    # plt.yscale("log")
+    # plt.title("MAE distribution per 100ms interval")
+    # # 设置 x 轴刻度：10 个位置，每个位置显示一位小数，比如 0.1, 0.2, ..., 1.0
+    # tick_positions = [(i + 0.5) * interval for i in range(num_bins)]
+    # tick_labels = [f"{pos:.1f}" for pos in tick_positions]
+    # # 自动生成20个tick位置
+    # positions = [(i + 0.5) * interval for i in range(num_bins)]
+    # labels = [f"{pos:.2f}" for pos in positions]
+
+    boxes_delta = [[] for _ in range(num_bins)]
     for i in range(num_bins):
-        # 选中这个 bin 里的时间点索引
         idx = np.where(bin_indices == i)[0]
         if len(idx) == 0:
             continue
-        # 从所有轨迹中提取这些时刻的误差，平均成一个值
-        box_data = mae_per_point[:, idx].mean(axis=1)  # (N,)
-        boxes[i] = box_data
-
-    # 画图
+        box_data = mae_per_point_delta[:, idx].mean(axis=1)
+        boxes_delta[i] = box_data
+    tick_positions = [(i + 0.5) * interval for i in range(num_bins)]
+    tick_labels = [f"{pos:.2f}" for pos in tick_positions]
     plt.figure(figsize=(12, 4))
-    plt.boxplot(boxes, positions=[(i + 0.5) * interval for i in range(num_bins)],
+    plt.boxplot(boxes_delta, positions=[(i + 0.5) * interval for i in range(num_bins)],
                 widths=0.04,
                 patch_artist=True,
                 boxprops=dict(facecolor='lightgray', color='black'),
@@ -486,38 +527,77 @@ def main():
                 capprops=dict(color='black'),
                 showfliers=False)
     plt.yscale("log")
-    plt.title("MAE distribution per 100ms interval")
-    # 设置 x 轴刻度：10 个位置，每个位置显示一位小数，比如 0.1, 0.2, ..., 1.0
+    plt.title("MAE distribution per 100ms interval (delta)")
+    plt.xlabel("Time (s)")
+    plt.ylabel("MAE (delta)")
+    plt.xticks(tick_positions[::2], tick_labels[::2])
+    plt.grid(True, linestyle="--", alpha=0.3)
+    plt.xlim(0, duration)
+    plt.tight_layout()
+    plt.savefig(os.path.join(CONFIG["out_dir"], "box_100ms_delta.pdf"))
+    plt.close()
+
+    boxes_omega = [[] for _ in range(num_bins)]
+    for i in range(num_bins):
+        idx = np.where(bin_indices == i)[0]
+        if len(idx) == 0:
+            continue
+        box_data = mae_per_point_omega[:, idx].mean(axis=1)
+        boxes_omega[i] = box_data
     tick_positions = [(i + 0.5) * interval for i in range(num_bins)]
-    tick_labels = [f"{pos:.1f}" for pos in tick_positions]
-    # 自动生成20个tick位置
-    positions = [(i + 0.5) * interval for i in range(num_bins)]
-    labels = [f"{pos:.2f}" for pos in positions]
+    tick_labels = [f"{pos:.2f}" for pos in tick_positions]
+    plt.figure(figsize=(12, 4))
+    plt.boxplot(boxes_omega, positions=[(i + 0.5) * interval for i in range(num_bins)],
+                widths=0.04,
+                patch_artist=True,
+                boxprops=dict(facecolor='lightgray', color='black'),
+                medianprops=dict(color='red', linestyle='-', linewidth=2),
+                whiskerprops=dict(color='black'),
+                capprops=dict(color='black'),
+                showfliers=False)
+    plt.yscale("log")
+    plt.title("MAE distribution per 100ms interval (omega)")
+    plt.xlabel("Time (s)")
+    plt.ylabel("MAE (omega)")
+    plt.xticks(tick_positions[::2], tick_labels[::2])
+    plt.grid(True, linestyle="--", alpha=0.3)
+    plt.xlim(0, duration)
+    plt.tight_layout()
+    plt.savefig(os.path.join(CONFIG["out_dir"], "box_100ms_omega.pdf"))
+    plt.close()
 
     # 只显示一半的tick，防止挤压
-    plt.xticks(
-        ticks=positions[::2],
-        labels=labels[::2]
-    )
-    plt.title("MAE distribution per 100ms interval")
-    plt.xlabel("Time (s)")
-    plt.ylabel("Avg MAE (delta + omega)")
-    plt.grid(True, linestyle="--", alpha=0.3)
-
-    plt.xlim(0, duration)  # ✅ 精准控制横轴范围，不再留白
-    # （可选）x 轴刻度自定义，看需要是否加：
-    # plt.xticks(positions[::2], labels[::2])
-
-    plt.tight_layout()
-    out_box_path = os.path.join(CONFIG["out_dir"], "box_avg_100ms_intervals.pdf")
-    plt.savefig(out_box_path)
-    plt.close()
-    print(f"[OK] Saved time-boxed MAE to: {out_box_path}")
+    plt.xticks(ticks=tick_positions[::2], labels=tick_labels[::2])
+    # plt.title("MAE distribution per 100ms interval")
+    # plt.xlabel("Time (s)")
+    # plt.ylabel("Avg MAE (delta + omega)")
+    # plt.grid(True, linestyle="--", alpha=0.3)
+    #
+    # plt.xlim(0, duration)  # ✅ 精准控制横轴范围，不再留白
+    # # （可选）x 轴刻度自定义，看需要是否加：
+    # # plt.xticks(positions[::2], labels[::2])
+    #
+    # plt.tight_layout()
+    # out_box_path = os.path.join(CONFIG["out_dir"], "box_avg_100ms_intervals.pdf")
+    # plt.savefig(out_box_path)
+    # plt.close()
+    # print(f"[OK] Saved time-boxed MAE to: {out_box_path}")
     np.save(os.path.join(CONFIG["out_dir"], "mae_avg_t.npy"), mae_avg_t)
     np.save(os.path.join(CONFIG["out_dir"], "mse_avg_t.npy"), mse_avg_t)
     np.save(os.path.join(CONFIG["out_dir"], "maxae_avg_t.npy"), maxae_avg_t)
     np.save(os.path.join(CONFIG["out_dir"], "time_axis.npy"), t)
     print("[OK] Saved MAE/MSE/MaxAE + time to .npy")
+
+    # 10) 保存所有用于画图的数据为 .npy
+    np.save(os.path.join(CONFIG["out_dir"], "mae_over_time_delta.npy"), t_MAE[:, 0])
+    np.save(os.path.join(CONFIG["out_dir"], "mae_over_time_omega.npy"), t_MAE[:, 1])
+    np.save(os.path.join(CONFIG["out_dir"], "mse_over_time_delta.npy"), t_MSE[:, 0])
+    np.save(os.path.join(CONFIG["out_dir"], "mse_over_time_omega.npy"), t_MSE[:, 1])
+    np.save(os.path.join(CONFIG["out_dir"], "maxae_over_time_delta.npy"), t_MaxAE[:, 0])
+    np.save(os.path.join(CONFIG["out_dir"], "maxae_over_time_omega.npy"), t_MaxAE[:, 1])
+    np.save(os.path.join(CONFIG["out_dir"], "box_mae_delta.npy"), mae_all[:, 0])
+    np.save(os.path.join(CONFIG["out_dir"], "box_mae_omega.npy"), mae_all[:, 1])
+    print("[OK] Saved all 8 plot-related arrays as .npy.")
 
 
 if __name__ == "__main__":

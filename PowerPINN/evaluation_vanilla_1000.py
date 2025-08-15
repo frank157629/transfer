@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 # ==============================
 CONFIG = {
     # "model_path": "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/evaluation/GFL_2nd_orderDynamicNN_1_750_800000_1000_100000_None_None_1_0_0_0_Static_20250814-091159.pth",          # <- 填你的 .pth
-    "model_path": "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/evaluation/vanilla_1000_5000_10000/GFL_2nd_orderDynamicNN_1_750_800000_1000_100000_None_None_1_0_0_0_Static_20250814-150302.pth",
+    "model_path": "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/evaluation/vanilla_model_1000_5000_10000/GFL_2nd_orderDynamicNN_1_750_800000_1000_100000_None_None_1_0_0_0_Static_20250814-150302.pth",
     "dataset_path": "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/lhs_sampling/dataset_v8_mixed_k1000.pkl",        # <- 填 (N,3,T) 的测试集 [t,delta,omega]
     # "dataset_path": "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/data/GFL_2nd_order/dataset_v11.pkl",
     "out_dir": "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/evaluation/vanilla/reports_vanilla_1000",   # <- PDF 输出目录

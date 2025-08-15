@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 # 一处配置（路径留白，自己粘贴）
 # ==============================
 CONFIG = {
-    "model_path": "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/evaluation/vanilla_1000_5000_10000/GFL_2nd_orderDynamicNN_1_750_8000000_1000_1000000_None_None_1_0_0_0_Static_20250814-101254.pth",
+    "model_path": "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/evaluation/vanilla_model_1000_5000_10000/GFL_2nd_orderDynamicNN_1_750_8000000_1000_1000000_None_None_1_0_0_0_Static_20250814-101254.pth",
     "dataset_path": "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/lhs_sampling/dataset_v8_mixed_k1000.pkl",        # <- 填 (N,3,T) 的测试集 [t,delta,omega]
     # "dataset_path": "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/data/GFL_2nd_order/dataset_v11.pkl",
     "out_dir": "/Users/nbhsbgnb/PycharmProjects/PythonProject/PowerPINN/evaluation/vanilla/reports_vanilla_10000",   # <- PDF 输出目录
@@ -521,7 +521,7 @@ def main():
     np.save(os.path.join(CONFIG["out_dir"], "maxae_avg_t.npy"), maxae_avg_t)
     np.save(os.path.join(CONFIG["out_dir"], "time_axis.npy"), t)
     print("[OK] Saved MAE/MSE/MaxAE + time to .npy")
-    return y_true, y_pred, t
+    return y_true, y_pred, t, t_MAE, t_MSE, t_MaxAE
 def plot_true_pred_subplots(y_true, y_pred, t, traj_indices, save_path):
     """
     绘制多条轨迹的预测与真实值（delta 和 omega），以 subplot 方式集中展示
@@ -575,11 +575,19 @@ def save_single_traj_plot(y_true, y_pred, time, idx, save_dir="."):
     print(f"[OK] Saved traj {idx} comparison to: {path}")
 if __name__ == "__main__":
     main()
-    y_true, y_pred, t = main()
+    y_true, y_pred, t, t_MAE, t_MSE, t_MaxAE = main()
     traj_ids_to_plot = list(range(1))   # 可换成 15–30 等
     save_path = os.path.join(CONFIG["out_dir"], "pred_vs_true_15trajs.pdf")
     plot_true_pred_subplots(y_true, y_pred, t, traj_ids_to_plot, save_path)    # ✅ 清理缓
     save_single_traj_plot(y_true, y_pred, t, idx=99, save_dir=".")
+
+    # === 额外保存 delta 和 omega 各自的指标 ===
+    np.save(os.path.join(CONFIG["out_dir"], "mae_t_delta.npy"), t_MAE[:, 0])
+    np.save(os.path.join(CONFIG["out_dir"], "mae_t_omega.npy"), t_MAE[:, 1])
+    np.save(os.path.join(CONFIG["out_dir"], "mse_t_delta.npy"), t_MSE[:, 0])
+    np.save(os.path.join(CONFIG["out_dir"], "mse_t_omega.npy"), t_MSE[:, 1])
+    np.save(os.path.join(CONFIG["out_dir"], "maxae_t_delta.npy"), t_MaxAE[:, 0])
+    np.save(os.path.join(CONFIG["out_dir"], "maxae_t_omega.npy"), t_MaxAE[:, 1])
 
 # ✅ 清理缓存，防止内存累积导致崩溃
     import gc
