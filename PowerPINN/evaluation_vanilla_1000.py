@@ -309,6 +309,37 @@ def main():
     print(f"[RESULT] Total time     = {total_ms:.3f} ms")
     print(f"[RESULT] Per-trajectory = {per_traj_ms:.6f} ms/traj")
 
+    # 4b) 保存所有 loss 指标
+    t_MAE, t_MSE, t_MaxAE = error_over_time(y_np, y_pred, N, T)
+    final_max_mae = float(np.max(t_MaxAE[-1]))  # (T,2) 最后一个时间点，δ/ω 中最大的那个绝对误差
+
+    # === 提取 final 时刻的误差（delta / omega 分开） ===
+    final_mae_delta = t_MAE[-1, 0]
+    final_mae_omega = t_MAE[-1, 1]
+
+    final_mse_delta = t_MSE[-1, 0]
+    final_mse_omega = t_MSE[-1, 1]
+
+    final_maxae_delta = t_MaxAE[-1, 0]
+    final_maxae_omega = t_MaxAE[-1, 1]
+
+    # 可选：打印输出
+    print("Test loss vanilla_8000 (separated):")
+    print(f"MAE (delta)    = {final_mae_delta:.6e}")
+    print(f"MAE (omega)    = {final_mae_omega:.6e}")
+    print(f"MSE (delta)    = {final_mse_delta:.6e}")
+    print(f"MSE (omega)    = {final_mse_omega:.6e}")
+    print(f"MaxAE (delta)  = {final_maxae_delta:.6e}")
+    print(f"MaxAE (omega)  = {final_maxae_omega:.6e}")
+    # === 可选：写入 loss_metrics.txt ===
+    with open(os.path.join(CONFIG["out_dir"], "loss_metrics_separate.txt"), "a") as f:
+        f.write("\nTest loss vanilla_8000 (separated):\n")
+        f.write(f"MAE (delta)    = {final_mae_delta:.6e}\n")
+        f.write(f"MAE (omega)    = {final_mae_omega:.6e}\n")
+        f.write(f"MSE (delta)    = {final_mse_delta:.6e}\n")
+        f.write(f"MSE (omega)    = {final_mse_omega:.6e}\n")
+        f.write(f"MaxAE (delta)  = {final_maxae_delta:.6e}\n")
+        f.write(f"MaxAE (omega)  = {final_maxae_omega:.6e}\n")
     # 4) 全局指标（不计时）
     mae, mse, maxae = compute_metrics(y_np, y_pred)
     print("\n=== METRICS (NOT TIMED) ===")
@@ -316,7 +347,7 @@ def main():
     print(f"MSE    = {mse:.6e}")
     print(f"Max AE  = {maxae:.6e}")
     # 4b) 保存所有 loss 指标
-    t_MAE, t_MSE, t_MaxAE = error_over_time(y_np, y_pred, N, T)
+    # t_MAE, t_MSE, t_MaxAE = error_over_time(y_np, y_pred, N, T)
     final_max_mae = float(np.max(t_MaxAE[-1]))  # (T,2) 最后一个时间点，δ/ω 中最大的那个绝对误差
 
     metrics_txt = os.path.join(CONFIG["out_dir"], "loss_metrics.txt")
@@ -573,7 +604,6 @@ def save_single_traj_plot(y_true, y_pred, time, idx, save_dir="."):
     print(f"[OK] Saved traj {idx} comparison to: {path}")
 
 if __name__ == "__main__":
-    main()
     y_true, y_pred, t = main()
     traj_ids_to_plot = list(range(1))   # 可换成 15–30 等
     save_path = os.path.join(CONFIG["out_dir"], "pred_vs_true_15trajs.pdf")

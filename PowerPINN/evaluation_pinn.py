@@ -318,12 +318,41 @@ def main():
     t_MAE, t_MSE, t_MaxAE = error_over_time(y_np, y_pred, N, T)
     final_max_mae = float(np.max(t_MaxAE[-1]))  # (T,2) 最后一个时间点，δ/ω 中最大的那个绝对误差
 
+    # === 提取 final 时刻的误差（delta / omega 分开） ===
+    final_mae_delta = t_MAE[-1, 0]
+    final_mae_omega = t_MAE[-1, 1]
+
+    final_mse_delta = t_MSE[-1, 0]
+    final_mse_omega = t_MSE[-1, 1]
+
+    final_maxae_delta = t_MaxAE[-1, 0]
+    final_maxae_omega = t_MaxAE[-1, 1]
+
+    # 可选：打印输出
+    print("Test loss pinn (separated):")
+    print(f"MAE (delta)    = {final_mae_delta:.6e}")
+    print(f"MAE (omega)    = {final_mae_omega:.6e}")
+    print(f"MSE (delta)    = {final_mse_delta:.6e}")
+    print(f"MSE (omega)    = {final_mse_omega:.6e}")
+    print(f"MaxAE (delta)  = {final_maxae_delta:.6e}")
+    print(f"MaxAE (omega)  = {final_maxae_omega:.6e}")
+    # === 可选：写入 loss_metrics.txt ===
+    with open(os.path.join(CONFIG["out_dir"], "loss_metrics_separate.txt"), "a") as f:
+        f.write("\nTest loss pinn (separated): (separated):\n")
+        f.write(f"MAE (delta)    = {final_mae_delta:.6e}\n")
+        f.write(f"MAE (omega)    = {final_mae_omega:.6e}\n")
+        f.write(f"MSE (delta)    = {final_mse_delta:.6e}\n")
+        f.write(f"MSE (omega)    = {final_mse_omega:.6e}\n")
+        f.write(f"MaxAE (delta)  = {final_maxae_delta:.6e}\n")
+        f.write(f"MaxAE (omega)  = {final_maxae_omega:.6e}\n")
+
     metrics_txt = os.path.join(CONFIG["out_dir"], "loss_metrics.txt")
     with open(metrics_txt, "w") as f:
         f.write("=== PINN: TEST LOSS METRICS ===\n")
         f.write(f"MAE             = {mae:.6e}\n")
         f.write(f"MSE            = {mse:.6e}\n")
         f.write(f"Max AE          = {maxae:.6e}\n")
+
     print(f"[OK] Saved metrics to: {metrics_txt}")
 
     # 5) over-time 指标 + PDF（每个指标一页，δ/ω同图）
