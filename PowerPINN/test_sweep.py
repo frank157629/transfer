@@ -32,6 +32,10 @@ def train(config=None):
     cfg.seed = config.seed
     cfg.network.weighting.weights = [config.weight_data, config.weight_dt, config.weight_pinn, config.weight_pinn_ic]
     cfg.theme = setup.theme
+    cfg.dataset.number = config.number
+    cfg.network.optimizer = config.optimizer
+    cfg.dataset.new_coll_points_flag = config.new_coll_points_flag
+    cfg.dataset.batch_size = config.batch_size
 
     if cfg.network.optimizer == "LBFGS":
         lbfgs_iter = 10
@@ -49,7 +53,7 @@ def train(config=None):
         if setup.train == "pinn":
             pinn = PhysicsInformedNeuralNetworkActions(cfg, modelling_full)
         elif setup.train == "vanilla":
-            vanilla = VanillaNeuralNetworkActions(cfg, modelling_full)
+            vanilla = VanillaNeuralNetworkActions(cfg)
 
     elif cfg.theme == "GFM":
         ##Add your specifications here...
@@ -63,7 +67,7 @@ def train(config=None):
         pinn.pinn_train2(run)
     elif setup.train == "vanilla":
         print("VANILLA")
-        vanilla.vanilla_train2(run)
+        vanilla.vanilla_train(run)
 
 
 
@@ -85,11 +89,15 @@ if __name__ == "__main__":
         #     "weight_pinn_ic": {"values": [1e-3]}
         # }
         , "parameters": {
+            "number": {"values": [666]},
             "seed": {"values": [1]},
             "weight_data": {"values": [1]},
-            "weight_dt": {"values": [1e-4]},
+            "weight_dt": {"values": [1e-3]},
             "weight_pinn": {"values": [1e-4]},
-            "weight_pinn_ic": {"values": [1e-4]}
+            "weight_pinn_ic": {"values": [1e-1]},
+            "optimizer": {"values": ["Adam"]},
+            "new_coll_points_flag": {"values": [False]},
+            "batch_size": {"values": ["None"]},
         }
     }
 
