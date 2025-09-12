@@ -165,7 +165,7 @@ if __name__ == "__main__":
     save_path  = f"{out_dir}/dataset_v{dataset_id}.pkl"
     with open(save_path, "wb") as f:
         pickle.dump(final_ds, f)
-    print(f"✅ Saved {len(sample_ids)} trajectories to → {save_path}")
+    print(f"Saved {len(sample_ids)} trajectories to → {save_path}")
 
     # ---- IC map PDF ----
     delta0_all, omega0_all = data[sample_ids, 1, 0], data[sample_ids, 2, 0]
@@ -175,4 +175,4 @@ if __name__ == "__main__":
     plt.title("IC of Saved Trajectories"), plt.grid(True), plt.tight_layout()
     pdf_path = f"{out_dir}/ic_map_dataset_v{dataset_id}_mixed_k{len(sample_ids)}.pdf"
     plt.savefig(pdf_path), plt.close()
-    print(f"✅ IC map saved to → {pdf_path}")
+    print(f"IC map saved to → {pdf_path}")
