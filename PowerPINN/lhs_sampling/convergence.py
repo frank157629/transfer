@@ -38,10 +38,7 @@ def load_dataset(path: str) -> np.ndarray:
     with open(path, "rb") as f:
         return np.array(pickle.load(f))     # shape: (N, 3, T)
 
-def classify_delta(data: np.ndarray,
-                   tail: int,
-                   offset: float,
-                   tol: float):
+def classify_delta(data: np.ndarray,tail: int,offset: float,tol: float):
     """
     Convergence of δ ：
       • center = k·2π + offset
@@ -94,7 +91,7 @@ def plot_ic_scatter(groups, data):
     return A, B, C
 
 def quick_plot(traj_ids, title):
-    """画 δ & ω 轨迹"""
+    """draw δ & ω trajectories"""
     if not traj_ids:
         print(f"[{title}] empty set, skip.")
         return
@@ -122,22 +119,22 @@ def quick_plot(traj_ids, title):
 
 # ---------- Main function ----------
 if __name__ == "__main__":
-    print("📥 Loading dataset…")
+    print(" Loading dataset…")
     data = load_dataset(data_path)                    # shape (N,3,T)
 
-    print("🧮 Classifying trajectories by δ tail behaviour…")
+    print(" Classifying trajectories by δ tail behaviour…")
     groups = classify_delta(data, tail_window, delta_offset, delta_tol)
 
-    # ---- 统计打印 ----
+    # ---- statistic ----
     total_conv = sum(len(v) for v in groups.values())
-    print(f"📊 Converged trajectories: {total_conv}/{data.shape[0]}\n")
+    print(f" Converged trajectories: {total_conv}/{data.shape[0]}\n")
     for k in sorted(groups):
         print(f"  k = {k:2d} ([{2*k}π+Δ₀]): {len(groups[k])} trajectories")
 
-    # ---- 可视化 ----
+    # ---- visualisation ----
     A, B, C = plot_ic_scatter(groups, data)
 
-    # ---- 采样 ----
+    # ---- Sampling inside Trajectory set----
     k0_ids  = groups.get(0, [])
     kN_ids  = [idx for k,v in groups.items() if k!=0 for idx in v]
     non_ids = list(set(range(data.shape[0])) - set(k0_ids) - set(kN_ids))
@@ -161,16 +158,16 @@ if __name__ == "__main__":
     quick_plot(kN_ids, "Class B  (δ→k·2π+Δ₀, k≠0)")
     quick_plot(non_ids, "Class C  (Non-converged)")
 
-    # ---- 保存 ----
+    # ---- save dataset----
     final_ds   = data[sample_ids]
-    out_dir    = "../lhs_sampling"
+    out_dir    = "../data/GFL_2nd_order"
     os.makedirs(out_dir, exist_ok=True)
-    save_path  = f"{out_dir}/dataset_v{dataset_id}_mixed_k{len(sample_ids)}.pkl"
+    save_path  = f"{out_dir}/dataset_v{dataset_id}.pkl"
     with open(save_path, "wb") as f:
         pickle.dump(final_ds, f)
     print(f"✅ Saved {len(sample_ids)} trajectories to → {save_path}")
 
-    # ---- 初始条件散点 PDF ----
+    # ---- IC map PDF ----
     delta0_all, omega0_all = data[sample_ids, 1, 0], data[sample_ids, 2, 0]
     plt.figure(figsize=(8,6))
     plt.scatter(delta0_all, omega0_all, s=1, c='black', alpha=.6)
