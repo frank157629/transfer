@@ -9,7 +9,7 @@ from scipy.stats import qmc
     under "Configurable parameters" 
 2. The ICs would be saved under "lhs_init_conditions"
 3. A plot of the sampled points would be saved under "lhs_region_plot"
-4. Next step would be done in "create_dataset_d1.py", Which solves uses the ICs to generate the trajectories.
+4. Next step would be done in "create_dataset_d1.py", Which uses the generated ICs to generate the trajectories.
 '''
 # ======== Configurable parameters ========
 n_samples = 100000                      # Number of sample points

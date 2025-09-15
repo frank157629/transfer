@@ -1,16 +1,16 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+"PowerPINN/lhs_sampling/convergence.py"
 """
-convergence1.py
+convergence.py
 
-1. This file takes the trajectories from a dataset and filters the converging
-    datasets from the non-converging, and saves a number of the converging
-    datasets under "../lhs_sampling" for further processing. A convergence
-    map would also be saved inside the lhs_sampling folder.
-2. Configuration for the error and standard deviation tolerance can be tuned under
-    section <Configurations>.
-3. For the training, the datasets under "../data/GFL_2nd_order" would be used.
-    (e.g. "dataset_v10")
+1. This script classifies trajectories from a dataset into convergent and
+non-convergent groups. A subset of the convergent trajectories is saved
+under "../lhs_sampling" for further processing. A convergence map is also
+generated in the same folder.
+2. Error and standard deviation tolerances can be configured in the
+<Configurations> section.
+3. For training, datasets from "../data/GFL_2nd_order" (e.g. "dataset_v10.pkl")
+are used.
+
 """
 
 import numpy as np, pickle, matplotlib.pyplot as plt
@@ -18,11 +18,11 @@ from collections import defaultdict
 import os
 
 # ======== configurations ========
-dataset_id      = 9
+dataset_id      = 2
 data_path       = f"../data/GFL_2nd_order/dataset_v{dataset_id}.pkl"
 
 tail_window     = 100          # tail window
-delta_offset    = 0.137        # Δ₀：offset from 2*pi because of error of Rahul's Model
+delta_offset    = 0.137        # Δ₀：offset from 2*pi because of standard deviation of the Model
 delta_tol       = 0.001        # Error tolerance in tail window ±tol (rad)
 
 # sampling ratio
@@ -40,10 +40,14 @@ def load_dataset(path: str) -> np.ndarray:
 
 def classify_delta(data: np.ndarray,tail: int,offset: float,tol: float):
     """
-    Convergence of δ ：
-      • center = k·2π + offset
-      • For all δ ∈ [center ± tol] in tail window -> allocate in k
-    return dict{k: [traj_id,…]}
+    Classify trajectories by the convergence of δ.
+
+    • Center is defined as k·2π + offset.
+    • If all δ values within the tail window lie inside [center ± tol],
+      the trajectory is assigned to class k.
+
+    Returns:
+        dict[int, list[int]]: Mapping from k to a list of trajectory indices.
     """
     groups = defaultdict(list)
     N      = data.shape[0]
@@ -160,9 +164,9 @@ if __name__ == "__main__":
 
     # ---- save dataset----
     final_ds   = data[sample_ids]
-    out_dir    = "../data/GFL_2nd_order"
+    out_dir    = "../lhs_sampling"
     os.makedirs(out_dir, exist_ok=True)
-    save_path  = f"{out_dir}/dataset_v{dataset_id}.pkl"
+    save_path  = f"{out_dir}/dataset_v{dataset_id}_mixed_k{len(sample_ids)}.pkl"
     with open(save_path, "wb") as f:
         pickle.dump(final_ds, f)
     print(f"Saved {len(sample_ids)} trajectories to → {save_path}")
