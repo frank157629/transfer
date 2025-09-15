@@ -1,4 +1,0 @@
-=== Vanilla 8000: TEST LOSS METRICS ===
-MAE             = 2.575464e+00
-MSE            = 3.603825e+01
-Max AE          = 5.981499e+01

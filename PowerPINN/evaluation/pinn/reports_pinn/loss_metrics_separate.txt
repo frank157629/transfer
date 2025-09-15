@@ -1,0 +1,8 @@
+
+Test loss pinn (separated):
+MAE (delta)    = 1.105111e-02
+MAE (omega)    = 9.427685e-02
+MSE (delta)    = 1.642288e-04
+MSE (omega)    = 1.371044e-02
+MaxAE (delta)  = 2.298923e-02
+MaxAE (omega)  = 2.416272e-01

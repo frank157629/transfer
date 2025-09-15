@@ -1,4 +1,0 @@
-=== Vanilla 4000: TEST LOSS METRICS ===
-MAE             = 3.693951e+00
-MSE            = 5.507721e+01
-Max AE          = 6.002315e+01

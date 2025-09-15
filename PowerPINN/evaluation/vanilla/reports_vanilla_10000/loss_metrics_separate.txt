@@ -1,0 +1,32 @@
+
+Test loss vanilla (separated at final time):
+MAE (delta)    = 1.164521e-01
+MAE (omega)    = 3.349380e+00
+MSE (delta)    = 3.578447e-02
+MSE (omega)    = 2.822557e+01
+MaxAE (delta)  = 4.612461e-01
+MaxAE (omega)  = 1.018909e+01
+
+Test loss vanilla (separated at final time):
+MAE (delta)    = 1.164521e-01
+MAE (omega)    = 3.349380e+00
+MSE (delta)    = 3.578447e-02
+MSE (omega)    = 2.822557e+01
+MaxAE (delta)  = 4.612461e-01
+MaxAE (omega)  = 1.018909e+01
+
+Test loss vanilla (separated at final time):
+MAE (delta)    = 1.164521e-01
+MAE (omega)    = 3.349380e+00
+MSE (delta)    = 3.578447e-02
+MSE (omega)    = 2.822557e+01
+MaxAE (delta)  = 4.612461e-01
+MaxAE (omega)  = 1.018909e+01
+
+Test loss vanilla (separated at final time):
+MAE (delta)    = 1.164521e-01
+MAE (omega)    = 3.349380e+00
+MSE (delta)    = 3.578447e-02
+MSE (omega)    = 2.822557e+01
+MaxAE (delta)  = 4.612461e-01
+MaxAE (omega)  = 1.018909e+01
