@@ -4,12 +4,13 @@ import pickle
 import os
 from scipy.stats import qmc
 '''
-1. This file is the first step to generate IC sets of delta and omega inside a 
-    rectangular region using LHS. Tuning the parameters can be done 
-    under "Configurable parameters" 
-2. The ICs would be saved under "lhs_init_conditions"
-3. A plot of the sampled points would be saved under "lhs_region_plot"
-4. Next step would be done in "create_dataset_d1.py", Which uses the generated ICs to generate the trajectories.
+1. This script generates initial condition (IC) sets for δ and ω within a 
+   rectangular region using Latin Hypercube Sampling (LHS). Parameters can be 
+   tuned under "Configurable parameters".
+2. The ICs will be saved as "lhs_init_conditions.pkl".
+3. A plot of the sampled points will be saved as "lhs_region_plot.pdf".
+4. The next step is handled in "create_dataset_d1.py", which uses the generated 
+   ICs to simulate trajectories.
 '''
 # ======== Configurable parameters ========
 n_samples = 100000                      # Number of sample points
@@ -35,7 +36,7 @@ def generate_lhs_points_and_plot(n_samples, delta_range, omega_range, save_path,
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
     with open(save_path, "wb") as f:
         pickle.dump(sample_scaled.tolist(), f)
-    print(f"✅ Saved {n_samples} LHS points to {save_path}")
+    print(f"Saved {n_samples} LHS points to {save_path}")
 
     # Compute aspect ratio
     delta_width = delta_range[1] - delta_range[0]
@@ -61,7 +62,7 @@ def generate_lhs_points_and_plot(n_samples, delta_range, omega_range, save_path,
 
     plt.tight_layout()
     plt.savefig(plot_path, dpi=300)
-    print(f"🖼️ Plot saved to {plot_path}")
+    print(f"Plot saved to {plot_path}")
     # plt.show()
 
     return sample_scaled
