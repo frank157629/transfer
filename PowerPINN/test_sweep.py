@@ -1,3 +1,4 @@
+"PowerPINN/test_sweep.py"
 import os
 
 from ode.gfl_models_d import GridFollowingConverterModels
@@ -81,24 +82,30 @@ if __name__ == "__main__":
             "name": "Test_loss",
             "goal": "minimize"
         }
-        # ,"parameters": {
-        #     "seed": {"values": [1]},
-        #     "weight_data": {"values": [1]},
-        #     "weight_dt": {"values": [1e-3]},
-        #     "weight_pinn": {"values": [1e-3]},
-        #     "weight_pinn_ic": {"values": [1e-3]}
-        # }
+        #vanilla configuration
         , "parameters": {
             "number": {"values": [666]},
             "seed": {"values": [1]},
             "weight_data": {"values": [1]},
-            "weight_dt": {"values": [1e-3]},
-            "weight_pinn": {"values": [1e-4]},
-            "weight_pinn_ic": {"values": [1e-1]},
+            "weight_dt": {"values": [0]},
+            "weight_pinn": {"values": [0]},
+            "weight_pinn_ic": {"values": [0]},
             "optimizer": {"values": ["Adam"]},
             "new_coll_points_flag": {"values": [False]},
             "batch_size": {"values": ["None"]},
         }
+        # #pinn configuration
+        # , "parameters": {
+        #     "number": {"values": [666]},
+        #     "seed": {"values": [1]},
+        #     "weight_data": {"values": [1]},
+        #     "weight_dt": {"values": [1e-3]},
+        #     "weight_pinn": {"values": [1e-4]},
+        #     "weight_pinn_ic": {"values": [1e-1]},
+        #     "optimizer": {"values": ["Adam"]},
+        #     "new_coll_points_flag": {"values": [False]},
+        #     "batch_size": {"values": ["None"]},
+        # }
     }
 
     # Initialize and run sweep
