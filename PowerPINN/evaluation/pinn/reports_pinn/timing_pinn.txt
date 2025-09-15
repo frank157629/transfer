@@ -1,4 +1,4 @@
 === PURE FORWARD TIMING (ms) ===
-[bench]      1 traj  ->  0.967 ms
-[bench]     50 traj  ->  35.675 ms
-[bench]    500 traj  ->  269.359 ms
+[bench]      1 traj  ->  1.054 ms
+[bench]     50 traj  ->  29.605 ms
+[bench]    500 traj  ->  267.899 ms
