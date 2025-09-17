@@ -1,16 +1,14 @@
 "PowerPINN/lhs_sampling/convergence.py"
 """
-convergence.py
-
 1. This script classifies trajectories from a dataset into convergent and
-non-convergent groups. A subset of the convergent trajectories is saved
-under "../lhs_sampling" for further processing. A convergence map is also
-generated in the same folder.
+    non-convergent groups. A subset of the convergent trajectories is saved
+    under "../lhs_sampling" for further processing. A convergence map is also
+    generated in the same folder.
 2. Error and standard deviation tolerances can be configured in the
-<Configurations> section.
-3. For training, datasets from "../data/GFL_2nd_order" (e.g. "dataset_v10.pkl")
-are used.
-
+    <Configurations> section.
+3. For training, save the dataset under ../data/GFL_2nd_order/ 
+    (e.g., dataset_v10.pkl), and update the dataset number in 
+    setup_dataset_xxx_gfl.yaml accordingly.
 """
 
 import numpy as np, pickle, matplotlib.pyplot as plt
