@@ -4,28 +4,20 @@ import torch.optim as optim
 import os
 import matplotlib.pyplot as plt
 from src.nn.nn_dataset import DataSampler
-from src.nn.nn_model import Net, Network,PinnA, FullyConnectedResNet, Kalm
+from src.nn.nn_model import Network
 from src.functions import *
 from src.nn.early_stopping import EarlyStopping
 from src.ode.gfl_models_d import GridFollowingConverterModels
 import wandb
 import torch.autograd.functional as func
-from src.nn.gradient_based_weighting import PINNWeighting
 import numpy as np
 from omegaconf import OmegaConf
 from torch.utils.data import DataLoader, TensorDataset
 from src.ode.gfl_models_d import calculate_frequency
 
-
-
-'''
-    Haitian, this was the nn_actions from the toolbox originally. 
-    However, we are implementing training logic here only for pinn, the vanilla NN is defined in the same folder as vanilla_actions
-'''
-
 class VanillaNeuralNetworkActions():
     """
-    A class used to define the actions of the PINN
+    A class used to define the actions of the Vanilla NN
 
     Attributes
     ----------
@@ -55,8 +47,6 @@ class VanillaNeuralNetworkActions():
         This function defines the optimizer
     custom_learning_rate(lr_name)
         This function defines the learning rate scheduler
-    custom_weight_loss_updated(weight_data, weight_dt, weight_pinn, data_loss, dt_loss, pinn_loss, epoch)
-        This function updates the weights of the loss functions
     weight_init(module, init_name)
         This function initializes the weights of the neural network model
     test(x_test)
@@ -65,8 +55,6 @@ class VanillaNeuralNetworkActions():
         This function plots the data for a specific variable
     plot_all(x_train, y_train)
         This function plots all the data in pairs
-    plot_all_dt(x_train, y_train)
-        This function plots the derivative of all the data in pairs
     forward_nn(time, no_time)
         This function calculates the output of the neural network model, input is given as time and the other input columns
     forward_pass(x_train)
@@ -118,26 +106,15 @@ class VanillaNeuralNetworkActions():
             self.relobralo_loss = ReLoBRaLoLoss()
         return
 
-    #Haitian, define pinn
+    #Haitian, define vanilla NN
     def define_vanilla_model(self):
         """
         This function defines the neural network model
         """
         print("Selected deep learning model: ",self.cfg.network.type)
-        if self.cfg.network.type == "KAN": # Static architecture of the neural network
-            print(self.input_dim, self.cfg.network.hidden_dim, self.output_dim)
-            model = Kalm(self.input_dim, self.cfg.network.hidden_dim, self.output_dim, self.cfg.network.hidden_layers)
-            # model.speed()
-        elif self.cfg.network.type == "StaticNN": # Static architecture of the neural network
-            model = Net(self.input_dim, self.cfg.network.hidden_dim, self.output_dim)
-        elif self.cfg.network.type == "DynamicNN" or self.cfg.network.type == "PinnB" or self.cfg.network.type == "PinnA": # Dynamic architecture of the neural network
+
+        if self.cfg.network.type == "DynamicNN": # Dynamic architecture of the neural network
             model = Network(self.input_dim, self.cfg.network.hidden_dim, self.output_dim, self.cfg.network.hidden_layers)
-        elif self.cfg.network.type == "PinnAA": # Dynamic architecture of the neural network with the PinnA architecture for the output
-            model = PinnA(self.input_dim, self.cfg.network.hidden_dim, self.output_dim, self.cfg.network.hidden_layers)
-        elif self.cfg.network.type == "ResNet":
-            num_blocks=2
-            num_layers_per_block=2
-            model = FullyConnectedResNet(self.input_dim, self.cfg.network.hidden_dim, self.output_dim, num_blocks, num_layers_per_block)
         else:
             raise Exception("NN type not found")
         return model
@@ -264,11 +241,7 @@ class VanillaNeuralNetworkActions():
         x_train = torch.cat((time, no_time), 1)
         y_pred = self.model.forward(x_train)
         y_pred = self.data_loader.detransform_output(y_pred)
-        if self.cfg.network.type == "PinnA":
-            return no_time + y_pred*time
-        if self.cfg.network.type == "PinnB":
-            return no_time + y_pred
-        if self.cfg.network.type in ["DynamicNN", "PinnAA", "ResNet", "KAN"]:
+        if self.cfg.network.type == "DynamicNN":
             return y_pred
         else:
             raise Exception('Enter valid NN type! (zeroth_order or first_order')
@@ -283,11 +256,7 @@ class VanillaNeuralNetworkActions():
         no_time = x_train[:,1:]
         y_pred = self.model.forward(x_train)
         y_pred = self.data_loader.detransform_output(y_pred)
-        if self.cfg.network.type == "PinnA":
-            return no_time + y_pred*time
-        if self.cfg.network.type == "PinnB":
-            return no_time + y_pred
-        if self.cfg.network.type in ["DynamicNN", "PinnAA", "ResNet","KAN"]:
+        if self.cfg.network.type == "DynamicNN":
             return y_pred
         else:
             raise Exception('Enter valid NN type! (zeroth_order or first_order')
@@ -428,12 +397,7 @@ class VanillaNeuralNetworkActions():
                     self.loss_data  = loss
             else:
                 def closure():
-                    # output = self.forward_pass(x_batch)
-                    # loss_data = self.criterion(output, y_train)
-                    # self.loss_total = loss_data
-                    # self.optimizer.zero_grad()
-                    # loss_total.backward()
-                    # return loss_total
+
                     self.optimizer.zero_grad()
                     output = self.forward_pass(x_train)
                     loss = self.criterion(output, y_train)
@@ -449,17 +413,9 @@ class VanillaNeuralNetworkActions():
             if self.optimizer != "LBFGS":
                 self.scheduler.step()
             """
-            #total_iteration_count += iteration_count
 
             # Validation
             self.model.eval()
-
-            # # add the losses
-            # loss_val_data = self.criterion(val_outputs, y_val)
-            # loss_val_physics = [self.criterion(val_dydt0[:, i], val_ode0[:, i]) for i in range(val_dydt0.shape[1])]
-            # mean_loss_val_physics = torch.mean(torch.stack(loss_val_physics))
-            #
-            # val_loss = loss_val_data.item()
             with torch.no_grad():
                 x_val_dev = x_val.to(self.device)
                 y_val_dev = y_val.to(self.device)
@@ -514,13 +470,15 @@ class VanillaNeuralNetworkActions():
     #Haitian, change log_plot
     def test_model(self, starting_traj=0, total_traj=1, run=None):
         """
-        This function tests the neural network model
+        Tests the trained model using test trajectories and logs test metrics.
 
         Args:
-            x_train (torch.Tensor): input data
-            y_train (torch.Tensor): output data
-            num_epochs (int): number of epochs
+            starting_traj (int): Index of the first test trajectory to evaluate.
+            total_traj (int): Number of test trajectories to evaluate.
+            run (wandb.Run, optional): W&B run object for logging.
         """
+
+
         total_traj = total_traj if total_traj < self.data_loader.total_test_trajectories else self.data_loader.total_test_trajectories
         sample_per_traj = int(self.data_loader.sample_per_traj)
 
@@ -624,7 +582,7 @@ class VanillaNeuralNetworkActions():
         run.log({f"traj_{gname}": wandb.Image(fig)},commit=False)
 
         plt.close(fig)
-        run.log({}, commit=True)  #  ??
+        run.log({}, commit=True)
 
 
 
@@ -689,9 +647,6 @@ class VanillaNeuralNetworkActions():
             time = unique_values.detach().cpu().numpy()
             for i in range(y_pred_.shape[1]):
                 for j in range(time.shape[0]):
-                    #run.log({"Maw ": loss_total.item(), 'epoch': epoch})
-                    # log MAE and RMSE for each variable at time
-
                     run.log({f"MAE for variable {self.keys[i]}": mae[j,i], "Time": time[j]})
                     run.log({f"MSE for variable {self.keys[i]}": rmse[j,i], "Time": time[j]})
 
