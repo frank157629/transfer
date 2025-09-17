@@ -38,7 +38,7 @@ network:
   weight_init: "xavier_normal" # Choose between "xavier_normal" or "xavier_uniform" or "kaiming_normal" or "kaiming_uniform" or "normal"
   lr: 0.001
   lr_scheduler : "No_scheduler" # Choose between "StepLR", "MultiStepLR", "ExponentialLR", "ReduceLROnPlateau", "No_scheduler"
-  num_epochs: 7500
+  num_epochs: 750
   batch_size: "None" # Choose between "None" or any integer value
   early_stopping: True
   early_stopping_patience: 2500
