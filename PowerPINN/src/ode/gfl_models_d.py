@@ -21,7 +21,7 @@ def check_state_sanity(t, x, den=None, max_step_time=10):
     if _last_check_time is not None:
         duration = now - _last_check_time
         if duration > max_step_time:
-            raise RuntimeError(f"⏰ Step at t={t:.4f} took too long: {duration:.3f} s")
+            raise RuntimeError(f" Step at t={t:.4f} took too long: {duration:.3f} s")
     _last_check_time = now
 
     # 2. check denominator
@@ -204,15 +204,5 @@ class GridFollowingConverterModels:
             return [dgamma_dt, ddelta_dt, dtheta_pll_dt, di_gd_g_dt, di_gq_g_dt, dv_od_g_dt, dv_oq_g_dt]
         else:
             raise NotImplementedError
-
-
-
-
-
-
-
-
-
-
 
 
