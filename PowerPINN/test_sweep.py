@@ -1,8 +1,15 @@
 "PowerPINN/test_sweep.py"
+"""
+Entry point for launching W&B hyperparameter sweeps.
+
+- Loads sweep configuration (PINN or Vanilla NN) from `config.yaml`
+- Dynamically adjusts training settings per sweep run
+- Supports both Physics-Informed Neural Networks and Vanilla NNs
+- Initializes and runs the W&B sweep agent
+"""
 import os
 
 from ode.gfl_models_d import GridFollowingConverterModels
-from src.ode.sm_models_d import SynchronousMachineModels
 from src.nn.pinn_actions import PhysicsInformedNeuralNetworkActions
 from src.nn.vanilla_actions import VanillaNeuralNetworkActions
 from src.functions import *
@@ -16,17 +23,11 @@ def train(config=None):
     setup = OmegaConf.load("src/conf/config.yaml")
 
     # Load base configuration from YAML
-
-    if setup.theme == "SM":
-        cfg = OmegaConf.load("src/conf/setup_dataset_nn_sm.yaml.yaml")
-    elif setup.theme == "GFL":
+    if setup.theme == "GFL":
         if setup.train == "pinn":
             cfg = OmegaConf.load("src/conf/setup_dataset_pinn_gfl.yaml")
         elif setup.train == "vanilla":
             cfg = OmegaConf.load("src/conf/setup_dataset_vanilla_gfl.yaml")
-    elif setup.theme == "GFM":
-        #Add your specifications here...
-        raise NotImplementedError
     else:
         raise NotImplementedError
 
@@ -46,23 +47,14 @@ def train(config=None):
 
 
     # Initialize model and network
-    if cfg.theme == "SM":
-        modelling_full = SynchronousMachineModels(cfg)
-        network = NeuralNetworkActions(cfg, modelling_full)
-    elif cfg.theme == "GFL":
+    if cfg.theme == "GFL":
         modelling_full = GridFollowingConverterModels(cfg)
         if setup.train == "pinn":
             pinn = PhysicsInformedNeuralNetworkActions(cfg, modelling_full)
         elif setup.train == "vanilla":
             vanilla = VanillaNeuralNetworkActions(cfg)
 
-    elif cfg.theme == "GFM":
-        ##Add your specifications here...
-        raise NotImplementedError
-
-
-    # Set skip points and start training
-    #Haitian, changed pinn_train2, removed passing the skip_points as parameters of function but inside the function.
+    #Haitian, Skip point configs are now handled internally in `pinn_train2()` instead of being passed as arguments
     if setup.train == "pinn":
         print("PINN")
         pinn.pinn_train2(run)
@@ -82,9 +74,9 @@ if __name__ == "__main__":
             "name": "Test_loss",
             "goal": "minimize"
         }
-        #vanilla configuration
+        #Configuration for Vanilla NN sweep
         , "parameters": {
-            "number": {"values": [666]},
+            "number": {"values": [1]},
             "seed": {"values": [1]},
             "weight_data": {"values": [1]},
             "weight_dt": {"values": [0]},
@@ -94,9 +86,10 @@ if __name__ == "__main__":
             "new_coll_points_flag": {"values": [False]},
             "batch_size": {"values": ["None"]},
         }
-        # #pinn configuration
+
+        ## Alternative configuration for PINN sweep
         # , "parameters": {
-        #     "number": {"values": [666]},
+        #     "number": {"values": [1]},
         #     "seed": {"values": [1]},
         #     "weight_data": {"values": [1]},
         #     "weight_dt": {"values": [1e-3]},
