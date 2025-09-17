@@ -1,4 +1,4 @@
-# evaluation_vanilla_10000.py
+"PowerPINN/evaluation_vanilla_10000.py"
 """
 Vanilla model evaluation on a dataset shaped (N, 3, T) with channels [t, delta, omega].
 
