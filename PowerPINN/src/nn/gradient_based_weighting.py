@@ -1,3 +1,4 @@
+"PowerPINN/src/nn/gradient_based_weighting.py"
 import torch
 import torch.nn as nn
 

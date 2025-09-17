@@ -1,3 +1,4 @@
+"PowerPINN/src/nn/nn_model.py"
 import torch.nn as nn
 import torch
 import torch.nn.functional as F
