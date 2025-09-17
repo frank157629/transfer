@@ -1,3 +1,15 @@
+"PowerPINN/create_data_d1.py"
+"""
+Solve GFL model trajectories from LHS-sampled initial conditions.
+
+Steps:
+1. Load δ₀–ω₀ samples from lhs_init_conditions.pkl (LHS over region).
+2. Use GridFollowingConverterModels to solve ODEs for each IC.
+3. Save full time-domain trajectories as dataset_vXX.pkl under PowerPINN/data/GFL_2nd_order.
+4. Use convergence.py later to filter valid (converging) trajectories.
+
+"""
+
 from src.functions import *
 import torch
 import wandb
@@ -8,24 +20,7 @@ from omegaconf import OmegaConf
 import pickle
 import os
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
-
-
 os.environ["HYDRA_FULL_ERROR"]="1"
-
-'''
-1. This file is for solving the ICs that are newly generated. 
-2. The generated ICs come from lhs_init_conditions.pkl, 
-    which are generated with LHS sampling inside a rectangular 
-    region of 'delta x omega'.
-3. The solution are trajectories, which would be saved under 
-    the regular naming convention.(e.g. dataset_v10.pkl)
-4. The next step would be loading dataset_v10.pkl into convergence.pkl 
-    to filter the non-converging trajectories and use a part of 
-    the converging points as dataset.
-5. If you are using datasets directly from the whole region for training, 
-    change the number under section dataset inside "setup_dataset_pinn_gfl.yaml" 
-    or "setup_dataset_vanilla_gfl.yaml as 10. "
-'''
 
 # Use hydra to configure the dataset creation along with the setup_dataset_sm.yaml file
 #@hydra.main(config_path="src/conf", config_name="setup_dataset_sm.yaml",version_base=None)
@@ -43,11 +38,11 @@ def main(config):
         GFL_model = ODE_modelling(cfg)
         with open("lhs_init_conditions.pkl", "rb") as f:
             lhs_dataset = pickle.load(f)
-        init_conditions = np.array(lhs_dataset)[:,:2]  # 只取 [δ₀, ω₀]
-        modelling_full = GridFollowingConverterModels(cfg) # Define the GridFollowingConverterModels model to be used
-        flag_for_time = True  # we expect solution of each timestep
-        solution = GFL_model.solve_model(init_conditions, modelling_full,flag_for_time)  # Solve the model for the various initial conditions
-        GFL_model.save_dataset(solution)  # Save the dataset
+        init_conditions = np.array(lhs_dataset)[:,:2]  # Extract [δ₀, ω₀] samples
+        modelling_full = GridFollowingConverterModels(cfg) # Instantiate GFL model
+        flag_for_time = True  # Output full time-domain trajectory
+        solution = GFL_model.solve_model(init_conditions, modelling_full,flag_for_time)  # Solve ODEs for each IC
+        GFL_model.save_dataset(solution)  # Save dataset to disk
     else:
         raise NotImplementedError
 
