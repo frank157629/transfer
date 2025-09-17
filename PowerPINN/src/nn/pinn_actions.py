@@ -1,3 +1,4 @@
+"PowerPINN/src/nn/pinn_actions.py"
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -501,7 +502,7 @@ class PhysicsInformedNeuralNetworkActions():
             return torch.mean(torch.stack(loss_list)), loss_list
 
     #Haitian, by passing the skip points through function parameters, now changed to passing within the function using .yaml
-    def pinn_train2(self,wandb_run=None):
+    def pinn_train(self,wandb_run=None):
         """
         This function trains the neural network model
 

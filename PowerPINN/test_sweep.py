@@ -57,7 +57,7 @@ def train(config=None):
     #Haitian, Skip point configs are now handled internally in `pinn_train2()` instead of being passed as arguments
     if setup.train == "pinn":
         print("PINN")
-        pinn.pinn_train2(run)
+        pinn.pinn_train(run)
     elif setup.train == "vanilla":
         print("VANILLA")
         vanilla.vanilla_train(run)
