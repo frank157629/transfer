@@ -14,6 +14,7 @@ model:
   sampling: "Lhs" # Choose between "Lhs" or "Linear" or "Random" for sampling the initial conditions for collocation points
   torch : True # Keep it True when training the model! and also using to create the collocaiton points
   activation: "tanh"
+
 dataset:
   number : 1 # Number of dataset to be used
   shuffle: True # Shuffle the trajectories of the dataset # If True, the dataset will be shuffled
