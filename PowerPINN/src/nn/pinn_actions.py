@@ -16,10 +16,6 @@ import numpy as np
 from omegaconf import OmegaConf
 from torch.utils.data import DataLoader, TensorDataset
 from src.ode.gfl_models_d import calculate_frequency
-'''
-    This was the nn_actions from the toolbox originally. 
-    However, we are implementing training logic here only for pinn, the vanilla NN is defined in the same folder as vanilla_actions.
-'''
 
 class PhysicsInformedNeuralNetworkActions():
     """
