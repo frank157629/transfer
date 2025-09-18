@@ -16,12 +16,9 @@ import numpy as np
 from omegaconf import OmegaConf
 from torch.utils.data import DataLoader, TensorDataset
 from src.ode.gfl_models_d import calculate_frequency
-
-
-
 '''
-    Haitian, this was the nn_actions from the toolbox originally. 
-    However, we are implementing training logic here only for pinn, the vanilla NN is defined in the same folder as vanilla_actions
+    This was the nn_actions from the toolbox originally. 
+    However, we are implementing training logic here only for pinn, the vanilla NN is defined in the same folder as vanilla_actions.
 '''
 
 class PhysicsInformedNeuralNetworkActions():
@@ -40,10 +37,10 @@ class PhysicsInformedNeuralNetworkActions():
     optimizer (optim) : optimizer
     scheduler (optim) : learning rate scheduler
     GFL_model (GFL_modelling) : class for creating the GFL model
-    machine_params (dict) : parameters of the synchronous machine
+    machine_params (dict) : parameters of the GFL
     system_params (dict) : parameters of the power system
-    modelling_eq (CreateSolver) : class for solving the synchronous machine model
-    flag_for_modelling (bool) : flag for using the synchronous machine model
+    modelling_eq (CreateSolver) : class for solving the GFL model
+    flag_for_modelling (bool) : flag for using the GFL model
     device (torch.device) : device to run the model
     
     Methods
@@ -331,7 +328,7 @@ class PhysicsInformedNeuralNetworkActions():
 
     def calculate_from_ode(self, output):
         """
-        This function calculates the output(dy/dt) of the synchronous machine model for the given input y
+        This function calculates the output(dy/dt) of the GFL model for the given input y
         """
         if self.cfg.modelling_method:
             if self.cfg.theme == "GFL":

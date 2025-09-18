@@ -31,7 +31,7 @@ class VanillaNeuralNetworkActions():
     criterion (nn.Module) : loss function
     optimizer (optim) : optimizer
     scheduler (optim) : learning rate scheduler
-    GFL_model (GFL_modelling) : class for creating the synchronous machine model
+    GFL_model (GFL_modelling) : class for creating the GFL model
     machine_params (dict) : parameters of the GFL
     system_params (dict) : parameters of the power system
     modelling_eq (CreateSolver) : class for solving the GFL model
