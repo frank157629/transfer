@@ -2,6 +2,6 @@
 # src/conf/config.yaml
 theme: GFL #keep SM, for comparison
 #Vanilla or pinn
-train: vanilla
+train: pinn
 
 

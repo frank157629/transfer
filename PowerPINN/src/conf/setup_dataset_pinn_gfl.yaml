@@ -1,6 +1,6 @@
 wandb:
   api_key: "c26f0418182418f6712b79b4457de4faa81b7524"
-  project: "Project_PINNs_for_synchronous_machine"
+  project: "Project_PINNs_for_gfl"
 
 time : 1 # Total time to be considered
 num_of_points : 1000 # To be used when defining new collocation points, num per second, e.g. 1000*1s = 1K points
