@@ -39,7 +39,7 @@ class PhysicsInformedNeuralNetworkActions():
     criterion (nn.Module) : loss function
     optimizer (optim) : optimizer
     scheduler (optim) : learning rate scheduler
-    SM_model (SM_modelling) : class for creating the synchronous machine model
+    GFL_model (GFL_modelling) : class for creating the GFL model
     machine_params (dict) : parameters of the synchronous machine
     system_params (dict) : parameters of the power system
     modelling_eq (CreateSolver) : class for solving the synchronous machine model
@@ -94,9 +94,7 @@ class PhysicsInformedNeuralNetworkActions():
         self.scheduler = self.custom_learning_rate(cfg.network.lr_scheduler) # Define the learning rate scheduler
 
         # Create an instance of the class xxx_modelling
-        if self.cfg.theme == "SM":
-            self.SynchronousMachineModels = SynchronousMachineModels(self.cfg)
-        elif self.cfg.theme == "GFL":
+        if self.cfg.theme == "GFL":
             self.GridFollowingConverterModels = GridFollowingConverterModels(self.cfg)
 
         self.model = self.model.to(self.device)
@@ -319,37 +317,23 @@ class PhysicsInformedNeuralNetworkActions():
             u.append(self.derivative(y[:,i], time))
         u_all = torch.cat(u, 1)
         return y, u_all
-    #Haitian, new
+
     def calculate_autograd(self, x_train):
         time = x_train[:, 0].unsqueeze(1).clone().detach().to(self.device)
         time.requires_grad_(True)  # ★关键
         no_time = x_train[:, 1:].to(self.device)
 
-        # 方式A：autograd.grad（建议先用这个，最稳）
         y = self.forward_nn(time=time, no_time=no_time)
         dy_dt = torch.autograd.grad(
             y, time, grad_outputs=torch.ones_like(y), create_graph=True, retain_graph=True
         )[0]
         return y, dy_dt
 
-
-    # def calculate_autograd(self, x_train):
-    #     """
-    #     This function calculates the output of the neural network model and the derivative of the output
-    #     """
-    #     time = x_train[:,0].unsqueeze(1) # get the time column SOSOSO check if x_train[1:,0] is required
-    #     no_time = x_train[:,1:] # get the input columns
-    #     y, dy_dt = torch.autograd.functional.jvp( # calculate the jacobian vector product
-    #         func=lambda t: self.forward_nn(time=t, no_time = no_time), inputs=time ,v=torch.ones(time.shape).to(self.device), create_graph=True)
-    #     return y, dy_dt
-    #Haitian, added for y_processed the "GFL" branch, line 335
     def calculate_from_ode(self, output):
         """
         This function calculates the output(dy/dt) of the synchronous machine model for the given input y
         """
         if self.cfg.modelling_method:
-            if self.cfg.theme == "SM":
-                y_processed = self.modelling_full.odequation_sm(0, output.split(split_size=1, dim=1))
             if self.cfg.theme == "GFL":
                 y_processed = self.modelling_full.odequation_gfl(0, output.split(split_size=1, dim=1))
 
@@ -712,10 +696,7 @@ class PhysicsInformedNeuralNetworkActions():
     # Haitian, added different logic for plotting GFL
     def log_plot(self, output, target, epoch, run, x_test, type, starting_traj=0, total_traj=1):
         # log in wandb
-        if self.cfg.theme == "SM":
-            modeling_guide_path = os.path.join(self.cfg.dirs.init_conditions_dir, "modellings_guide_sm.yaml")
-            modeling_guide = OmegaConf.load(modeling_guide_path)
-        elif self.cfg.theme == "GFL":
+        if self.cfg.theme == "GFL":
             modeling_guide_path = os.path.join(self.cfg.dirs.init_conditions_dir, "modellings_guide_gfl.yaml")
             modeling_guide = OmegaConf.load(modeling_guide_path)
 
@@ -788,11 +769,11 @@ class PhysicsInformedNeuralNetworkActions():
         plt.tight_layout()
 
         # --------------------------- wandb docu.
-        gname = f"{type}{blk_idx[0]+1}-{blk_idx[-1]+1}"  # Example ：1-5, 6-10 …
+        gname = f"{type}{blk_idx[0]+1}-{blk_idx[-1]+1}"  # Example: 1-5, 6-10 …
         run.log({f"traj_{gname}": wandb.Image(fig)},commit=False)
 
         plt.close(fig)
-        run.log({}, commit=True)  #  ??
+        run.log({}, commit=True)  #
 
 
     
@@ -816,41 +797,15 @@ class PhysicsInformedNeuralNetworkActions():
         mae = np.array(mae)
         rmse = np.array(rmse)
         mae2 = torch.abs(y_test - y_pred)  # Calculate absolute errors for each prediction
-        if self.cfg.theme == "SM":
-            var_name = ["theta","omega(r/s)","E_q(pu)","E_d(pu)"]
-        elif self.cfg.theme == "GFL":
+        if self.cfg.theme == "GFL":
             if self.model_flag == "GFL_2nd_order":
                 var_name = ["delta", "omega"]
-            elif self.model_flag == "GFL_4th_order":
-                var_name = ["delta", "delta_omega", "delta_Id", "delta_Id_dt"]
         else:
             raise NotImplementedError
         if run is not None:
             for i in range(y_pred_.shape[1]):
-                """
-                plt.figure()
-                plt.title(f"MAE for variable {var_name[i]} over time")
-                """
                 mean_mae = np.mean(mae[:,i])
-                """
-                plt.plot(unique_values.detach().cpu().numpy(), mae[:,i], label=f"Mean MAE: {mean_mae}")
-                plt.xlabel("Time(s)")
-                plt.ylabel("MAE")
-                plt.legend()
-                run.log({f"MAE for variable {var_name[i]} over time": wandb.Image(plt)})
-                plt.close()
-                plt.figure()
-                plt.title(f"RMSE for variable {var_name[i]} over time")
-                """
                 mean_rmse = np.mean(rmse[:,i])
-                """
-                plt.plot(unique_values.detach().cpu().numpy(), rmse[:,i], label=f"Mean RMSE: {mean_rmse}")
-                plt.xlabel("Time(s)")
-                plt.ylabel("RMSE")
-                plt.legend()
-                run.log({f"RMSE for variable {var_name[i]} over time": wandb.Image(plt)})
-                plt.close()
-                """
                 max_mae = torch.max(mae2[:,i])  # Find the maximum absolute error # calculate the absolute error for each prediction, to find max mae
 
                 #log only mean values
@@ -860,9 +815,7 @@ class PhysicsInformedNeuralNetworkActions():
             time = unique_values.detach().cpu().numpy()
             for i in range(y_pred_.shape[1]):
                 for j in range(time.shape[0]):
-                    #run.log({"Maw ": loss_total.item(), 'epoch': epoch})
-                    # log MAE and RMSE for each variable at time  
-                
+                    # log MAE and RMSE for each variable at time
                     run.log({f"MAE for variable {self.keys[i]}": mae[j,i], "Time": time[j]})
                     run.log({f"MSE for variable {self.keys[i]}": rmse[j,i], "Time": time[j]})
 

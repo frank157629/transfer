@@ -31,11 +31,11 @@ class VanillaNeuralNetworkActions():
     criterion (nn.Module) : loss function
     optimizer (optim) : optimizer
     scheduler (optim) : learning rate scheduler
-    SM_model (SM_modelling) : class for creating the synchronous machine model
-    machine_params (dict) : parameters of the synchronous machine
+    GFL_model (GFL_modelling) : class for creating the synchronous machine model
+    machine_params (dict) : parameters of the GFL
     system_params (dict) : parameters of the power system
-    modelling_eq (CreateSolver) : class for solving the synchronous machine model
-    flag_for_modelling (bool) : flag for using the synchronous machine model
+    modelling_eq (CreateSolver) : class for solving the GFL model
+    flag_for_modelling (bool) : flag for using the GFL model
     device (torch.device) : device to run the model
 
     Methods
@@ -60,9 +60,6 @@ class VanillaNeuralNetworkActions():
         This function calculates the output of the neural network model, input is given as time and the other input columns
     forward_pass(x_train)
         This function calculates the output of the neural network model, input is given as the one whole tensor
-
-
-
     """
     def __init__(self, cfg): # The modelling equations are used, must be predefined, more choices to be added such as dynamic modelling
         self.cfg = cfg
@@ -81,15 +78,11 @@ class VanillaNeuralNetworkActions():
         self.scheduler = self.custom_learning_rate(cfg.network.lr_scheduler) # Define the learning rate scheduler
 
         # Create an instance of the class xxx_modelling
-        if self.cfg.theme == "SM":
-            self.SynchronousMachineModels = SynchronousMachineModels(self.cfg)
-        elif self.cfg.theme == "GFL":
+        if self.cfg.theme == "GFL":
             self.GridFollowingConverterModels = GridFollowingConverterModels(self.cfg)
 
         self.model = self.model.to(self.device)
         self.early_stopping = EarlyStopping(patience=cfg.network.early_stopping_patience, verbose=True, delta=cfg.network.early_stopping_min_delta)
-
-
 
     def setup_nn(self):
         self.model = self.define_vanilla_model()  # Create an instance of the class Net
@@ -189,8 +182,6 @@ class VanillaNeuralNetworkActions():
             raise Exception("Learning rate not found")
         return scheduler
 
-
-
     def weight_init(self,module, init_name):
         """
         This function initializes the weights of the neural network model
@@ -215,7 +206,6 @@ class VanillaNeuralNetworkActions():
                     raise Exception("Initialization not found")
         return
 
-
     def test(self, x_test):
         """
         This function tests the neural network model
@@ -231,10 +221,6 @@ class VanillaNeuralNetworkActions():
             y_pred = self.forward_pass(x_test)
         return y_pred
 
-
-
-
-
     def forward_nn(self, time, no_time):
         """
         This function calculates the output of the neural network model, input is given as time and the other input columns
@@ -246,8 +232,6 @@ class VanillaNeuralNetworkActions():
             return y_pred
         else:
             raise Exception('Enter valid NN type! (zeroth_order or first_order')
-
-
 
     def forward_pass(self, x_train):
         """
@@ -261,10 +245,6 @@ class VanillaNeuralNetworkActions():
             return y_pred
         else:
             raise Exception('Enter valid NN type! (zeroth_order or first_order')
-
-
-
-
 
     def folder_name_f2(self,cfg):
         weight_data, weight_dt, weight_pinn, weight_pinn_ic = cfg.network.weighting.weights
@@ -299,7 +279,6 @@ class VanillaNeuralNetworkActions():
 
         return folder_name
 
-
     def initialize_loss_weights(self, weight_data, weight_dt, weight_pinn, weight_pinn_ic):
 
         self.weight_data = 1
@@ -307,7 +286,6 @@ class VanillaNeuralNetworkActions():
         self.weight_pinn = 0
         self.weight_pinn_ic = 0
         return
-
 
     def calc_adapt_criterion_loss(self, x_train, y_train, output):
         """
@@ -359,30 +337,12 @@ class VanillaNeuralNetworkActions():
         os.makedirs(os.path.join(self.cfg.dirs.model_dir, folder_name),exist_ok=True)
         self.wandb_run = wandb_run
 
-
-
         print("getting in training")
         for epoch in range(self.cfg.network.num_epochs):
 
 
             self.model.train() # set the model to training mode
             if self.cfg.network.batch_size != "None":
-                # # Training loop with batches
-                # for x_batch, y_batch in zip(train_loader):
-                #
-                #     # Move data to the correct device
-                #     x_batch, y_batch = x_batch.to(self.device), y_batch.to(self.device)
-                #
-                #     def closure():
-                #         output = self.forward_pass(x_batch)
-                #         loss_data = self.criterion(output, y_batch) # calculate the data loss
-                #         self.loss_total = loss_data
-                #         self.optimizer.zero_grad() # zero the gradients
-                #         loss_total.backward() # backpropagate the total weighted loss
-                #
-                #         return loss_total
-                #
-                #     self.optimizer.step(closure) # update the weights of the model
 
                 for x_batch, y_batch in train_loader:
                     x_batch, y_batch = x_batch.to(self.device), y_batch.to(self.device)
@@ -410,17 +370,12 @@ class VanillaNeuralNetworkActions():
 
                 self.optimizer.step(closure)
 
-            """
-            if self.optimizer != "LBFGS":
-                self.scheduler.step()
-            """
-
             # Validation
             self.model.eval()
             with torch.no_grad():
                 x_val_dev = x_val.to(self.device)
                 y_val_dev = y_val.to(self.device)
-                val_outputs = self.forward_pass(x_val_dev)   # <--- 关键：先算 val_outputs
+                val_outputs = self.forward_pass(x_val_dev)
                 loss_val_data = self.criterion(val_outputs, y_val_dev)
 
             val_loss = loss_val_data.item()
@@ -478,7 +433,6 @@ class VanillaNeuralNetworkActions():
             total_traj (int): Number of test trajectories to evaluate.
             run (wandb.Run, optional): W&B run object for logging.
         """
-
 
         total_traj = total_traj if total_traj < self.data_loader.total_test_trajectories else self.data_loader.total_test_trajectories
         sample_per_traj = int(self.data_loader.sample_per_traj)
@@ -579,7 +533,7 @@ class VanillaNeuralNetworkActions():
         plt.tight_layout()
 
         # --------------------------- wandb docu.
-        gname = f"{type}{blk_idx[0]+1}-{blk_idx[-1]+1}"  # Example ：1-5, 6-10 …
+        gname = f"{type}{blk_idx[0]+1}-{blk_idx[-1]+1}"  # Example: 1-5, 6-10 …
         run.log({f"traj_{gname}": wandb.Image(fig)},commit=False)
 
         plt.close(fig)
@@ -615,30 +569,8 @@ class VanillaNeuralNetworkActions():
             raise NotImplementedError
         if run is not None:
             for i in range(y_pred_.shape[1]):
-                """
-                plt.figure()
-                plt.title(f"MAE for variable {var_name[i]} over time")
-                """
                 mean_mae = np.mean(mae[:,i])
-                """
-                plt.plot(unique_values.detach().cpu().numpy(), mae[:,i], label=f"Mean MAE: {mean_mae}")
-                plt.xlabel("Time(s)")
-                plt.ylabel("MAE")
-                plt.legend()
-                run.log({f"MAE for variable {var_name[i]} over time": wandb.Image(plt)})
-                plt.close()
-                plt.figure()
-                plt.title(f"RMSE for variable {var_name[i]} over time")
-                """
                 mean_rmse = np.mean(rmse[:,i])
-                """
-                plt.plot(unique_values.detach().cpu().numpy(), rmse[:,i], label=f"Mean RMSE: {mean_rmse}")
-                plt.xlabel("Time(s)")
-                plt.ylabel("RMSE")
-                plt.legend()
-                run.log({f"RMSE for variable {var_name[i]} over time": wandb.Image(plt)})
-                plt.close()
-                """
                 max_mae = torch.max(mae2[:,i])  # Find the maximum absolute error # calculate the absolute error for each prediction, to find max mae
 
                 #log only mean values
